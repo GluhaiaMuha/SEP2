@@ -15,9 +15,11 @@ public class ModelFactory
 
   public LibraryModel getLibraryModel()
   {
-    if(modelManager == null){
+    if (modelManager == null)
+    {
       modelManager = new LibraryModelManager(clientFactory.getClient());
     }
     return modelManager;
 
   }
+}
