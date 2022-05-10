@@ -1,6 +1,8 @@
 package client.core;
 
 import client.views.loginView.LoginViewModel;
+import org.postgresql.copy.CopyDual;
+import org.postgresql.core.v3.CopyDualImpl;
 
 public class ViewModelFactory
 {
