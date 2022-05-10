@@ -19,6 +19,3 @@ public class ViewModelFactory
     }
     return logInViewModel;
   }
-
-  //TODO: add mainViewModel
-}
