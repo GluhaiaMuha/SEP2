@@ -42,7 +42,7 @@ public class ViewHandler
     }
   }
 
-  public void openMainView(){
+  public void openLibrarianMainView(){
     try
     {
       Parent root = loadFXML("../views/mainView/main.fxml");
@@ -50,6 +50,23 @@ public class ViewHandler
       Scene scene = new Scene(root);
       stage.setScene(scene);
       stage.setTitle("Library App");
+      stage.centerOnScreen();
+      stage.show();
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  public void openRegisterView(){
+    try
+    {
+      Parent root = loadFXML("../views/registerView/register.fxml");
+
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setTitle("Sign Up");
       stage.centerOnScreen();
       stage.show();
     }

@@ -10,4 +10,12 @@ public class LibraryModelManager implements LibraryModel
   {
     this.client = client;
   }
+
+  @Override public boolean login(String username, String password)
+  {
+    if(username.equals("aaaaa") && password.equals("aaaaa")){
+      return true;
+    }
+    return false;
+  }
 }
