@@ -1,17 +1,23 @@
 package client.core;
 
-import client.model.Model;
-import client.model.ModelManager;
+import client.model.LibraryModel;
+import client.model.LibraryModelManager;
 
 public class ModelFactory
 {
-    public Model model;
+  private LibraryModel modelManager;
+  private ClientFactory clientFactory;
 
-    public Model getModel(){
-        if(model==null){
-            model = new ModelManager();
-        }
-        return model;
+  public ModelFactory(ClientFactory cf)
+  {
+    this.clientFactory = cf;
+  }
+
+  public LibraryModel getLibraryModel()
+  {
+    if(modelManager == null){
+      modelManager = new LibraryModelManager(clientFactory.getClient());
     }
+    return modelManager;
 
-}
+  }

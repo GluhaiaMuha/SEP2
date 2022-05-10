@@ -1,5 +1,5 @@
 package client.network;
 
-public class RMIClient
+public class RMIClient implements Client
 {
 }
