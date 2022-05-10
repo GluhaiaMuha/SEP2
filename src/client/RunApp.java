@@ -1,6 +1,5 @@
 package client;
 
-import client.model.LibraryModel;
 import javafx.application.Application;
 
 public class RunApp

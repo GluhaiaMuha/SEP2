@@ -1,5 +1,6 @@
 package client;
 
+
 import client.core.ClientFactory;
 import client.core.ModelFactory;
 import client.core.ViewHandler;
@@ -9,7 +10,6 @@ import javafx.stage.Stage;
 
 public class LibraryApp extends Application
 {
-
   @Override public void start(Stage stage) throws Exception
   {
     ClientFactory cf = new ClientFactory();
