@@ -45,7 +45,7 @@
                   <Font size="27.0" />
                </font>
             </Text>
-            <Button layoutX="121.0" layoutY="353.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="195.0" style="-fx-background-color: transparent;" text="Already a user? Login" textFill="#292826">
+            <Button layoutX="121.0" layoutY="353.0" mnemonicParsing="false" onAction="#onLogin" prefHeight="42.0" prefWidth="195.0" style="-fx-background-color: transparent;" text="Already a user? Login" textFill="#292826">
                <font>
                   <Font size="16.0" />
                </font>
