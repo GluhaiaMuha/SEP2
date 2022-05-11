@@ -9,6 +9,7 @@ public class LibraryModelManager implements LibraryModel
   public LibraryModelManager(Client client)
   {
     this.client = client;
+    this.client.startClient();
   }
 
   @Override public boolean login(String username, String password)
