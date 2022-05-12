@@ -25,17 +25,17 @@
    <right>
       <AnchorPane prefHeight="410.0" prefWidth="440.0" style="-fx-background-color: #F9D342;" BorderPane.alignment="CENTER">
          <children>
-            <Text fill="#292826" layoutX="48.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
+            <Text fill="#292826" layoutX="46.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
-            <Text fill="#292826" layoutX="48.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
+            <Text fill="#292826" layoutX="46.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
-            <Text fill="#292826" layoutX="48.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number:">
+            <Text fill="#292826" layoutX="46.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number:">
                <font>
                   <Font size="18.0" />
                </font>
@@ -50,9 +50,21 @@
                   <Font size="16.0" />
                </font>
             </Button>
-            <TextField layoutX="190.0" layoutY="118.0" style="-fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent; -fx-border-color: #292826;" />
-            <TextField layoutX="191.0" layoutY="206.0" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #292826;" />
-            <PasswordField layoutX="191.0" layoutY="163.0" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #292826;" />
+            <TextField layoutX="198.0" layoutY="191.0" style="-fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent; -fx-border-color: #292826;" />
+            <TextField layoutX="198.0" layoutY="259.0" prefHeight="6.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #292826;" />
+            <PasswordField layoutX="198.0" layoutY="223.0" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #292826;" />
+            <Text fill="#292826" layoutX="46.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#292826" layoutX="46.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Second Name:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <TextField layoutX="198.0" layoutY="144.0" style="-fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent; -fx-border-color: #292826;" />
+            <TextField layoutX="198.0" layoutY="115.0" style="-fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent; -fx-border-color: #292826;" />
          </children>
       </AnchorPane>
    </right>
