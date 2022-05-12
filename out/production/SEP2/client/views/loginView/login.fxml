@@ -35,14 +35,14 @@
                   <Font size="20.0" />
                </font>
             </Text>
-            <TextField layoutX="144.0" layoutY="163.0" style="-fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent; -fx-border-color: #292826;" />
-            <PasswordField layoutX="146.0" layoutY="218.0" style="-fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent; -fx-border-color: #292826;" />
+            <TextField fx:id="emailInput" layoutX="144.0" layoutY="163.0" style="-fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent; -fx-border-color: #292826;" />
+            <PasswordField fx:id="passwordInput" layoutX="146.0" layoutY="218.0" style="-fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent; -fx-border-color: #292826;" />
             <ImageView fitHeight="104.0" fitWidth="148.0" layoutX="146.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../shared/additional/lock.png" />
                </image>
             </ImageView>
-            <Button layoutX="171.0" layoutY="270.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #292826;" text="Login" textFill="#f9d342">
+            <Button layoutX="171.0" layoutY="270.0" mnemonicParsing="false" onAction="#onLoginAction" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #292826;" text="Login" textFill="#f9d342">
                <font>
                   <Font size="21.0" />
                </font>
