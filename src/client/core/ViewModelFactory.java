@@ -5,28 +5,30 @@ import client.views.registerView.RegisterViewModel;
 
 public class ViewModelFactory
 {
+  private static ViewModelFactory instance=new ViewModelFactory();
 
-  private ModelFactory modelFactory;
+  public static ViewModelFactory getInstance(){
+    return instance;
+  }
+
   private LoginViewModel logInViewModel;
   private RegisterViewModel registerViewModel;
 
-  public ViewModelFactory(ModelFactory modelFactory)
-  {
-    this.modelFactory = modelFactory;
+  public ViewModelFactory() {
   }
 
   public LoginViewModel getLoginViewModel()
   {
     if (logInViewModel == null)
     {
-      logInViewModel = new LoginViewModel(modelFactory.getLibraryModel());
+      logInViewModel = new LoginViewModel(ModelFactory.getInstance().getLibraryModel());
     }
     return logInViewModel;
   }
 
   public RegisterViewModel getRegisterViewModel(){
     if (registerViewModel == null){
-      registerViewModel = new RegisterViewModel(modelFactory.getLibraryModel());
+      registerViewModel = new RegisterViewModel(ModelFactory.getInstance().getLibraryModel());
     }
     return registerViewModel;
   }

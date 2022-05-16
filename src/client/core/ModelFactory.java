@@ -5,19 +5,21 @@ import client.model.LibraryModelManager;
 
 public class ModelFactory
 {
-  private LibraryModel modelManager;
-  private ClientFactory clientFactory;
+  private static ModelFactory instance = new ModelFactory();
+  public static ModelFactory getInstance(){
+    return instance;
+  }
 
-  public ModelFactory(ClientFactory cf)
-  {
-    this.clientFactory = cf;
+  private LibraryModel modelManager;
+
+  public ModelFactory() {
   }
 
   public LibraryModel getLibraryModel()
   {
     if (modelManager == null)
     {
-      modelManager = new LibraryModelManager(clientFactory.getClient());
+      modelManager = new LibraryModelManager(ClientFactory.getInstance().getClient());
     }
     return modelManager;
 
