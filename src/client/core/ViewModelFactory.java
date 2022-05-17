@@ -1,5 +1,6 @@
 package client.core;
 
+import client.views.librarianMainView.MainViewModel;
 import client.views.loginView.LoginViewModel;
 import client.views.registerView.RegisterViewModel;
 
@@ -13,6 +14,7 @@ public class ViewModelFactory
 
   private LoginViewModel logInViewModel;
   private RegisterViewModel registerViewModel;
+  private MainViewModel librarianMainViewModel;
 
   public ViewModelFactory() {
   }
@@ -31,5 +33,13 @@ public class ViewModelFactory
       registerViewModel = new RegisterViewModel(ModelFactory.getInstance().getLibraryModel());
     }
     return registerViewModel;
+  }
+
+  public MainViewModel getMainViewModel()
+  {
+    if (librarianMainViewModel == null){
+      librarianMainViewModel = new MainViewModel(ModelFactory.getInstance().getLibraryModel());
+    }
+    return librarianMainViewModel;
   }
 }

@@ -23,7 +23,7 @@ public class ViewHandler
   public void start() {
     stage = new Stage();
     ViewFactory.init(stage);
-    openLoginView();
+    openLibrarianMainView();
   }
 
   public void openLoginView() {
@@ -38,9 +38,9 @@ public class ViewHandler
     stage.show();
   }
 
-//  public void openLibrarianMainView() {
-//    Scene logScene=ViewFactory.getScene("LibrarianMain");
-//    stage.setScene(logScene);
-//    stage.show();
-//  }
+  public void openLibrarianMainView() {
+    Scene logScene=ViewFactory.getScene("LibrarianMain");
+    stage.setScene(logScene);
+    stage.show();
+  }
 }
