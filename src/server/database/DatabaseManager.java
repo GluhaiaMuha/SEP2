@@ -9,7 +9,7 @@ public class DatabaseManager implements DatabaseInterface{
     private DatabaseFront database = DatabaseFront.getInstance();
 
     @Override
-    public void insert(String tableName, String fields) {
+    public void insert(String tableName, String[] fields) {
         Connection connection = null;
         String sqlString = "INSERT INTO libraryhorsens."+tableName+" VALUES(DEFAULT,'" + fields+"');";
         try {
