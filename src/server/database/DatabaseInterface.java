@@ -4,7 +4,7 @@ package server.database;
 
 public interface DatabaseInterface{
 
-    void insert(String tableName,String fields);
+    void insert(String tableName,String[] fields);
 
     void update(String tableName, String field, String whereClause);
 
