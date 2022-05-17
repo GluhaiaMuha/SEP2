@@ -51,18 +51,18 @@ public class ViewFactory
         e.printStackTrace();
       }
     }
-//    else if (sceneName.equals("LibrarianMain")) {
-//      try {
-//        Parent root = loadFXML("../views/librarianMainView/main.fxml");
-//
-//        scene = new Scene(root);
-//        stage.setTitle("Library App");
-//        stage.centerOnScreen();
-//
-//      } catch (IOException e) {
-//        e.printStackTrace();
-//      }
-//    }
+    else if (sceneName.equals("LibrarianMain")) {
+      try {
+        Parent root = loadFXML("../views/librarianMainView/main.fxml");
+
+        scene = new Scene(root);
+        stage.setTitle("Library App");
+        stage.centerOnScreen();
+
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
     scenes.put(sceneName, scene);
   }
 
