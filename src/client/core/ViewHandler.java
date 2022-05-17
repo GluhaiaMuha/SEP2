@@ -40,4 +40,28 @@ public class ViewHandler
     stage.setScene(logScene);
     stage.show();
   }
+
+  public void openRentView() {
+    Scene logScene=ViewFactory.getScene("Rent");
+    stage.setScene(logScene);
+    stage.show();
+  }
+
+  public void openLoansView() {
+    Scene logScene=ViewFactory.getScene("Loans");
+    stage.setScene(logScene);
+    stage.show();
+  }
+
+  public void openReviewView() {
+    Scene logScene=ViewFactory.getScene("Review");
+    stage.setScene(logScene);
+    stage.show();
+  }
+
+  public void openCustomerMainView() {
+    Scene logScene=ViewFactory.getScene("CustomerMain");
+    stage.setScene(logScene);
+    stage.show();
+  }
 }

@@ -1,8 +1,12 @@
 package client.core;
 
+import client.views.customerMainView.CustomerMainViewModel;
 import client.views.librarianMainView.MainViewModel;
+import client.views.loans.LoansViewModel;
 import client.views.loginView.LoginViewModel;
 import client.views.registerView.RegisterViewModel;
+import client.views.rent.RentViewModel;
+import client.views.review.ReviewViewModel;
 
 public class ViewModelFactory
 {
@@ -14,7 +18,11 @@ public class ViewModelFactory
 
   private LoginViewModel logInViewModel;
   private RegisterViewModel registerViewModel;
-  private MainViewModel librarianMainViewModel;
+  private CustomerMainViewModel customerMainViewModel;
+  private LoansViewModel loansViewModel;
+  private RentViewModel rentViewModel;
+
+  private ReviewViewModel reviewViewModel;
 
   public ViewModelFactory() {
   }
@@ -34,12 +42,32 @@ public class ViewModelFactory
     }
     return registerViewModel;
   }
-
-  public MainViewModel getMainViewModel()
-  {
-    if (librarianMainViewModel == null){
-      librarianMainViewModel = new MainViewModel(ModelFactory.getInstance().getLibraryModel());
+  public CustomerMainViewModel getCustomerMainViewModel() {
+    if (customerMainViewModel == null){
+      customerMainViewModel= new CustomerMainViewModel(ModelFactory.getInstance().getLibraryModel());
     }
-    return librarianMainViewModel;
+    return customerMainViewModel;
   }
+  public LoansViewModel getLoansViewModel() {
+    if (loansViewModel == null){
+      loansViewModel = new LoansViewModel(ModelFactory.getInstance().getLibraryModel());
+    }
+  return loansViewModel;
+}
+
+  public RentViewModel getRentViewModel() {
+    if (rentViewModel == null){
+      rentViewModel = new RentViewModel(ModelFactory.getInstance().getLibraryModel());
+    }
+    return rentViewModel;
+  }
+
+  public ReviewViewModel getReviewViewModel() {
+    if (reviewViewModel == null){
+      reviewViewModel = new ReviewViewModel(ModelFactory.getInstance().getLibraryModel());
+    }
+    return reviewViewModel;
+  }
+
+
 }

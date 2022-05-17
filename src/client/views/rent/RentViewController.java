@@ -18,10 +18,20 @@ public class RentViewController implements ViewController {
     public void onSearchProductAction(ActionEvent actionEvent) {
     }
 
-    public void onBackButton() {
+    public void onBackButton(ActionEvent event) {
         viewHandler.openCustomerMainView();
     }
 
     public void onShowAvailableAction(ActionEvent actionEvent) {
+    }
+
+    public void onSearchProductTextField(ActionEvent actionEvent) {
+    }
+
+    public void onSearchButton(ActionEvent actionEvent) {
+
+    }
+
+    public void onRentButton(ActionEvent actionEvent) {
     }
 }

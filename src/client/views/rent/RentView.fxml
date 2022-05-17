@@ -3,37 +3,87 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F9D342;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.rent.RentViewController">
+<AnchorPane prefHeight="503.0" prefWidth="778.0" style="-fx-background-color: #F9D342;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.rent.RentViewController">
    <children>
-      <TableView layoutX="30.0" layoutY="86.0" prefHeight="270.0" prefWidth="542.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-        </columns>
-      </TableView>
-      <Label layoutX="30.0" layoutY="43.0" text="Search product">
+      <TabPane layoutX="30.0" layoutY="93.0" tabMinWidth="150.0">
+         <tabs>
+            <Tab text="Books">
+               <content>
+                  <TableView prefHeight="332.0" prefWidth="723.0">
+                    <columns>
+                      <TableColumn prefWidth="48.799991607666016" text="isbn" />
+                      <TableColumn prefWidth="98.4000244140625" text="title" />
+                        <TableColumn minWidth="0.0" prefWidth="117.59996032714844" text="author" />
+                        <TableColumn prefWidth="113.5999755859375" text="page count" />
+                        <TableColumn minWidth="1.60003662109375" prefWidth="226.4000244140625" text="genre" />
+                        <TableColumn minWidth="0.0" prefWidth="79.199951171875" text="year" />
+                        <TableColumn prefWidth="39.99993896484375" text="rating" />
+                    </columns>
+                  </TableView>
+               </content>
+            </Tab>
+            <Tab text="Movies">
+               <content>
+                  <TableView prefHeight="332.0" prefWidth="723.0">
+                     <columns>
+                        <TableColumn prefWidth="59.19998550415039" text="id" />
+                        <TableColumn prefWidth="164.8000030517578" text="title" />
+                        <TableColumn prefWidth="153.59996032714844" text="director" />
+                        <TableColumn minWidth="0.0" prefWidth="57.60003662109375" text="year" />
+                        <TableColumn minWidth="0.0" prefWidth="59.20001220703125" text="lenght" />
+                        <TableColumn prefWidth="172.79998779296875" text="description" />
+                        <TableColumn prefWidth="58.4000244140625" text="rating" />
+                     </columns>
+                  </TableView>
+               </content>
+            </Tab>
+            <Tab text="CDs">
+               <content>
+                  <TableView prefHeight="332.0" prefWidth="723.0">
+                     <columns>
+                        <TableColumn prefWidth="75.0" text="name" />
+                        <TableColumn prefWidth="188.00001525878906" text="capacity" />
+                        <TableColumn prefWidth="92.79998779296875" text="usage" />
+                        <TableColumn minWidth="1.60003662109375" prefWidth="107.20001220703125" text="genre" />
+                        <TableColumn minWidth="0.0" prefWidth="76.79998779296875" text="year" />
+                        <TableColumn minWidth="0.0" prefWidth="182.39996337890625" text="author" />
+                        <TableColumn prefWidth="39.99993896484375" text="rating" />
+                     </columns>
+                  </TableView>
+               </content>
+            </Tab>
+            <Tab text="Software">
+               <content>
+                  <TableView prefHeight="332.0" prefWidth="723.0">
+                     <columns>
+                        <TableColumn minWidth="0.0" prefWidth="76.79998779296875" text="name" />
+                        <TableColumn minWidth="0.0" prefWidth="134.4000244140625" text="type" />
+                        <TableColumn prefWidth="123.19993591308594" text="version" />
+                        <TableColumn prefWidth="115.199951171875" text="license type" />
+                        <TableColumn minWidth="0.0" prefWidth="48.79998779296875" text="rating" />
+                     </columns>
+                  </TableView>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <TextField layoutX="30.0" layoutY="47.0" onAction="#onSearchProductTextField" prefHeight="26.0" prefWidth="248.0" />
+      <CheckBox layoutX="622.0" layoutY="51.0" mnemonicParsing="false" onAction="#onShowAvailableAction" text="Show available only " />
+      <Button layoutX="30.0" layoutY="459.0" mnemonicParsing="false" onAction="#onBackButton" style="-fx-background-color: #292826;" text="Back" textFill="#f9d342" />
+      <Label layoutX="176.0" layoutY="7.0" text="The National Library of Horsens “Hedevig Rosing”">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="123.0" layoutY="38.0" onAction="#onSearchProductAction" prefHeight="26.0" prefWidth="248.0" />
-      <CheckBox layoutX="424.0" layoutY="42.0" mnemonicParsing="false" onAction="#onShowAvailableAction" text="Show available only " />
-      <Button layoutX="30.0" layoutY="361.0" mnemonicParsing="false" onAction="#onBackButton" style="-fx-background-color: #292826;" text="Back" textFill="#f9d342">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
+      <Button layoutX="290.0" layoutY="47.0" mnemonicParsing="false" onAction="#onSearchButton" style="-fx-background-color: #292826;" text="Search" textFill="#f9d342" />
+      <Button layoutX="711.0" layoutY="459.0" mnemonicParsing="false" onAction="#onRentButton" style="-fx-background-color: #292826;" text="Rent" textFill="#f9d342" />
    </children>
 </AnchorPane>
