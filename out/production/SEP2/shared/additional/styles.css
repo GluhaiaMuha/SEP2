@@ -1,0 +1,15 @@
+/* TabPane CSS */
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #292826;
+
+}
+.tab{
+  -fx-pref-width: 375;
+  -fx-pref-height: 30;
+  -fx-font-size: 15;
+  -fx-padding: 100,0,0,0;
+}
+.tab-label{
+  -fx-text-fill: white;
+}
