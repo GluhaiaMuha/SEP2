@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F9D342;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.customerMainView.CustomerMainViewController">
+   <children>
+      <ImageView fitHeight="62.0" fitWidth="70.0" layoutX="10.0" layoutY="10.0">
+         <image>
+            <Image url="@../../../shared/additional/logo.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="80.0" layoutY="187.0" mnemonicParsing="false" onAction="#onRentAction" style="-fx-background-color: #292826;" text="Rent" textFill="#f9d342">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+      <Button layoutX="258.0" layoutY="187.0" mnemonicParsing="false" onAction="#onLoansAction" style="-fx-background-color: #292826;" text="Loans" textFill="#f9d342">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+      <Button layoutX="437.0" layoutY="187.0" mnemonicParsing="false" onAction="#onReviewAction" style="-fx-background-color: #292826;" text="Review" textFill="#f9d342">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+      <Label layoutX="116.0" layoutY="27.0" text="The National Library of Horsens “Hedevig Rosing”">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
