@@ -6,12 +6,12 @@ import java.sql.SQLException;
 
 public class DatabaseManager implements DatabaseInterface{
 
-    private DatabaseFront database = DatabaseFront.getInstance();
+    private final DatabaseFront database = DatabaseFront.getInstance();
 
-    @Override
+    @Override //@TODO make this work for tables where one of the values is "SERIAL" type
     public void insert(String tableName, String[] fields) {
         Connection connection = null;
-        String sqlString = "INSERT INTO libraryhorsens."+tableName+" VALUES(DEFAULT,'" + fields+"');";
+        String sqlString = "INSERT INTO libraryhorsens." + tableName + " VALUES(DEFAULT,'" + fields + "');";
         try {
             connection = database.getConnection();
         } catch (SQLException e) {
@@ -38,7 +38,14 @@ public class DatabaseManager implements DatabaseInterface{
 
     @Override
     public void delete(String tableName, String whereClause) {
-
+        String sqlString = "DELETE FROM libraryhorsens. " + tableName +" WHERE " + whereClause;
+        try {
+            Connection connection = database.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sqlString);
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
