@@ -10,6 +10,7 @@ import java.io.IOException;
 
 public class ViewHandler
 {
+
   private Stage stage;
   private ViewModelFactory vmf;
 
@@ -76,6 +77,74 @@ public class ViewHandler
     }
   }
 
+  public void openCustomerMainView(){
+    try {
+
+      Parent root = loadFXML("../views/customerMainView/CustomerMainView.fxml");
+
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setTitle("Customer Main");
+      stage.centerOnScreen();
+      stage.show();
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void openRentView() {
+    try
+    {
+      Parent root = loadFXML("../views/rent/RentView.fxml");
+
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setTitle("Rent");
+      stage.centerOnScreen();
+      stage.show();
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  public void openLoansView() {
+    try
+    {
+      Parent root = loadFXML("../views/loans/LoansView.fxml");
+
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setTitle("Loans");
+      stage.centerOnScreen();
+      stage.show();
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  public void openReviewView() {
+    try
+    {
+      Parent root = loadFXML("../views/review/ReviewView.fxml");
+
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setTitle("Review");
+      stage.centerOnScreen();
+      stage.show();
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+
+  }
+
   private Parent loadFXML(String path) throws IOException
   {
     FXMLLoader loader = new FXMLLoader();
@@ -86,5 +155,7 @@ public class ViewHandler
     controller.init(this, vmf);
     return root;
   }
+
+
 
 }
