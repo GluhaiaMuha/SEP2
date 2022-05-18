@@ -14,18 +14,22 @@
             <tabs>
             <Tab style="-fx-background-color: #292826;" text="View Movies">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #F9D342; -fx-border-width: 1,1,0,1;">
                      <children>
-                        <TableView layoutX="24.0" layoutY="52.0" prefHeight="402.0" prefWidth="800.0">
+                        <TableView fx:id="movieTable" layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
                           <columns>
-                            <TableColumn prefWidth="196.0" text="Title" />
-                            <TableColumn prefWidth="140.79998779296875" text="Director" />
-                              <TableColumn prefWidth="88.0" text="Year" />
-                              <TableColumn prefWidth="87.20001220703125" text="Length" />
-                              <TableColumn prefWidth="228.800048828125" text="Movie Actor" />
-                              <TableColumn prefWidth="64.80010986328125" text="Status" />
+                            <TableColumn fx:id="movieTitleCol" prefWidth="154.0" text="Title" />
+                            <TableColumn fx:id="movieAuthorCol" prefWidth="103.0" text="Author" />
+                              <TableColumn fx:id="movieYearCol" prefWidth="94.0" text="Year" />
+                              <TableColumn fx:id="moviePgCol" prefWidth="94.0" text="Pages" />
+                              <TableColumn fx:id="movieGenreCol" prefWidth="106.0" text="Genre" />
+                              <TableColumn fx:id="movieStatusCol" prefWidth="111.0" text="Status" />
+                              <TableColumn fx:id="movieISBNCol" prefWidth="73.0" text="ISBN" />
+                              <TableColumn fx:id="movieCount" prefWidth="64.0" text="Count" />
                           </columns>
                         </TableView>
+                        <TextField layoutX="249.0" layoutY="14.0" text="Search..." />
+                        <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
                      </children>
                   </AnchorPane>
               </content>
@@ -34,7 +38,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="388.0" prefWidth="729.0" style="-fx-border-color: #F9D342; -fx-border-width: 1,1,0,1;">
                             <children>
-                                <TableView layoutX="29.0" layoutY="46.0" prefHeight="402.0" prefWidth="800.0">
+                                <TableView layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
                                     <columns>
                                         <TableColumn prefWidth="210.4000129699707" text="Title" />
                                         <TableColumn prefWidth="228.8000030517578" text="Author" />
@@ -43,8 +47,8 @@
                                         <TableColumn prefWidth="119.199951171875" text="Status" />
                                     </columns>
                                 </TableView>
-                        <TextField layoutX="237.0" layoutY="14.0" />
-                        <Button layoutX="403.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
+                        <TextField layoutX="249.0" layoutY="14.0" text="Search..." />
+                        <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -53,7 +57,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="850.0" style="-fx-border-color: #F9D342;">
                      <children>
-                        <TableView layoutX="24.0" layoutY="46.0" prefHeight="402.0" prefWidth="800.0">
+                        <TableView layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
                            <columns>
                               <TableColumn prefWidth="210.4000129699707" text="Title" />
                               <TableColumn prefWidth="228.8000030517578" text="Author" />
@@ -62,14 +66,16 @@
                               <TableColumn prefWidth="119.199951171875" text="Status" />
                            </columns>
                         </TableView>
+                        <TextField layoutX="249.0" layoutY="14.0" />
+                        <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Button" />
                      </children></AnchorPane>
                     </content>
                 </Tab>
             <Tab style="-fx-background-color: #292826;" text="View Software">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #F9D342;">
                      <children>
-                        <TableView layoutX="24.0" layoutY="46.0" prefHeight="402.0" prefWidth="800.0">
+                        <TableView layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
                            <columns>
                               <TableColumn prefWidth="210.4000129699707" text="Title" />
                               <TableColumn prefWidth="228.8000030517578" text="Author" />
@@ -78,13 +84,15 @@
                               <TableColumn prefWidth="119.199951171875" text="Status" />
                            </columns>
                         </TableView>
+                        <TextField layoutX="249.0" layoutY="14.0" />
+                        <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Button" />
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
             <Tab style="-fx-background-color: #292826;" text="Manage Products">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #F9D342;" />
               </content>
             </Tab>
             </tabs>

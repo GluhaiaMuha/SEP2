@@ -8,34 +8,93 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="775.0" style="-fx-background-color: #292826;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.librarianMainView.MainViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: #292826;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.librarianMainView.MainViewController">
     <children>
-        <TabPane prefHeight="475.0" prefWidth="775.0" style="-fx-background-color: #292826;" stylesheets="@../../../shared/additional/styles.css" tabClosingPolicy="UNAVAILABLE">
+        <TabPane prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: #292826;" stylesheets="@../../../shared/additional/styles.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <tabs>
-                <Tab closable="false" style="-fx-background-color: #292826;" text="View Products">
+            <Tab style="-fx-background-color: #292826;" text="View Movies">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #F9D342; -fx-border-width: 1,1,0,1;">
+                     <children>
+                        <TableView fx:id="movieTable" layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
+                          <columns>
+                            <TableColumn fx:id="movieTitleCol" prefWidth="154.0" text="Title" />
+                            <TableColumn fx:id="movieAuthorCol" prefWidth="103.0" text="Author" />
+                              <TableColumn fx:id="movieYearCol" prefWidth="94.0" text="Year" />
+                              <TableColumn fx:id="moviePgCol" prefWidth="94.0" text="Pages" />
+                              <TableColumn fx:id="movieGenreCol" prefWidth="106.0" text="Genre" />
+                              <TableColumn fx:id="movieStatusCol" prefWidth="111.0" text="Status" />
+                              <TableColumn fx:id="movieISBNCol" prefWidth="73.0" text="ISBN" />
+                              <TableColumn fx:id="movieCount" prefWidth="64.0" text="Count" />
+                          </columns>
+                        </TableView>
+                        <TextField layoutX="249.0" layoutY="14.0" text="Search..." />
+                        <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+                <Tab closable="false" style="-fx-background-color: #292826;" text="View Books">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="388.0" prefWidth="729.0" style="-fx-border-color: #F9D342; -fx-border-width: 1,1,0,1;">
                             <children>
-                                <TableView layoutX="42.0" layoutY="53.0" prefHeight="370.0" prefWidth="690.0" style="-fx-background-color: #292826; -fx-border-color: #F9D342;">
+                                <TableView layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
                                     <columns>
-                                        <TableColumn prefWidth="75.0" text="Title" />
-                                        <TableColumn prefWidth="75.0" text="Author" />
-                                        <TableColumn prefWidth="75.0" text="Year" />
-                                        <TableColumn prefWidth="75.0" text="Genre" />
-                                        <TableColumn prefWidth="75.0" text="Status" />
+                                        <TableColumn prefWidth="210.4000129699707" text="Title" />
+                                        <TableColumn prefWidth="228.8000030517578" text="Author" />
+                                        <TableColumn prefWidth="93.60000610351562" text="Year" />
+                                        <TableColumn prefWidth="133.60003662109375" text="Genre" />
+                                        <TableColumn prefWidth="119.199951171875" text="Status" />
                                     </columns>
                                 </TableView>
-                        <TextField layoutX="237.0" layoutY="14.0" />
-                        <Button layoutX="403.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
+                        <TextField layoutX="249.0" layoutY="14.0" text="Search..." />
+                        <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
                             </children>
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab style="-fx-background-color: #292826;" text="Manage Products">
+                <Tab style="-fx-background-color: #292826;" text="View CD's">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="445.0" prefWidth="774.0" style="-fx-border-color: #F9D342;" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="850.0" style="-fx-border-color: #F9D342;">
+                     <children>
+                        <TableView layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
+                           <columns>
+                              <TableColumn prefWidth="210.4000129699707" text="Title" />
+                              <TableColumn prefWidth="228.8000030517578" text="Author" />
+                              <TableColumn prefWidth="93.60000610351562" text="Year" />
+                              <TableColumn prefWidth="133.60003662109375" text="Genre" />
+                              <TableColumn prefWidth="119.199951171875" text="Status" />
+                           </columns>
+                        </TableView>
+                        <TextField layoutX="249.0" layoutY="14.0" />
+                        <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Button" />
+                     </children></AnchorPane>
                     </content>
                 </Tab>
+            <Tab style="-fx-background-color: #292826;" text="View Software">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #F9D342;">
+                     <children>
+                        <TableView layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
+                           <columns>
+                              <TableColumn prefWidth="210.4000129699707" text="Title" />
+                              <TableColumn prefWidth="228.8000030517578" text="Author" />
+                              <TableColumn prefWidth="93.60000610351562" text="Year" />
+                              <TableColumn prefWidth="133.60003662109375" text="Genre" />
+                              <TableColumn prefWidth="119.199951171875" text="Status" />
+                           </columns>
+                        </TableView>
+                        <TextField layoutX="249.0" layoutY="14.0" />
+                        <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Button" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab style="-fx-background-color: #292826;" text="Manage Products">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #F9D342;" />
+              </content>
+            </Tab>
             </tabs>
         </TabPane>
     </children>

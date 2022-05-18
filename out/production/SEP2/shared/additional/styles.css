@@ -4,10 +4,11 @@
     -fx-background-color: #292826;
 }
 .tab{
-  -fx-pref-width: 375;
+  -fx-pref-width: 160;
   -fx-pref-height: 30;
   -fx-font-size: 15;
-  -fx-padding: 100,0,0,0;
+  -fx-padding: 50,0,0,0;
+
 }
 
 .tab-label{

@@ -15,7 +15,7 @@
    <children>
       <TabPane layoutX="30.0" layoutY="93.0" tabMinWidth="150.0">
          <tabs>
-            <Tab text="Books">
+            <Tab closable="false" text="Books">
                <content>
                   <TableView prefHeight="332.0" prefWidth="723.0">
                     <columns>
@@ -30,7 +30,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab text="Movies">
+            <Tab closable="false" text="Movies">
                <content>
                   <TableView prefHeight="332.0" prefWidth="723.0">
                      <columns>
@@ -45,7 +45,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab text="CDs">
+            <Tab closable="false" text="CDs">
                <content>
                   <TableView prefHeight="332.0" prefWidth="723.0">
                      <columns>
@@ -60,7 +60,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab text="Software">
+            <Tab closable="false" text="Software">
                <content>
                   <TableView prefHeight="332.0" prefWidth="723.0">
                      <columns>

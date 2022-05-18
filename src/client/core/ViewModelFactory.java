@@ -7,6 +7,7 @@ import client.views.loginView.LoginViewModel;
 import client.views.registerView.RegisterViewModel;
 import client.views.rent.RentViewModel;
 import client.views.review.ReviewViewModel;
+import org.junit.jupiter.params.provider.EnumSource;
 
 public class ViewModelFactory
 {
@@ -21,6 +22,7 @@ public class ViewModelFactory
   private CustomerMainViewModel customerMainViewModel;
   private LoansViewModel loansViewModel;
   private RentViewModel rentViewModel;
+  private MainViewModel librarianViewModel;
 
   private ReviewViewModel reviewViewModel;
 
@@ -69,5 +71,12 @@ public class ViewModelFactory
     return reviewViewModel;
   }
 
-
+  public MainViewModel getMainViewModel()
+  {
+   if (librarianViewModel == null){
+     librarianViewModel = new MainViewModel(ModelFactory.getInstance()
+         .getLibraryModel());
+   }
+   return librarianViewModel;
+  }
 }
