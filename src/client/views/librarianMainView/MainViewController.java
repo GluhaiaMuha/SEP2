@@ -14,7 +14,7 @@ public class MainViewController implements ViewController
   public void init(ViewHandler vh, ViewModelFactory vmf)
   {
     this.viewHandler = vh;
-    mainViewController = vmf.getMainViewModel();
+    //mainViewController = vmf.getMainViewModel();
 
   }
 }
