@@ -17,6 +17,7 @@ public class MainViewController implements ViewController
 {
   private ViewHandler viewHandler;
   private MainViewModel mainViewController;
+  private DatabaseManager createTableExample = new DatabaseManager();
 
   /* Here starts Movie Table */
   @FXML
@@ -39,7 +40,7 @@ public class MainViewController implements ViewController
   private TableColumn<Movie, Integer> movieCount;
 
   @Override
-  public void init(ViewHandler vh, ViewModelFactory vmf)
+  public void init(ViewHandler vh, ViewModelFactory vmf) throws SQLException
   {
     this.viewHandler = vh;
     mainViewController = vmf.getMainViewModel();
