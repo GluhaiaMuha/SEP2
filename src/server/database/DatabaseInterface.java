@@ -1,6 +1,6 @@
 package server.database;
 
-
+import java.sql.SQLException;
 
 public interface DatabaseInterface{
 
@@ -8,7 +8,7 @@ public interface DatabaseInterface{
 
     void update(String tableName, String field, String whereClause);
 
-    void delete(String tableName, String whereClause);
+    void delete(String tableName, String whereClause) throws SQLException;
 
     void startTransaction();
 

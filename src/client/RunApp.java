@@ -1,6 +1,11 @@
 package client;
 
 import javafx.application.Application;
+import server.database.DatabaseManager;
+import shared.transferObj.Book;
+import shared.transferObj.Movie;
+
+import java.sql.SQLException;
 
 public class RunApp
 {

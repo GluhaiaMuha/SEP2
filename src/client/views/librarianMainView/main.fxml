@@ -18,14 +18,12 @@
                      <children>
                         <TableView fx:id="movieTable" layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
                           <columns>
-                            <TableColumn fx:id="movieTitleCol" prefWidth="154.0" text="Title" />
-                            <TableColumn fx:id="movieAuthorCol" prefWidth="103.0" text="Author" />
-                              <TableColumn fx:id="movieYearCol" prefWidth="94.0" text="Year" />
-                              <TableColumn fx:id="moviePgCol" prefWidth="94.0" text="Pages" />
-                              <TableColumn fx:id="movieGenreCol" prefWidth="106.0" text="Genre" />
-                              <TableColumn fx:id="movieStatusCol" prefWidth="111.0" text="Status" />
-                              <TableColumn fx:id="movieISBNCol" prefWidth="73.0" text="ISBN" />
-                              <TableColumn fx:id="movieCount" prefWidth="64.0" text="Count" />
+                            <TableColumn fx:id="movieHashCol" prefWidth="85.0" text="Hash" />
+                            <TableColumn fx:id="movieTitleCol" prefWidth="224.00003051757812" text="Title" />
+                              <TableColumn fx:id="movieDirectorCol" prefWidth="172.0" text="Director" />
+                              <TableColumn fx:id="movieYearCol" prefWidth="106.39996337890625" text="Year" />
+                              <TableColumn fx:id="movieLength" prefWidth="108.00006103515625" text="Length" />
+                              <TableColumn fx:id="movieAmountInStock" prefWidth="108.0" text="AmountInStock" />
                           </columns>
                         </TableView>
                         <TextField layoutX="249.0" layoutY="14.0" text="Search..." />
@@ -38,13 +36,15 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="388.0" prefWidth="729.0" style="-fx-border-color: #F9D342; -fx-border-width: 1,1,0,1;">
                             <children>
-                                <TableView layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
+                                <TableView fx:id="booksTable" layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
                                     <columns>
-                                        <TableColumn prefWidth="210.4000129699707" text="Title" />
-                                        <TableColumn prefWidth="228.8000030517578" text="Author" />
-                                        <TableColumn prefWidth="93.60000610351562" text="Year" />
-                                        <TableColumn prefWidth="133.60003662109375" text="Genre" />
-                                        <TableColumn prefWidth="119.199951171875" text="Status" />
+                                        <TableColumn fx:id="booksHashCol" prefWidth="87.0" text="Hash" />
+                                        <TableColumn fx:id="booksTitleCol" prefWidth="162.0" text="Title" />
+                                        <TableColumn fx:id="booksAuthorCol" prefWidth="133.0" text="Author" />
+                                        <TableColumn fx:id="booksPageCountCol" prefWidth="91.0" text="Pages" />
+                                        <TableColumn fx:id="booksGenreCol" prefWidth="150.0" text="Genre" />
+                              <TableColumn fx:id="booksYearCol" prefWidth="72.0" text="Year" />
+                              <TableColumn fx:id="booksAmountInStockCol" prefWidth="104.0" text="AmountInStock" />
                                     </columns>
                                 </TableView>
                         <TextField layoutX="249.0" layoutY="14.0" text="Search..." />
@@ -57,13 +57,13 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="850.0" style="-fx-border-color: #F9D342;">
                      <children>
-                        <TableView layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
+                        <TableView fx:id="cdTable" layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
                            <columns>
-                              <TableColumn prefWidth="210.4000129699707" text="Title" />
-                              <TableColumn prefWidth="228.8000030517578" text="Author" />
-                              <TableColumn prefWidth="93.60000610351562" text="Year" />
-                              <TableColumn prefWidth="133.60003662109375" text="Genre" />
-                              <TableColumn prefWidth="119.199951171875" text="Status" />
+                              <TableColumn fx:id="cdHashCol" prefWidth="109.0" text="Hash" />
+                              <TableColumn fx:id="cdNameCol" prefWidth="218.0" text="Name" />
+                              <TableColumn fx:id="cdCapacityCol" prefWidth="149.0" text="Capacity" />
+                              <TableColumn fx:id="cdUsageCol" prefWidth="192.0" text="Uasge" />
+                              <TableColumn fx:id="cdAmountInStockCol" prefWidth="131.0" text="AmountInStock" />
                            </columns>
                         </TableView>
                         <TextField layoutX="249.0" layoutY="14.0" />
@@ -75,13 +75,14 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #F9D342;">
                      <children>
-                        <TableView layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
+                        <TableView fx:id="softwareTable" layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
                            <columns>
-                              <TableColumn prefWidth="210.4000129699707" text="Title" />
-                              <TableColumn prefWidth="228.8000030517578" text="Author" />
-                              <TableColumn prefWidth="93.60000610351562" text="Year" />
-                              <TableColumn prefWidth="133.60003662109375" text="Genre" />
-                              <TableColumn prefWidth="119.199951171875" text="Status" />
+                              <TableColumn fx:id="softwareHashCol" prefWidth="88.0" text="Hash" />
+                              <TableColumn fx:id="softwareNameCol" prefWidth="181.0" text="Name" />
+                              <TableColumn fx:id="softwareTypeCol" prefWidth="129.0" text="Type" />
+                              <TableColumn fx:id="softwareVersionCol" prefWidth="129.0" text="Version" />
+                              <TableColumn fx:id="softwareLicenseTypeCol" prefWidth="157.0" text="LicenseType" />
+                              <TableColumn fx:id="softwareAmountInStockCol" prefWidth="115.0" text="AmountInStock" />
                            </columns>
                         </TableView>
                         <TextField layoutX="249.0" layoutY="14.0" />

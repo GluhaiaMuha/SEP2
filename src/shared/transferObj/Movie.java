@@ -1,49 +1,19 @@
 package shared.transferObj;
 
-import javafx.scene.control.Button;
-
-public class Movie
+public class Movie extends Product
 {
-  private int ISBN;
   private String title;
-  private String genre;
-  private String author;
-  private int pgCount;
-  private int year;
-  private String status; //TODO: Change later according to db.
-  private int count;
+  private String director;
+  private int length;
+  private int release_year;
 
-
-  public Movie(String title, String author, int year, int pgCount, String genre, String status, int ISBN, int count)
+  public Movie(String hash, String title, String director, int release_year, int length,int amountInStock)
   {
-    this.ISBN = ISBN;
+    super(hash,amountInStock);
     this.title = title;
-    this.genre = genre;
-    this.author = author;
-    this.pgCount = pgCount;
-    this.year = year;
-    this.status = status;
-    this.count = count;
-  }
-
-//  public Movie(String title, String author, int year, int pgCount, String genre, String status, int ISBN){
-//    this.ISBN = ISBN;
-//    this.title = title;
-//    this.genre = genre;
-//    this.author = author;
-//    this.pgCount = pgCount;
-//    this.year = year;
-//    this.status = status;
-//  }
-
-  public int getISBN()
-  {
-    return ISBN;
-  }
-
-  public void setISBN(int ISBN)
-  {
-    this.ISBN = ISBN;
+    this.director = director;
+    this.length = length;
+    this.release_year = release_year;
   }
 
   public String getTitle()
@@ -51,68 +21,19 @@ public class Movie
     return title;
   }
 
-  public void setTitle(String title)
+  public String getDirector()
   {
-    this.title = title;
+    return director;
   }
 
-  public String getGenre()
+  public int getLength()
   {
-    return genre;
+    return length;
   }
 
-  public void setGenre(String genre)
+  public int getRelease_year()
   {
-    this.genre = genre;
+    return release_year;
   }
 
-  public String getAuthor()
-  {
-    return author;
-  }
-
-  public void setAuthor(String author)
-  {
-    this.author = author;
-  }
-
-  public int getPgCount()
-  {
-    return pgCount;
-  }
-
-  public void setPgCount(int pgCount)
-  {
-    this.pgCount = pgCount;
-  }
-
-  public int getYear()
-  {
-    return year;
-  }
-
-  public void setYear(int year)
-  {
-    this.year = year;
-  }
-
-  public String getStatus()
-  {
-    return status;
-  }
-
-  public void setStatus(String status)
-  {
-    this.status = status;
-  }
-
-  public int getCount()
-  {
-    return count;
-  }
-
-  public void setCount(int count)
-  {
-    this.count = count;
-  }
 }

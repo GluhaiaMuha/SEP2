@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ public class ViewFactory
         stage.setTitle("Log In");
         stage.centerOnScreen();
 
-      } catch (IOException e) {
+      } catch (IOException | SQLException e) {
         e.printStackTrace();
       }
     } else if (sceneName.equals("Register")) {
@@ -51,7 +52,7 @@ public class ViewFactory
         stage.setTitle("Sign Up");
         stage.centerOnScreen();
 
-      } catch (IOException e) {
+      } catch (IOException | SQLException e) {
         e.printStackTrace();
       }
     } else if (sceneName.equals("CustomerMain")) {
@@ -62,7 +63,7 @@ public class ViewFactory
         stage.setTitle("Library App");
         stage.centerOnScreen();
 
-      } catch (IOException e) {
+      } catch (IOException | SQLException e) {
         e.printStackTrace();
       }
     } else if (sceneName.equals("Loans")) {
@@ -73,7 +74,7 @@ public class ViewFactory
         stage.setTitle("Library App Loans");
         stage.centerOnScreen();
 
-      } catch (IOException e) {
+      } catch (IOException | SQLException e) {
         e.printStackTrace();
       }
     } else if (sceneName.equals("Rent")) {
@@ -84,7 +85,7 @@ public class ViewFactory
         stage.setTitle("Library App Rent ");
         stage.centerOnScreen();
 
-      } catch (IOException e) {
+      } catch (IOException | SQLException e) {
         e.printStackTrace();
       }
     } else if (sceneName.equals("Review")) {
@@ -95,7 +96,7 @@ public class ViewFactory
         stage.setTitle("Library App Review");
         stage.centerOnScreen();
 
-      } catch (IOException e) {
+      } catch (IOException | SQLException e) {
         e.printStackTrace();
       }
     } else if (sceneName.equals("LibrarianMain")) {
@@ -106,14 +107,15 @@ public class ViewFactory
         stage.setTitle("Library App");
         stage.centerOnScreen();
 
-      } catch (IOException e) {
+      } catch (IOException | SQLException e) {
         e.printStackTrace();
       }
     }
       scenes.put(sceneName, scene);
     }
 
-    private static Parent loadFXML(String path) throws IOException {
+    private static Parent loadFXML(String path) throws IOException, SQLException
+    {
       FXMLLoader loader = new FXMLLoader();
       loader.setLocation(ViewFactory.class.getResource(path));
       Parent root = loader.load();
