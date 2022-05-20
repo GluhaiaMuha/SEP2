@@ -229,4 +229,9 @@ public class RentViewController implements ViewController {
 
     }
 
+    @FXML
+    void onGoToMainPage(ActionEvent event) {
+        viewHandler.openCustomerMainView();
+    }
+
 }

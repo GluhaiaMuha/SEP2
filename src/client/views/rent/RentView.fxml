@@ -29,6 +29,7 @@
                         <TextField layoutX="249.0" layoutY="14.0" promptText="Search..." />
                         <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
                         <Button layoutX="783.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRentMovie" text="Rent" />
+                        <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                      </children>
                   </AnchorPane>
                </content>
@@ -51,6 +52,7 @@
                         <TextField layoutX="249.0" layoutY="14.0" promptText="Search..." />
                         <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
                         <Button layoutX="783.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRentBook" text="Rent" />
+                        <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                      </children>
                   </AnchorPane>
                </content>
@@ -71,6 +73,7 @@
                         <TextField layoutX="249.0" layoutY="14.0" promptText="Search..." />
                         <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
                         <Button layoutX="783.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRentCD" text="Rent" />
+                        <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                      </children></AnchorPane>
                </content>
             </Tab>
@@ -90,7 +93,8 @@
                         </TableView>
                         <TextField layoutX="249.0" layoutY="14.0" promptText="Search..." />
                         <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
-                        <Button layoutX="772.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRentSoftware" text="Rent" />
+                        <Button layoutX="783.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRentSoftware" text="Rent" />
+                        <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                      </children>
                   </AnchorPane>
                </content>
