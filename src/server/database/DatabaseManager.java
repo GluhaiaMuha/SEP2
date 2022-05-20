@@ -129,7 +129,7 @@ public class DatabaseManager implements DatabaseInterface{
                 statement.setString(1, software.getHash());
                 statement.setString(2, software.getName());
                 statement.setString(3, software.getType());
-                statement.setDouble(4, software.getVersion());
+                statement.setString(4, software.getVersion());
                 statement.setString(5, software.getLicense_type());
                 statement.setInt(6, software.getAmountInStock());
                 statement.executeUpdate();
@@ -239,7 +239,7 @@ public class DatabaseManager implements DatabaseInterface{
                     String hash = resultSet.getString("hash");
                     String name = resultSet.getString("name");
                     String type = resultSet.getString("type");
-                    double version = resultSet.getDouble("version");
+                    String version = resultSet.getString("version");
                     String license_type = resultSet.getString("license_type");
                     int amountInStock = resultSet.getInt("amountInStock");
                     Software software = new Software(hash, name, type, version, license_type, amountInStock);
@@ -387,7 +387,7 @@ public class DatabaseManager implements DatabaseInterface{
                 statement.setString(1, software.getHash());
                 statement.setString(2, software.getName());
                 statement.setString(3, software.getType());
-                statement.setDouble(4, software.getVersion());
+                statement.setString(4, software.getVersion());
                 statement.setString(5, software.getLicense_type());
                 statement.setInt(6, software.getAmountInStock());
                 statement.executeUpdate();
