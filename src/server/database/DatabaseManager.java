@@ -13,45 +13,45 @@ public class DatabaseManager{
 
     private final DatabaseFront database = DatabaseFront.getInstance();
 
-//    @Override //@TODO make this work for tables where one of the values is "SERIAL" type
-//    public void insert(String tableName, String[] fields) {
-//        Connection connection = null;
-//        String sqlString = "INSERT INTO libraryhorsens." + tableName + " VALUES(DEFAULT,'" + fields + "');";
-//        try {
-//            connection = database.getConnection();
-//        } catch (SQLException e) {
-//            System.err.println("Error connecting to the database!");
-//        }
-//        try {
-//            PreparedStatement statement = connection.prepareStatement(sqlString);
-//            statement.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                connection.close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-//
-//    @Override
-//    public void update(String tableName, String field, String whereClause) {
-//
-//    }
-//
-//    //    @Override
-//    //    public void delete(String tableName, String whereClause) {
-//    //        String sqlString = "DELETE FROM libraryhorsens. " + tableName +" WHERE " + whereClause;
-//    //        try {
-//    //            Connection connection = database.getConnection();
-//    //            PreparedStatement statement = connection.prepareStatement(sqlString);
-//    //            statement.execute();
-//    //        } catch (SQLException e) {
-//    //            e.printStackTrace();
-//    //        }
-//    //    }
+    //    @Override //@TODO make this work for tables where one of the values is "SERIAL" type
+    //    public void insert(String tableName, String[] fields) {
+    //        Connection connection = null;
+    //        String sqlString = "INSERT INTO libraryhorsens." + tableName + " VALUES(DEFAULT,'" + fields + "');";
+    //        try {
+    //            connection = database.getConnection();
+    //        } catch (SQLException e) {
+    //            System.err.println("Error connecting to the database!");
+    //        }
+    //        try {
+    //            PreparedStatement statement = connection.prepareStatement(sqlString);
+    //            statement.executeUpdate();
+    //        } catch (SQLException e) {
+    //            e.printStackTrace();
+    //        } finally {
+    //            try {
+    //                connection.close();
+    //            } catch (SQLException e) {
+    //                e.printStackTrace();
+    //            }
+    //        }
+    //    }
+    //
+    //    @Override
+    //    public void update(String tableName, String field, String whereClause) {
+    //
+    //    }
+    //
+    //    //    @Override
+    //    //    public void delete(String tableName, String whereClause) {
+    //    //        String sqlString = "DELETE FROM libraryhorsens. " + tableName +" WHERE " + whereClause;
+    //    //        try {
+    //    //            Connection connection = database.getConnection();
+    //    //            PreparedStatement statement = connection.prepareStatement(sqlString);
+    //    //            statement.execute();
+    //    //        } catch (SQLException e) {
+    //    //            e.printStackTrace();
+    //    //        }
+    //    //    }
 
     public Object insert(String tableName, Object obj) throws SQLException
     {
@@ -250,6 +250,61 @@ public class DatabaseManager{
         return null;
     }
 
+    public Login readUserLogin(String tableName, Login login) throws SQLException
+    {
+        try(Connection connection = database.getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM libraryhorsens." + tableName + " WHERE email = " + login.getE_mail());
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next())
+            {
+                String e_mail = resultSet.getString("email");
+                String password1 = resultSet.getString("password");
+                return new Login(e_mail, password1);
+            }
+            else
+                return null;
+        }
+    }
+
+    public Register readUserRegister(Register register) throws SQLException
+    {
+        try(Connection connection = database.getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(
+                "SELECT f_name, l_name, email, password, phone FROM libraryhorsens.customer JOIN customer_password ON customer.email = customer_password.email WHERE email = " + register.getE_mail());
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next())
+            {
+                String f_name = resultSet.getString("f_name");
+                String l_name = resultSet.getString("l_name");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                String phone = resultSet.getString("phone");
+                return new Register(f_name, l_name, email, password, phone);
+            }
+            else return null;
+        }
+    }
+
+    public void insertUserRegister(Register register) throws SQLException
+    {
+        try(Connection connection = database.getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(
+                "INSERT INTO libraryhorsens.customer (email, f_name, l_name, phone) VALUES (?, ?, ?, ?);"
+                    + "INSERT INTO libraryhorsens.customer_password (email, password) VALUES (?, ?);");
+            statement.setString(1, register.getE_mail());
+            statement.setString(2, register.getF_name());
+            statement.setString(3, register.getL_name());
+            statement.setString(4, register.getPhone());
+            statement.setString(5, register.getE_mail());
+            statement.setString(6, register.getPassword());
+            statement.executeUpdate();
+        }
+    }
+
     public void update(String tableName, String whereClause, Object obj) throws SQLException
     {
         //        if (tableName.equals("product"))
@@ -353,14 +408,14 @@ public class DatabaseManager{
             statement.executeUpdate();
         }
     }
-//
-//    @Override
-//    public void startTransaction() {
-//
-//    }
-//
-//    @Override
-//    public void endTransaction() {
-//
-//    }
+    //
+    //    @Override
+    //    public void startTransaction() {
+    //
+    //    }
+    //
+    //    @Override
+    //    public void endTransaction() {
+    //
+    //    }
 }
