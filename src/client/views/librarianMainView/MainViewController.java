@@ -48,6 +48,8 @@ public class MainViewController implements ViewController
     /* Movie Table Start Here */
     /* For future use, make sure PropretyValueFactory is the same as the get/set Methods */
 
+
+    //TODO: Распеределить по типом даты.
     final ObservableList<Movie> data = FXCollections.observableArrayList(
         new Movie("Harry Potter: 1","J.K Rowling", 2001, 2145, "Fantasy", "Available", 1231,2 ),
         new Movie("Harry Potter: 1","J.K Rowling", 2001, 2145, "Fantasy", "Available", 1231,3 ),
