@@ -209,7 +209,7 @@ public class MainViewController implements ViewController
   {
     String name = softwareNameField.getText();
     String type = softwareTypeField.getText();
-    double version = Double.parseDouble(softwareVersionField.getText());
+    String version = softwareVersionField.getText();
     String licenseType = softwareLicenseTypeField.getText();
     int amountInStock = Integer.parseInt(softwareAmountInStockField.getText());
     String hash = String.valueOf(name.hashCode());

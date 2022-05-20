@@ -4,10 +4,10 @@ public class Software extends Product
 {
   private String name;
   private String type;
-  private double version;
+  private String version;
   private String license_type;
 
-  public Software(String hash, String name, String type, double version, String license_type, int amountInStock)
+  public Software(String hash, String name, String type, String version, String license_type, int amountInStock)
   {
     super(hash, amountInStock);
     this.name = name;
@@ -26,7 +26,7 @@ public class Software extends Product
     return type;
   }
 
-  public double getVersion()
+  public String getVersion()
   {
     return version;
   }
