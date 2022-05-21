@@ -1,7 +1,7 @@
 package server.database;
 
-import shared.transferObj.Login;
-import shared.transferObj.Register;
+import shared.transferObj.Customer;
+import shared.transferObj.User;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -11,11 +11,11 @@ public interface DatabaseInterface{
 
     List<Object> read(String tableName) throws SQLException;
 
-    Login readUserLogin(String tableName, Login login) throws SQLException;
+    User readUserLogin(String tableName, String email, String password) throws SQLException;
 
-    Register readUserRegister(Register register) throws SQLException;
+    User readUserRegister(String tableName, String email) throws SQLException;
 
-    void insertUserRegister(Register register) throws SQLException;
+    void insertUserRegister(Customer customer) throws SQLException;
 
     public void update(String tableName, String whereClause, Object obj) throws SQLException;
 

@@ -12,11 +12,18 @@ import java.util.List;
 public class DatabaseManager implements DatabaseInterface{
 
     private final DatabaseFront database = DatabaseFront.getInstance();
+    private static DatabaseManager instance;
+
+    public static DatabaseManager getInstance()
+    {
+        if(instance==null) instance = new DatabaseManager();
+        return instance;
+    }
 
     //    @Override //@TODO make this work for tables where one of the values is "SERIAL" type
     //    public void insert(String tableName, String[] fields) {
     //        Connection connection = null;
-    //        String sqlString = "INSERT INTO libraryhorsens." + tableName + " VALUES(DEFAULT,'" + fields + "');";
+    //        String sqlString = "INSERT INTO " + tableName + " VALUES(DEFAULT,'" + fields + "');";
     //        try {
     //            connection = database.getConnection();
     //        } catch (SQLException e) {
@@ -43,7 +50,7 @@ public class DatabaseManager implements DatabaseInterface{
     //
     //    //    @Override
     //    //    public void delete(String tableName, String whereClause) {
-    //    //        String sqlString = "DELETE FROM libraryhorsens. " + tableName +" WHERE " + whereClause;
+    //    //        String sqlString = "DELETE FROM " + tableName +" WHERE " + whereClause;
     //    //        try {
     //    //            Connection connection = database.getConnection();
     //    //            PreparedStatement statement = connection.prepareStatement(sqlString);
@@ -61,7 +68,7 @@ public class DatabaseManager implements DatabaseInterface{
         //            {
         //                Product product = (Product) obj;
         //                PreparedStatement statement = connection.prepareStatement(
-        //                    "INSERT INTO libraryhorsens." + tableName + "(hash, amountInStock) VALUES (?, ?)");
+        //                    "INSERT INTO " + tableName + "(hash, amountInStock) VALUES (?, ?)");
         //                statement.setString(1, product.getHash());
         //                statement.setInt(2, product.getAmountInStock());
         //                statement.executeUpdate();
@@ -74,7 +81,7 @@ public class DatabaseManager implements DatabaseInterface{
             {
                 Book book = (Book) obj;
                 PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO libraryhorsens." + tableName + "(hash, title, author, pageCount, genre, publication_year, amountInStock) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO " + tableName + "(hash, title, author, pageCount, genre, publication_year, amountInStock) VALUES (?, ?, ?, ?, ?, ?, ?)");
                 statement.setString(1, book.getHash());
                 statement.setString(2, book.getTitle());
                 statement.setString(3, book.getAuthor());
@@ -92,7 +99,7 @@ public class DatabaseManager implements DatabaseInterface{
             {
                 Movie movie = (Movie) obj;
                 PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO libraryhorsens." + tableName + "(hash, title, director, release_year, length, amountInStock) VALUES (?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO " + tableName + "(hash, title, director, release_year, length, amountInStock) VALUES (?, ?, ?, ?, ?, ?)");
                 statement.setString(1, movie.getHash());
                 statement.setString(2, movie.getTitle());
                 statement.setString(3, movie.getDirector());
@@ -109,7 +116,7 @@ public class DatabaseManager implements DatabaseInterface{
             {
                 CD cd = (CD) obj;
                 PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO libraryhorsens." + tableName + "(hash, name, capacity, usage, amountInStock) VALUES (?, ?, ?, ?, ?)");
+                    "INSERT INTO " + tableName + "(hash, name, capacity, usage, amountInStock) VALUES (?, ?, ?, ?, ?)");
                 statement.setString(1, cd.getHash());
                 statement.setString(2, cd.getName());
                 statement.setInt(3, cd.getCapacity());
@@ -125,7 +132,7 @@ public class DatabaseManager implements DatabaseInterface{
             {
                 Software software = (Software) obj;
                 PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO libraryhorsens." + tableName + "(hash, name, type, version, license_type, amountInStock) VALUES (?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO " + tableName + "(hash, name, type, version, license_type, amountInStock) VALUES (?, ?, ?, ?, ?, ?)");
                 statement.setString(1, software.getHash());
                 statement.setString(2, software.getName());
                 statement.setString(3, software.getType());
@@ -147,7 +154,7 @@ public class DatabaseManager implements DatabaseInterface{
             try(Connection connection = database.getConnection())
             {
                 PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM libraryhorsens." + tableName);
+                    "SELECT * FROM " + tableName);
                 ResultSet resultSet = statement.executeQuery();
                 ArrayList<Object> products = new ArrayList<>();
                 while (resultSet.next())
@@ -165,7 +172,7 @@ public class DatabaseManager implements DatabaseInterface{
             try(Connection connection = database.getConnection())
             {
                 PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM libraryhorsens."+ tableName);
+                    "SELECT * FROM "+ tableName);
                 ResultSet resultSet = statement.executeQuery();
                 ArrayList<Object> books = new ArrayList<>();
                 while (resultSet.next())
@@ -188,7 +195,7 @@ public class DatabaseManager implements DatabaseInterface{
             try(Connection connection = database.getConnection())
             {
                 PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM libraryhorsens."+ tableName);
+                    "SELECT * FROM "+ tableName);
                 ResultSet resultSet = statement.executeQuery();
                 ArrayList<Object> movies = new ArrayList<>();
                 while (resultSet.next())
@@ -210,7 +217,7 @@ public class DatabaseManager implements DatabaseInterface{
             try(Connection connection = database.getConnection())
             {
                 PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM libraryhorsens."+ tableName);
+                    "SELECT * FROM "+ tableName);
                 ResultSet resultSet = statement.executeQuery();
                 ArrayList<Object> cds = new ArrayList<>();
                 while (resultSet.next())
@@ -231,7 +238,7 @@ public class DatabaseManager implements DatabaseInterface{
             try(Connection connection = database.getConnection())
             {
                 PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM libraryhorsens."+ tableName);
+                    "SELECT * FROM "+ tableName);
                 ResultSet resultSet = statement.executeQuery();
                 ArrayList<Object> softwares = new ArrayList<>();
                 while (resultSet.next())
@@ -252,59 +259,56 @@ public class DatabaseManager implements DatabaseInterface{
     }
 
     @Override
-    public Login readUserLogin(String tableName, Login login) throws SQLException
+    public User readUserLogin(String tableName, String email, String password) throws SQLException
     {
         try(Connection connection = database.getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(
-                "SELECT * FROM libraryhorsens." + tableName + " WHERE email = " + login.getE_mail());
+                "SELECT email, password, type FROM " + tableName + " WHERE email = '" + email + "' AND password = '" + password + "'");
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next())
             {
                 String e_mail = resultSet.getString("email");
-                String password1 = resultSet.getString("password");
-                return new Login(e_mail, password1);
+                String user_password = resultSet.getString("password");
+                String type = resultSet.getString("type");
+                return new User(e_mail, user_password, type);
             }
-            else
-                return null;
         }
+        return null;
     }
 
     @Override
-    public Register readUserRegister(Register register) throws SQLException
+    public User readUserRegister(String tableName, String email) throws SQLException
     {
         try(Connection connection = database.getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(
-                "SELECT f_name, l_name, email, password, phone FROM libraryhorsens.customer JOIN customer_password ON customer.email = customer_password.email WHERE email = " + register.getE_mail());
+                "SELECT email, password, type FROM " + tableName + " WHERE email = '" + email + "'");
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next())
             {
-                String f_name = resultSet.getString("f_name");
-                String l_name = resultSet.getString("l_name");
-                String email = resultSet.getString("email");
-                String password = resultSet.getString("password");
-                String phone = resultSet.getString("phone");
-                return new Register(f_name, l_name, email, password, phone);
+                String e_mail = resultSet.getString("email");
+                String user_password = resultSet.getString("password");
+                String type = resultSet.getString("type");
+                return new User(e_mail, user_password, type);
             }
-            else return null;
         }
+        return null;
     }
 
     @Override
-    public void insertUserRegister(Register register) throws SQLException
+    public void insertUserRegister(Customer customer) throws SQLException
     {
         try(Connection connection = database.getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(
-                "INSERT INTO libraryhorsens.customer (email, f_name, l_name, phone) VALUES (?, ?, ?, ?);"
-                    + "INSERT INTO libraryhorsens.customer_password (email, password) VALUES (?, ?);");
-            statement.setString(1, register.getE_mail());
-            statement.setString(2, register.getF_name());
-            statement.setString(3, register.getL_name());
-            statement.setString(4, register.getPhone());
-            statement.setString(5, register.getE_mail());
-            statement.setString(6, register.getPassword());
+                "INSERT INTO customer (email, f_name, l_name, phone, password, type) VALUES (?, ?, ?, ?, ?, ?);");
+            statement.setString(1, customer.getE_mail());
+            statement.setString(2, customer.getF_name());
+            statement.setString(3, customer.getL_name());
+            statement.setString(4, customer.getPhone());
+            statement.setString(5, customer.getPassword());
+            statement.setString(6, customer.getUser());
             statement.executeUpdate();
         }
     }
@@ -319,7 +323,7 @@ public class DatabaseManager implements DatabaseInterface{
         //                Product product = (Product) obj;
         //
         //                PreparedStatement statement = connection.prepareStatement(
-        //                    "UPDATE libraryhorsens."+ tableName + " SET hash = ?, amountInStock = ? WHERE "+ whereClause);
+        //                    "UPDATE "+ tableName + " SET hash = ?, amountInStock = ? WHERE "+ whereClause);
         //                statement.setString(1, product.getHash());
         //                statement.setInt(2, product.getAmountInStock());
         //                statement.executeUpdate();
@@ -332,7 +336,7 @@ public class DatabaseManager implements DatabaseInterface{
                 Book book = (Book) obj;
 
                 PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE libraryhorsens."+ tableName + " SET hash = ?, title = ?, author = ?, pageCount = ?, genre = ?, publication_year = ?, amountInStock = ? WHERE " + whereClause);
+                    "UPDATE "+ tableName + " SET hash = ?, title = ?, author = ?, pageCount = ?, genre = ?, publication_year = ?, amountInStock = ? WHERE " + whereClause);
                 statement.setString(1, book.getHash());
                 statement.setString(2, book.getTitle());
                 statement.setString(3, book.getAuthor());
@@ -350,7 +354,7 @@ public class DatabaseManager implements DatabaseInterface{
                 Movie movie = (Movie) obj;
 
                 PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE libraryhorsens."+ tableName + " SET hash = ?, title = ?, director = ?, release_year = ?, length = ?, amountInStock = ? WHERE " + whereClause);
+                    "UPDATE "+ tableName + " SET hash = ?, title = ?, director = ?, release_year = ?, length = ?, amountInStock = ? WHERE " + whereClause);
                 statement.setString(1, movie.getHash());
                 statement.setString(2, movie.getTitle());
                 statement.setString(3, movie.getDirector());
@@ -367,7 +371,7 @@ public class DatabaseManager implements DatabaseInterface{
                 CD cd = (CD) obj;
 
                 PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE libraryhorsens."+ tableName + " SET hash = ?, name = ?, capacity = ?, usage = ?, amountInStock = ? WHERE " + whereClause);
+                    "UPDATE "+ tableName + " SET hash = ?, name = ?, capacity = ?, usage = ?, amountInStock = ? WHERE " + whereClause);
                 statement.setString(1, cd.getHash());
                 statement.setString(2, cd.getName());
                 statement.setInt(3, cd.getCapacity());
@@ -383,7 +387,7 @@ public class DatabaseManager implements DatabaseInterface{
                 Software software = (Software) obj;
 
                 PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE libraryhorsens."+ tableName + " SET hash = ?, name = ?, type = ?, version = ?, license_type = ?, amountInStock = ? WHERE " + whereClause);
+                    "UPDATE "+ tableName + " SET hash = ?, name = ?, type = ?, version = ?, license_type = ?, amountInStock = ? WHERE " + whereClause);
                 statement.setString(1, software.getHash());
                 statement.setString(2, software.getName());
                 statement.setString(3, software.getType());
@@ -403,14 +407,14 @@ public class DatabaseManager implements DatabaseInterface{
         //            try(Connection connection = database.getConnection())
         //            {
         //                PreparedStatement statement = connection.prepareStatement(
-        //                    "DELETE FROM libraryhorsens." + tableName + " WHERE " + whereClause);
+        //                    "DELETE FROM " + tableName + " WHERE " + whereClause);
         //                statement.executeUpdate();
         //            }
         //        }
         try(Connection connection = database.getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(
-                "DELETE FROM libraryhorsens." + tableName + " WHERE " + whereClause);
+                "DELETE FROM " + tableName + " WHERE " + whereClause);
             statement.executeUpdate();
         }
     }

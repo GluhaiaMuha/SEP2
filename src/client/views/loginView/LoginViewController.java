@@ -7,6 +7,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import server.database.DatabaseManager;
+import shared.transferObj.User;
+
+import java.sql.SQLException;
 
 public class LoginViewController implements ViewController
 {
@@ -27,8 +31,23 @@ public class LoginViewController implements ViewController
   }
 
   @FXML
-  void onLoginAction(ActionEvent event) {
-
+  void onLoginAction(ActionEvent event) throws SQLException
+  {
+    String email = emailInput.getText();
+    String password = passwordInput.getText();
+    User received = DatabaseManager.getInstance().readUserLogin("users", email, password);
+    if (received != null)
+    {
+      if (received.getUser().equals("librarian"))
+        viewHandler.openLibrarianMainView();
+      else if (received.getUser().equals("customer"))
+        viewHandler.openCustomerMainView();
+    }
+    else
+    {
+      emailInput.setText("error");
+      passwordInput.setText("");
+    }
   }
 
   @FXML

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DatabaseFront{
 
     private static DatabaseFront instance;
-    public final String URL = "jdbc:postgresql://localhost:5432/postgres";
+    public final String URL = "jdbc:postgresql://localhost:5432/postgres?currentSchema=\"libraryhorsens\"";
     public final String USER = "postgres";
     public final String PASSWORD = "password"; //@TODO make sure the password is the same for everyone
 
