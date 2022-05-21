@@ -145,9 +145,12 @@ public class MainViewController implements ViewController
   @FXML
   private TextField softwareAmountInStockField;
 
-
-
-
+  /**
+   * Initializes the Controller
+   * @param vh View Handler
+   * @param vmf ViewModelFactory
+   * @throws SQLException Possible exception if the database is not found
+   */
   @Override
   public void init(ViewHandler vh, ViewModelFactory vmf) throws SQLException
   {
@@ -156,6 +159,13 @@ public class MainViewController implements ViewController
     updateTables();
   }
 
+  /**
+   * ActionEvent for adding a movie after pressing a button in a Scene
+   *
+   * @param event
+   * @throws SQLException
+   */
+  /* Movie Action Events Start Here */
   @FXML
   void onAddMovie(ActionEvent event) throws SQLException
   {
@@ -172,6 +182,39 @@ public class MainViewController implements ViewController
     clearTextFields("movie");
   }
 
+  /**
+   * ActionEvent for removing a movie after pressing a button in a Scene
+   *
+   * @param event
+   * @throws SQLException
+   */
+  @FXML
+  void onRemoveMovie(ActionEvent event) throws SQLException
+  {
+    Movie selectedMovie = (Movie) movieTable.getSelectionModel().getSelectedItem();
+    if (selectedMovie.getAmountInStock() == 1){
+      movieTable.getItems().remove(selectedMovie);
+      createTableExample.delete("movie","hash = '" + selectedMovie.getHash() + "'");
+      updateTables();
+    }else if (selectedMovie.getAmountInStock() > 0){
+      selectedMovie.setAmountInStock(selectedMovie.getAmountInStock() - 1);
+      createTableExample.update("movie", "hash = '" +selectedMovie.getHash() + "'", selectedMovie);
+      updateTables();
+    }
+  }
+
+
+
+
+
+
+  /**
+   * ActionEvent for adding a book after pressing a button in a Scene
+   *
+   * @param event
+   * @throws SQLException
+   */
+  /* Book Action Events Start Here */
   @FXML
   void onAddBook(ActionEvent event) throws SQLException
   {
@@ -189,6 +232,42 @@ public class MainViewController implements ViewController
     clearTextFields("book");
   }
 
+  /**
+   * ActionEvent for removing a book after pressing a button in a Scene
+   *
+   * @param event
+   * @throws SQLException
+   */
+  @FXML
+  void onRemoveBook(ActionEvent event) throws SQLException
+  {
+    Book selectedBook = (Book) booksTable.getSelectionModel().getSelectedItem();
+    if (selectedBook.getAmountInStock() == 1){
+      booksTable.getItems().remove(selectedBook);
+      createTableExample.delete("book", "hash = '" + selectedBook.getHash() + "'");
+      updateTables();
+    }else if (selectedBook.getAmountInStock() > 0){
+      selectedBook.setAmountInStock(selectedBook.getAmountInStock() - 1);
+      createTableExample.update("book", "hash = '" + selectedBook.getHash() + "'", selectedBook);
+      updateTables();
+    }
+  }
+
+
+
+
+
+
+
+
+  /* CD Action Events Start Here */
+
+  /**
+   * ActionEvent for adding a cd after pressing a button in a Scene
+   *
+   * @param event
+   * @throws SQLException
+   */
   @FXML
   void onAddCd(ActionEvent event) throws SQLException
   {
@@ -204,6 +283,42 @@ public class MainViewController implements ViewController
     clearTextFields("cd");
   }
 
+  /**
+   * ActionEvent for removing a cd after pressing a button in a Scene
+   *
+   * @param event
+   * @throws SQLException
+   */
+  @FXML
+  void onRemoveCd(ActionEvent event) throws SQLException
+  {
+    CD selectedCd = (CD) cdTable.getSelectionModel().getSelectedItem();
+    if (selectedCd.getAmountInStock() == 1){
+      cdTable.getItems().remove(selectedCd);
+      createTableExample.delete("cd", "hash = '" + selectedCd.getHash() + "'");
+      updateTables();
+    }else if (selectedCd.getAmountInStock() > 0){
+      selectedCd.setAmountInStock(selectedCd.getAmountInStock() - 1);
+      createTableExample.update("cd", "hash = '" + selectedCd.getHash() + "'", selectedCd);
+      updateTables();
+    }
+  }
+
+
+
+
+
+
+
+
+  /* Software Action Events Start Here */
+
+  /**
+   * ActionEvent for adding a software after pressing a button in a Scene
+   *
+   * @param event
+   * @throws SQLException
+   */
   @FXML
   void onAddSoftware(ActionEvent event) throws SQLException
   {
@@ -220,9 +335,41 @@ public class MainViewController implements ViewController
     clearTextFields("software");
   }
 
+  /**
+   * ActionEvent for removing a software after pressing a button in a Scene
+   *
+   * @param event
+   * @throws SQLException
+   */
+  @FXML
+  void onRemoveSoftware(ActionEvent event) throws SQLException
+  {
+    Software selectedSoftware = (Software) softwareTable.getSelectionModel().getSelectedItem();
+    if (selectedSoftware.getAmountInStock() == 1){
+      softwareTable.getItems().remove(selectedSoftware);
+      createTableExample.delete("software", "hash = '" + selectedSoftware.getHash() + "'");
+      updateTables();
+    }else if (selectedSoftware.getAmountInStock() > 0){
+      selectedSoftware.setAmountInStock(selectedSoftware.getAmountInStock() - 1);
+      createTableExample.update("software", "hash = '" + selectedSoftware.getHash() + "'", selectedSoftware);
+      updateTables();
+    }
+  }
 
 
 
+
+
+
+
+
+  /* Utility Methods Start Here*/
+
+  /**
+   * Method for cleaning the textFields each time a product is added
+   *
+   * @param s product Type
+   */
   private void clearTextFields(String s){
     if (s.equals("movie"))
     {
@@ -252,8 +399,11 @@ public class MainViewController implements ViewController
     }
   }
 
-
-
+  /**
+   * Method for updating TableViews and binding each Property to cells
+   *
+   * @throws SQLException
+   */
   private void updateTables() throws SQLException
   {
     /* Movie Table Start Here */

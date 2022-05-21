@@ -31,6 +31,7 @@
                         </TableView>
                         <TextField layoutX="302.0" layoutY="14.0" text="Search..." />
                         <Button layoutX="477.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
+                        <Button layoutX="845.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveMovie" text="Remove" />
                      </children>
                   </AnchorPane>
               </content>
@@ -52,6 +53,7 @@
                                 </TableView>
                         <TextField layoutX="302.0" layoutY="14.0" text="Search..." />
                         <Button layoutX="477.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
+                        <Button layoutX="844.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveBook" text="Remove" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -71,6 +73,7 @@
                         </TableView>
                         <TextField layoutX="302.0" layoutY="14.0" />
                         <Button layoutX="477.0" layoutY="14.0" mnemonicParsing="false" text="Button" />
+                        <Button layoutX="844.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveCd" text="Remove" />
                      </children></AnchorPane>
                     </content>
                 </Tab>
@@ -90,6 +93,7 @@
                         </TableView>
                         <TextField layoutX="302.0" layoutY="14.0" />
                         <Button layoutX="477.0" layoutY="14.0" mnemonicParsing="false" text="Button" />
+                        <Button layoutX="844.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveSoftware" text="Remove" />
                      </children>
                   </AnchorPane>
               </content>
