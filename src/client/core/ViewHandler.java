@@ -21,47 +21,55 @@ public class ViewHandler
     stage = new Stage();
     ViewFactory.init(stage);
     openLibrarianMainView();
+
   }
 
   public void openLoginView() {
-    Scene uppercaseScene = ViewFactory.getScene("Login");
-    stage.setScene(uppercaseScene);
+    Scene loginScene = ViewFactory.getScene("Login");
+    stage.setScene(loginScene);
+    stage.setTitle("Log In");
     stage.show();
   }
 
   public void openRegisterView() {
-    Scene logScene=ViewFactory.getScene("Register");
-    stage.setScene(logScene);
+    Scene registerScene=ViewFactory.getScene("Register");
+    stage.setScene(registerScene);
+    stage.setTitle("Sign Up");
     stage.show();
   }
 
   public void openLibrarianMainView() {
-    Scene logScene=ViewFactory.getScene("LibrarianMain");
-    stage.setScene(logScene);
+    Scene librarianMainScene=ViewFactory.getScene("LibrarianMain");
+    stage.setScene(librarianMainScene);
+    stage.setTitle("Library app");
     stage.show();
   }
 
   public void openRentView() {
-    Scene logScene=ViewFactory.getScene("Rent");
-    stage.setScene(logScene);
+    Scene rentScene=ViewFactory.getScene("Rent");
+    stage.setScene(rentScene);
+    stage.setTitle("Library App Rent ");
     stage.show();
   }
 
   public void openLoansView() {
-    Scene logScene=ViewFactory.getScene("Loans");
-    stage.setScene(logScene);
+    Scene loansScene=ViewFactory.getScene("Loans");
+    stage.setScene(loansScene);
+    stage.setTitle("Library App Loans");
     stage.show();
   }
 
   public void openReviewView() {
-    Scene logScene=ViewFactory.getScene("Review");
-    stage.setScene(logScene);
+    Scene reviewScene=ViewFactory.getScene("Review");
+    stage.setScene(reviewScene);
+    stage.setTitle("Library App Review");
     stage.show();
   }
 
   public void openCustomerMainView() {
-    Scene logScene=ViewFactory.getScene("CustomerMain");
-    stage.setScene(logScene);
+    Scene customerMainScene=ViewFactory.getScene("CustomerMain");
+    stage.setScene(customerMainScene);
+    stage.setTitle("Library App");
     stage.show();
   }
 }

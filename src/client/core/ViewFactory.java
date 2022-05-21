@@ -38,7 +38,6 @@ public class ViewFactory
         Parent root = loadFXML("../views/loginView/login.fxml");
 
         scene = new Scene(root);
-        stage.setTitle("Log In");
         stage.centerOnScreen();
 
       } catch (IOException | SQLException e) {
@@ -49,7 +48,6 @@ public class ViewFactory
         Parent root = loadFXML("../views/registerView/register.fxml");
 
         scene = new Scene(root);
-        stage.setTitle("Sign Up");
         stage.centerOnScreen();
 
       } catch (IOException | SQLException e) {
@@ -60,7 +58,6 @@ public class ViewFactory
         Parent root = loadFXML("../views/customerMainView/CustomerMainView.fxml");
 
         scene = new Scene(root);
-        stage.setTitle("Library App");
         stage.centerOnScreen();
 
       } catch (IOException | SQLException e) {
@@ -71,7 +68,6 @@ public class ViewFactory
         Parent root = loadFXML("../views/loans/LoansView.fxml");
 
         scene = new Scene(root);
-        stage.setTitle("Library App Loans");
         stage.centerOnScreen();
 
       } catch (IOException | SQLException e) {
@@ -82,7 +78,6 @@ public class ViewFactory
         Parent root = loadFXML("../views/rent/RentView.fxml");
 
         scene = new Scene(root);
-        stage.setTitle("Library App Rent ");
         stage.centerOnScreen();
 
       } catch (IOException | SQLException e) {
@@ -93,7 +88,6 @@ public class ViewFactory
         Parent root = loadFXML("../views/review/ReviewView.fxml");
 
         scene = new Scene(root);
-        stage.setTitle("Library App Review");
         stage.centerOnScreen();
 
       } catch (IOException | SQLException e) {
@@ -101,10 +95,10 @@ public class ViewFactory
       }
     } else if (sceneName.equals("LibrarianMain")) {
       try {
-        Parent root = loadFXML("../views/librarianMainView/main.fxml");
 
+
+        Parent root = loadFXML("../views/librarianMainView/main.fxml");
         scene = new Scene(root);
-        stage.setTitle("Library App");
         stage.centerOnScreen();
 
       } catch (IOException | SQLException e) {
