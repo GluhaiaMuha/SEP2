@@ -1,19 +1,16 @@
 package shared.transferObj;
 
-public class Register
+public class Customer extends User
 {
   private String f_name;
   private String l_name;
-  private String e_mail;
-  private String password;
   private String phone;
 
-  public Register(String f_name, String l_name, String e_mail, String password, String phone)
+  public Customer(String e_mail, String f_name, String l_name, String phone, String password, String user)
   {
+    super(e_mail, password, user);
     this.f_name = f_name;
     this.l_name = l_name;
-    this.e_mail = e_mail;
-    this.password = password;
     this.phone = phone;
   }
 
@@ -35,26 +32,6 @@ public class Register
   public void setL_name(String l_name)
   {
     this.l_name = l_name;
-  }
-
-  public String getE_mail()
-  {
-    return e_mail;
-  }
-
-  public void setE_mail(String e_mail)
-  {
-    this.e_mail = e_mail;
-  }
-
-  public String getPassword()
-  {
-    return password;
-  }
-
-  public void setPassword(String password)
-  {
-    this.password = password;
   }
 
   public String getPhone()
