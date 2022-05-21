@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseManager{
+public class DatabaseManager implements DatabaseInterface{
 
     private final DatabaseFront database = DatabaseFront.getInstance();
 
@@ -52,7 +52,7 @@ public class DatabaseManager{
     //    //            e.printStackTrace();
     //    //        }
     //    //    }
-
+    @Override
     public Object insert(String tableName, Object obj) throws SQLException
     {
         //        if (tableName.equals("product"))
@@ -129,7 +129,7 @@ public class DatabaseManager{
                 statement.setString(1, software.getHash());
                 statement.setString(2, software.getName());
                 statement.setString(3, software.getType());
-                statement.setDouble(4, software.getVersion());
+                statement.setString(4, software.getVersion());
                 statement.setString(5, software.getLicense_type());
                 statement.setInt(6, software.getAmountInStock());
                 statement.executeUpdate();
@@ -139,6 +139,7 @@ public class DatabaseManager{
         return null;
     }
 
+    @Override
     public List<Object> read(String tableName) throws SQLException
     {
         if (tableName.equals("product"))
@@ -238,7 +239,7 @@ public class DatabaseManager{
                     String hash = resultSet.getString("hash");
                     String name = resultSet.getString("name");
                     String type = resultSet.getString("type");
-                    double version = resultSet.getDouble("version");
+                    String version = resultSet.getString("version");
                     String license_type = resultSet.getString("license_type");
                     int amountInStock = resultSet.getInt("amountInStock");
                     Software software = new Software(hash, name, type, version, license_type, amountInStock);
@@ -250,6 +251,7 @@ public class DatabaseManager{
         return null;
     }
 
+    @Override
     public Login readUserLogin(String tableName, Login login) throws SQLException
     {
         try(Connection connection = database.getConnection())
@@ -268,6 +270,7 @@ public class DatabaseManager{
         }
     }
 
+    @Override
     public Register readUserRegister(Register register) throws SQLException
     {
         try(Connection connection = database.getConnection())
@@ -288,6 +291,7 @@ public class DatabaseManager{
         }
     }
 
+    @Override
     public void insertUserRegister(Register register) throws SQLException
     {
         try(Connection connection = database.getConnection())
@@ -305,6 +309,7 @@ public class DatabaseManager{
         }
     }
 
+    @Override
     public void update(String tableName, String whereClause, Object obj) throws SQLException
     {
         //        if (tableName.equals("product"))
@@ -382,7 +387,7 @@ public class DatabaseManager{
                 statement.setString(1, software.getHash());
                 statement.setString(2, software.getName());
                 statement.setString(3, software.getType());
-                statement.setDouble(4, software.getVersion());
+                statement.setString(4, software.getVersion());
                 statement.setString(5, software.getLicense_type());
                 statement.setInt(6, software.getAmountInStock());
                 statement.executeUpdate();
@@ -390,6 +395,7 @@ public class DatabaseManager{
         }
     }
 
+    @Override
     public void delete(String tableName, String whereClause) throws SQLException
     {
         //        if (tableName.equals("product"))
