@@ -7,10 +7,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.w3c.dom.Text;
 import server.database.DatabaseInterface;
 import server.database.DatabaseManager;
 import shared.transferObj.Book;
@@ -145,6 +147,25 @@ public class MainViewController implements ViewController
   @FXML
   private TextField softwareAmountInStockField;
 
+
+  /* Edit Text Fields Start Here */
+  @FXML
+  private ChoiceBox<String> editMovieChoiceBox = new ChoiceBox<>();
+  @FXML
+  private TextField editMovieTitleCol;
+  @FXML
+  private TextField editMovieDirectorCol;
+  @FXML
+  private TextField editMovieReleaseYearCol;
+  @FXML
+  private TextField editMovieLengthCol;
+  @FXML
+  private TextField editMovieAmountInStockCol;
+
+  public MainViewController() throws SQLException
+  {
+  }
+
   /**
    * Initializes the Controller
    * @param vh View Handler
@@ -157,14 +178,13 @@ public class MainViewController implements ViewController
     this.viewHandler = vh;
     mainViewController = vmf.getMainViewModel();
     updateTables();
+
+//    editMovieChoiceBox.getItems().add()
+    //TODO: Add same values from db to choiceBox
   }
 
-  /**
-   * ActionEvent for adding a movie after pressing a button in a Scene
-   *
-   * @param event
-   * @throws SQLException
-   */
+
+
   /* Movie Action Events Start Here */
   @FXML
   void onAddMovie(ActionEvent event) throws SQLException
@@ -182,12 +202,6 @@ public class MainViewController implements ViewController
     clearTextFields("movie");
   }
 
-  /**
-   * ActionEvent for removing a movie after pressing a button in a Scene
-   *
-   * @param event
-   * @throws SQLException
-   */
   @FXML
   void onRemoveMovie(ActionEvent event) throws SQLException
   {
@@ -202,18 +216,14 @@ public class MainViewController implements ViewController
       updateTables();
     }
   }
+  @FXML
+  void onEditMovie(ActionEvent event){
+
+  }
 
 
 
 
-
-
-  /**
-   * ActionEvent for adding a book after pressing a button in a Scene
-   *
-   * @param event
-   * @throws SQLException
-   */
   /* Book Action Events Start Here */
   @FXML
   void onAddBook(ActionEvent event) throws SQLException
@@ -232,12 +242,8 @@ public class MainViewController implements ViewController
     clearTextFields("book");
   }
 
-  /**
-   * ActionEvent for removing a book after pressing a button in a Scene
-   *
-   * @param event
-   * @throws SQLException
-   */
+
+
   @FXML
   void onRemoveBook(ActionEvent event) throws SQLException
   {
@@ -255,19 +261,8 @@ public class MainViewController implements ViewController
 
 
 
-
-
-
-
-
   /* CD Action Events Start Here */
 
-  /**
-   * ActionEvent for adding a cd after pressing a button in a Scene
-   *
-   * @param event
-   * @throws SQLException
-   */
   @FXML
   void onAddCd(ActionEvent event) throws SQLException
   {
@@ -283,12 +278,6 @@ public class MainViewController implements ViewController
     clearTextFields("cd");
   }
 
-  /**
-   * ActionEvent for removing a cd after pressing a button in a Scene
-   *
-   * @param event
-   * @throws SQLException
-   */
   @FXML
   void onRemoveCd(ActionEvent event) throws SQLException
   {
@@ -306,19 +295,8 @@ public class MainViewController implements ViewController
 
 
 
-
-
-
-
-
   /* Software Action Events Start Here */
 
-  /**
-   * ActionEvent for adding a software after pressing a button in a Scene
-   *
-   * @param event
-   * @throws SQLException
-   */
   @FXML
   void onAddSoftware(ActionEvent event) throws SQLException
   {
@@ -335,12 +313,6 @@ public class MainViewController implements ViewController
     clearTextFields("software");
   }
 
-  /**
-   * ActionEvent for removing a software after pressing a button in a Scene
-   *
-   * @param event
-   * @throws SQLException
-   */
   @FXML
   void onRemoveSoftware(ActionEvent event) throws SQLException
   {
@@ -371,39 +343,42 @@ public class MainViewController implements ViewController
    * @param s product Type
    */
   private void clearTextFields(String s){
-    if (s.equals("movie"))
+    switch (s)
     {
-      movieTitleField.setText("");
-      movieDirectorField.setText("");
-      movieReleaseYearField.setText("");
-      movieLengthField.setText("");
-      movieAmountInStockField.setText("");
-    }else if (s.equals("book")){
-      booksTitleField.setText("");
-      booksAuthorField.setText("");
-      booksPgCountField.setText("");
-      booksGenreField.setText("");
-      booksPublicationYearField.setText("");
-      booksAmountInStockField.setText("");
-    }else if (s.equals("cd")){
-      cdNameField.setText("");
-      cdCapacityField.setText("");
-      cdUsageField.setText("");
-      cdAmountInStockField.setText("");
-    }else if (s.equals("software")){
-      softwareNameField.setText("");
-      softwareTypeField.setText("");
-      softwareVersionField.setText("");
-      softwareLicenseTypeField.setText("");
-      softwareAmountInStockField.setText("");
+      case "movie":
+        movieTitleField.setText("");
+        movieDirectorField.setText("");
+        movieReleaseYearField.setText("");
+        movieLengthField.setText("");
+        movieAmountInStockField.setText("");
+        break;
+      case "book":
+        booksTitleField.setText("");
+        booksAuthorField.setText("");
+        booksPgCountField.setText("");
+        booksGenreField.setText("");
+        booksPublicationYearField.setText("");
+        booksAmountInStockField.setText("");
+        break;
+      case "cd":
+        cdNameField.setText("");
+        cdCapacityField.setText("");
+        cdUsageField.setText("");
+        cdAmountInStockField.setText("");
+        break;
+      case "software":
+        softwareNameField.setText("");
+        softwareTypeField.setText("");
+        softwareVersionField.setText("");
+        softwareLicenseTypeField.setText("");
+        softwareAmountInStockField.setText("");
+        break;
     }
   }
 
-  /**
-   * Method for updating TableViews and binding each Property to cells
-   *
-   * @throws SQLException
-   */
+
+
+
   private void updateTables() throws SQLException
   {
     /* Movie Table Start Here */
@@ -510,5 +485,6 @@ public class MainViewController implements ViewController
 
     softwareTable.setItems(dataSoftware);
   }
+
 
 }
