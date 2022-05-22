@@ -2,6 +2,9 @@ package client.model;
 
 import client.network.Client;
 
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+
 public class LibraryModelManager implements LibraryModel
 {
   private Client client;
@@ -12,11 +15,9 @@ public class LibraryModelManager implements LibraryModel
     this.client.startClient();
   }
 
-  @Override public boolean login(String username, String password)
+  public void registerCustomer(String email,String f_name, String l_name, String phone, String password, String type)
+      throws SQLException, RemoteException
   {
-    if(username.equals("aaaaa") && password.equals("aaaaa")){
-      return true;
-    }
-    return false;
+    client.registerCustomer(email, f_name, l_name, phone, password, type);
   }
 }

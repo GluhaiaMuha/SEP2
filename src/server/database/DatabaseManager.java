@@ -497,6 +497,8 @@ public class DatabaseManager implements DatabaseInterface{
         return null;
     }
 
+
+
     @Override
     public User readUserRegister(String tableName, String email) throws SQLException
     {

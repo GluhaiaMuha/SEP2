@@ -9,6 +9,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 
 public class RMIClient implements Client, ClientCallback
 {
@@ -39,5 +40,10 @@ public class RMIClient implements Client, ClientCallback
     } catch (RemoteException e) {
       e.printStackTrace();
     }
+  }
+
+  public void registerCustomer(String email,String f_name, String l_name, String phone, String password, String type) throws RemoteException, SQLException
+  {
+    server.registerCustomer(email, f_name, l_name, phone, password, type);
   }
 }

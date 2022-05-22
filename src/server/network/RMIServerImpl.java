@@ -1,13 +1,17 @@
 package server.network;
 
+import server.database.DatabaseManager;
 import shared.network.ClientCallback;
 import shared.network.RMIServer;
+import shared.transferObj.Customer;
+import shared.transferObj.User;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 
 public class RMIServerImpl implements RMIServer
 {
@@ -35,5 +39,12 @@ public class RMIServerImpl implements RMIServer
   public void unRegisterClient(ClientCallback clientCallback)
   {
     connectionPool.removeClient(clientCallback);
+  }
+
+  public void registerCustomer(String email,String f_name, String l_name, String phone, String password, String type)
+      throws SQLException
+  {
+    Customer newCustomer = new Customer(email, f_name, l_name, phone, password, type);
+    DatabaseManager.getInstance().insertUserRegister(newCustomer);
   }
 }
