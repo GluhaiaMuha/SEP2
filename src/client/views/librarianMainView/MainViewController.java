@@ -244,7 +244,7 @@ public class MainViewController implements ViewController
   void onSelectMovieTitle(ActionEvent event) throws SQLException
   {
     savedTitle = editMovieChoiceBox.getValue();
-    Movie movie = DatabaseManager.getInstance().readMoviesByTitle(savedTitle);
+    Movie movie = DatabaseManager.getInstance().readMovieByTitle(savedTitle);
     editMovieTitle.setText(movie.getTitle());
     editMovieDirector.setText(movie.getDirector());
     editMovieReleaseYear.setText(Integer.toString(movie.getRelease_year()));
