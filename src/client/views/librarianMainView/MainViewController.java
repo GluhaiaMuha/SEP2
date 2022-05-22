@@ -7,10 +7,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.w3c.dom.Text;
 import server.database.DatabaseInterface;
 import server.database.DatabaseManager;
 import shared.transferObj.Book;
@@ -146,16 +148,44 @@ public class MainViewController implements ViewController
   private TextField softwareAmountInStockField;
 
 
+  /* Edit Text Fields Start Here */
+  @FXML
+  private ChoiceBox<String> editMovieChoiceBox = new ChoiceBox<>();
+  @FXML
+  private TextField editMovieTitleCol;
+  @FXML
+  private TextField editMovieDirectorCol;
+  @FXML
+  private TextField editMovieReleaseYearCol;
+  @FXML
+  private TextField editMovieLengthCol;
+  @FXML
+  private TextField editMovieAmountInStockCol;
 
+  public MainViewController() throws SQLException
+  {
+  }
 
+  /**
+   * Initializes the Controller
+   * @param vh View Handler
+   * @param vmf ViewModelFactory
+   * @throws SQLException Possible exception if the database is not found
+   */
   @Override
   public void init(ViewHandler vh, ViewModelFactory vmf) throws SQLException
   {
     this.viewHandler = vh;
     mainViewController = vmf.getMainViewModel();
     updateTables();
+
+//    editMovieChoiceBox.getItems().add()
+    //TODO: Add same values from db to choiceBox
   }
 
+
+
+  /* Movie Action Events Start Here */
   @FXML
   void onAddMovie(ActionEvent event) throws SQLException
   {
@@ -173,6 +203,29 @@ public class MainViewController implements ViewController
   }
 
   @FXML
+  void onRemoveMovie(ActionEvent event) throws SQLException
+  {
+    Movie selectedMovie = (Movie) movieTable.getSelectionModel().getSelectedItem();
+    if (selectedMovie.getAmountInStock() == 1){
+      movieTable.getItems().remove(selectedMovie);
+      createTableExample.delete("movie","hash = '" + selectedMovie.getHash() + "'");
+      updateTables();
+    }else if (selectedMovie.getAmountInStock() > 0){
+      selectedMovie.setAmountInStock(selectedMovie.getAmountInStock() - 1);
+      createTableExample.update("movie", "hash = '" +selectedMovie.getHash() + "'", selectedMovie);
+      updateTables();
+    }
+  }
+  @FXML
+  void onEditMovie(ActionEvent event){
+
+  }
+
+
+
+
+  /* Book Action Events Start Here */
+  @FXML
   void onAddBook(ActionEvent event) throws SQLException
   {
     String title = booksTitleField.getText();
@@ -188,6 +241,27 @@ public class MainViewController implements ViewController
     updateTables();
     clearTextFields("book");
   }
+
+
+
+  @FXML
+  void onRemoveBook(ActionEvent event) throws SQLException
+  {
+    Book selectedBook = (Book) booksTable.getSelectionModel().getSelectedItem();
+    if (selectedBook.getAmountInStock() == 1){
+      booksTable.getItems().remove(selectedBook);
+      createTableExample.delete("book", "hash = '" + selectedBook.getHash() + "'");
+      updateTables();
+    }else if (selectedBook.getAmountInStock() > 0){
+      selectedBook.setAmountInStock(selectedBook.getAmountInStock() - 1);
+      createTableExample.update("book", "hash = '" + selectedBook.getHash() + "'", selectedBook);
+      updateTables();
+    }
+  }
+
+
+
+  /* CD Action Events Start Here */
 
   @FXML
   void onAddCd(ActionEvent event) throws SQLException
@@ -205,6 +279,25 @@ public class MainViewController implements ViewController
   }
 
   @FXML
+  void onRemoveCd(ActionEvent event) throws SQLException
+  {
+    CD selectedCd = (CD) cdTable.getSelectionModel().getSelectedItem();
+    if (selectedCd.getAmountInStock() == 1){
+      cdTable.getItems().remove(selectedCd);
+      createTableExample.delete("cd", "hash = '" + selectedCd.getHash() + "'");
+      updateTables();
+    }else if (selectedCd.getAmountInStock() > 0){
+      selectedCd.setAmountInStock(selectedCd.getAmountInStock() - 1);
+      createTableExample.update("cd", "hash = '" + selectedCd.getHash() + "'", selectedCd);
+      updateTables();
+    }
+  }
+
+
+
+  /* Software Action Events Start Here */
+
+  @FXML
   void onAddSoftware(ActionEvent event) throws SQLException
   {
     String name = softwareNameField.getText();
@@ -220,37 +313,69 @@ public class MainViewController implements ViewController
     clearTextFields("software");
   }
 
-
-
-
-  private void clearTextFields(String s){
-    if (s.equals("movie"))
-    {
-      movieTitleField.setText("");
-      movieDirectorField.setText("");
-      movieReleaseYearField.setText("");
-      movieLengthField.setText("");
-      movieAmountInStockField.setText("");
-    }else if (s.equals("book")){
-      booksTitleField.setText("");
-      booksAuthorField.setText("");
-      booksPgCountField.setText("");
-      booksGenreField.setText("");
-      booksPublicationYearField.setText("");
-      booksAmountInStockField.setText("");
-    }else if (s.equals("cd")){
-      cdNameField.setText("");
-      cdCapacityField.setText("");
-      cdUsageField.setText("");
-      cdAmountInStockField.setText("");
-    }else if (s.equals("software")){
-      softwareNameField.setText("");
-      softwareTypeField.setText("");
-      softwareVersionField.setText("");
-      softwareLicenseTypeField.setText("");
-      softwareAmountInStockField.setText("");
+  @FXML
+  void onRemoveSoftware(ActionEvent event) throws SQLException
+  {
+    Software selectedSoftware = (Software) softwareTable.getSelectionModel().getSelectedItem();
+    if (selectedSoftware.getAmountInStock() == 1){
+      softwareTable.getItems().remove(selectedSoftware);
+      createTableExample.delete("software", "hash = '" + selectedSoftware.getHash() + "'");
+      updateTables();
+    }else if (selectedSoftware.getAmountInStock() > 0){
+      selectedSoftware.setAmountInStock(selectedSoftware.getAmountInStock() - 1);
+      createTableExample.update("software", "hash = '" + selectedSoftware.getHash() + "'", selectedSoftware);
+      updateTables();
     }
   }
+
+
+
+
+
+
+
+
+  /* Utility Methods Start Here*/
+
+  /**
+   * Method for cleaning the textFields each time a product is added
+   *
+   * @param s product Type
+   */
+  private void clearTextFields(String s){
+    switch (s)
+    {
+      case "movie":
+        movieTitleField.setText("");
+        movieDirectorField.setText("");
+        movieReleaseYearField.setText("");
+        movieLengthField.setText("");
+        movieAmountInStockField.setText("");
+        break;
+      case "book":
+        booksTitleField.setText("");
+        booksAuthorField.setText("");
+        booksPgCountField.setText("");
+        booksGenreField.setText("");
+        booksPublicationYearField.setText("");
+        booksAmountInStockField.setText("");
+        break;
+      case "cd":
+        cdNameField.setText("");
+        cdCapacityField.setText("");
+        cdUsageField.setText("");
+        cdAmountInStockField.setText("");
+        break;
+      case "software":
+        softwareNameField.setText("");
+        softwareTypeField.setText("");
+        softwareVersionField.setText("");
+        softwareLicenseTypeField.setText("");
+        softwareAmountInStockField.setText("");
+        break;
+    }
+  }
+
 
 
 
@@ -360,5 +485,6 @@ public class MainViewController implements ViewController
 
     softwareTable.setItems(dataSoftware);
   }
+
 
 }

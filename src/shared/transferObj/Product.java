@@ -20,4 +20,14 @@ public class Product
   {
     return amountInStock;
   }
+
+  public void setHash(String hash)
+  {
+    this.hash = hash;
+  }
+
+  public void setAmountInStock(int amountInStock)
+  {
+    this.amountInStock = amountInStock;
+  }
 }
