@@ -3,8 +3,6 @@ package client.core;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class ViewHandler
 {
   private static ViewHandler instance = new ViewHandler();
@@ -20,7 +18,7 @@ public class ViewHandler
   public void start() {
     stage = new Stage();
     ViewFactory.init(stage);
-    openLoginView();
+    openLibrarianMainView();
   }
 
   public void openLoginView() {
