@@ -1,7 +1,6 @@
 package server.database;
 
-import shared.transferObj.Customer;
-import shared.transferObj.User;
+import shared.transferObj.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -20,4 +19,12 @@ public interface DatabaseInterface{
     public void update(String tableName, String whereClause, Object obj) throws SQLException;
 
     void delete(String tableName, String whereClause) throws SQLException;
+
+    List<Book> readBooks() throws SQLException;
+
+    List<Movie> readMovies() throws SQLException;
+
+    List<CD> readCDS() throws SQLException;
+
+    List<Software> readSoftwares() throws SQLException;
 }

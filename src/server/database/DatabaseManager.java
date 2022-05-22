@@ -258,6 +258,98 @@ public class DatabaseManager implements DatabaseInterface{
         return null;
     }
 
+    public List<Book> readBooks() throws SQLException
+    {
+        try(Connection connection = database.getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM book");
+            ResultSet resultSet = statement.executeQuery();
+            ArrayList<Book> books = new ArrayList<>();
+            while (resultSet.next())
+            {
+                String hash = resultSet.getString("hash");
+                String title = resultSet.getString("title");
+                String author = resultSet.getString("author");
+                int pageCount = resultSet.getInt("pageCount");
+                String genre = resultSet.getString("genre");
+                int publication_year = resultSet.getInt("publication_year");
+                int amountInStock = resultSet.getInt("amountInStock");
+                Book book = new Book(hash, title, author, pageCount, genre, publication_year, amountInStock);
+                books.add(book);
+            }
+            return books;
+        }
+    }
+
+    public List<Movie> readMovies() throws SQLException
+    {
+        try(Connection connection = database.getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM movie");
+            ResultSet resultSet = statement.executeQuery();
+            ArrayList<Movie> movies = new ArrayList<>();
+            while (resultSet.next())
+            {
+                String hash = resultSet.getString("hash");
+                String title = resultSet.getString("title");
+                String director = resultSet.getString("director");
+                int release_year = resultSet.getInt("release_year");
+                int length = resultSet.getInt("length");
+                int amountInStock = resultSet.getInt("amountInStock");
+                Movie movie = new Movie(hash, title, director, release_year, length, amountInStock);
+                movies.add(movie);
+            }
+            return movies;
+        }
+    }
+
+    public List<CD> readCDS() throws SQLException
+    {
+        try(Connection connection = database.getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM cd");
+            ResultSet resultSet = statement.executeQuery();
+            ArrayList<CD> cds = new ArrayList<>();
+            while (resultSet.next())
+            {
+                String hash = resultSet.getString("hash");
+                String name = resultSet.getString("name");
+                int capacity = resultSet.getInt("capacity");
+                String usage = resultSet.getString("usage");
+                int amountInStock = resultSet.getInt("amountInStock");
+                CD cd = new CD(hash, name, capacity, usage, amountInStock);
+                cds.add(cd);
+            }
+            return cds;
+        }
+    }
+
+    public List<Software> readSoftwares() throws SQLException
+    {
+        try(Connection connection = database.getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM software");
+            ResultSet resultSet = statement.executeQuery();
+            ArrayList<Software> softwares = new ArrayList<>();
+            while (resultSet.next())
+            {
+                String hash = resultSet.getString("hash");
+                String name = resultSet.getString("name");
+                String type = resultSet.getString("type");
+                String version = resultSet.getString("version");
+                String license_type = resultSet.getString("license_type");
+                int amountInStock = resultSet.getInt("amountInStock");
+                Software software = new Software(hash, name, type, version, license_type, amountInStock);
+                softwares.add(software);
+            }
+            return softwares;
+        }
+    }
+
     @Override
     public User readUserLogin(String tableName, String email, String password) throws SQLException
     {
