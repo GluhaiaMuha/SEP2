@@ -2,6 +2,7 @@ package server.database;
 
 import shared.transferObj.*;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -32,7 +33,11 @@ public interface DatabaseInterface{
 
     List<Movie> readMoviesByTitle(String searchString) throws SQLException;
 
-    List<CD> readCDsByTitle(String searchString) throws SQLException;
+    List<CD> readCDsByName(String searchString) throws SQLException;
 
-    List<Software> readSoftwaresByTitle(String searchString) throws SQLException;
+    List<Software> readSoftwaresByName(String searchString) throws SQLException;
+
+    void rentProduct(String email, String productHash, Date dateFrom, Date dateTo) throws SQLException;
+
+    List<Rent> readCustomerRents(String customer_email, String product_hash) throws SQLException;
 }

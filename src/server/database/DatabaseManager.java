@@ -2,10 +2,7 @@ package server.database;
 
 import shared.transferObj.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -399,7 +396,7 @@ public class DatabaseManager implements DatabaseInterface{
         }
     }
 
-    public List<CD> readCDsByTitle(String searchString) throws SQLException
+    public List<CD> readCDsByName(String searchString) throws SQLException
     {
         try(Connection connection = database.getConnection())
         {
@@ -422,12 +419,13 @@ public class DatabaseManager implements DatabaseInterface{
         }
     }
 
-    public List<Software> readSoftwaresByTitle(String searchString) throws SQLException
+    public List<Software> readSoftwaresByName(String searchString) throws SQLException
     {
         try(Connection connection = database.getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(
                 "SELECT * FROM software WHERE name LIKE ?");
+            statement.setString(1,"%" + searchString + "%");
             ResultSet resultSet = statement.executeQuery();
             ArrayList<Software> softwares = new ArrayList<>();
             while (resultSet.next())
@@ -442,6 +440,41 @@ public class DatabaseManager implements DatabaseInterface{
                 softwares.add(software);
             }
             return softwares;
+        }
+    }
+
+    public void rentProduct(String email, String productHash, Date dateFrom, Date dateTo) throws SQLException
+    {
+        try(Connection connection = database.getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(
+                "INSERT INTO rent (customer_email, product_hash, dateFrom, dateTo) VALUES (?, ?, ?, ?)");
+            statement.setString(1, email);
+            statement.setString(2, productHash);
+            statement.setDate(3, dateFrom);
+            statement.setDate(4, dateTo);
+            statement.executeUpdate();
+        }
+    }
+
+    public List<Rent> readCustomerRents(String customer_email, String product_hash) throws SQLException
+    {
+        try(Connection connection = database.getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM rent WHERE customer_email = '" + customer_email + "' AND product_hash = '" + product_hash + "'");
+            ResultSet resultSet = statement.executeQuery();
+            ArrayList<Rent> rents = new ArrayList<>();
+            while (resultSet.next())
+            {
+                String email = resultSet.getString("customer_email");
+                String hash = resultSet.getString("product_hash");
+                Date dateFrom = resultSet.getDate("dateFrom");
+                Date dateTo = resultSet.getDate("dateTo");
+                Rent rent = new Rent(email, hash, dateFrom, dateTo);
+                rents.add(rent);
+            }
+            return rents;
         }
     }
 
