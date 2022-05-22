@@ -21,6 +21,8 @@ import shared.transferObj.Movie;
 import shared.transferObj.Software;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainViewController implements ViewController
 {
@@ -178,6 +180,7 @@ public class MainViewController implements ViewController
     this.viewHandler = vh;
     mainViewController = vmf.getMainViewModel();
     updateTables();
+    updateChoiceBoxes();
 
 //    editMovieChoiceBox.getItems().add()
     //TODO: Add same values from db to choiceBox
@@ -199,6 +202,7 @@ public class MainViewController implements ViewController
     Movie movie = new Movie(hash,title,director,release_year,length,amountInStock);
     createTableExample.insert("movie", movie);
     updateTables();
+    updateChoiceBoxes();
     clearTextFields("movie");
   }
 
@@ -217,10 +221,20 @@ public class MainViewController implements ViewController
     }
   }
   @FXML
-  void onEditMovie(ActionEvent event){
+  void onEditMovie(ActionEvent event) throws SQLException
+  {
 
   }
 
+  private void updateChoiceBoxes() throws SQLException
+  {
+    List<Movie> movies = DatabaseManager.getInstance().readMovies();
+    editMovieChoiceBox.getItems().clear();
+    for (int i = 0; i < movies.size(); i++)
+    {
+      editMovieChoiceBox.getItems().add(movies.get(i).getTitle());
+    }
+  }
 
 
 

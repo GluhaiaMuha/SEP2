@@ -1,6 +1,8 @@
 package shared.transferObj;
 
-public class User
+import java.io.Serializable;
+
+public class User implements Serializable
 {
   private String e_mail;
   private String password;

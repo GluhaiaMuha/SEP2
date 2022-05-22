@@ -22,7 +22,7 @@ import java.sql.SQLException;
 public class RentViewController implements ViewController {
 
     private ViewHandler viewHandler;
-    private MainViewModel mainViewController;
+    private RentViewModel rentViewController;
     private DatabaseManager createTableExample = new DatabaseManager();
 
     /* Movie Table Start Here */
@@ -105,14 +105,18 @@ public class RentViewController implements ViewController {
     public void init(ViewHandler vh, ViewModelFactory vmf) throws SQLException
     {
         this.viewHandler = vh;
-        mainViewController = vmf.getMainViewModel();
+        rentViewController = vmf.getRentViewModel();
+        updateTables();
+
+    }
 
 
+    private void updateTables() throws SQLException
+    {
         /* Movie Table Start Here */
-        /* For future use, make sure PropretyValueFactory is the same as the get/set Methods */
+        /* For future use, make sure PropertyValueFactory is the same as the get/set Methods */
 
-        //TODO: Распеределить по типом даты.
-        final ObservableList<Object> data = FXCollections.observableArrayList(createTableExample.read("movie")
+        final ObservableList<Object> dataMovie = FXCollections.observableArrayList(createTableExample.read("movie")
         );
 
         movieHashCol.setCellValueFactory(
@@ -134,13 +138,12 @@ public class RentViewController implements ViewController {
             new PropertyValueFactory<>("AmountInStock")
         );
 
-        movieTable.setItems(data);
+        movieTable.setItems(dataMovie);
 
         /* Books Table Starts Here */
 
         final ObservableList<Object> dataBook = FXCollections.observableArrayList(createTableExample.read("book")
         );
-
 
         booksHashCol.setCellValueFactory(
             new PropertyValueFactory<>("Hash")
@@ -167,6 +170,8 @@ public class RentViewController implements ViewController {
         booksTable.setItems(dataBook);
 
         /* CD Table Starts Here */
+        final ObservableList<Object> dataCD = FXCollections.observableArrayList(createTableExample.read("cd")
+        );
 
         cdHashCol.setCellValueFactory(
             new PropertyValueFactory<>("Hash")
@@ -184,9 +189,12 @@ public class RentViewController implements ViewController {
             new PropertyValueFactory<>("AmountInStock")
         );
 
-        //    cdTable.setItems();
+
+        cdTable.setItems(dataCD);
 
         /* Software Table Starts Here */
+        final ObservableList<Object> dataSoftware = FXCollections.observableArrayList(createTableExample.read("software")
+        );
 
         softwareHashCol.setCellValueFactory(
             new PropertyValueFactory<>("Hash")
@@ -206,32 +214,51 @@ public class RentViewController implements ViewController {
         softwareAmountInStockCol.setCellValueFactory(
             new PropertyValueFactory<>("AmountInStock")
         );
+
+        softwareTable.setItems(dataSoftware);
     }
 
 
     @FXML
-    void onRentBook(ActionEvent event) {
-
+    void onRentBook(ActionEvent event) throws SQLException
+    {
+        /*Book selectedBook = (Book) booksTable.getSelectionModel().getSelectedItem();
+        DatabaseManager.getInstance().rentProduct();
+        updateTables();*/
     }
 
     @FXML
-    void onRentCD(ActionEvent event) {
+    void onRentCD(ActionEvent event) throws SQLException
+    {
 
+        updateTables();
     }
 
     @FXML
-    void onRentMovie(ActionEvent event) {
+    void onRentMovie(ActionEvent event) throws SQLException
+    {
 
+
+        updateTables();
     }
 
     @FXML
-    void onRentSoftware(ActionEvent event) {
+    void onRentSoftware(ActionEvent event) throws SQLException
+    {
 
+
+        updateTables();
     }
 
     @FXML
     void onGoToMainPage(ActionEvent event) {
         viewHandler.openCustomerMainView();
+    }
+
+    @FXML
+    void onUpdateList(ActionEvent event) throws SQLException
+    {
+        updateTables();
     }
 
 }
