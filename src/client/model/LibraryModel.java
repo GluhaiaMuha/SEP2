@@ -10,5 +10,5 @@ public interface LibraryModel
   void registerCustomer(String email,String f_name, String l_name, String phone, String password, String type)
       throws SQLException, RemoteException;
 
-  User getInfo(String email) throws SQLException;
+  User getInfo(String email) throws SQLException, RemoteException;
 }

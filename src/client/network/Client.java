@@ -13,5 +13,5 @@ public interface Client
 
   void registerCustomer(String email,String f_name, String l_name, String phone, String password, String type) throws
       RemoteException, SQLException;
-  User getInfo(String email) throws SQLException;
+  User getInfo(String email) throws SQLException, RemoteException;
 }

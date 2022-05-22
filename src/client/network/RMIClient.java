@@ -48,7 +48,7 @@ public class RMIClient implements Client, ClientCallback
     server.registerCustomer(email, f_name, l_name, phone, password, type);
   }
 
-  public User getInfo(String email) throws SQLException
+  public User getInfo(String email) throws SQLException, RemoteException
   {
     return server.getInfo(email);
   }
