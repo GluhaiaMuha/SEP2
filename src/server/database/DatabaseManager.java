@@ -372,7 +372,7 @@ public class DatabaseManager implements DatabaseInterface{
         }
     }
 
-    public Movie readMoviesByTitle(String searchString) throws SQLException
+    public List<Movie> readMoviesByTitle(String searchString) throws SQLException
     {
         try(Connection connection = database.getConnection())
         {
@@ -380,7 +380,8 @@ public class DatabaseManager implements DatabaseInterface{
                 "SELECT * FROM movie WHERE title LIKE ?");
             statement.setString(1, "%" + searchString + "%");
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next())
+            ArrayList<Movie> movies = new ArrayList<>();
+            while (resultSet.next())
             {
                 String hash = resultSet.getString("hash");
                 String title = resultSet.getString("title");
@@ -388,9 +389,10 @@ public class DatabaseManager implements DatabaseInterface{
                 int release_year = resultSet.getInt("release_year");
                 int length = resultSet.getInt("length");
                 int amountInStock = resultSet.getInt("amountInStock");
-                return new Movie(hash, title, director, release_year, length, amountInStock);
+                Movie movie = new Movie(hash, title, director, release_year, length, amountInStock);
+                movies.add(movie);
             }
-            return null;
+            return movies;
         }
     }
 
@@ -438,6 +440,94 @@ public class DatabaseManager implements DatabaseInterface{
                 softwares.add(software);
             }
             return softwares;
+        }
+    }
+
+    public Book readBookByTitle(String searchString) throws SQLException
+    {
+        try(Connection connection = database.getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM book WHERE title LIKE ?");
+            statement.setString(1, "%" + searchString + "%");
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next())
+            {
+                String hash = resultSet.getString("hash");
+                String title = resultSet.getString("title");
+                String author = resultSet.getString("author");
+                int pageCount = resultSet.getInt("pageCount");
+                String genre = resultSet.getString("genre");
+                int publication_year = resultSet.getInt("publication_year");
+                int amountInStock = resultSet.getInt("amountInStock");
+                return new Book(hash, title, author, pageCount, genre, publication_year, amountInStock);
+            }
+            return null;
+        }
+    }
+
+    public Movie readMovieByTitle(String searchString) throws SQLException
+    {
+        try(Connection connection = database.getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM movie WHERE title LIKE ?");
+            statement.setString(1, "%" + searchString + "%");
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next())
+            {
+                String hash = resultSet.getString("hash");
+                String title = resultSet.getString("title");
+                String director = resultSet.getString("director");
+                int release_year = resultSet.getInt("release_year");
+                int length = resultSet.getInt("length");
+                int amountInStock = resultSet.getInt("amountInStock");
+                return new Movie(hash, title, director, release_year, length, amountInStock);
+            }
+            return null;
+        }
+    }
+
+    public CD readCDByName(String searchString) throws SQLException
+    {
+        try(Connection connection = database.getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM movie WHERE title LIKE ?");
+            statement.setString(1, "%" + searchString + "%");
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next())
+            {
+                String hash = resultSet.getString("hash");
+                String name = resultSet.getString("name");
+                int capacity = resultSet.getInt("capacity");
+                String usage = resultSet.getString("usage");
+                int amountInStock = resultSet.getInt("amountInStock");
+                return new CD(hash, name, capacity, usage, amountInStock);
+            }
+            return null;
+        }
+    }
+
+    public Software readSoftwareByName(String searchString) throws SQLException
+    {
+        try(Connection connection = database.getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM movie WHERE title LIKE ?");
+            statement.setString(1, "%" + searchString + "%");
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next())
+            {
+                String hash = resultSet.getString("hash");
+                String name = resultSet.getString("name");
+                String type = resultSet.getString("type");
+                String version = resultSet.getString("version");
+                String license_type = resultSet.getString("license_type");
+                int amountInStock = resultSet.getInt("amountInStock");
+                return new Software(hash, name, type, version, license_type, amountInStock);
+            }
+            return null;
         }
     }
 

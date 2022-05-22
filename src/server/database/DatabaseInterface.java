@@ -32,11 +32,19 @@ public interface DatabaseInterface{
 
     List<Book> readBooksByTitle(String searchString) throws SQLException;
 
-    Movie readMoviesByTitle(String searchString) throws SQLException;
+    List<Movie> readMoviesByTitle(String searchString) throws SQLException;
 
     List<CD> readCDsByName(String searchString) throws SQLException;
 
     List<Software> readSoftwaresByName(String searchString) throws SQLException;
+
+    Book readBookByTitle(String searchString) throws SQLException;
+
+    Movie readMovieByTitle(String searchString) throws SQLException;
+
+    CD readCDByName(String searchString) throws SQLException;
+
+    Software readSoftwareByName(String searchString) throws SQLException;
 
     void rentProduct(String email, String productHash, Date dateFrom, Date dateTo) throws SQLException;
 
