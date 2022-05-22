@@ -47,4 +47,9 @@ public class RMIServerImpl implements RMIServer
     Customer newCustomer = new Customer(email, f_name, l_name, phone, password, type);
     DatabaseManager.getInstance().insertUserRegister(newCustomer);
   }
+
+  public User getInfo(String email) throws SQLException
+  {
+    return DatabaseManager.getInstance().readUserRegister("user", email);
+  }
 }

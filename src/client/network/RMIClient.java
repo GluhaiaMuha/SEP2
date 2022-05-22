@@ -2,6 +2,7 @@ package client.network;
 
 import shared.network.ClientCallback;
 import shared.network.RMIServer;
+import shared.transferObj.User;
 
 import java.beans.PropertyChangeSupport;
 import java.rmi.NotBoundException;
@@ -45,5 +46,10 @@ public class RMIClient implements Client, ClientCallback
   public void registerCustomer(String email,String f_name, String l_name, String phone, String password, String type) throws RemoteException, SQLException
   {
     server.registerCustomer(email, f_name, l_name, phone, password, type);
+  }
+
+  public User getInfo(String email) throws SQLException
+  {
+    return server.getInfo(email);
   }
 }
