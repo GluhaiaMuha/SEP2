@@ -163,8 +163,23 @@ public class MainViewController implements ViewController
   private TextField editMovieLength;
   @FXML
   private TextField editMovieAmountInStock;
+  private String savedMovieTitle;
 
-  private String savedTitle;
+  @FXML
+  private ChoiceBox<String> editBookChoiceBox = new ChoiceBox<>();
+  @FXML
+  private TextField editBookTitle;
+  @FXML
+  private TextField editBookAuthor;
+  @FXML
+  private TextField editBookPgCount;
+  @FXML
+  private TextField editBookGenre;
+  @FXML
+  private TextField editBookPublicationYear;
+  @FXML
+  private TextField editBookAmountInStock;
+  private String savedBookTitle;
 
   public MainViewController() throws SQLException
   {
@@ -243,8 +258,8 @@ public class MainViewController implements ViewController
   @FXML
   void onSelectMovieTitle(ActionEvent event) throws SQLException
   {
-    savedTitle = editMovieChoiceBox.getValue();
-    Movie movie = DatabaseManager.getInstance().readMoviesByTitle(savedTitle);
+    savedMovieTitle = editMovieChoiceBox.getValue();
+    Movie movie = DatabaseManager.getInstance().readMoviesByTitle(savedMovieTitle);
     editMovieTitle.setText(movie.getTitle());
     editMovieDirector.setText(movie.getDirector());
     editMovieReleaseYear.setText(Integer.toString(movie.getRelease_year()));
@@ -273,8 +288,6 @@ public class MainViewController implements ViewController
     clearTextFields("book");
   }
 
-
-
   @FXML
   void onRemoveBook(ActionEvent event) throws SQLException
   {
@@ -288,6 +301,19 @@ public class MainViewController implements ViewController
       createTableExample.update("book", "hash = '" + selectedBook.getHash() + "'", selectedBook);
       updateTables();
     }
+  }
+
+  @FXML
+  void onEditBook(ActionEvent event){
+
+  }
+
+  @FXML
+  void onSelectBookTitle(ActionEvent event) throws SQLException
+  {
+    savedBookTitle = editBookChoiceBox.getValue();
+//    Book book = DatabaseManager.getInstance().readBooksByTitle(savedBookTitle);
+
   }
 
 
