@@ -30,6 +30,7 @@
                         <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
                         <Button layoutX="783.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRentMovie" text="Rent" />
                         <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
+                        <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />
                      </children>
                   </AnchorPane>
                </content>
@@ -53,6 +54,7 @@
                         <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
                         <Button layoutX="783.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRentBook" text="Rent" />
                         <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
+                        <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />
                      </children>
                   </AnchorPane>
                </content>
@@ -74,6 +76,7 @@
                         <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
                         <Button layoutX="783.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRentCD" text="Rent" />
                         <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
+                        <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />
                      </children></AnchorPane>
                </content>
             </Tab>
@@ -95,6 +98,7 @@
                         <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
                         <Button layoutX="783.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRentSoftware" text="Rent" />
                         <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
+                        <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />
                      </children>
                   </AnchorPane>
                </content>
