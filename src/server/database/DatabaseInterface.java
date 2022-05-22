@@ -32,7 +32,7 @@ public interface DatabaseInterface{
 
     List<Book> readBooksByTitle(String searchString) throws SQLException;
 
-    List<Movie> readMoviesByTitle(String searchString) throws SQLException;
+    Movie readMoviesByTitle(String searchString) throws SQLException;
 
     List<CD> readCDsByName(String searchString) throws SQLException;
 

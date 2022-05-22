@@ -372,7 +372,7 @@ public class DatabaseManager implements DatabaseInterface{
         }
     }
 
-    public List<Movie> readMoviesByTitle(String searchString) throws SQLException
+    public Movie readMoviesByTitle(String searchString) throws SQLException
     {
         try(Connection connection = database.getConnection())
         {
@@ -380,8 +380,7 @@ public class DatabaseManager implements DatabaseInterface{
                 "SELECT * FROM movie WHERE title LIKE ?");
             statement.setString(1, "%" + searchString + "%");
             ResultSet resultSet = statement.executeQuery();
-            ArrayList<Movie> movies = new ArrayList<>();
-            while (resultSet.next())
+            if (resultSet.next())
             {
                 String hash = resultSet.getString("hash");
                 String title = resultSet.getString("title");
@@ -389,10 +388,9 @@ public class DatabaseManager implements DatabaseInterface{
                 int release_year = resultSet.getInt("release_year");
                 int length = resultSet.getInt("length");
                 int amountInStock = resultSet.getInt("amountInStock");
-                Movie movie = new Movie(hash, title, director, release_year, length, amountInStock);
-                movies.add(movie);
+                return new Movie(hash, title, director, release_year, length, amountInStock);
             }
-            return movies;
+            return null;
         }
     }
 
