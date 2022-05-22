@@ -545,12 +545,12 @@ public class DatabaseManager implements DatabaseInterface{
         }
     }
 
-    public List<Rent> readCustomerRents(String customer_email, String product_hash) throws SQLException
+    public List<Rent> readCustomerRents(String customer_email) throws SQLException
     {
         try(Connection connection = database.getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(
-                "SELECT * FROM rent WHERE customer_email = '" + customer_email + "' AND product_hash = '" + product_hash + "'");
+                "SELECT * FROM rent WHERE customer_email = '" + customer_email + "'");
             ResultSet resultSet = statement.executeQuery();
             ArrayList<Rent> rents = new ArrayList<>();
             while (resultSet.next())
