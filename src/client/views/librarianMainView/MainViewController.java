@@ -154,15 +154,17 @@ public class MainViewController implements ViewController
   @FXML
   private ChoiceBox<String> editMovieChoiceBox = new ChoiceBox<>();
   @FXML
-  private TextField editMovieTitleCol;
+  private TextField editMovieTitle;
   @FXML
-  private TextField editMovieDirectorCol;
+  private TextField editMovieDirector;
   @FXML
-  private TextField editMovieReleaseYearCol;
+  private TextField editMovieReleaseYear;
   @FXML
-  private TextField editMovieLengthCol;
+  private TextField editMovieLength;
   @FXML
-  private TextField editMovieAmountInStockCol;
+  private TextField editMovieAmountInStock;
+
+  private String savedTitle;
 
   public MainViewController() throws SQLException
   {
@@ -182,8 +184,7 @@ public class MainViewController implements ViewController
     updateTables();
     updateChoiceBoxes();
 
-//    editMovieChoiceBox.getItems().add()
-    //TODO: Add same values from db to choiceBox
+
   }
 
 
@@ -214,26 +215,42 @@ public class MainViewController implements ViewController
       movieTable.getItems().remove(selectedMovie);
       createTableExample.delete("movie","hash = '" + selectedMovie.getHash() + "'");
       updateTables();
+      updateChoiceBoxes();
     }else if (selectedMovie.getAmountInStock() > 0){
       selectedMovie.setAmountInStock(selectedMovie.getAmountInStock() - 1);
       createTableExample.update("movie", "hash = '" +selectedMovie.getHash() + "'", selectedMovie);
       updateTables();
+      updateChoiceBoxes();
     }
   }
   @FXML
   void onEditMovie(ActionEvent event) throws SQLException
   {
+    String title = editMovieTitle.getText();
+    String director = editMovieDirector.getText();
+    int release_year = Integer.parseInt(editMovieReleaseYear.getText());
+    int length = Integer.parseInt(editMovieLength.getText());
+    int amountInStock = Integer.parseInt(editMovieAmountInStock.getText());
+    String hash = String.valueOf(title.hashCode());
 
+    Movie movie = new Movie(hash,title,director,release_year,length,amountInStock);
+    DatabaseManager.getInstance().update("movie", "hash = '" + hash + "'",movie);
+    updateTables();
+    updateChoiceBoxes();
+    clearTextFields("edit");
   }
 
-  private void updateChoiceBoxes() throws SQLException
+  @FXML
+  void onSelectMovieTitle(ActionEvent event) throws SQLException
   {
-    List<Movie> movies = DatabaseManager.getInstance().readMovies();
-    editMovieChoiceBox.getItems().clear();
-    for (int i = 0; i < movies.size(); i++)
-    {
-      editMovieChoiceBox.getItems().add(movies.get(i).getTitle());
-    }
+    savedTitle = editMovieChoiceBox.getValue();
+    Movie movie = DatabaseManager.getInstance().readMoviesByTitle(savedTitle);
+    editMovieTitle.setText(movie.getTitle());
+    editMovieDirector.setText(movie.getDirector());
+    editMovieReleaseYear.setText(Integer.toString(movie.getRelease_year()));
+    editMovieLength.setText(Integer.toString(movie.getLength()));
+    editMovieAmountInStock.setText(Integer.toString(movie.getAmountInStock()));
+
   }
 
 
@@ -351,6 +368,16 @@ public class MainViewController implements ViewController
 
   /* Utility Methods Start Here*/
 
+  private void updateChoiceBoxes() throws SQLException
+  {
+    List<Movie> movies = DatabaseManager.getInstance().readMovies();
+    editMovieChoiceBox.getItems().clear();
+    for (int i = 0; i < movies.size(); i++)
+    {
+      editMovieChoiceBox.getItems().add(movies.get(i).getTitle());
+    }
+  }
+
   /**
    * Method for cleaning the textFields each time a product is added
    *
@@ -387,6 +414,12 @@ public class MainViewController implements ViewController
         softwareLicenseTypeField.setText("");
         softwareAmountInStockField.setText("");
         break;
+      case "edit":
+        editMovieTitle.setText("");
+        editMovieDirector.setText("");
+        editMovieReleaseYear.setText("");
+        editMovieLength.setText("");
+        editMovieAmountInStock.setText("");
     }
   }
 
