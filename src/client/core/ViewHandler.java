@@ -20,8 +20,7 @@ public class ViewHandler
   public void start() {
     stage = new Stage();
     ViewFactory.init(stage);
-    openLibrarianMainView();
-
+    openLoginView();
   }
 
   public void openLoginView() {
