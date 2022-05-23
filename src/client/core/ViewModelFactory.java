@@ -7,7 +7,6 @@ import client.views.loginView.LoginViewModel;
 import client.views.registerView.RegisterViewModel;
 import client.views.rent.RentViewModel;
 import client.views.review.ReviewViewModel;
-import org.junit.jupiter.params.provider.EnumSource;
 
 public class ViewModelFactory
 {

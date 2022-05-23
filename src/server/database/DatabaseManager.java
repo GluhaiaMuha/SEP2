@@ -17,61 +17,9 @@ public class DatabaseManager implements DatabaseInterface{
         return instance;
     }
 
-    //    @Override //@TODO make this work for tables where one of the values is "SERIAL" type
-    //    public void insert(String tableName, String[] fields) {
-    //        Connection connection = null;
-    //        String sqlString = "INSERT INTO " + tableName + " VALUES(DEFAULT,'" + fields + "');";
-    //        try {
-    //            connection = database.getConnection();
-    //        } catch (SQLException e) {
-    //            System.err.println("Error connecting to the database!");
-    //        }
-    //        try {
-    //            PreparedStatement statement = connection.prepareStatement(sqlString);
-    //            statement.executeUpdate();
-    //        } catch (SQLException e) {
-    //            e.printStackTrace();
-    //        } finally {
-    //            try {
-    //                connection.close();
-    //            } catch (SQLException e) {
-    //                e.printStackTrace();
-    //            }
-    //        }
-    //    }
-    //
-    //    @Override
-    //    public void update(String tableName, String field, String whereClause) {
-    //
-    //    }
-    //
-    //    //    @Override
-    //    //    public void delete(String tableName, String whereClause) {
-    //    //        String sqlString = "DELETE FROM " + tableName +" WHERE " + whereClause;
-    //    //        try {
-    //    //            Connection connection = database.getConnection();
-    //    //            PreparedStatement statement = connection.prepareStatement(sqlString);
-    //    //            statement.execute();
-    //    //        } catch (SQLException e) {
-    //    //            e.printStackTrace();
-    //    //        }
-    //    //    }
     @Override
-    public Object insert(String tableName, Object obj) throws SQLException
+    public Object insert(String tableName, Object obj)
     {
-        //        if (tableName.equals("product"))
-        //        {
-        //            try(Connection connection = database.getConnection())
-        //            {
-        //                Product product = (Product) obj;
-        //                PreparedStatement statement = connection.prepareStatement(
-        //                    "INSERT INTO " + tableName + "(hash, amountInStock) VALUES (?, ?)");
-        //                statement.setString(1, product.getHash());
-        //                statement.setInt(2, product.getAmountInStock());
-        //                statement.executeUpdate();
-        //                return new Product(product.getHash(), product.getAmountInStock());
-        //            }
-        //        }
         if (tableName.equals("book"))
         {
             try(Connection connection = database.getConnection())
@@ -88,6 +36,10 @@ public class DatabaseManager implements DatabaseInterface{
                 statement.setInt(7, book.getAmountInStock());
                 statement.executeUpdate();
                 return new Book(book.getHash(), book.getTitle(), book.getAuthor(), book.getPageCount(), book.getGenre(), book.getPublication_year(), book.getAmountInStock());
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
             }
         }
         if (tableName.equals("movie"))
@@ -106,6 +58,10 @@ public class DatabaseManager implements DatabaseInterface{
                 statement.executeUpdate();
                 return new Movie(movie.getHash(), movie.getTitle(), movie.getDirector(), movie.getRelease_year(), movie.getLength(), movie.getAmountInStock());
             }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
         }
         if (tableName.equals("cd"))
         {
@@ -121,6 +77,10 @@ public class DatabaseManager implements DatabaseInterface{
                 statement.setInt(5, cd.getAmountInStock());
                 statement.executeUpdate();
                 return new CD(cd.getHash(), cd.getName(), cd.getCapacity(), cd.getUsage(), cd.getAmountInStock());
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
             }
         }
         if (tableName.equals("software"))
@@ -139,12 +99,16 @@ public class DatabaseManager implements DatabaseInterface{
                 statement.executeUpdate();
                 return new Software(software.getHash(), software.getName(), software.getType(), software.getVersion(), software.getLicense_type(), software.getAmountInStock());
             }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
         }
         return null;
     }
 
     @Override
-    public List<Object> read(String tableName) throws SQLException
+    public List<Object> read(String tableName)
     {
         if (tableName.equals("product"))
         {
@@ -162,6 +126,10 @@ public class DatabaseManager implements DatabaseInterface{
                     products.add(product);
                 }
                 return products;
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
             }
         }
         if (tableName.equals("book"))
@@ -186,6 +154,10 @@ public class DatabaseManager implements DatabaseInterface{
                 }
                 return books;
             }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
         }
         if (tableName.equals("movie"))
         {
@@ -208,6 +180,10 @@ public class DatabaseManager implements DatabaseInterface{
                 }
                 return movies;
             }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
         }
         if (tableName.equals("cd"))
         {
@@ -228,6 +204,10 @@ public class DatabaseManager implements DatabaseInterface{
                     cds.add(cd);
                 }
                 return cds;
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
             }
         }
         if (tableName.equals("software"))
@@ -251,11 +231,15 @@ public class DatabaseManager implements DatabaseInterface{
                 }
                 return softwares;
             }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
         }
         return null;
     }
 
-    public List<Book> readBooks() throws SQLException
+    public List<Book> readBooks()
     {
         try(Connection connection = database.getConnection())
         {
@@ -277,9 +261,14 @@ public class DatabaseManager implements DatabaseInterface{
             }
             return books;
         }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public List<Movie> readMovies() throws SQLException
+    public List<Movie> readMovies()
     {
         try(Connection connection = database.getConnection())
         {
@@ -300,9 +289,14 @@ public class DatabaseManager implements DatabaseInterface{
             }
             return movies;
         }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public List<CD> readCDS() throws SQLException
+    public List<CD> readCDS()
     {
         try(Connection connection = database.getConnection())
         {
@@ -322,9 +316,14 @@ public class DatabaseManager implements DatabaseInterface{
             }
             return cds;
         }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public List<Software> readSoftwares() throws SQLException
+    public List<Software> readSoftwares()
     {
         try(Connection connection = database.getConnection())
         {
@@ -345,9 +344,14 @@ public class DatabaseManager implements DatabaseInterface{
             }
             return softwares;
         }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public List<Book> readBooksByTitle(String searchString) throws SQLException
+    public List<Book> readBooksByTitle(String searchString)
     {
         try(Connection connection = database.getConnection())
         {
@@ -370,9 +374,14 @@ public class DatabaseManager implements DatabaseInterface{
             }
             return books;
         }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public List<Movie> readMoviesByTitle(String searchString) throws SQLException
+    public List<Movie> readMoviesByTitle(String searchString)
     {
         try(Connection connection = database.getConnection())
         {
@@ -394,9 +403,14 @@ public class DatabaseManager implements DatabaseInterface{
             }
             return movies;
         }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public List<CD> readCDsByName(String searchString) throws SQLException
+    public List<CD> readCDsByName(String searchString)
     {
         try(Connection connection = database.getConnection())
         {
@@ -417,9 +431,14 @@ public class DatabaseManager implements DatabaseInterface{
             }
             return cds;
         }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public List<Software> readSoftwaresByName(String searchString) throws SQLException
+    public List<Software> readSoftwaresByName(String searchString)
     {
         try(Connection connection = database.getConnection())
         {
@@ -441,9 +460,14 @@ public class DatabaseManager implements DatabaseInterface{
             }
             return softwares;
         }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public Book readBookByTitle(String searchString) throws SQLException
+    public Book readBookByTitle(String searchString)
     {
         try(Connection connection = database.getConnection())
         {
@@ -462,11 +486,15 @@ public class DatabaseManager implements DatabaseInterface{
                 int amountInStock = resultSet.getInt("amountInStock");
                 return new Book(hash, title, author, pageCount, genre, publication_year, amountInStock);
             }
-            return null;
         }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public Movie readMovieByTitle(String searchString) throws SQLException
+    public Movie readMovieByTitle(String searchString)
     {
         try(Connection connection = database.getConnection())
         {
@@ -484,11 +512,15 @@ public class DatabaseManager implements DatabaseInterface{
                 int amountInStock = resultSet.getInt("amountInStock");
                 return new Movie(hash, title, director, release_year, length, amountInStock);
             }
-            return null;
         }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public CD readCDByName(String searchString) throws SQLException
+    public CD readCDByName(String searchString)
     {
         try(Connection connection = database.getConnection())
         {
@@ -505,8 +537,12 @@ public class DatabaseManager implements DatabaseInterface{
                 int amountInStock = resultSet.getInt("amountInStock");
                 return new CD(hash, name, capacity, usage, amountInStock);
             }
-            return null;
         }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public Software readSoftwareByName(String searchString) throws SQLException
@@ -527,11 +563,15 @@ public class DatabaseManager implements DatabaseInterface{
                 int amountInStock = resultSet.getInt("amountInStock");
                 return new Software(hash, name, type, version, license_type, amountInStock);
             }
-            return null;
         }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public void rentProduct(String email, String productHash, Date dateFrom, Date dateTo) throws SQLException
+    public void rentProduct(String email, String productHash, Date dateFrom, Date dateTo)
     {
         try(Connection connection = database.getConnection())
         {
@@ -543,9 +583,13 @@ public class DatabaseManager implements DatabaseInterface{
             statement.setDate(4, dateTo);
             statement.executeUpdate();
         }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
-    public List<Rent> readCustomerRents(String customer_email) throws SQLException
+    public List<Rent> readCustomerRents(String customer_email)
     {
         try(Connection connection = database.getConnection())
         {
@@ -564,10 +608,15 @@ public class DatabaseManager implements DatabaseInterface{
             }
             return rents;
         }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
-    public User readUserLogin(String tableName, String email, String password) throws SQLException
+    public User readUserLogin(String tableName, String email, String password)
     {
         try(Connection connection = database.getConnection())
         {
@@ -582,13 +631,17 @@ public class DatabaseManager implements DatabaseInterface{
                 return new User(e_mail, user_password, type);
             }
         }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
         return null;
     }
 
 
 
     @Override
-    public User readUserRegister(String tableName, String email) throws SQLException
+    public User readUserRegister(String tableName, String email)
     {
         try(Connection connection = database.getConnection())
         {
@@ -603,11 +656,15 @@ public class DatabaseManager implements DatabaseInterface{
                 return new User(e_mail, user_password, type);
             }
         }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
-    public void insertUserRegister(Customer customer) throws SQLException
+    public void insertUserRegister(Customer customer)
     {
         try(Connection connection = database.getConnection())
         {
@@ -621,24 +678,15 @@ public class DatabaseManager implements DatabaseInterface{
             statement.setString(6, customer.getUser());
             statement.executeUpdate();
         }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void update(String tableName, String whereClause, Object obj) throws SQLException
+    public void update(String tableName, String whereClause, Object obj)
     {
-        //        if (tableName.equals("product"))
-        //        {
-        //            try(Connection connection = database.getConnection())
-        //            {
-        //                Product product = (Product) obj;
-        //
-        //                PreparedStatement statement = connection.prepareStatement(
-        //                    "UPDATE "+ tableName + " SET hash = ?, amountInStock = ? WHERE "+ whereClause);
-        //                statement.setString(1, product.getHash());
-        //                statement.setInt(2, product.getAmountInStock());
-        //                statement.executeUpdate();
-        //            }
-        //        }
         if (tableName.equals("book"))
         {
             try(Connection connection = database.getConnection())
@@ -655,6 +703,10 @@ public class DatabaseManager implements DatabaseInterface{
                 statement.setInt(6, book.getPublication_year());
                 statement.setInt(7, book.getAmountInStock());
                 statement.executeUpdate();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
             }
         }
         if (tableName.equals("movie"))
@@ -673,6 +725,10 @@ public class DatabaseManager implements DatabaseInterface{
                 statement.setInt(6, movie.getAmountInStock());
                 statement.executeUpdate();
             }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
         }
         if (tableName.equals("cd"))
         {
@@ -688,6 +744,10 @@ public class DatabaseManager implements DatabaseInterface{
                 statement.setString(4, cd.getUsage());
                 statement.setInt(5, cd.getAmountInStock());
                 statement.executeUpdate();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
             }
         }
         if (tableName.equals("software"))
@@ -706,36 +766,25 @@ public class DatabaseManager implements DatabaseInterface{
                 statement.setInt(6, software.getAmountInStock());
                 statement.executeUpdate();
             }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 
     @Override
-    public void delete(String tableName, String whereClause) throws SQLException
+    public void delete(String tableName, String whereClause)
     {
-        //        if (tableName.equals("product"))
-        //        {
-        //            try(Connection connection = database.getConnection())
-        //            {
-        //                PreparedStatement statement = connection.prepareStatement(
-        //                    "DELETE FROM " + tableName + " WHERE " + whereClause);
-        //                statement.executeUpdate();
-        //            }
-        //        }
         try(Connection connection = database.getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(
                 "DELETE FROM " + tableName + " WHERE " + whereClause);
             statement.executeUpdate();
         }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
-    //
-    //    @Override
-    //    public void startTransaction() {
-    //
-    //    }
-    //
-    //    @Override
-    //    public void endTransaction() {
-    //
-    //    }
 }
