@@ -1,15 +1,15 @@
 package client.views.loginView;
 
-import client.views.ViewController;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
+import client.views.ViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import server.database.DatabaseManager;
 import shared.transferObj.User;
 
+import javax.swing.*;
 import java.sql.SQLException;
 
 public class LoginViewController implements ViewController
@@ -28,31 +28,52 @@ public class LoginViewController implements ViewController
   {
     this.viewHandler = vh;
     loginViewModel = vmf.getLoginViewModel();
+    emailInput.textProperty().bindBidirectional(vmf.getLoginViewModel().emailProperty());
+    passwordInput.textProperty().bindBidirectional(vmf.getLoginViewModel().passwordProperty());
   }
 
   @FXML
-  void onLoginAction(ActionEvent event) throws SQLException
+  void onLoginAction(ActionEvent event)
   {
-    String email = emailInput.getText();
-    String password = passwordInput.getText();
-    User received = DatabaseManager.getInstance().readUserLogin("users", email, password);
-    if (received != null)
+    if (validUserInformation())
     {
-      if (received.getUser().equals("librarian"))
-        viewHandler.openLibrarianMainView();
-      else if (received.getUser().equals("customer"))
-        viewHandler.openCustomerMainView();
+      String email = emailInput.getText();
+      String password = passwordInput.getText();
+      User received = loginViewModel.readUserLogin(email, password);
+      if (received != null)
+      {
+        if (received.getUser().equals("librarian"))
+          viewHandler.openLibrarianMainView();
+        else if (received.getUser().equals("customer"))
+          viewHandler.openCustomerMainView();
+      }
+      else
+      {
+        clearTextFields();
+        JOptionPane.showMessageDialog(null,"Invalid email or password!");
+      }
     }
-    else
+  }
+
+  public boolean validUserInformation()
+  {
+    if(emailInput.getText().isEmpty() || passwordInput.getText().isEmpty())
     {
-      emailInput.setText("error");
-      passwordInput.setText("");
+      JOptionPane.showMessageDialog(null,"Please fill in all fields");
+      return false;
     }
+    return true;
   }
 
   @FXML
   void onRegister(ActionEvent event) {
     viewHandler.openRegisterView();
+  }
+
+  private void clearTextFields()
+  {
+    emailInput.clear();
+    passwordInput.clear();
   }
  }
 

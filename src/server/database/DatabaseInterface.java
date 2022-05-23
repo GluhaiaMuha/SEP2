@@ -11,13 +11,13 @@ public interface DatabaseInterface{
 
     List<Object> read(String tableName) throws SQLException;
 
-    User readUserLogin(String tableName, String email, String password) throws SQLException;
+//    User readUserLogin(String tableName, String email, String password) throws SQLException;
 
-    User readUserRegister(String tableName, String email) throws SQLException;
+//    User readUserRegister(String tableName, String email) throws SQLException;
+//
+//    void insertUserRegister(Customer customer) throws SQLException;
 
-    void insertUserRegister(Customer customer) throws SQLException;
-
-    public void update(String tableName, String whereClause, Object obj) throws SQLException;
+    void update(String tableName, String whereClause, Object obj) throws SQLException;
 
     void delete(String tableName, String whereClause) throws SQLException;
 

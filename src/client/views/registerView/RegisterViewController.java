@@ -3,19 +3,24 @@ package client.views.registerView;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
-import client.views.loginView.LoginViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import server.database.DatabaseManager;
 import shared.transferObj.Customer;
 import shared.transferObj.User;
 
+import javax.swing.*;
 import java.sql.SQLException;
 
 public class RegisterViewController implements ViewController
 {
+  @FXML
+  private TextField fName;
+
+  @FXML
+  private TextField lName;
+
   @FXML
   private TextField email;
 
@@ -25,12 +30,6 @@ public class RegisterViewController implements ViewController
   @FXML
   private TextField phoneNumber;
 
-  @FXML
-  private TextField fName;
-
-  @FXML
-  private TextField sName;
-
   private ViewHandler viewHandler;
   private RegisterViewModel registerViewModel;
 
@@ -38,31 +37,69 @@ public class RegisterViewController implements ViewController
   {
     this.viewHandler = vh;
     registerViewModel = vmf.getRegisterViewModel();
+    fName.textProperty().bindBidirectional(vmf.getRegisterViewModel().fNameProperty());
+    lName.textProperty().bindBidirectional(vmf.getRegisterViewModel().lNameProperty());
+    email.textProperty().bindBidirectional(vmf.getRegisterViewModel().emailProperty());
+    password.textProperty().bindBidirectional(vmf.getRegisterViewModel().passwordProperty());
+    phoneNumber.textProperty().bindBidirectional(vmf.getRegisterViewModel().phoneNumberProperty());
   }
 
   @FXML
-  void onRegister(ActionEvent event) throws SQLException
+  void onRegister(ActionEvent event)
   {
-    String customerEmail = email.getText();
-    String customerPassword = password.getText();
-    String customerPhoneNumber = phoneNumber.getText();
-    String customer_fName = fName.getText();
-    String customer_sName = sName.getText();
-    User received = DatabaseManager.getInstance().readUserRegister("users", customerEmail);
-    if (received == null)
+    if (validCustomerInformation())
     {
-      Customer newCustomer = new Customer(customerEmail, customer_fName, customer_sName, customerPhoneNumber, customerPassword, "customer");
-      DatabaseManager.getInstance().insertUserRegister(newCustomer);
-      viewHandler.openCustomerMainView();
+      String customer_fName = fName.getText();
+      String customer_lName = lName.getText();
+      String customerEmail = email.getText();
+      String customerPassword = password.getText();
+      String customerPhoneNumber = phoneNumber.getText();
+      User received = registerViewModel.readUserRegister(customerEmail);
+      if (received == null)
+      {
+        Customer newCustomer = new Customer(customerEmail, customer_fName, customer_lName, customerPhoneNumber, customerPassword, "customer");
+        registerViewModel.newCustomer(newCustomer);
+        viewHandler.openCustomerMainView();
+      }
+      else
+      {
+        clearTextFields();
+        JOptionPane.showMessageDialog(null,"Invalid email");
+      }
     }
-    else
+  }
+
+  private void clearTextFields()
+  {
+    fName.clear();
+    lName.clear();
+    email.clear();
+    password.clear();
+    phoneNumber.clear();
+  }
+
+  public boolean validCustomerInformation()
+  {
+    if(fName.getText().isEmpty() || lName.getText().isEmpty() || email.getText().isEmpty() || password.getText().isEmpty() || phoneNumber.getText().isEmpty())
     {
-      email.setText("This user already exists");
-      password.setText("");
-      phoneNumber.setText("");
-      fName.setText("");
-      sName.setText("");
+      JOptionPane.showMessageDialog(null,"Please fill in all fields");
+      return false;
     }
+    for(int i=0;i<phoneNumber.getText().length();i++)
+    {
+      if(!"0123456789".contains(phoneNumber.getText().charAt(i)+""))
+      {
+        JOptionPane.showMessageDialog(null,"Only digits allowed in phone field");
+        return false;
+      }
+    }
+    if (!email.getText().contains("@") || !email.getText().contains("."))
+    {
+      JOptionPane.showMessageDialog(null,"Invalid email");
+      return false;
+    }
+
+    return true;
   }
 
   @FXML
