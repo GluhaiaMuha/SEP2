@@ -2,6 +2,8 @@ package client.network;
 
 import shared.network.ClientCallback;
 import shared.network.RMIServer;
+import shared.transferObj.Customer;
+import shared.transferObj.User;
 
 import java.beans.PropertyChangeSupport;
 import java.rmi.NotBoundException;
@@ -14,6 +16,8 @@ public class RMIClient implements Client, ClientCallback
 {
   private PropertyChangeSupport support;
   private RMIServer server;
+
+  private String email;
 
   public RMIClient()
   {
@@ -39,5 +43,59 @@ public class RMIClient implements Client, ClientCallback
     } catch (RemoteException e) {
       e.printStackTrace();
     }
+  }
+
+  @Override
+  public User readUserRegister(String email)
+  {
+    User user = null;
+    try
+    {
+      user = server.readUserRegister(email);
+      if (user==null)
+      {
+        this.email = email;
+      }
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return user;
+  }
+
+  @Override
+  public void newCustomer(Customer customer)
+  {
+    try
+    {
+      server.newCustomer(customer);
+    }catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  @Override
+  public User readUserLogin(String email, String password)
+  {
+    User user = null;
+    try
+    {
+      user = server.readUserLogin(email, password);
+      if (user!=null)
+      {
+        this.email = email;
+      }
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return user;
+  }
+
+  @Override
+  public String getEmail()
+  {
+    return email;
   }
 }

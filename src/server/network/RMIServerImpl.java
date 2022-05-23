@@ -1,6 +1,8 @@
 package server.network;
 
-import server.database.DatabaseManager;
+import server.database.General.Register.RegisterDAOImpl;
+import server.model.General.Login.LoginModelImpl;
+import server.model.General.Register.RegisterModelImpl;
 import shared.network.ClientCallback;
 import shared.network.RMIServer;
 import shared.transferObj.Customer;
@@ -11,7 +13,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.SQLException;
 
 public class RMIServerImpl implements RMIServer
 {
@@ -39,5 +40,23 @@ public class RMIServerImpl implements RMIServer
   public void unRegisterClient(ClientCallback clientCallback)
   {
     connectionPool.removeClient(clientCallback);
+  }
+
+  @Override
+  public User readUserRegister(String email)
+  {
+    return RegisterModelImpl.getInstance().readUserRegister(email);
+  }
+
+  @Override
+  public void newCustomer(Customer customer)
+  {
+    RegisterModelImpl.getInstance().newCustomer(customer);
+  }
+
+  @Override
+  public User readUserLogin(String email, String password)
+  {
+    return LoginModelImpl.getInstance().readUserLogin(email, password);
   }
 }
