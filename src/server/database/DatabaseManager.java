@@ -525,7 +525,7 @@ public class DatabaseManager implements DatabaseInterface{
         try(Connection connection = database.getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(
-                "SELECT * FROM movie WHERE title LIKE ?");
+                "SELECT * FROM cd WHERE name LIKE ?");
             statement.setString(1, "%" + searchString + "%");
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next())
@@ -550,7 +550,7 @@ public class DatabaseManager implements DatabaseInterface{
         try(Connection connection = database.getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(
-                "SELECT * FROM movie WHERE title LIKE ?");
+                "SELECT * FROM software WHERE name LIKE ?");
             statement.setString(1, "%" + searchString + "%");
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next())

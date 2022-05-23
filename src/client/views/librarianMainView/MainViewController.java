@@ -197,6 +197,23 @@ public class MainViewController implements ViewController
   private TextField editCdAmountInStock;
   private String savedCdName;
 
+  /* Edit Software */
+  @FXML
+  private ChoiceBox<String>editSoftwareChoiceBox;
+  @FXML
+  private TextField editSoftwareName;
+  @FXML
+  private TextField editSoftwareType;
+  @FXML
+  private TextField editSoftwareVersion;
+  @FXML
+  private TextField editSoftwareLicenseType;
+  @FXML
+  private TextField editSoftwareAmountInStock;
+  private String savedSoftwareName;
+
+
+
 
 
 
@@ -254,7 +271,6 @@ public class MainViewController implements ViewController
       selectedMovie.setAmountInStock(selectedMovie.getAmountInStock() - 1);
       createTableExample.update("movie", "hash = '" +selectedMovie.getHash() + "'", selectedMovie);
       updateTables();
-      updateChoiceBoxes();
       updateChoiceBoxes();
     }
   }
@@ -315,6 +331,7 @@ public class MainViewController implements ViewController
       booksTable.getItems().remove(selectedBook);
       createTableExample.delete("book", "hash = '" + selectedBook.getHash() + "'");
       updateTables();
+      updateChoiceBoxes();
     }else if (selectedBook.getAmountInStock() > 0){
       selectedBook.setAmountInStock(selectedBook.getAmountInStock() - 1);
       createTableExample.update("book", "hash = '" + selectedBook.getHash() + "'", selectedBook);
@@ -380,6 +397,7 @@ public class MainViewController implements ViewController
       cdTable.getItems().remove(selectedCd);
       createTableExample.delete("cd", "hash = '" + selectedCd.getHash() + "'");
       updateTables();
+      updateChoiceBoxes();
     }else if (selectedCd.getAmountInStock() > 0){
       selectedCd.setAmountInStock(selectedCd.getAmountInStock() - 1);
       createTableExample.update("cd", "hash = '" + selectedCd.getHash() + "'", selectedCd);
@@ -407,6 +425,7 @@ public class MainViewController implements ViewController
   {
     savedCdName = editCdChoiceBox.getValue();
     CD cd = DatabaseManager.getInstance().readCDByName(savedCdName);
+
     editCdName.setText(cd.getName());
     editCdCapacity.setText(Integer.toString(cd.getCapacity()));
     editCdUsage.setText(cd.getUsage());
@@ -431,6 +450,7 @@ public class MainViewController implements ViewController
     createTableExample.insert("software", software);
     updateTables();
     clearTextFields("software");
+    updateChoiceBoxes();
   }
 
   @FXML
@@ -441,12 +461,45 @@ public class MainViewController implements ViewController
       softwareTable.getItems().remove(selectedSoftware);
       createTableExample.delete("software", "hash = '" + selectedSoftware.getHash() + "'");
       updateTables();
+      updateChoiceBoxes();
     }else if (selectedSoftware.getAmountInStock() > 0){
       selectedSoftware.setAmountInStock(selectedSoftware.getAmountInStock() - 1);
       createTableExample.update("software", "hash = '" + selectedSoftware.getHash() + "'", selectedSoftware);
       updateTables();
+      updateChoiceBoxes();
     }
   }
+  @FXML
+  void onEditSoftware(ActionEvent event) throws SQLException
+  {
+    String name = editSoftwareName.getText();
+    String type = editSoftwareType.getText();
+    String version = editSoftwareVersion.getText();
+    String license_type = editSoftwareLicenseType.getText();
+    int amountInStock = Integer.parseInt(editSoftwareAmountInStock.getText());
+    String hash = Integer.toString(name.hashCode());
+
+    Software software = new Software(hash,name,type,version,license_type,amountInStock);
+    DatabaseManager.getInstance().update("software", "hash = '" + hash + "'", software);
+    updateTables();
+    updateChoiceBoxes();
+    clearTextFields("editSoftware");
+  }
+  @FXML
+  void onSelectSoftwareName(ActionEvent event) throws SQLException
+  {
+    savedSoftwareName = editSoftwareChoiceBox.getValue();
+    Software software = DatabaseManager.getInstance().readSoftwareByName(savedSoftwareName);
+
+    editSoftwareName.setText(software.getName());
+    editSoftwareType.setText(software.getType());
+    editSoftwareVersion.setText(software.getVersion());
+    editSoftwareLicenseType.setText(software.getLicense_type());
+    editSoftwareAmountInStock.setText(Integer.toString(software.getAmountInStock()));
+  }
+
+
+
 
 
 
@@ -478,6 +531,13 @@ public class MainViewController implements ViewController
     for (int i = 0; i < cds.size(); i++)
     {
       editCdChoiceBox.getItems().add(cds.get(i).getName());
+    }
+
+    List<Software> software = DatabaseManager.getInstance().readSoftwares();
+    editSoftwareChoiceBox.getItems().clear();
+    for (int i = 0; i < software.size(); i++)
+    {
+      editSoftwareChoiceBox.getItems().add(software.get(i).getName());
     }
   }
 
@@ -531,12 +591,20 @@ public class MainViewController implements ViewController
         editBookGenre.setText("");
         editBookPgCount.setText("");
         editBookAmountInStock.setText("");
+        editBookPublicationYear.setText("");
         break;
       case "editCd":
         editCdName.setText("");
         editCdCapacity.setText("");
         editCdUsage.setText("");
         editCdAmountInStock.setText("");
+        break;
+      case "editSoftware":
+        editSoftwareName.setText("");
+        editSoftwareType.setText("");
+        editSoftwareVersion.setText("");
+        editSoftwareLicenseType.setText("");
+        editSoftwareAmountInStock.setText("");
     }
   }
 
