@@ -1,6 +1,5 @@
 package server.database;
 
-import javafx.collections.ObservableList;
 import shared.transferObj.*;
 
 import java.sql.Date;
@@ -48,5 +47,5 @@ public interface DatabaseInterface{
 
     void rentProduct(String email, String productHash, Date dateFrom, Date dateTo) throws SQLException;
 
-    List<Rent> readCustomerRents(String customer_email, String product_hash) throws SQLException;
+    List<Rent> readCustomerRents(String customer_email) throws SQLException;
 }
