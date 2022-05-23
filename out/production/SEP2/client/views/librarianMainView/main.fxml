@@ -30,9 +30,10 @@
                               <TableColumn fx:id="movieAmountInStock" prefWidth="61.0" text="In Stock" />
                           </columns>
                         </TableView>
-                        <TextField layoutX="302.0" layoutY="14.0" promptText="Search..." />
-                        <Button layoutX="477.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
-                        <Button layoutX="845.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveMovie" text="Remove" />
+                        <TextField fx:id="movieSearchField" layoutX="239.0" layoutY="14.0" prefHeight="25.0" prefWidth="292.0" promptText="Search..." />
+                        <Button layoutX="769.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveMovie" text="Remove Selected Item" />
+                        <Button layoutX="549.0" layoutY="14.0" mnemonicParsing="false" onAction="#onMovieSearch" text="Search" />
+                        <Button layoutX="611.0" layoutY="14.0" mnemonicParsing="false" onAction="#onMovieReset" text="Reset" />
                      </children>
                   </AnchorPane>
               </content>
@@ -53,8 +54,7 @@
                                     </columns>
                                 </TableView>
                         <TextField layoutX="302.0" layoutY="14.0" promptText="Search..." />
-                        <Button layoutX="477.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
-                        <Button layoutX="844.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveBook" text="Remove" />
+                        <Button layoutX="769.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveBook" text="Remove Selected Item" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -73,8 +73,7 @@
                            </columns>
                         </TableView>
                         <TextField layoutX="302.0" layoutY="14.0" promptText="Search..." />
-                        <Button layoutX="477.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
-                        <Button layoutX="844.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveCd" text="Remove" />
+                        <Button layoutX="769.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveCd" text="Remove Selected Item" />
                      </children></AnchorPane>
                     </content>
                 </Tab>
@@ -93,8 +92,7 @@
                            </columns>
                         </TableView>
                         <TextField layoutX="302.0" layoutY="14.0" promptText="Search..." />
-                        <Button layoutX="477.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
-                        <Button layoutX="844.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveSoftware" text="Remove" />
+                        <Button layoutX="769.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveSoftware" text="Remove Selected Item" />
                      </children>
                   </AnchorPane>
               </content>
@@ -103,7 +101,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #F9D342;">
                      <children>
-                        <TitledPane expanded="false" layoutY="14.0" prefHeight="429.0" prefWidth="228.0" text="Manage Movies">
+                        <TitledPane layoutY="14.0" prefHeight="429.0" prefWidth="228.0" text="Manage Movies">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -149,7 +147,7 @@
                               <Font size="15.0" />
                            </font>
                         </TitledPane>
-                        <TitledPane expanded="false" layoutX="228.0" layoutY="14.0" prefHeight="429.0" prefWidth="228.0" text="Manage Books">
+                        <TitledPane layoutX="228.0" layoutY="14.0" prefHeight="429.0" prefWidth="228.0" text="Manage Books">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="226.0">
                                  <children>
@@ -201,7 +199,7 @@
                               <Font size="15.0" />
                            </font>
                         </TitledPane>
-                        <TitledPane expanded="false" layoutX="472.0" layoutY="14.0" prefHeight="429.0" prefWidth="228.0" text="Manage CD's">
+                        <TitledPane layoutX="472.0" layoutY="14.0" prefHeight="429.0" prefWidth="228.0" text="Manage CD's">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>

@@ -12,7 +12,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.w3c.dom.Text;
 import server.database.DatabaseInterface;
 import server.database.DatabaseManager;
 import shared.transferObj.Book;
@@ -22,7 +21,6 @@ import shared.transferObj.Software;
 
 import javax.xml.crypto.Data;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainViewController implements ViewController
@@ -30,6 +28,7 @@ public class MainViewController implements ViewController
   private ViewHandler viewHandler;
   private MainViewModel mainViewController;
   private DatabaseInterface createTableExample = new DatabaseManager();
+
 
   /* Movie Table Start Here */
 
@@ -212,6 +211,16 @@ public class MainViewController implements ViewController
   private TextField editSoftwareAmountInStock;
   private String savedSoftwareName;
 
+  /* Search */
+  @FXML
+  private TextField movieSearchField;
+  @FXML
+  private TextField bookSearchField;
+  @FXML
+  private TextField cdSearchField;
+  @FXML
+  private TextField softwareSearchField;
+
 
 
 
@@ -240,6 +249,7 @@ public class MainViewController implements ViewController
 
 
   /* Movie Action Events Start Here */
+
   @FXML
   void onAddMovie(ActionEvent event) throws SQLException
   {
@@ -257,22 +267,14 @@ public class MainViewController implements ViewController
     clearTextFields("movie");
     updateChoiceBoxes();
   }
-
   @FXML
   void onRemoveMovie(ActionEvent event) throws SQLException
   {
     Movie selectedMovie = (Movie) movieTable.getSelectionModel().getSelectedItem();
-    if (selectedMovie.getAmountInStock() == 1){
       movieTable.getItems().remove(selectedMovie);
       createTableExample.delete("movie","hash = '" + selectedMovie.getHash() + "'");
       updateTables();
       updateChoiceBoxes();
-    }else if (selectedMovie.getAmountInStock() > 0){
-      selectedMovie.setAmountInStock(selectedMovie.getAmountInStock() - 1);
-      createTableExample.update("movie", "hash = '" +selectedMovie.getHash() + "'", selectedMovie);
-      updateTables();
-      updateChoiceBoxes();
-    }
   }
   @FXML
   void onEditMovie(ActionEvent event) throws SQLException
@@ -290,7 +292,6 @@ public class MainViewController implements ViewController
     updateChoiceBoxes();
     clearTextFields("editMovie");
   }
-
   @FXML
   void onSelectMovieTitle(ActionEvent event) throws SQLException
   {
@@ -302,10 +303,23 @@ public class MainViewController implements ViewController
     editMovieLength.setText(Integer.toString(movie.getLength()));
     editMovieAmountInStock.setText(Integer.toString(movie.getAmountInStock()));
   }
+  @FXML
+  void onMovieSearch(ActionEvent event){
+    String search = movieSearchField.getText();
+    ObservableList<Object> moviesSearched = FXCollections.observableArrayList(DatabaseManager.getInstance().readMoviesByTitle(search));
+
+    movieTable.setItems(moviesSearched);
+  }
+  @FXML
+  void onMovieReset(ActionEvent event) throws SQLException
+  {
+    updateTables();
+  }
 
 
 
   /* Book Action Events Start Here */
+
   @FXML
   void onAddBook(ActionEvent event) throws SQLException
   {
@@ -327,17 +341,10 @@ public class MainViewController implements ViewController
   void onRemoveBook(ActionEvent event) throws SQLException
   {
     Book selectedBook = (Book) booksTable.getSelectionModel().getSelectedItem();
-    if (selectedBook.getAmountInStock() == 1){
       booksTable.getItems().remove(selectedBook);
       createTableExample.delete("book", "hash = '" + selectedBook.getHash() + "'");
       updateTables();
       updateChoiceBoxes();
-    }else if (selectedBook.getAmountInStock() > 0){
-      selectedBook.setAmountInStock(selectedBook.getAmountInStock() - 1);
-      createTableExample.update("book", "hash = '" + selectedBook.getHash() + "'", selectedBook);
-      updateTables();
-      updateChoiceBoxes();
-    }
   }
   @FXML
   void onEditBook(ActionEvent event) throws SQLException
@@ -369,6 +376,21 @@ public class MainViewController implements ViewController
     editBookPublicationYear.setText(Integer.toString(book.getPublication_year()));
     editBookAmountInStock.setText(Integer.toString(book.getAmountInStock()));
   }
+  @FXML
+  void onBookSearch(){
+    String search = bookSearchField.getText();
+    ObservableList<Object> booksSearched = FXCollections.observableArrayList(DatabaseManager.getInstance().readBooksByTitle(search));
+
+    booksTable.setItems(booksSearched);
+  }
+  @FXML
+  void onBookReset() throws SQLException
+  {
+    updateTables();
+  }
+
+
+
 
 
   /* CD Action Events Start Here */
@@ -388,22 +410,14 @@ public class MainViewController implements ViewController
     clearTextFields("cd");
     updateChoiceBoxes();
   }
-
   @FXML
   void onRemoveCd(ActionEvent event) throws SQLException
   {
     CD selectedCd = (CD) cdTable.getSelectionModel().getSelectedItem();
-    if (selectedCd.getAmountInStock() == 1){
       cdTable.getItems().remove(selectedCd);
       createTableExample.delete("cd", "hash = '" + selectedCd.getHash() + "'");
       updateTables();
       updateChoiceBoxes();
-    }else if (selectedCd.getAmountInStock() > 0){
-      selectedCd.setAmountInStock(selectedCd.getAmountInStock() - 1);
-      createTableExample.update("cd", "hash = '" + selectedCd.getHash() + "'", selectedCd);
-      updateTables();
-      updateChoiceBoxes();
-    }
   }
   @FXML
   void onEditCd(ActionEvent event) throws SQLException
@@ -431,6 +445,21 @@ public class MainViewController implements ViewController
     editCdUsage.setText(cd.getUsage());
     editCdAmountInStock.setText(Integer.toString(cd.getAmountInStock()));
   }
+  @FXML
+  void onSearchCd(ActionEvent event){
+    String search = cdSearchField.getText();
+    ObservableList<Object> cdSearched = FXCollections.observableArrayList(DatabaseManager.getInstance().readCDsByName(search));
+
+    cdTable.setItems(cdSearched);
+  }
+  @FXML
+  void onCdReset(ActionEvent event) throws SQLException
+  {
+    updateTables();
+  }
+
+
+
 
 
 
@@ -457,17 +486,10 @@ public class MainViewController implements ViewController
   void onRemoveSoftware(ActionEvent event) throws SQLException
   {
     Software selectedSoftware = (Software) softwareTable.getSelectionModel().getSelectedItem();
-    if (selectedSoftware.getAmountInStock() == 1){
       softwareTable.getItems().remove(selectedSoftware);
       createTableExample.delete("software", "hash = '" + selectedSoftware.getHash() + "'");
       updateTables();
       updateChoiceBoxes();
-    }else if (selectedSoftware.getAmountInStock() > 0){
-      selectedSoftware.setAmountInStock(selectedSoftware.getAmountInStock() - 1);
-      createTableExample.update("software", "hash = '" + selectedSoftware.getHash() + "'", selectedSoftware);
-      updateTables();
-      updateChoiceBoxes();
-    }
   }
   @FXML
   void onEditSoftware(ActionEvent event) throws SQLException
@@ -497,13 +519,18 @@ public class MainViewController implements ViewController
     editSoftwareLicenseType.setText(software.getLicense_type());
     editSoftwareAmountInStock.setText(Integer.toString(software.getAmountInStock()));
   }
+  @FXML
+  void onSoftwareSearch(ActionEvent event){
+    String search = softwareSearchField.getText();
+    ObservableList<Object> softwareSearch = FXCollections.observableArrayList(DatabaseManager.getInstance().readSoftwaresByName(search));
 
-
-
-
-
-
-
+    cdTable.setItems(softwareSearch);
+  }
+  @FXML
+  void onSoftwareReset(ActionEvent event) throws SQLException
+  {
+    updateTables();
+  }
 
 
 
@@ -616,8 +643,7 @@ public class MainViewController implements ViewController
     /* Movie Table Start Here */
     /* For future use, make sure PropertyValueFactory is the same as the get/set Methods */
 
-    final ObservableList<Object> dataMovie = FXCollections.observableArrayList(createTableExample.read("movie")
-    );
+    final ObservableList<Object> dataMovie = FXCollections.observableArrayList(createTableExample.readMovies());
 
     movieHashCol.setCellValueFactory(
         new PropertyValueFactory<>("Hash")
