@@ -346,7 +346,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="392.0" prefWidth="226.0">
                                  <children>
-                                    <TextField layoutX="31.0" layoutY="71.0" />
+                                    <TextField fx:id="editBookTitle" editable="false" layoutX="31.0" layoutY="71.0" />
                                     <Text layoutX="90.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title">
                                        <font>
                                           <Font size="18.0" />
@@ -357,26 +357,26 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
-                                    <TextField layoutX="39.0" layoutY="126.0" />
+                                    <TextField fx:id="editBookAuthor" layoutX="39.0" layoutY="126.0" />
                                     <Text layoutX="64.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Page Count">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
-                                    <TextField layoutX="37.0" layoutY="181.0" />
+                                    <TextField fx:id="editBookPgCount" layoutX="37.0" layoutY="181.0" />
                                     <Text layoutX="84.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
-                                    <TextField layoutX="34.0" layoutY="236.0" />
+                                    <TextField fx:id="editBookGenre" layoutX="34.0" layoutY="236.0" />
                                     <Text layoutX="42.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount In Stock">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
-                                    <TextField layoutX="34.0" layoutY="344.0" />
-                                    <Button layoutX="83.0" layoutY="383.0" mnemonicParsing="false" text="Add">
+                                    <TextField fx:id="editBookAmountInStock" layoutX="34.0" layoutY="344.0" />
+                                    <Button layoutX="39.0" layoutY="384.0" mnemonicParsing="false" onAction="#onEditBook" text="Add">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
@@ -386,8 +386,9 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
-                                    <TextField layoutX="32.0" layoutY="291.0" />
-                                    <ChoiceBox layoutX="32.0" layoutY="14.0" prefWidth="150.0" />
+                                    <TextField fx:id="editBookPublicationYear" layoutX="32.0" layoutY="291.0" />
+                                    <ChoiceBox fx:id="editBookChoiceBox" layoutX="32.0" layoutY="14.0" prefWidth="150.0" />
+                                    <Button layoutX="127.0" layoutY="383.0" mnemonicParsing="false" onAction="#onSelectBookTitle" prefHeight="37.0" prefWidth="57.0" text="Select" />
                                  </children>
                               </AnchorPane>
                            </content>
@@ -399,7 +400,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <TextField layoutX="39.0" layoutY="133.0" />
+                                    <TextField editable="false" layoutX="39.0" layoutY="133.0" />
                                     <Text layoutX="89.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
                                        <font>
                                           <Font size="18.0" />
@@ -446,7 +447,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <TextField layoutX="35.0" layoutY="185.0" />
+                                    <TextField fx:id="editCdName" editable="false" layoutX="35.0" layoutY="185.0" />
                                     <Text layoutX="87.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
                                        <font>
                                           <Font size="18.0" />
@@ -457,25 +458,26 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
-                                    <TextField layoutX="35.0" layoutY="238.0" />
+                                    <TextField fx:id="editCdCapacity" layoutX="35.0" layoutY="238.0" />
                                     <Text layoutX="87.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usage">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
-                                    <TextField layoutX="37.0" layoutY="291.0" />
+                                    <TextField fx:id="editCdUsage" layoutX="37.0" layoutY="291.0" />
                                     <Text layoutX="49.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount In Stock">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
-                                    <TextField layoutX="36.0" layoutY="344.0" />
-                                    <Button layoutX="87.0" layoutY="384.0" mnemonicParsing="false" text="Add">
+                                    <TextField fx:id="editCdAmountInStock" layoutX="36.0" layoutY="344.0" />
+                                    <Button layoutX="37.0" layoutY="384.0" mnemonicParsing="false" onAction="#onEditCd" text="Add">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </Button>
-                                    <ChoiceBox layoutX="40.0" layoutY="14.0" prefWidth="150.0" />
+                                    <ChoiceBox fx:id="editCdChoiceBox" layoutX="40.0" layoutY="14.0" prefWidth="150.0" />
+                                    <Button layoutX="135.0" layoutY="384.0" mnemonicParsing="false" onAction="#onSelectCdName" prefHeight="36.0" prefWidth="57.0" text="Select" />
                                  </children>
                               </AnchorPane>
                            </content>

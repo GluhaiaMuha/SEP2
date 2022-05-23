@@ -20,6 +20,7 @@ import shared.transferObj.CD;
 import shared.transferObj.Movie;
 import shared.transferObj.Software;
 
+import javax.xml.crypto.Data;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -151,6 +152,7 @@ public class MainViewController implements ViewController
 
 
   /* Edit Text Fields Start Here */
+  /* Edit Movie */
   @FXML
   private ChoiceBox<String> editMovieChoiceBox = new ChoiceBox<>();
   @FXML
@@ -163,8 +165,41 @@ public class MainViewController implements ViewController
   private TextField editMovieLength;
   @FXML
   private TextField editMovieAmountInStock;
+  private String savedMovieTitle;
 
-  private String savedTitle;
+  /* Edit Book */
+  @FXML
+  private ChoiceBox<String> editBookChoiceBox = new ChoiceBox<>();
+  @FXML
+  private TextField editBookTitle;
+  @FXML
+  private TextField editBookAuthor;
+  @FXML
+  private TextField editBookPgCount;
+  @FXML
+  private TextField editBookGenre;
+  @FXML
+  private TextField editBookPublicationYear;
+  @FXML
+  private TextField editBookAmountInStock;
+  private String savedBookTitle;
+
+  /* Edit CD */
+  @FXML
+  private ChoiceBox<String> editCdChoiceBox = new ChoiceBox<>();
+  @FXML
+  private TextField editCdName;
+  @FXML
+  private TextField editCdCapacity;
+  @FXML
+  private TextField editCdUsage;
+  @FXML
+  private TextField editCdAmountInStock;
+  private String savedCdName;
+
+
+
+
 
   public MainViewController() throws SQLException
   {
@@ -183,8 +218,6 @@ public class MainViewController implements ViewController
     mainViewController = vmf.getMainViewModel();
     updateTables();
     updateChoiceBoxes();
-
-
   }
 
 
@@ -205,6 +238,7 @@ public class MainViewController implements ViewController
     updateTables();
     updateChoiceBoxes();
     clearTextFields("movie");
+    updateChoiceBoxes();
   }
 
   @FXML
@@ -220,6 +254,7 @@ public class MainViewController implements ViewController
       selectedMovie.setAmountInStock(selectedMovie.getAmountInStock() - 1);
       createTableExample.update("movie", "hash = '" +selectedMovie.getHash() + "'", selectedMovie);
       updateTables();
+      updateChoiceBoxes();
       updateChoiceBoxes();
     }
   }
@@ -237,20 +272,19 @@ public class MainViewController implements ViewController
     DatabaseManager.getInstance().update("movie", "hash = '" + hash + "'",movie);
     updateTables();
     updateChoiceBoxes();
-    clearTextFields("edit");
+    clearTextFields("editMovie");
   }
 
   @FXML
   void onSelectMovieTitle(ActionEvent event) throws SQLException
   {
-    savedTitle = editMovieChoiceBox.getValue();
-    Movie movie = DatabaseManager.getInstance().readMovieByTitle(savedTitle);
+    savedMovieTitle = editMovieChoiceBox.getValue();
+    Movie movie = DatabaseManager.getInstance().readMovieByTitle(savedMovieTitle);
     editMovieTitle.setText(movie.getTitle());
     editMovieDirector.setText(movie.getDirector());
     editMovieReleaseYear.setText(Integer.toString(movie.getRelease_year()));
     editMovieLength.setText(Integer.toString(movie.getLength()));
     editMovieAmountInStock.setText(Integer.toString(movie.getAmountInStock()));
-
   }
 
 
@@ -271,10 +305,8 @@ public class MainViewController implements ViewController
     createTableExample.insert("book", book);
     updateTables();
     clearTextFields("book");
+    updateChoiceBoxes();
   }
-
-
-
   @FXML
   void onRemoveBook(ActionEvent event) throws SQLException
   {
@@ -287,9 +319,39 @@ public class MainViewController implements ViewController
       selectedBook.setAmountInStock(selectedBook.getAmountInStock() - 1);
       createTableExample.update("book", "hash = '" + selectedBook.getHash() + "'", selectedBook);
       updateTables();
+      updateChoiceBoxes();
     }
   }
+  @FXML
+  void onEditBook(ActionEvent event) throws SQLException
+  {
+    String title = editBookTitle.getText();
+    String author = editBookAuthor.getText();
+    int pgCount = Integer.parseInt(editBookPgCount.getText());
+    String genre = editBookGenre.getText();
+    int publicationYear = Integer.parseInt(editBookPublicationYear.getText());
+    int amountInStock = Integer.parseInt(editBookAmountInStock.getText());
+    String hash = String.valueOf(title.hashCode());
 
+    Book book = new Book(hash, title, author, pgCount, genre, publicationYear, amountInStock);
+    DatabaseManager.getInstance().update("book", "hash = '" + hash + "'", book);
+    updateTables();
+    updateChoiceBoxes();
+    clearTextFields("editBook");
+
+  }
+  @FXML
+  void onSelectBookTitle(ActionEvent event) throws SQLException
+  {
+    savedBookTitle = editBookChoiceBox.getValue();
+    Book book = DatabaseManager.getInstance().readBookByTitle(savedBookTitle);
+    editBookTitle.setText(book.getTitle());
+    editBookAuthor.setText(book.getAuthor());
+    editBookPgCount.setText(Integer.toString(book.getPageCount()));
+    editBookGenre.setText(book.getGenre());
+    editBookPublicationYear.setText(Integer.toString(book.getPublication_year()));
+    editBookAmountInStock.setText(Integer.toString(book.getAmountInStock()));
+  }
 
 
   /* CD Action Events Start Here */
@@ -307,6 +369,7 @@ public class MainViewController implements ViewController
     createTableExample.insert("cd", cd);
     updateTables();
     clearTextFields("cd");
+    updateChoiceBoxes();
   }
 
   @FXML
@@ -321,7 +384,33 @@ public class MainViewController implements ViewController
       selectedCd.setAmountInStock(selectedCd.getAmountInStock() - 1);
       createTableExample.update("cd", "hash = '" + selectedCd.getHash() + "'", selectedCd);
       updateTables();
+      updateChoiceBoxes();
     }
+  }
+  @FXML
+  void onEditCd(ActionEvent event) throws SQLException
+  {
+    String name = editCdName.getText();
+    int capacity = Integer.parseInt(editCdCapacity.getText());
+    String usage = editCdUsage.getText();
+    int amountInStock = Integer.parseInt(editCdAmountInStock.getText());
+    String hash = Integer.toString(name.hashCode());
+
+    CD cd = new CD(hash,name,capacity,usage,amountInStock);
+    DatabaseManager.getInstance().update("cd", "hash = '" + hash + "'", cd);
+    updateTables();
+    updateChoiceBoxes();
+    clearTextFields("editCd");
+  }
+  @FXML
+  void onSelectCdName(ActionEvent event) throws SQLException
+  {
+    savedCdName = editCdChoiceBox.getValue();
+    CD cd = DatabaseManager.getInstance().readCDByName(savedCdName);
+    editCdName.setText(cd.getName());
+    editCdCapacity.setText(Integer.toString(cd.getCapacity()));
+    editCdUsage.setText(cd.getUsage());
+    editCdAmountInStock.setText(Integer.toString(cd.getAmountInStock()));
   }
 
 
@@ -376,10 +465,24 @@ public class MainViewController implements ViewController
     {
       editMovieChoiceBox.getItems().add(movies.get(i).getTitle());
     }
+
+    List<Book> books = DatabaseManager.getInstance().readBooks();
+    editBookChoiceBox.getItems().clear();
+    for (int i = 0; i < books.size(); i++)
+    {
+      editBookChoiceBox.getItems().add(books.get(i).getTitle());
+    }
+
+    List<CD> cds = DatabaseManager.getInstance().readCDS();
+    editCdChoiceBox.getItems().clear();
+    for (int i = 0; i < cds.size(); i++)
+    {
+      editCdChoiceBox.getItems().add(cds.get(i).getName());
+    }
   }
 
   /**
-   * Method for cleaning the textFields each time a product is added
+   * Method for cleaning the textFields each time a product is added/edited
    *
    * @param s product Type
    */
@@ -414,12 +517,26 @@ public class MainViewController implements ViewController
         softwareLicenseTypeField.setText("");
         softwareAmountInStockField.setText("");
         break;
-      case "edit":
+      case "editMovie":
         editMovieTitle.setText("");
         editMovieDirector.setText("");
         editMovieReleaseYear.setText("");
         editMovieLength.setText("");
         editMovieAmountInStock.setText("");
+        break;
+      case "editBook":
+        editBookTitle.setText("");
+        editBookAuthor.setText("");
+        editBookPgCount.setText("");
+        editBookGenre.setText("");
+        editBookPgCount.setText("");
+        editBookAmountInStock.setText("");
+        break;
+      case "editCd":
+        editCdName.setText("");
+        editCdCapacity.setText("");
+        editCdUsage.setText("");
+        editCdAmountInStock.setText("");
     }
   }
 
