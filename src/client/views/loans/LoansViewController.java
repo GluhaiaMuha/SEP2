@@ -10,25 +10,22 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import server.database.DatabaseManager;
-import shared.transferObj.*;
+import shared.transferObj.Rent;
 
 import java.sql.Date;
-import java.sql.SQLException;
 
 public class LoansViewController implements ViewController {
     private ViewHandler viewHandler;
     private LoansViewModel loansViewModel;
-    private DatabaseManager createTableExample = new DatabaseManager();
 
 
     /* Movie Table Start Here */
+
 
     @FXML
     private TableView<Rent> movieTable;
     @FXML
     private TableColumn<Rent, String> movieEmailCol;
-
     @FXML
     private TableColumn<Rent, String> movieTitleCol;
     @FXML
@@ -39,42 +36,45 @@ public class LoansViewController implements ViewController {
 
     /* Books Table Starts Here */
 
+
     @FXML
-    private TableView<Object> booksTable;
+    private TableView<Rent> booksTable;
     @FXML
-    private TableColumn<Book, String> booksTitleCol;
+    private TableColumn<Rent, String> booksEmailCol;
     @FXML
-    private TableColumn<Book, Date> booksDateFromCol;
+    private TableColumn<Rent, String> booksTitleCol;
     @FXML
-    private TableColumn<Book, Date> booksDateToCol;
+    private TableColumn<Rent, Date> booksDateFromCol;
+    @FXML
+    private TableColumn<Rent, Date> booksDateToCol;
 
     /* CD Table Starts Here */
 
+
     @FXML
-    private TableView<Object> cdTable;
+    private TableView<Rent> cdTable;
     @FXML
-    private TableColumn<CD, String> cdNameCol;
+    private TableColumn<Rent, String> cdEmailCol;
     @FXML
-    private TableColumn<CD, Date> cdDateFromCol;
+    private TableColumn<Rent, String> cdNameCol;
     @FXML
-    private TableColumn<CD, Date> cdDateToCol;
+    private TableColumn<Rent, Date> cdDateFromCol;
+    @FXML
+    private TableColumn<Rent, Date> cdDateToCol;
 
     /* Software Table Starts Here */
 
+
     @FXML
-    private TableView<Object> softwareTable;
+    private TableView<Rent> softwareTable;
     @FXML
-    private TableColumn<Software, String> softwareNameCol;
+    private TableColumn<Rent, String> softwareEmailCol;
     @FXML
-    private TableColumn<Software, Date> softwareDateFromCol;
+    private TableColumn<Rent, String> softwareNameCol;
     @FXML
-    private TableColumn<Software, Date> softwareDateToCol;
-
-
-
-
-
-
+    private TableColumn<Rent, Date> softwareDateFromCol;
+    @FXML
+    private TableColumn<Rent, Date> softwareDateToCol;
 
 
     @Override
@@ -84,14 +84,13 @@ public class LoansViewController implements ViewController {
         loansViewModel= vmf.getLoansViewModel();
     }
 
-
     @FXML
     void onGoToMainPage(ActionEvent event) {
         viewHandler.openCustomerMainView();
     }
 
     @FXML
-    void onUpdateList(ActionEvent event) throws SQLException
+    void onUpdateList(ActionEvent event)
     {
         updateTables();
     }
@@ -104,9 +103,13 @@ public class LoansViewController implements ViewController {
         final ObservableList<Rent> dataMovie = FXCollections.observableArrayList(loansViewModel.readCustomerRents(loansViewModel.getEmail(), "movie")
         );
 
-        movieEmailCol.setCellValueFactory(new PropertyValueFactory<>("customer_email"));
+        movieEmailCol.setCellValueFactory(
+            new PropertyValueFactory<>("customer_email")
+        );
 
-        movieTitleCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        movieTitleCol.setCellValueFactory(
+            new PropertyValueFactory<>("productName")
+        );
 
         movieDateFromCol.setCellValueFactory(
             new PropertyValueFactory<>("DateFrom")
@@ -119,12 +122,17 @@ public class LoansViewController implements ViewController {
 
         /* Books Table Starts Here */
 
-        final ObservableList<Object> dataBook = FXCollections.observableArrayList(createTableExample.read("book")
+        final ObservableList<Rent> dataBook = FXCollections.observableArrayList(loansViewModel.readCustomerRents(loansViewModel.getEmail(), "book")
+        );
+
+        booksEmailCol.setCellValueFactory(
+            new PropertyValueFactory<>("customer_email")
         );
 
         booksTitleCol.setCellValueFactory(
-            new PropertyValueFactory<>("Title")
+            new PropertyValueFactory<>("productName")
         );
+
         booksDateFromCol.setCellValueFactory(
             new PropertyValueFactory<>("DateFrom")
         );
@@ -135,12 +143,17 @@ public class LoansViewController implements ViewController {
         booksTable.setItems(dataBook);
 
         /* CD Table Starts Here */
-        final ObservableList<Object> dataCD = FXCollections.observableArrayList(createTableExample.read("cd")
+        final ObservableList<Rent> dataCD = FXCollections.observableArrayList(loansViewModel.readCustomerRents(loansViewModel.getEmail(), "cd")
+        );
+
+        cdEmailCol.setCellValueFactory(
+            new PropertyValueFactory<>("customer_email")
         );
 
         cdNameCol.setCellValueFactory(
-            new PropertyValueFactory<>("Name")
+            new PropertyValueFactory<>("productName")
         );
+
         cdDateFromCol.setCellValueFactory(
             new PropertyValueFactory<>("DateFrom")
         );
@@ -152,12 +165,17 @@ public class LoansViewController implements ViewController {
         cdTable.setItems(dataCD);
 
         /* Software Table Starts Here */
-        final ObservableList<Object> dataSoftware = FXCollections.observableArrayList(createTableExample.read("software")
+        final ObservableList<Rent> dataSoftware = FXCollections.observableArrayList(loansViewModel.readCustomerRents(loansViewModel.getEmail(), "software")
+        );
+
+        softwareEmailCol.setCellValueFactory(
+            new PropertyValueFactory<>("customer_email")
         );
 
         softwareNameCol.setCellValueFactory(
-            new PropertyValueFactory<>("Name")
+            new PropertyValueFactory<>("productName")
         );
+
         softwareDateFromCol.setCellValueFactory(
             new PropertyValueFactory<>("DateFrom")
         );

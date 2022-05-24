@@ -4,7 +4,6 @@ import server.database.Librarian.ManageProducts.ManageProductsDAOImpl;
 
 public class ManageProductsImpl implements ManageProducts
 {
-
   private static ManageProducts instance = new ManageProductsImpl();
 
   public static ManageProducts getInstance(){
@@ -21,8 +20,8 @@ public class ManageProductsImpl implements ManageProducts
     ManageProductsDAOImpl.getInstance().delete(tableName, whereClause);
   }
 
-  @Override public Object insert(String tableName, Object obj)
+  @Override public void insert(String tableName, Object obj)
   {
-    return ManageProductsDAOImpl.getInstance().insert(tableName, obj);
+    ManageProductsDAOImpl.getInstance().insert(tableName, obj);
   }
 }

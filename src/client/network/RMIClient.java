@@ -2,9 +2,7 @@ package client.network;
 
 import shared.network.ClientCallback;
 import shared.network.RMIServer;
-import shared.transferObj.Customer;
-import shared.transferObj.Rent;
-import shared.transferObj.User;
+import shared.transferObj.*;
 
 import java.beans.PropertyChangeSupport;
 import java.rmi.NotBoundException;
@@ -12,7 +10,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.Date;
 import java.util.List;
 
 public class RMIClient implements Client, ClientCallback
@@ -116,6 +113,208 @@ public class RMIClient implements Client, ClientCallback
     try
     {
       server.rentProduct(product, rent);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  @Override public List<Object> read(String tableName)
+  {
+    List<Object> obj = null;
+    try
+    {
+      obj = server.read(tableName);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return obj;
+  }
+
+  @Override public List<Book> readBooks()
+  {
+    List<Book> books = null;
+    try
+    {
+      books = server.readBooks();
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return books;
+  }
+
+  @Override public List<Movie> readMovies()
+  {
+    List<Movie> movies = null;
+    try
+    {
+      movies = server.readMovies();
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return movies;
+  }
+
+  @Override public List<CD> readCDS()
+  {
+    List<CD> cds = null;
+    try
+    {
+      cds = server.readCDS();
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return cds;
+  }
+
+  @Override public List<Software> readSoftwares()
+  {
+    List<Software> softwares = null;
+    try
+    {
+      softwares = server.readSoftwares();
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return softwares;
+  }
+
+  @Override public List<Book> readBooksByTitle(String searchString)
+  {
+    List<Book> books = null;
+    try
+    {
+      books = server.readBooksByTitle(searchString);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return books;
+  }
+
+  @Override public List<Movie> readMoviesByTitle(String searchString)
+  {
+    List<Movie> movies = null;
+    try
+    {
+      movies = server.readMoviesByTitle(searchString);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return movies;
+  }
+
+  @Override public List<CD> readCDsByName(String searchString)
+  {
+    List<CD> cds = null;
+    try
+    {
+      cds = server.readCDsByName(searchString);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return cds;
+  }
+
+  @Override public List<Software> readSoftwaresByName(String searchString)
+  {
+    List<Software> softwares = null;
+    try
+    {
+      softwares = server.readSoftwaresByName(searchString);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return softwares;
+  }
+
+  @Override public Book readBookByTitle(String searchString)
+  {
+    Book book = null;
+    try
+    {
+      book = server.readBookByTitle(searchString);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return book;
+  }
+
+  @Override public Movie readMovieByTitle(String searchString)
+  {
+    Movie movie = null;
+    try
+    {
+      movie = server.readMovieByTitle(searchString);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return movie;
+  }
+
+  @Override public CD readCDByName(String searchString)
+  {
+    CD cd = null;
+    try
+    {
+      cd = server.readCDByName(searchString);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return cd;
+  }
+
+  @Override public Software readSoftwareByName(String searchString)
+  {
+    Software software = null;
+    try
+    {
+      software = server.readSoftwareByName(searchString);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return software;
+  }
+
+  @Override public void update(String tableName, String whereClause, Object obj)
+  {
+    try
+    {
+      server.update(tableName, whereClause, obj);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  @Override public void delete(String tableName, String whereClause)
+  {
+    try
+    {
+      server.delete(tableName, whereClause);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  @Override public void insert(String tableName, Object obj)
+  {
+    try
+    {
+      server.insert(tableName, obj);
     } catch (RemoteException e)
     {
       e.printStackTrace();

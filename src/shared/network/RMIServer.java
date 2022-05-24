@@ -1,12 +1,9 @@
 package shared.network;
 
-import shared.transferObj.Customer;
-import shared.transferObj.Rent;
-import shared.transferObj.User;
+import shared.transferObj.*;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.sql.Date;
 import java.util.List;
 
 public interface RMIServer extends Remote
@@ -24,4 +21,36 @@ public interface RMIServer extends Remote
   List<Rent> readCustomerRents(String customer_email, String product) throws RemoteException;
 
   void rentProduct(String product, Rent rent) throws RemoteException;
+
+  List<Object> read(String tableName) throws RemoteException;
+
+  List<Book> readBooks() throws RemoteException;
+
+  List<Movie> readMovies() throws RemoteException;
+
+  List<CD> readCDS() throws RemoteException;
+
+  List<Software> readSoftwares() throws RemoteException;
+
+  List<Book> readBooksByTitle(String searchString) throws RemoteException;
+
+  List<Movie> readMoviesByTitle(String searchString) throws RemoteException;
+
+  List<CD> readCDsByName(String searchString) throws RemoteException;
+
+  List<Software> readSoftwaresByName(String searchString) throws RemoteException;
+
+  Book readBookByTitle(String searchString) throws RemoteException;
+
+  Movie readMovieByTitle(String searchString) throws RemoteException;
+
+  CD readCDByName(String searchString) throws RemoteException;
+
+  Software readSoftwareByName(String searchString) throws RemoteException;
+
+  void update(String tableName, String whereClause, Object obj) throws RemoteException;
+
+  void delete(String tableName, String whereClause) throws RemoteException;
+
+  void insert(String tableName, Object obj) throws RemoteException;
 }

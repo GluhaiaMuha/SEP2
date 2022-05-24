@@ -1,7 +1,7 @@
 package client.views.loans;
 
 import client.model.LibraryModel;
-import shared.transferObj.Rent;
+import shared.transferObj.*;
 
 import java.util.List;
 

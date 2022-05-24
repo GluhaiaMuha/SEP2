@@ -7,8 +7,5 @@ public interface ManageProductsDAO
 
   void delete(String tableName, String whereClause);
 
-  Object insert(String tableName, Object obj);
-
-
-
+  void insert(String tableName, Object obj);
 }
