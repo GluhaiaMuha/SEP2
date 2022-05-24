@@ -97,12 +97,12 @@ public class RMIClient implements Client, ClientCallback
   }
 
   @Override
-  public List<Rent> readCustomerRents(String customer_email)
+  public List<Rent> readCustomerRents(String customer_email, String product)
   {
     List<Rent> rents = null;
     try
     {
-      rents = server.readCustomerRents(customer_email);
+      rents = server.readCustomerRents(customer_email, product);
     } catch (RemoteException e)
     {
       e.printStackTrace();
@@ -111,11 +111,11 @@ public class RMIClient implements Client, ClientCallback
   }
 
   @Override
-  public void rentProduct(Rent rent)
+  public void rentProduct(String product, Rent rent)
   {
     try
     {
-      server.rentProduct(rent);
+      server.rentProduct(product, rent);
     } catch (RemoteException e)
     {
       e.printStackTrace();

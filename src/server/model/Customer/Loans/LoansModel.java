@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface LoansModel
 {
-  List<Rent> readCustomerRents(String customer_email);
+  List<Rent> readCustomerRents(String customer_email, String product);
 }

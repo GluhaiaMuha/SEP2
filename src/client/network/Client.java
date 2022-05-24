@@ -19,9 +19,9 @@ public interface Client
 
   User readUserLogin(String email, String password);
 
-  List<Rent> readCustomerRents(String customer_email);
+  List<Rent> readCustomerRents(String customer_email, String product);
 
-  void rentProduct(Rent rent);
+  void rentProduct(String product, Rent rent);
 
   String getEmail();
 }

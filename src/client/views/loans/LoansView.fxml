@@ -18,10 +18,10 @@
                             <children>
                                 <TableView fx:id="movieTable" layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
                                     <columns>
-                              <TableColumn fx:id="movieEmailCol" prefWidth="169.0" text="Email" />
-                                        <TableColumn fx:id="movieHashCol" prefWidth="208.0" text="Product_Hash" />
-                                        <TableColumn fx:id="movieDateFromCol" prefWidth="235.0" text="Date From" />
-                                        <TableColumn fx:id="movieDateToCol" prefWidth="187.0" text="Date To" />
+                              <TableColumn fx:id="movieEmailCol" prefWidth="160.0" text="Email" />
+                              <TableColumn fx:id="movieTitleCol" prefWidth="183.0" text="Title" />
+                                        <TableColumn fx:id="movieDateFromCol" prefWidth="238.0" text="Date From" />
+                                        <TableColumn fx:id="movieDateToCol" prefWidth="218.0" text="Date To" />
                                     </columns>
                                 </TableView>
                                 <TextField layoutX="249.0" layoutY="14.0" promptText="Search..." />

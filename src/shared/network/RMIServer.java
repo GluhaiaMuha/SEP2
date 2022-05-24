@@ -21,7 +21,7 @@ public interface RMIServer extends Remote
 
   User readUserLogin(String email, String password) throws RemoteException;
 
-  List<Rent> readCustomerRents(String customer_email) throws RemoteException;
+  List<Rent> readCustomerRents(String customer_email, String product) throws RemoteException;
 
-  void rentProduct(Rent rent) throws RemoteException;
+  void rentProduct(String product, Rent rent) throws RemoteException;
 }

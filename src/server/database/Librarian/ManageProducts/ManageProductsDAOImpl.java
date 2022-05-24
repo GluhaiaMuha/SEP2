@@ -20,7 +20,6 @@ public class ManageProductsDAOImpl implements ManageProductsDAO
   }
 
   @Override public void update(String tableName, String whereClause, Object obj)
-      throws SQLException
   {
     if (tableName.equals("book"))
     {
@@ -109,7 +108,6 @@ public class ManageProductsDAOImpl implements ManageProductsDAO
   }
 
   @Override public void delete(String tableName, String whereClause)
-      throws SQLException
   {
 
     try(Connection connection = database.getConnection())
@@ -125,7 +123,6 @@ public class ManageProductsDAOImpl implements ManageProductsDAO
   }
 
   @Override public Object insert(String tableName, Object obj)
-      throws SQLException
   {
     if (tableName.equals("book"))
     {

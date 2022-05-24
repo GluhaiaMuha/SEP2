@@ -36,7 +36,6 @@ public class ManageProductsImpl implements ManageProducts
   }
 
   @Override public Object insert(String tableName, Object obj)
-      throws SQLException
   {
     return ManageProductsDAOImpl.getInstance().insert(tableName, obj);
   }

@@ -28,8 +28,9 @@ public class LoansViewController implements ViewController {
     private TableView<Rent> movieTable;
     @FXML
     private TableColumn<Rent, String> movieEmailCol;
+
     @FXML
-    private TableColumn<Rent, String> movieHashCol;
+    private TableColumn<Rent, String> movieTitleCol;
     @FXML
     private TableColumn<Rent, Date> movieDateFromCol;
     @FXML
@@ -81,7 +82,6 @@ public class LoansViewController implements ViewController {
     {
         this.viewHandler = vh;
         loansViewModel= vmf.getLoansViewModel();
-        updateTables();
     }
 
 
@@ -101,14 +101,13 @@ public class LoansViewController implements ViewController {
         /* Movie Table Start Here */
         /* For future use, make sure PropertyValueFactory is the same as the get/set Methods */
 
-        final ObservableList<Rent> dataMovie = FXCollections.observableArrayList(loansViewModel.readCustomerRents(loansViewModel.getEmail())
+        final ObservableList<Rent> dataMovie = FXCollections.observableArrayList(loansViewModel.readCustomerRents(loansViewModel.getEmail(), "movie")
         );
 
         movieEmailCol.setCellValueFactory(new PropertyValueFactory<>("customer_email"));
 
-        movieHashCol.setCellValueFactory(
-            new PropertyValueFactory<>("product_hash")
-        );
+        movieTitleCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
+
         movieDateFromCol.setCellValueFactory(
             new PropertyValueFactory<>("DateFrom")
         );

@@ -17,8 +17,8 @@ public class RentProductModelImpl implements RentProductModel
     return instance;
   }
 
-  public void rentProduct(Rent rent)
+  public void rentProduct(String product, Rent rent)
   {
-    RentProductDAOImpl.getInstance().rentProduct(rent);
+    RentProductDAOImpl.getInstance().rentProduct(product, rent);
   }
 }

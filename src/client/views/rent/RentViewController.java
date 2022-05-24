@@ -224,8 +224,8 @@ public class RentViewController implements ViewController {
             selectedBook.setAmountInStock(selectedBook.getAmountInStock() - 1);
             java.sql.Date sqlDateFrom = new java.sql.Date(System.currentTimeMillis());
             java.sql.Date sqlDateTo = new java.sql.Date(System.currentTimeMillis() + 691200000);
-            Rent rent = new Rent(rentViewModel.getEmail(), selectedBook.getHash(), sqlDateFrom, sqlDateTo);
-            rentViewModel.rentProduct(rent);
+            Rent rent = new Rent(rentViewModel.getEmail(), selectedBook.getHash(), selectedBook.getTitle(), sqlDateFrom, sqlDateTo);
+            rentViewModel.rentProduct("book" ,rent);
             updateTables();
         }
         else
@@ -241,8 +241,8 @@ public class RentViewController implements ViewController {
             selectedCD.setAmountInStock(selectedCD.getAmountInStock() - 1);
             java.sql.Date sqlDateFrom = new java.sql.Date(System.currentTimeMillis());
             java.sql.Date sqlDateTo = new java.sql.Date(System.currentTimeMillis() + 691200000);
-            Rent rent = new Rent(rentViewModel.getEmail(), selectedCD.getHash(), sqlDateFrom, sqlDateTo);
-            rentViewModel.rentProduct(rent);
+            Rent rent = new Rent(rentViewModel.getEmail(), selectedCD.getHash(), selectedCD.getName(), sqlDateFrom, sqlDateTo);
+            rentViewModel.rentProduct("cd" ,rent);
             updateTables();
         }
         else
@@ -257,8 +257,8 @@ public class RentViewController implements ViewController {
             selectedMovie.setAmountInStock(selectedMovie.getAmountInStock() - 1);
             java.sql.Date sqlDateFrom = new java.sql.Date(System.currentTimeMillis());
             java.sql.Date sqlDateTo = new java.sql.Date(System.currentTimeMillis() + 691200000);
-            Rent rent = new Rent(rentViewModel.getEmail(), selectedMovie.getHash(), sqlDateFrom, sqlDateTo);
-            rentViewModel.rentProduct(rent);
+            Rent rent = new Rent(rentViewModel.getEmail(), selectedMovie.getHash(), selectedMovie.getTitle(), sqlDateFrom, sqlDateTo);
+            rentViewModel.rentProduct("movie",rent);
             updateTables();
         }
         else
@@ -273,8 +273,8 @@ public class RentViewController implements ViewController {
             selectedSoftware.setAmountInStock(selectedSoftware.getAmountInStock() - 1);
             java.sql.Date sqlDateFrom = new java.sql.Date(System.currentTimeMillis());
             java.sql.Date sqlDateTo = new java.sql.Date(System.currentTimeMillis() + 691200000);
-            Rent rent = new Rent(rentViewModel.getEmail(), selectedSoftware.getHash(), sqlDateFrom, sqlDateTo);
-            rentViewModel.rentProduct(rent);
+            Rent rent = new Rent(rentViewModel.getEmail(), selectedSoftware.getHash(), selectedSoftware.getName(), sqlDateFrom, sqlDateTo);
+            rentViewModel.rentProduct("software", rent);
             updateTables();
         }
         else

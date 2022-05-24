@@ -13,9 +13,9 @@ public class LoansViewModel {
         this.libraryModel = libraryModel;
     }
 
-    public List<Rent> readCustomerRents(String customer_email)
+    public List<Rent> readCustomerRents(String customer_email, String product)
     {
-        return libraryModel.readCustomerRents(customer_email);
+        return libraryModel.readCustomerRents(customer_email, product);
     }
 
     public String getEmail()

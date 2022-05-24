@@ -11,9 +11,9 @@ public class RentViewModel {
         this.libraryModel = libraryModel;
     }
 
-    public void rentProduct(Rent rent)
+    public void rentProduct(String product, Rent rent)
     {
-        libraryModel.rentProduct(rent);
+        libraryModel.rentProduct(product, rent);
     }
 
     public String getEmail()

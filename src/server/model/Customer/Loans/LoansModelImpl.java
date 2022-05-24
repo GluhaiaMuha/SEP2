@@ -19,8 +19,8 @@ public class LoansModelImpl implements LoansModel
     return instance;
   }
 
-  public List<Rent> readCustomerRents(String customer_email)
+  public List<Rent> readCustomerRents(String customer_email, String product)
   {
-    return LoansDAOImpl.getInstance().readCustomerRents(customer_email);
+    return LoansDAOImpl.getInstance().readCustomerRents(customer_email, product);
   }
 }

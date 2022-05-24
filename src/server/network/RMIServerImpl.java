@@ -66,14 +66,14 @@ public class RMIServerImpl implements RMIServer
   }
 
   @Override
-  public List<Rent> readCustomerRents(String customer_email)
+  public List<Rent> readCustomerRents(String customer_email, String product)
   {
-    return LoansModelImpl.getInstance().readCustomerRents(customer_email);
+    return LoansModelImpl.getInstance().readCustomerRents(customer_email, product);
   }
 
   @Override
-  public void rentProduct(Rent rent)
+  public void rentProduct(String product, Rent rent)
   {
-    RentProductModelImpl.getInstance().rentProduct(rent);
+    RentProductModelImpl.getInstance().rentProduct(product, rent);
   }
 }

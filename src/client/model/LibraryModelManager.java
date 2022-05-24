@@ -36,15 +36,15 @@ public class LibraryModelManager implements LibraryModel
   }
 
   @Override
-  public List<Rent> readCustomerRents(String customer_email)
+  public List<Rent> readCustomerRents(String customer_email, String product)
   {
-    return client.readCustomerRents(customer_email);
+    return client.readCustomerRents(customer_email, product);
   }
 
   @Override
-  public void rentProduct(Rent rent)
+  public void rentProduct(String product, Rent rent)
   {
-    client.rentProduct(rent);
+    client.rentProduct(product, rent);
   }
 
   @Override
