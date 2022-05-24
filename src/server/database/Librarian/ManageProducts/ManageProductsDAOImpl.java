@@ -1,18 +1,17 @@
 package server.database.Librarian.ManageProducts;
 
 import server.database.DatabaseFront;
-import shared.transferObj.*;
+import shared.transferObj.Book;
+import shared.transferObj.CD;
+import shared.transferObj.Movie;
+import shared.transferObj.Software;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ManageProductsDAOImpl implements ManageProductsDAO
 {
-  private final DatabaseFront database = DatabaseFront.getInstance();
   private static ManageProductsDAO instance = new ManageProductsDAOImpl();
 
   public static ManageProductsDAO getInstance(){
@@ -23,7 +22,7 @@ public class ManageProductsDAOImpl implements ManageProductsDAO
   {
     if (tableName.equals("book"))
     {
-      try(Connection connection = database.getConnection())
+      try(Connection connection = DatabaseFront.getInstance().getConnection())
       {
         Book book = (Book) obj;
 
@@ -45,7 +44,7 @@ public class ManageProductsDAOImpl implements ManageProductsDAO
     }
     if (tableName.equals("movie"))
     {
-      try(Connection connection = database.getConnection())
+      try(Connection connection = DatabaseFront.getInstance().getConnection())
       {
         Movie movie = (Movie) obj;
 
@@ -66,7 +65,7 @@ public class ManageProductsDAOImpl implements ManageProductsDAO
     }
     if (tableName.equals("cd"))
     {
-      try(Connection connection = database.getConnection())
+      try(Connection connection = DatabaseFront.getInstance().getConnection())
       {
         CD cd = (CD) obj;
 
@@ -86,7 +85,7 @@ public class ManageProductsDAOImpl implements ManageProductsDAO
     }
     if (tableName.equals("software"))
     {
-      try(Connection connection = database.getConnection())
+      try(Connection connection = DatabaseFront.getInstance().getConnection())
       {
         Software software = (Software) obj;
 
@@ -110,7 +109,7 @@ public class ManageProductsDAOImpl implements ManageProductsDAO
   @Override public void delete(String tableName, String whereClause)
   {
 
-    try(Connection connection = database.getConnection())
+    try(Connection connection = DatabaseFront.getInstance().getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
           "DELETE FROM " + tableName + " WHERE " + whereClause);
@@ -126,7 +125,7 @@ public class ManageProductsDAOImpl implements ManageProductsDAO
   {
     if (tableName.equals("book"))
     {
-      try(Connection connection = database.getConnection())
+      try(Connection connection = DatabaseFront.getInstance().getConnection())
       {
         Book book = (Book) obj;
         PreparedStatement statement = connection.prepareStatement(
@@ -148,7 +147,7 @@ public class ManageProductsDAOImpl implements ManageProductsDAO
     }
     if (tableName.equals("movie"))
     {
-      try(Connection connection = database.getConnection())
+      try(Connection connection = DatabaseFront.getInstance().getConnection())
       {
         Movie movie = (Movie) obj;
         PreparedStatement statement = connection.prepareStatement(
@@ -169,7 +168,7 @@ public class ManageProductsDAOImpl implements ManageProductsDAO
     }
     if (tableName.equals("cd"))
     {
-      try(Connection connection = database.getConnection())
+      try(Connection connection = DatabaseFront.getInstance().getConnection())
       {
         CD cd = (CD) obj;
         PreparedStatement statement = connection.prepareStatement(
@@ -189,7 +188,7 @@ public class ManageProductsDAOImpl implements ManageProductsDAO
     }
     if (tableName.equals("software"))
     {
-      try(Connection connection = database.getConnection())
+      try(Connection connection = DatabaseFront.getInstance().getConnection())
       {
         Software software = (Software) obj;
         PreparedStatement statement = connection.prepareStatement(

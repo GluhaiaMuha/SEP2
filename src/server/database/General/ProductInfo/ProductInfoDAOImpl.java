@@ -12,7 +12,6 @@ import java.util.List;
 
 public class ProductInfoDAOImpl implements ProductInfoDAO
 {
-  private final DatabaseFront database = DatabaseFront.getInstance();
   private static ProductInfoDAO instance = new ProductInfoDAOImpl();
 
   public static ProductInfoDAO getInstance(){
@@ -23,7 +22,7 @@ public class ProductInfoDAOImpl implements ProductInfoDAO
   {
     if (tableName.equals("product"))
     {
-      try(Connection connection = database.getConnection())
+      try(Connection connection = DatabaseFront.getInstance().getConnection())
       {
         PreparedStatement statement = connection.prepareStatement(
             "SELECT * FROM " + tableName);
@@ -45,7 +44,7 @@ public class ProductInfoDAOImpl implements ProductInfoDAO
     }
     if (tableName.equals("book"))
     {
-      try(Connection connection = database.getConnection())
+      try(Connection connection = DatabaseFront.getInstance().getConnection())
       {
         PreparedStatement statement = connection.prepareStatement(
             "SELECT * FROM "+ tableName);
@@ -72,7 +71,7 @@ public class ProductInfoDAOImpl implements ProductInfoDAO
     }
     if (tableName.equals("movie"))
     {
-      try(Connection connection = database.getConnection())
+      try(Connection connection = DatabaseFront.getInstance().getConnection())
       {
         PreparedStatement statement = connection.prepareStatement(
             "SELECT * FROM "+ tableName);
@@ -98,7 +97,7 @@ public class ProductInfoDAOImpl implements ProductInfoDAO
     }
     if (tableName.equals("cd"))
     {
-      try(Connection connection = database.getConnection())
+      try(Connection connection = DatabaseFront.getInstance().getConnection())
       {
         PreparedStatement statement = connection.prepareStatement(
             "SELECT * FROM "+ tableName);
@@ -123,7 +122,7 @@ public class ProductInfoDAOImpl implements ProductInfoDAO
     }
     if (tableName.equals("software"))
     {
-      try(Connection connection = database.getConnection())
+      try(Connection connection = DatabaseFront.getInstance().getConnection())
       {
         PreparedStatement statement = connection.prepareStatement(
             "SELECT * FROM "+ tableName);
@@ -152,7 +151,7 @@ public class ProductInfoDAOImpl implements ProductInfoDAO
 
   @Override public List<Book> readBooks()
   {
-    try(Connection connection = database.getConnection())
+    try(Connection connection = DatabaseFront.getInstance().getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
           "SELECT * FROM book");
@@ -180,7 +179,7 @@ public class ProductInfoDAOImpl implements ProductInfoDAO
 
   @Override public List<Movie> readMovies()
   {
-    try(Connection connection = database.getConnection())
+    try(Connection connection = DatabaseFront.getInstance().getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
           "SELECT * FROM movie");
@@ -208,7 +207,7 @@ public class ProductInfoDAOImpl implements ProductInfoDAO
 
   @Override public List<CD> readCDS()
   {
-    try(Connection connection = database.getConnection())
+    try(Connection connection = DatabaseFront.getInstance().getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
           "SELECT * FROM cd");
@@ -235,7 +234,7 @@ public class ProductInfoDAOImpl implements ProductInfoDAO
 
   @Override public List<Software> readSoftwares()
   {
-    try(Connection connection = database.getConnection())
+    try(Connection connection = DatabaseFront.getInstance().getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
           "SELECT * FROM software");
@@ -263,7 +262,7 @@ public class ProductInfoDAOImpl implements ProductInfoDAO
 
   @Override public List<Book> readBooksByTitle(String searchString)
   {
-    try(Connection connection = database.getConnection())
+    try(Connection connection = DatabaseFront.getInstance().getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
           "SELECT * FROM book WHERE title LIKE ?");
@@ -293,7 +292,7 @@ public class ProductInfoDAOImpl implements ProductInfoDAO
 
   @Override public List<Movie> readMoviesByTitle(String searchString)
   {
-    try(Connection connection = database.getConnection())
+    try(Connection connection = DatabaseFront.getInstance().getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
           "SELECT * FROM movie WHERE title LIKE ?");
@@ -322,7 +321,7 @@ public class ProductInfoDAOImpl implements ProductInfoDAO
 
   @Override public List<CD> readCDsByName(String searchString)
   {
-    try(Connection connection = database.getConnection())
+    try(Connection connection = DatabaseFront.getInstance().getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
           "SELECT * FROM cd WHERE name LIKE ?");
@@ -350,7 +349,7 @@ public class ProductInfoDAOImpl implements ProductInfoDAO
 
   @Override public List<Software> readSoftwaresByName(String searchString)
   {
-    try(Connection connection = database.getConnection())
+    try(Connection connection = DatabaseFront.getInstance().getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
           "SELECT * FROM software WHERE name LIKE ?");
@@ -379,7 +378,7 @@ public class ProductInfoDAOImpl implements ProductInfoDAO
 
   @Override public Book readBookByTitle(String searchString)
   {
-    try(Connection connection = database.getConnection())
+    try(Connection connection = DatabaseFront.getInstance().getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
           "SELECT * FROM book WHERE title LIKE ?");
@@ -406,7 +405,7 @@ public class ProductInfoDAOImpl implements ProductInfoDAO
 
   @Override public Movie readMovieByTitle(String searchString)
   {
-    try(Connection connection = database.getConnection())
+    try(Connection connection = DatabaseFront.getInstance().getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
           "SELECT * FROM movie WHERE title LIKE ?");
@@ -432,7 +431,7 @@ public class ProductInfoDAOImpl implements ProductInfoDAO
 
   @Override public CD readCDByName(String searchString)
   {
-    try(Connection connection = database.getConnection())
+    try(Connection connection = DatabaseFront.getInstance().getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
           "SELECT * FROM cd WHERE name LIKE ?");
@@ -457,7 +456,7 @@ public class ProductInfoDAOImpl implements ProductInfoDAO
 
   @Override public Software readSoftwareByName(String searchString)
   {
-    try(Connection connection = database.getConnection())
+    try(Connection connection = DatabaseFront.getInstance().getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
           "SELECT * FROM software WHERE name LIKE ?");

@@ -5,7 +5,6 @@ import shared.transferObj.CD;
 import shared.transferObj.Movie;
 import shared.transferObj.Software;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface ProductInfoDAO
