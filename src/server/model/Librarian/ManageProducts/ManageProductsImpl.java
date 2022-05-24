@@ -16,15 +16,23 @@ public class ManageProductsImpl implements ManageProducts
   }
 
   @Override public void update(String tableName, String whereClause, Object obj)
-      throws SQLException
   {
-    ManageProductsDAOImpl.getInstance().update(tableName, whereClause, obj);
+    try
+    {
+      ManageProductsDAOImpl.getInstance().update(tableName, whereClause, obj);
+    }catch (SQLException e){
+      e.printStackTrace();
+    }
   }
 
   @Override public void delete(String tableName, String whereClause)
-      throws SQLException
   {
-    ManageProductsDAOImpl.getInstance().delete(tableName, whereClause);
+    try
+    {
+      ManageProductsDAOImpl.getInstance().delete(tableName, whereClause);
+    }catch (SQLException e){
+      e.printStackTrace();
+    }
   }
 
   @Override public Object insert(String tableName, Object obj)
