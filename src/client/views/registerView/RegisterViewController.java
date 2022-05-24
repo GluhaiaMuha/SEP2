@@ -47,25 +47,31 @@ public class RegisterViewController implements ViewController
   @FXML
   void onRegister(ActionEvent event)
   {
-    if (validCustomerInformation())
+    try
     {
-      String customer_fName = fName.getText();
-      String customer_lName = lName.getText();
-      String customerEmail = email.getText();
-      String customerPassword = password.getText();
-      String customerPhoneNumber = phoneNumber.getText();
-      User received = registerViewModel.readUserRegister(customerEmail);
-      if (received == null)
+      if (validCustomerInformation())
       {
-        Customer newCustomer = new Customer(customerEmail, customer_fName, customer_lName, customerPhoneNumber, customerPassword, "customer");
-        registerViewModel.newCustomer(newCustomer);
-        viewHandler.openCustomerMainView();
+        String customer_fName = fName.getText();
+        String customer_lName = lName.getText();
+        String customerEmail = email.getText();
+        String customerPassword = password.getText();
+        String customerPhoneNumber = phoneNumber.getText();
+        User received = registerViewModel.readUserRegister(customerEmail);
+        if (received == null)
+        {
+          Customer newCustomer = new Customer(customerEmail, customer_fName, customer_lName, customerPhoneNumber, customerPassword, "customer");
+          registerViewModel.newCustomer(newCustomer);
+          viewHandler.openCustomerMainView();
+        }
+        else
+        {
+          clearTextFields();
+          JOptionPane.showMessageDialog(null,"Invalid email");
+        }
       }
-      else
-      {
-        clearTextFields();
-        JOptionPane.showMessageDialog(null,"Invalid email");
-      }
+    }catch (Exception e)
+    {
+      JOptionPane.showMessageDialog(null,"Please fill in all fields");
     }
   }
 

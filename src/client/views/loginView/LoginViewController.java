@@ -35,23 +35,29 @@ public class LoginViewController implements ViewController
   @FXML
   void onLoginAction(ActionEvent event)
   {
-    if (validUserInformation())
+    try
     {
-      String email = emailInput.getText();
-      String password = passwordInput.getText();
-      User received = loginViewModel.readUserLogin(email, password);
-      if (received != null)
+      if (validUserInformation())
       {
-        if (received.getUser().equals("librarian"))
-          viewHandler.openLibrarianMainView();
-        else if (received.getUser().equals("customer"))
-          viewHandler.openCustomerMainView();
+        String email = emailInput.getText();
+        String password = passwordInput.getText();
+        User received = loginViewModel.readUserLogin(email, password);
+        if (received != null)
+        {
+          if (received.getUser().equals("librarian"))
+            viewHandler.openLibrarianMainView();
+          else if (received.getUser().equals("customer"))
+            viewHandler.openCustomerMainView();
+        }
+        else
+        {
+          clearTextFields();
+          JOptionPane.showMessageDialog(null,"Invalid email or password!");
+        }
       }
-      else
-      {
-        clearTextFields();
-        JOptionPane.showMessageDialog(null,"Invalid email or password!");
-      }
+    }catch (Exception e)
+    {
+      JOptionPane.showMessageDialog(null,"Please fill in all fields");
     }
   }
 

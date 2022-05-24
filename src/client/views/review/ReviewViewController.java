@@ -99,13 +99,13 @@ public class ReviewViewController implements ViewController {
     @FXML
     void onUpdateList(ActionEvent event) throws SQLException
     {
-//        updateTables();
+        updateTables();
     }
 
-  /*  private void updateTables() throws SQLException
+    private void updateTables() throws SQLException
     {
-        *//* Movie Table Start Here *//*
-        *//* For future use, make sure PropertyValueFactory is the same as the get/set Methods *//*
+        //* Movie Table Start Here *//*
+        //* For future use, make sure PropertyValueFactory is the same as the get/set Methods *//*
 
         final ObservableList<Object> dataMovie = FXCollections.observableArrayList(createTableExample.read("movie")
         );
@@ -125,7 +125,7 @@ public class ReviewViewController implements ViewController {
 
         movieTable.setItems(dataMovie);
 
-        *//* Books Table Starts Here *//*
+        //* Books Table Starts Here *//*
 
         final ObservableList<Object> dataBook = FXCollections.observableArrayList(createTableExample.read("book")
         );
@@ -145,7 +145,7 @@ public class ReviewViewController implements ViewController {
 
         booksTable.setItems(dataBook);
 
-        *//* CD Table Starts Here *//*
+        //* CD Table Starts Here *//*
         final ObservableList<Object> dataCD = FXCollections.observableArrayList(createTableExample.read("cd")
         );
 
@@ -165,7 +165,7 @@ public class ReviewViewController implements ViewController {
 
         cdTable.setItems(dataCD);
 
-        *//* Software Table Starts Here *//*
+        //* Software Table Starts Here *//*
         final ObservableList<Object> dataSoftware = FXCollections.observableArrayList(createTableExample.read("software")
         );
 
@@ -183,5 +183,5 @@ public class ReviewViewController implements ViewController {
         );
 
         softwareTable.setItems(dataSoftware);
-    }*/
+    }
 }
