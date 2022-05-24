@@ -1,6 +1,8 @@
 package shared.transferObj;
 
-public class Movie extends Product
+import java.io.Serializable;
+
+public class Movie extends Product implements Serializable
 {
   private String title;
   private String director;

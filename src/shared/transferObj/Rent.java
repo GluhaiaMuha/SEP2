@@ -1,8 +1,9 @@
 package shared.transferObj;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Rent
+public class Rent implements Serializable
 {
   private String customer_email;
   private String product_hash;

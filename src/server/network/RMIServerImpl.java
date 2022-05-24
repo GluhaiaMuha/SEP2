@@ -1,11 +1,14 @@
 package server.network;
 
 import server.database.General.Register.RegisterDAOImpl;
+import server.model.Customer.Loans.LoansModelImpl;
+import server.model.Customer.RentProduct.RentProductModelImpl;
 import server.model.General.Login.LoginModelImpl;
 import server.model.General.Register.RegisterModelImpl;
 import shared.network.ClientCallback;
 import shared.network.RMIServer;
 import shared.transferObj.Customer;
+import shared.transferObj.Rent;
 import shared.transferObj.User;
 
 import java.rmi.AlreadyBoundException;
@@ -13,6 +16,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.Date;
+import java.util.List;
 
 public class RMIServerImpl implements RMIServer
 {
@@ -58,5 +63,17 @@ public class RMIServerImpl implements RMIServer
   public User readUserLogin(String email, String password)
   {
     return LoginModelImpl.getInstance().readUserLogin(email, password);
+  }
+
+  @Override
+  public List<Rent> readCustomerRents(String customer_email)
+  {
+    return LoansModelImpl.getInstance().readCustomerRents(customer_email);
+  }
+
+  @Override
+  public void rentProduct(Rent rent)
+  {
+    RentProductModelImpl.getInstance().rentProduct(rent);
   }
 }

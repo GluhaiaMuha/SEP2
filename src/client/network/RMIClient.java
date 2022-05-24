@@ -3,6 +3,7 @@ package client.network;
 import shared.network.ClientCallback;
 import shared.network.RMIServer;
 import shared.transferObj.Customer;
+import shared.transferObj.Rent;
 import shared.transferObj.User;
 
 import java.beans.PropertyChangeSupport;
@@ -11,6 +12,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.Date;
+import java.util.List;
 
 public class RMIClient implements Client, ClientCallback
 {
@@ -91,6 +94,32 @@ public class RMIClient implements Client, ClientCallback
       e.printStackTrace();
     }
     return user;
+  }
+
+  @Override
+  public List<Rent> readCustomerRents(String customer_email)
+  {
+    List<Rent> rents = null;
+    try
+    {
+      rents = server.readCustomerRents(customer_email);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return rents;
+  }
+
+  @Override
+  public void rentProduct(Rent rent)
+  {
+    try
+    {
+      server.rentProduct(rent);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
   }
 
   @Override

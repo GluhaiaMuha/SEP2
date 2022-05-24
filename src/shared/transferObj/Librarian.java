@@ -1,6 +1,8 @@
 package shared.transferObj;
 
-public class Librarian extends User
+import java.io.Serializable;
+
+public class Librarian extends User implements Serializable
 {
   public Librarian(String e_mail, String password, String user)
   {

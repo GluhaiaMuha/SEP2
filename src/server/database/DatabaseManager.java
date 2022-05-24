@@ -571,49 +571,49 @@ public class DatabaseManager implements DatabaseInterface{
         return null;
     }
 
-    public void rentProduct(String email, String productHash, Date dateFrom, Date dateTo)
-    {
-        try(Connection connection = database.getConnection())
-        {
-            PreparedStatement statement = connection.prepareStatement(
-                "INSERT INTO rent (customer_email, product_hash, dateFrom, dateTo) VALUES (?, ?, ?, ?)");
-            statement.setString(1, email);
-            statement.setString(2, productHash);
-            statement.setDate(3, dateFrom);
-            statement.setDate(4, dateTo);
-            statement.executeUpdate();
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-    }
+//    public void rentProduct(String email, String productHash, Date dateFrom, Date dateTo)
+//    {
+//        try(Connection connection = database.getConnection())
+//        {
+//            PreparedStatement statement = connection.prepareStatement(
+//                "INSERT INTO rent (customer_email, product_hash, dateFrom, dateTo) VALUES (?, ?, ?, ?)");
+//            statement.setString(1, email);
+//            statement.setString(2, productHash);
+//            statement.setDate(3, dateFrom);
+//            statement.setDate(4, dateTo);
+//            statement.executeUpdate();
+//        }
+//        catch (SQLException e)
+//        {
+//            e.printStackTrace();
+//        }
+//    }
 
-    public List<Rent> readCustomerRents(String customer_email)
-    {
-        try(Connection connection = database.getConnection())
-        {
-            PreparedStatement statement = connection.prepareStatement(
-                "SELECT * FROM rent WHERE customer_email = '" + customer_email + "'");
-            ResultSet resultSet = statement.executeQuery();
-            ArrayList<Rent> rents = new ArrayList<>();
-            while (resultSet.next())
-            {
-                String email = resultSet.getString("customer_email");
-                String hash = resultSet.getString("product_hash");
-                Date dateFrom = resultSet.getDate("dateFrom");
-                Date dateTo = resultSet.getDate("dateTo");
-                Rent rent = new Rent(email, hash, dateFrom, dateTo);
-                rents.add(rent);
-            }
-            return rents;
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-        return null;
-    }
+//    public List<Rent> readCustomerRents(String customer_email)
+//    {
+//        try(Connection connection = database.getConnection())
+//        {
+//            PreparedStatement statement = connection.prepareStatement(
+//                "SELECT * FROM rent WHERE customer_email = '" + customer_email + "'");
+//            ResultSet resultSet = statement.executeQuery();
+//            ArrayList<Rent> rents = new ArrayList<>();
+//            while (resultSet.next())
+//            {
+//                String email = resultSet.getString("customer_email");
+//                String hash = resultSet.getString("product_hash");
+//                Date dateFrom = resultSet.getDate("dateFrom");
+//                Date dateTo = resultSet.getDate("dateTo");
+//                Rent rent = new Rent(email, hash, dateFrom, dateTo);
+//                rents.add(rent);
+//            }
+//            return rents;
+//        }
+//        catch (SQLException e)
+//        {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
 //    @Override
 //    public User readUserLogin(String tableName, String email, String password)

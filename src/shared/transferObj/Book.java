@@ -1,6 +1,8 @@
 package shared.transferObj;
 
-public class Book extends Product
+import java.io.Serializable;
+
+public class Book extends Product implements Serializable
 {
   private String title;
   private String author;

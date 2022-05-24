@@ -45,7 +45,7 @@ public interface DatabaseInterface{
 
     Software readSoftwareByName(String searchString) throws SQLException;
 
-    void rentProduct(String email, String productHash, Date dateFrom, Date dateTo) throws SQLException;
+//    void rentProduct(String email, String productHash, Date dateFrom, Date dateTo) throws SQLException;
 
-    List<Rent> readCustomerRents(String customer_email) throws SQLException;
+//    List<Rent> readCustomerRents(String customer_email) throws SQLException;
 }

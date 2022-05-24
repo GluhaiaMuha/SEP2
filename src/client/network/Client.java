@@ -1,7 +1,11 @@
 package client.network;
 
 import shared.transferObj.Customer;
+import shared.transferObj.Rent;
 import shared.transferObj.User;
+
+import java.sql.Date;
+import java.util.List;
 
 public interface Client
 {
@@ -14,6 +18,10 @@ public interface Client
   void newCustomer(Customer customer);
 
   User readUserLogin(String email, String password);
+
+  List<Rent> readCustomerRents(String customer_email);
+
+  void rentProduct(Rent rent);
 
   String getEmail();
 }

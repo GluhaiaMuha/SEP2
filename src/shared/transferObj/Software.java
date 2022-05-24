@@ -1,6 +1,8 @@
 package shared.transferObj;
 
-public class Software extends Product
+import java.io.Serializable;
+
+public class Software extends Product implements Serializable
 {
   private String name;
   private String type;

@@ -1,6 +1,8 @@
 package shared.transferObj;
 
-public class CD extends Product
+import java.io.Serializable;
+
+public class CD extends Product implements Serializable
 {
   private String name;
   private int capacity;

@@ -1,6 +1,8 @@
 package shared.transferObj;
 
-public class Product
+import java.io.Serializable;
+
+public class Product implements Serializable
 {
   private String hash;
   private int amountInStock;

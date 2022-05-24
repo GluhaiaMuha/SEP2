@@ -12,17 +12,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import server.database.DatabaseManager;
-import shared.transferObj.Book;
-import shared.transferObj.CD;
-import shared.transferObj.Movie;
-import shared.transferObj.Software;
+import shared.transferObj.*;
 
+import java.sql.Date;
 import java.sql.SQLException;
 
 public class RentViewController implements ViewController {
 
     private ViewHandler viewHandler;
-    private RentViewModel rentViewController;
+    private RentViewModel rentViewModel;
     private DatabaseManager createTableExample = new DatabaseManager();
 
     /* Movie Table Start Here */
@@ -105,9 +103,8 @@ public class RentViewController implements ViewController {
     public void init(ViewHandler vh, ViewModelFactory vmf) throws SQLException
     {
         this.viewHandler = vh;
-        rentViewController = vmf.getRentViewModel();
+        rentViewModel = vmf.getRentViewModel();
         updateTables();
-
     }
 
 
@@ -222,32 +219,66 @@ public class RentViewController implements ViewController {
     @FXML
     void onRentBook(ActionEvent event) throws SQLException
     {
-        /*Book selectedBook = (Book) booksTable.getSelectionModel().getSelectedItem();
-        DatabaseManager.getInstance().rentProduct();
-        updateTables();*/
+        Book selectedBook = (Book) booksTable.getSelectionModel().getSelectedItem();
+        if (selectedBook.getAmountInStock() > 0){
+            selectedBook.setAmountInStock(selectedBook.getAmountInStock() - 1);
+            java.sql.Date sqlDateFrom = new java.sql.Date(System.currentTimeMillis());
+            java.sql.Date sqlDateTo = new java.sql.Date(System.currentTimeMillis() + 691200000);
+            Rent rent = new Rent(rentViewModel.getEmail(), selectedBook.getHash(), sqlDateFrom, sqlDateTo);
+            rentViewModel.rentProduct(rent);
+            updateTables();
+        }
+        else
+            System.out.println("Error");
     }
 
     @FXML
     void onRentCD(ActionEvent event) throws SQLException
     {
 
-        updateTables();
+        CD selectedCD = (CD) cdTable.getSelectionModel().getSelectedItem();
+        if (selectedCD.getAmountInStock() > 0){
+            selectedCD.setAmountInStock(selectedCD.getAmountInStock() - 1);
+            java.sql.Date sqlDateFrom = new java.sql.Date(System.currentTimeMillis());
+            java.sql.Date sqlDateTo = new java.sql.Date(System.currentTimeMillis() + 691200000);
+            Rent rent = new Rent(rentViewModel.getEmail(), selectedCD.getHash(), sqlDateFrom, sqlDateTo);
+            rentViewModel.rentProduct(rent);
+            updateTables();
+        }
+        else
+            System.out.println("Error");
     }
 
     @FXML
     void onRentMovie(ActionEvent event) throws SQLException
     {
-
-
-        updateTables();
+        Movie selectedMovie = (Movie) movieTable.getSelectionModel().getSelectedItem();
+        if (selectedMovie.getAmountInStock() > 0){
+            selectedMovie.setAmountInStock(selectedMovie.getAmountInStock() - 1);
+            java.sql.Date sqlDateFrom = new java.sql.Date(System.currentTimeMillis());
+            java.sql.Date sqlDateTo = new java.sql.Date(System.currentTimeMillis() + 691200000);
+            Rent rent = new Rent(rentViewModel.getEmail(), selectedMovie.getHash(), sqlDateFrom, sqlDateTo);
+            rentViewModel.rentProduct(rent);
+            updateTables();
+        }
+        else
+            System.out.println("Error");
     }
 
     @FXML
     void onRentSoftware(ActionEvent event) throws SQLException
     {
-
-
-        updateTables();
+        Software selectedSoftware = (Software) softwareTable.getSelectionModel().getSelectedItem();
+        if (selectedSoftware.getAmountInStock() > 0){
+            selectedSoftware.setAmountInStock(selectedSoftware.getAmountInStock() - 1);
+            java.sql.Date sqlDateFrom = new java.sql.Date(System.currentTimeMillis());
+            java.sql.Date sqlDateTo = new java.sql.Date(System.currentTimeMillis() + 691200000);
+            Rent rent = new Rent(rentViewModel.getEmail(), selectedSoftware.getHash(), sqlDateFrom, sqlDateTo);
+            rentViewModel.rentProduct(rent);
+            updateTables();
+        }
+        else
+            System.out.println("Error");
     }
 
     @FXML
