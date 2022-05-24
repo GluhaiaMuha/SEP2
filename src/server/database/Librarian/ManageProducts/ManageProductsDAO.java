@@ -13,7 +13,6 @@ public interface ManageProductsDAO
 
   Object insert(String tableName, Object obj) throws SQLException;
 
-  List<Object> read(String tableName) throws SQLException;
 
 
 }

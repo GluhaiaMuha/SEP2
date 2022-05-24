@@ -32,9 +32,4 @@ public class ManageProductsImpl implements ManageProducts
   {
     return ManageProductsDAOImpl.getInstance().insert(tableName, obj);
   }
-
-  @Override public List<Object> read(String tableName) throws SQLException
-  {
-    return ManageProductsDAOImpl.getInstance().read(tableName);
-  }
 }

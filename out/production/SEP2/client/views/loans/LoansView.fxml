@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: #292826;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.loans.LoansViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: #292826;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.loans.LoansViewController">
     <children>
         <TabPane prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: #292826;" stylesheets="@../../../shared/additional/styles.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <tabs>
@@ -18,9 +18,10 @@
                             <children>
                                 <TableView fx:id="movieTable" layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
                                     <columns>
-                                        <TableColumn fx:id="movieTitleCol" prefWidth="275.1999397277832" text="Title" />
-                                        <TableColumn fx:id="movieDateFromCol" prefWidth="245.60009765625" text="Date From" />
-                                        <TableColumn fx:id="movieDateToCol" prefWidth="279.20001220703125" text="Date To" />
+                              <TableColumn fx:id="movieEmailCol" prefWidth="169.0" text="Email" />
+                                        <TableColumn fx:id="movieHashCol" prefWidth="208.0" text="Product_Hash" />
+                                        <TableColumn fx:id="movieDateFromCol" prefWidth="235.0" text="Date From" />
+                                        <TableColumn fx:id="movieDateToCol" prefWidth="187.0" text="Date To" />
                                     </columns>
                                 </TableView>
                                 <TextField layoutX="249.0" layoutY="14.0" promptText="Search..." />
