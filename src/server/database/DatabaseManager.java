@@ -773,6 +773,8 @@ public class DatabaseManager implements DatabaseInterface{
         }
     }
 
+
+    //To Delete
     @Override
     public void delete(String tableName, String whereClause)
     {

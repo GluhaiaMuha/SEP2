@@ -53,8 +53,10 @@
                               <TableColumn fx:id="booksAmountInStockCol" prefWidth="53.0" text="In Stock" />
                                     </columns>
                                 </TableView>
-                        <TextField layoutX="302.0" layoutY="14.0" promptText="Search..." />
                         <Button layoutX="769.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveBook" text="Remove Selected Item" />
+                        <TextField fx:id="bookSearchField" layoutX="239.0" layoutY="14.0" prefHeight="25.0" prefWidth="292.0" promptText="Search..." />
+                        <Button layoutX="548.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBookSearch" text="Search" />
+                        <Button layoutX="611.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBookReset" text="Reset" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -72,8 +74,10 @@
                               <TableColumn fx:id="cdAmountInStockCol" prefWidth="51.0" text="In Stock" />
                            </columns>
                         </TableView>
-                        <TextField layoutX="302.0" layoutY="14.0" promptText="Search..." />
                         <Button layoutX="769.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveCd" text="Remove Selected Item" />
+                        <TextField fx:id="cdSearchField" layoutX="239.0" layoutY="14.0" prefHeight="25.0" prefWidth="292.0" promptText="Search..." />
+                        <Button layoutX="548.0" layoutY="14.0" mnemonicParsing="false" onAction="#onSearchCd" text="Search" />
+                        <Button layoutX="611.0" layoutY="14.0" mnemonicParsing="false" onAction="#onCdReset" text="Reset" />
                      </children></AnchorPane>
                     </content>
                 </Tab>
@@ -91,8 +95,10 @@
                               <TableColumn fx:id="softwareAmountInStockCol" prefWidth="53.0" text="In Stock" />
                            </columns>
                         </TableView>
-                        <TextField layoutX="302.0" layoutY="14.0" promptText="Search..." />
                         <Button layoutX="769.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveSoftware" text="Remove Selected Item" />
+                        <TextField fx:id="softwareSearchField" layoutX="239.0" layoutY="14.0" prefHeight="25.0" prefWidth="292.0" promptText="Search..." />
+                        <Button layoutX="548.0" layoutY="14.0" mnemonicParsing="false" onAction="#onSoftwareSearch" text="Search" />
+                        <Button layoutX="611.0" layoutY="14.0" mnemonicParsing="false" onAction="#onSoftwareReset" text="Reset" />
                      </children>
                   </AnchorPane>
               </content>
