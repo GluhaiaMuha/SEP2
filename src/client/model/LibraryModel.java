@@ -48,5 +48,7 @@ public interface LibraryModel
 
   void insert(String tableName, Object obj);
 
+  Customer readCustomerInfo(String email);
+
   String getEmail();
 }

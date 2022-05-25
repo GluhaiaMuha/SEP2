@@ -125,6 +125,11 @@ public class LibraryModelManager implements LibraryModel
     client.insert(tableName, obj);
   }
 
+  @Override public Customer readCustomerInfo(String email)
+  {
+    return client.readCustomerInfo(email);
+  }
+
   @Override
   public String getEmail()
   {

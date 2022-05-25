@@ -321,6 +321,19 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
+  @Override public Customer readCustomerInfo(String email)
+  {
+    Customer customer = null;
+    try
+    {
+      customer = server.readCustomerInfo(email);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return customer;
+  }
+
   @Override
   public String getEmail()
   {

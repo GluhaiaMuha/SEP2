@@ -7,12 +7,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import shared.transferObj.User;
 
-import javax.swing.*;
-import java.sql.SQLException;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class LoginViewController implements ViewController
+public class LoginViewController implements ViewController, PropertyChangeListener
 {
   @FXML
   private TextField emailInput;
@@ -30,45 +29,14 @@ public class LoginViewController implements ViewController
     loginViewModel = vmf.getLoginViewModel();
     emailInput.textProperty().bindBidirectional(vmf.getLoginViewModel().emailProperty());
     passwordInput.textProperty().bindBidirectional(vmf.getLoginViewModel().passwordProperty());
+    loginViewModel.addListener("Librarian Login", this);
+    loginViewModel.addListener("Customer Login", this);
   }
 
   @FXML
   void onLoginAction(ActionEvent event)
   {
-    try
-    {
-      if (validUserInformation())
-      {
-        String email = emailInput.getText();
-        String password = passwordInput.getText();
-        User received = loginViewModel.readUserLogin(email, password);
-        if (received != null)
-        {
-          if (received.getUser().equals("librarian"))
-            viewHandler.openLibrarianMainView();
-          else if (received.getUser().equals("customer"))
-            viewHandler.openCustomerMainView();
-        }
-        else
-        {
-          clearTextFields();
-          JOptionPane.showMessageDialog(null,"Invalid email or password!");
-        }
-      }
-    }catch (Exception e)
-    {
-      JOptionPane.showMessageDialog(null,"Please fill in all fields");
-    }
-  }
-
-  public boolean validUserInformation()
-  {
-    if(emailInput.getText().isEmpty() || passwordInput.getText().isEmpty())
-    {
-      JOptionPane.showMessageDialog(null,"Please fill in all fields");
-      return false;
-    }
-    return true;
+    loginViewModel.login();
   }
 
   @FXML
@@ -76,11 +44,17 @@ public class LoginViewController implements ViewController
     viewHandler.openRegisterView();
   }
 
-  private void clearTextFields()
+  @Override public void propertyChange(PropertyChangeEvent evt)
   {
-    emailInput.clear();
-    passwordInput.clear();
+    if(evt.getPropertyName().equals("Librarian Login"))
+    {
+      viewHandler.openLibrarianMainView();
+    }
+    else if(evt.getPropertyName().equals("Customer Login"))
+    {
+      viewHandler.openCustomerMainView();
+    }
   }
- }
+}
 
 

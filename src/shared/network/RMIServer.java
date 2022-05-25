@@ -53,4 +53,6 @@ public interface RMIServer extends Remote
   void delete(String tableName, String whereClause) throws RemoteException;
 
   void insert(String tableName, Object obj) throws RemoteException;
+
+  Customer readCustomerInfo(String email) throws RemoteException;
 }

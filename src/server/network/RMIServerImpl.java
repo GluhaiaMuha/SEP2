@@ -1,5 +1,6 @@
 package server.network;
 
+import server.model.Customer.CustomerInfo.CustomerInfoImpl;
 import server.model.Customer.Loans.LoansModelImpl;
 import server.model.Customer.RentProduct.RentProductModelImpl;
 import server.model.General.Login.LoginModelImpl;
@@ -153,5 +154,10 @@ public class RMIServerImpl implements RMIServer
   @Override public void insert(String tableName, Object obj)
   {
     ManageProductsImpl.getInstance().insert(tableName, obj);
+  }
+
+  @Override public Customer readCustomerInfo(String email)
+  {
+    return CustomerInfoImpl.getInstance().readCustomerInfo(email);
   }
 }

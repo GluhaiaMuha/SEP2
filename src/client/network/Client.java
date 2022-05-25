@@ -52,5 +52,7 @@ public interface Client
 
   void insert(String tableName, Object obj);
 
+  Customer readCustomerInfo(String email);
+
   String getEmail();
 }
