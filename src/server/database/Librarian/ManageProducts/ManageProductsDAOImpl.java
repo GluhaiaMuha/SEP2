@@ -121,7 +121,7 @@ public class ManageProductsDAOImpl implements ManageProductsDAO
     }
   }
 
-  @Override public Object insert(String tableName, Object obj)
+  @Override public void insert(String tableName, Object obj)
   {
     if (tableName.equals("book"))
     {
@@ -138,7 +138,6 @@ public class ManageProductsDAOImpl implements ManageProductsDAO
         statement.setInt(6, book.getPublication_year());
         statement.setInt(7, book.getAmountInStock());
         statement.executeUpdate();
-        return new Book(book.getHash(), book.getTitle(), book.getAuthor(), book.getPageCount(), book.getGenre(), book.getPublication_year(), book.getAmountInStock());
       }
       catch (SQLException e)
       {
@@ -159,7 +158,6 @@ public class ManageProductsDAOImpl implements ManageProductsDAO
         statement.setInt(5, movie.getLength());
         statement.setInt(6, movie.getAmountInStock());
         statement.executeUpdate();
-        return new Movie(movie.getHash(), movie.getTitle(), movie.getDirector(), movie.getRelease_year(), movie.getLength(), movie.getAmountInStock());
       }
       catch (SQLException e)
       {
@@ -179,7 +177,6 @@ public class ManageProductsDAOImpl implements ManageProductsDAO
         statement.setString(4, cd.getUsage());
         statement.setInt(5, cd.getAmountInStock());
         statement.executeUpdate();
-        return new CD(cd.getHash(), cd.getName(), cd.getCapacity(), cd.getUsage(), cd.getAmountInStock());
       }
       catch (SQLException e)
       {
@@ -200,13 +197,11 @@ public class ManageProductsDAOImpl implements ManageProductsDAO
         statement.setString(5, software.getLicense_type());
         statement.setInt(6, software.getAmountInStock());
         statement.executeUpdate();
-        return new Software(software.getHash(), software.getName(), software.getType(), software.getVersion(), software.getLicense_type(), software.getAmountInStock());
       }
       catch (SQLException e)
       {
         e.printStackTrace();
       }
     }
-    return null;
   }
 }

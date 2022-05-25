@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: #292826;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.rent.RentViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: #292826;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.rent.RentViewController">
    <children>
       <TabPane prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: #292826;" stylesheets="@../../../shared/additional/styles.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
@@ -26,8 +26,8 @@
                               <TableColumn fx:id="movieAmountInStock" prefWidth="108.0" text="AmountInStock" />
                            </columns>
                         </TableView>
-                        <TextField layoutX="249.0" layoutY="14.0" promptText="Search..." />
-                        <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
+                        <TextField fx:id="movieSearchField" layoutX="249.0" layoutY="14.0" promptText="Search..." />
+                        <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" onAction="#onMovieSearch" text="Search" />
                         <Button layoutX="783.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRentMovie" text="Rent" />
                         <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                         <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />
@@ -50,8 +50,8 @@
                               <TableColumn fx:id="booksAmountInStockCol" prefWidth="104.0" text="AmountInStock" />
                            </columns>
                         </TableView>
-                        <TextField layoutX="249.0" layoutY="14.0" promptText="Search..." />
-                        <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
+                        <TextField fx:id="bookSearchField" layoutX="249.0" layoutY="14.0" promptText="Search..." />
+                        <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBookSearch" text="Search" />
                         <Button layoutX="783.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRentBook" text="Rent" />
                         <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                         <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />
@@ -72,8 +72,8 @@
                               <TableColumn fx:id="cdAmountInStockCol" prefWidth="131.0" text="AmountInStock" />
                            </columns>
                         </TableView>
-                        <TextField layoutX="249.0" layoutY="14.0" promptText="Search..." />
-                        <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
+                        <TextField fx:id="cdSearchField" layoutX="249.0" layoutY="14.0" promptText="Search..." />
+                        <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" onAction="#onCDSearch" text="Search" />
                         <Button layoutX="783.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRentCD" text="Rent" />
                         <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                         <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />
@@ -94,8 +94,8 @@
                               <TableColumn fx:id="softwareAmountInStockCol" prefWidth="115.0" text="AmountInStock" />
                            </columns>
                         </TableView>
-                        <TextField layoutX="249.0" layoutY="14.0" promptText="Search..." />
-                        <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
+                        <TextField fx:id="softwareSearchField" layoutX="249.0" layoutY="14.0" promptText="Search..." />
+                        <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" onAction="#onSoftwareSearch" text="Search" />
                         <Button layoutX="783.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRentSoftware" text="Rent" />
                         <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                         <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />

@@ -1,22 +1,21 @@
 package server.network;
 
-import server.database.General.Register.RegisterDAOImpl;
+import server.model.Customer.CustomerInfo.CustomerInfoImpl;
 import server.model.Customer.Loans.LoansModelImpl;
 import server.model.Customer.RentProduct.RentProductModelImpl;
 import server.model.General.Login.LoginModelImpl;
+import server.model.General.ProductInfo.ProductInfoModelImpl;
 import server.model.General.Register.RegisterModelImpl;
+import server.model.Librarian.ManageProducts.ManageProductsImpl;
 import shared.network.ClientCallback;
 import shared.network.RMIServer;
-import shared.transferObj.Customer;
-import shared.transferObj.Rent;
-import shared.transferObj.User;
+import shared.transferObj.*;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.Date;
 import java.util.List;
 
 public class RMIServerImpl implements RMIServer
@@ -71,9 +70,99 @@ public class RMIServerImpl implements RMIServer
     return LoansModelImpl.getInstance().readCustomerRents(customer_email, product);
   }
 
+  @Override public void removeRent(Rent rent, String product)
+  {
+    LoansModelImpl.getInstance().removeRent(rent, product);
+  }
+
   @Override
   public void rentProduct(String product, Rent rent)
   {
     RentProductModelImpl.getInstance().rentProduct(product, rent);
+  }
+
+  @Override public List<Object> read(String tableName)
+  {
+    return ProductInfoModelImpl.getInstance().read(tableName);
+  }
+
+  @Override public List<Book> readBooks()
+  {
+    return ProductInfoModelImpl.getInstance().readBooks();
+  }
+
+  @Override public List<Movie> readMovies()
+  {
+    return ProductInfoModelImpl.getInstance().readMovies();
+  }
+
+  @Override public List<CD> readCDS()
+  {
+    return ProductInfoModelImpl.getInstance().readCDS();
+  }
+
+  @Override public List<Software> readSoftwares()
+  {
+    return ProductInfoModelImpl.getInstance().readSoftwares();
+  }
+
+  @Override public List<Book> readBooksByTitle(String searchString)
+  {
+    return ProductInfoModelImpl.getInstance().readBooksByTitle(searchString);
+  }
+
+  @Override public List<Movie> readMoviesByTitle(String searchString)
+  {
+    return ProductInfoModelImpl.getInstance().readMoviesByTitle(searchString);
+  }
+
+  @Override public List<CD> readCDsByName(String searchString)
+  {
+    return ProductInfoModelImpl.getInstance().readCDsByName(searchString);
+  }
+
+  @Override public List<Software> readSoftwaresByName(String searchString)
+  {
+    return ProductInfoModelImpl.getInstance().readSoftwaresByName(searchString);
+  }
+
+  @Override public Book readBookByTitle(String searchString)
+  {
+    return ProductInfoModelImpl.getInstance().readBookByTitle(searchString);
+  }
+
+  @Override public Movie readMovieByTitle(String searchString)
+  {
+    return ProductInfoModelImpl.getInstance().readMovieByTitle(searchString);
+  }
+
+  @Override public CD readCDByName(String searchString)
+  {
+    return ProductInfoModelImpl.getInstance().readCDByName(searchString);
+  }
+
+  @Override public Software readSoftwareByName(String searchString)
+  {
+    return ProductInfoModelImpl.getInstance().readSoftwareByName(searchString);
+  }
+
+  @Override public void update(String tableName, String whereClause, Object obj)
+  {
+    ManageProductsImpl.getInstance().update(tableName, whereClause, obj);
+  }
+
+  @Override public void delete(String tableName, String whereClause)
+  {
+    ManageProductsImpl.getInstance().delete(tableName, whereClause);
+  }
+
+  @Override public void insert(String tableName, Object obj)
+  {
+    ManageProductsImpl.getInstance().insert(tableName, obj);
+  }
+
+  @Override public Customer readCustomerInfo(String email)
+  {
+    return CustomerInfoImpl.getInstance().readCustomerInfo(email);
   }
 }

@@ -3,30 +3,32 @@ package client.views.rent;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
-import client.views.librarianMainView.MainViewModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import server.database.DatabaseManager;
 import shared.transferObj.*;
 
-import java.sql.Date;
-import java.sql.SQLException;
+import javax.swing.*;
+import java.util.List;
 
 public class RentViewController implements ViewController {
 
     private ViewHandler viewHandler;
     private RentViewModel rentViewModel;
-    private DatabaseManager createTableExample = new DatabaseManager();
 
     /* Movie Table Start Here */
 
     @FXML
+    private TextField movieSearchField;
+
+    @FXML
     private TableView<Object> movieTable;
+
     @FXML
     private TableColumn<Movie, Integer> movieHashCol;
     @FXML
@@ -41,6 +43,9 @@ public class RentViewController implements ViewController {
     private TableColumn<Movie, Integer> movieAmountInStock;
 
     /* Books Table Starts Here */
+
+    @FXML
+    private TextField bookSearchField;
 
     @FXML
     private TableView<Object> booksTable;
@@ -63,6 +68,9 @@ public class RentViewController implements ViewController {
     /* CD Table Starts Here */
 
     @FXML
+    private TextField cdSearchField;
+
+    @FXML
     private TableView<Object> cdTable;
 
     @FXML
@@ -77,6 +85,9 @@ public class RentViewController implements ViewController {
     private TableColumn<CD, Integer> cdAmountInStockCol;
 
     /* Software Table Starts Here */
+
+    @FXML
+    private TextField softwareSearchField;
 
     @FXML
     private TableView<Object> softwareTable;
@@ -96,24 +107,226 @@ public class RentViewController implements ViewController {
 
 
 
-
-
-
     @Override
-    public void init(ViewHandler vh, ViewModelFactory vmf) throws SQLException
+    public void init(ViewHandler vh, ViewModelFactory vmf)
     {
         this.viewHandler = vh;
         rentViewModel = vmf.getRentViewModel();
         updateTables();
     }
 
+    @FXML
+    void onRentBook(ActionEvent event)
+    {
+        Book selectedBook = (Book) booksTable.getSelectionModel().getSelectedItem();
 
-    private void updateTables() throws SQLException
+        if (validation(selectedBook, "book"))
+        {
+            if (selectedBook.getAmountInStock() > 0)
+            {
+                selectedBook.setAmountInStock(selectedBook.getAmountInStock() - 1);
+                java.sql.Date sqlDateFrom = new java.sql.Date(System.currentTimeMillis());
+                java.sql.Date sqlDateTo = new java.sql.Date(
+                    System.currentTimeMillis() + 691200000);
+                Rent rent = new Rent(rentViewModel.getEmail(), selectedBook.getHash(), selectedBook.getTitle(),
+                    sqlDateFrom, sqlDateTo);
+                rentViewModel.rentProduct("book", rent);
+                rentViewModel.update("book",
+                    "hash = '" + selectedBook.getHash() + "'", selectedBook);
+                updateTables();
+            }
+            else
+            {
+                booksTable.getSelectionModel().setCellSelectionEnabled(false);
+                JOptionPane.showMessageDialog(null, "No product in stock!");
+            }
+        }else
+            JOptionPane.showMessageDialog(null, "Product already rented!");
+    }
+
+    @FXML
+    void onRentCD(ActionEvent event)
+    {
+        CD selectedCD = (CD) cdTable.getSelectionModel().getSelectedItem();
+
+        if (validation(selectedCD, "cd"))
+        {
+            if (selectedCD.getAmountInStock() > 0){
+                selectedCD.setAmountInStock(selectedCD.getAmountInStock() - 1);
+                java.sql.Date sqlDateFrom = new java.sql.Date(System.currentTimeMillis());
+                java.sql.Date sqlDateTo = new java.sql.Date(System.currentTimeMillis() + 691200000);
+                Rent rent = new Rent(rentViewModel.getEmail(), selectedCD.getHash(), selectedCD.getName(), sqlDateFrom, sqlDateTo);
+                rentViewModel.rentProduct("cd" ,rent);
+                rentViewModel.update("cd", "hash = '" + selectedCD.getHash() + "'", selectedCD);
+                updateTables();
+            }
+            else
+            {
+                cdTable.getSelectionModel().setCellSelectionEnabled(false);
+                JOptionPane.showMessageDialog(null, "No product in stock!");
+            }
+        }else
+            JOptionPane.showMessageDialog(null, "Product already rented!");
+
+    }
+
+    @FXML
+    void onRentMovie(ActionEvent event)
+    {
+        Movie selectedMovie = (Movie) movieTable.getSelectionModel().getSelectedItem();
+
+        if (validation(selectedMovie, "movie"))
+        {
+            if (selectedMovie.getAmountInStock() > 0){
+                selectedMovie.setAmountInStock(selectedMovie.getAmountInStock() - 1);
+                java.sql.Date sqlDateFrom = new java.sql.Date(System.currentTimeMillis());
+                java.sql.Date sqlDateTo = new java.sql.Date(System.currentTimeMillis() + 691200000);
+                Rent rent = new Rent(rentViewModel.getEmail(), selectedMovie.getHash(), selectedMovie.getTitle(), sqlDateFrom, sqlDateTo);
+                rentViewModel.rentProduct("movie",rent);
+                rentViewModel.update("movie", "hash = '" + selectedMovie.getHash() + "'", selectedMovie);
+                updateTables();
+            }
+            else
+            {
+                movieTable.getSelectionModel().setCellSelectionEnabled(false);
+                JOptionPane.showMessageDialog(null, "No product in stock!");
+            }
+        }else
+            JOptionPane.showMessageDialog(null, "Product already rented!");
+    }
+
+    @FXML
+    void onRentSoftware(ActionEvent event)
+    {
+        Software selectedSoftware = (Software) softwareTable.getSelectionModel().getSelectedItem();
+
+        if (validation(selectedSoftware, "software"))
+        {
+            if (selectedSoftware.getAmountInStock() > 0){
+                selectedSoftware.setAmountInStock(selectedSoftware.getAmountInStock() - 1);
+                java.sql.Date sqlDateFrom = new java.sql.Date(System.currentTimeMillis());
+                java.sql.Date sqlDateTo = new java.sql.Date(System.currentTimeMillis() + 691200000);
+                Rent rent = new Rent(rentViewModel.getEmail(), selectedSoftware.getHash(), selectedSoftware.getName(), sqlDateFrom, sqlDateTo);
+                rentViewModel.rentProduct("software", rent);
+                rentViewModel.update("software", "hash = '" + selectedSoftware.getHash() + "'", selectedSoftware);
+                updateTables();
+            }
+            else
+            {
+                softwareTable.getSelectionModel().setCellSelectionEnabled(false);
+                JOptionPane.showMessageDialog(null, "No product in stock!");
+            }
+        }else
+            JOptionPane.showMessageDialog(null, "Product already rented!");
+    }
+
+    public boolean validation(Object product, String table)
+    {
+        List<Rent> rents = rentViewModel.readCustomerRents(rentViewModel.getEmail(), table);
+        switch (table)
+        {
+            case "book":
+                Book book = (Book) product;
+                for (Rent rent : rents)
+                {
+                    if (rent.getProduct_hash().equals(book.getHash()))
+                    {
+                        return false;
+                    }
+                }
+                break;
+            case "movie":
+                Movie movie = (Movie) product;
+                for (Rent rent : rents)
+                {
+                    if (rent.getProduct_hash().equals(movie.getHash()))
+                    {
+                        return false;
+                    }
+                }
+                break;
+            case "cd":
+                CD cd = (CD) product;
+                for (Rent rent : rents)
+                {
+                    if (rent.getProduct_hash().equals(cd.getHash()))
+                    {
+                        return false;
+                    }
+                }
+                break;
+            case "software":
+                Software software = (Software) product;
+                for (Rent rent : rents)
+                {
+                    if (rent.getProduct_hash().equals(software.getHash()))
+                    {
+                        return false;
+                    }
+                }
+                break;
+        }
+        return true;
+    }
+
+    @FXML
+    void onGoToMainPage(ActionEvent event) {
+        viewHandler.openCustomerMainView();
+    }
+
+    @FXML
+    void onUpdateList(ActionEvent event)
+    {
+        updateTables();
+    }
+
+    @FXML
+    void onMovieSearch(ActionEvent event)
+    {
+        String search = movieSearchField.getText();
+        ObservableList<Object> moviesSearched = FXCollections.observableArrayList(rentViewModel.readMoviesByTitle(search));
+
+        movieTable.setItems(moviesSearched);
+        updateTables();
+    }
+
+    @FXML
+    void onBookSearch(ActionEvent event)
+    {
+        String search = bookSearchField.getText();
+        ObservableList<Object> booksSearched = FXCollections.observableArrayList(rentViewModel.readBooksByTitle(search));
+
+        booksTable.setItems(booksSearched);
+        updateTables();
+    }
+
+    @FXML
+    void onCDSearch(ActionEvent event)
+    {
+        String search = cdSearchField.getText();
+        ObservableList<Object> CDsSearched = FXCollections.observableArrayList(rentViewModel.readCDsByName(search));
+
+        cdTable.setItems(CDsSearched);
+        updateTables();
+    }
+
+    @FXML
+    void onSoftwareSearch(ActionEvent event)
+    {
+        String search = softwareSearchField.getText();
+        ObservableList<Object> softwaresSearched = FXCollections.observableArrayList(rentViewModel.readSoftwaresByName(search));
+
+        softwareTable.setItems(softwaresSearched);
+        updateTables();
+    }
+
+
+    private void updateTables()
     {
         /* Movie Table Start Here */
         /* For future use, make sure PropertyValueFactory is the same as the get/set Methods */
 
-        final ObservableList<Object> dataMovie = FXCollections.observableArrayList(createTableExample.read("movie")
+        final ObservableList<Object> dataMovie = FXCollections.observableArrayList(rentViewModel.read("movie")
         );
 
         movieHashCol.setCellValueFactory(
@@ -139,7 +352,7 @@ public class RentViewController implements ViewController {
 
         /* Books Table Starts Here */
 
-        final ObservableList<Object> dataBook = FXCollections.observableArrayList(createTableExample.read("book")
+        final ObservableList<Object> dataBook = FXCollections.observableArrayList(rentViewModel.read("book")
         );
 
         booksHashCol.setCellValueFactory(
@@ -167,7 +380,7 @@ public class RentViewController implements ViewController {
         booksTable.setItems(dataBook);
 
         /* CD Table Starts Here */
-        final ObservableList<Object> dataCD = FXCollections.observableArrayList(createTableExample.read("cd")
+        final ObservableList<Object> dataCD = FXCollections.observableArrayList(rentViewModel.read("cd")
         );
 
         cdHashCol.setCellValueFactory(
@@ -190,7 +403,7 @@ public class RentViewController implements ViewController {
         cdTable.setItems(dataCD);
 
         /* Software Table Starts Here */
-        final ObservableList<Object> dataSoftware = FXCollections.observableArrayList(createTableExample.read("software")
+        final ObservableList<Object> dataSoftware = FXCollections.observableArrayList(rentViewModel.read("software")
         );
 
         softwareHashCol.setCellValueFactory(
@@ -213,83 +426,6 @@ public class RentViewController implements ViewController {
         );
 
         softwareTable.setItems(dataSoftware);
-    }
-
-
-    @FXML
-    void onRentBook(ActionEvent event) throws SQLException
-    {
-        Book selectedBook = (Book) booksTable.getSelectionModel().getSelectedItem();
-        if (selectedBook.getAmountInStock() > 0){
-            selectedBook.setAmountInStock(selectedBook.getAmountInStock() - 1);
-            java.sql.Date sqlDateFrom = new java.sql.Date(System.currentTimeMillis());
-            java.sql.Date sqlDateTo = new java.sql.Date(System.currentTimeMillis() + 691200000);
-            Rent rent = new Rent(rentViewModel.getEmail(), selectedBook.getHash(), selectedBook.getTitle(), sqlDateFrom, sqlDateTo);
-            rentViewModel.rentProduct("book" ,rent);
-            updateTables();
-        }
-        else
-            System.out.println("Error");
-    }
-
-    @FXML
-    void onRentCD(ActionEvent event) throws SQLException
-    {
-
-        CD selectedCD = (CD) cdTable.getSelectionModel().getSelectedItem();
-        if (selectedCD.getAmountInStock() > 0){
-            selectedCD.setAmountInStock(selectedCD.getAmountInStock() - 1);
-            java.sql.Date sqlDateFrom = new java.sql.Date(System.currentTimeMillis());
-            java.sql.Date sqlDateTo = new java.sql.Date(System.currentTimeMillis() + 691200000);
-            Rent rent = new Rent(rentViewModel.getEmail(), selectedCD.getHash(), selectedCD.getName(), sqlDateFrom, sqlDateTo);
-            rentViewModel.rentProduct("cd" ,rent);
-            updateTables();
-        }
-        else
-            System.out.println("Error");
-    }
-
-    @FXML
-    void onRentMovie(ActionEvent event) throws SQLException
-    {
-        Movie selectedMovie = (Movie) movieTable.getSelectionModel().getSelectedItem();
-        if (selectedMovie.getAmountInStock() > 0){
-            selectedMovie.setAmountInStock(selectedMovie.getAmountInStock() - 1);
-            java.sql.Date sqlDateFrom = new java.sql.Date(System.currentTimeMillis());
-            java.sql.Date sqlDateTo = new java.sql.Date(System.currentTimeMillis() + 691200000);
-            Rent rent = new Rent(rentViewModel.getEmail(), selectedMovie.getHash(), selectedMovie.getTitle(), sqlDateFrom, sqlDateTo);
-            rentViewModel.rentProduct("movie",rent);
-            updateTables();
-        }
-        else
-            System.out.println("Error");
-    }
-
-    @FXML
-    void onRentSoftware(ActionEvent event) throws SQLException
-    {
-        Software selectedSoftware = (Software) softwareTable.getSelectionModel().getSelectedItem();
-        if (selectedSoftware.getAmountInStock() > 0){
-            selectedSoftware.setAmountInStock(selectedSoftware.getAmountInStock() - 1);
-            java.sql.Date sqlDateFrom = new java.sql.Date(System.currentTimeMillis());
-            java.sql.Date sqlDateTo = new java.sql.Date(System.currentTimeMillis() + 691200000);
-            Rent rent = new Rent(rentViewModel.getEmail(), selectedSoftware.getHash(), selectedSoftware.getName(), sqlDateFrom, sqlDateTo);
-            rentViewModel.rentProduct("software", rent);
-            updateTables();
-        }
-        else
-            System.out.println("Error");
-    }
-
-    @FXML
-    void onGoToMainPage(ActionEvent event) {
-        viewHandler.openCustomerMainView();
-    }
-
-    @FXML
-    void onUpdateList(ActionEvent event) throws SQLException
-    {
-        updateTables();
     }
 
 }

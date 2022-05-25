@@ -5,7 +5,6 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: #292826;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.loans.LoansViewController">
@@ -24,10 +23,9 @@
                                         <TableColumn fx:id="movieDateToCol" prefWidth="218.0" text="Date To" />
                                     </columns>
                                 </TableView>
-                                <TextField layoutX="249.0" layoutY="14.0" promptText="Search..." />
-                                <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
                                 <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                                 <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />
+                        <Button layoutX="738.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveMovieRent" text="Remove" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -38,15 +36,15 @@
                             <children>
                                 <TableView fx:id="booksTable" layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
                                     <columns>
-                                        <TableColumn fx:id="booksTitleCol" prefWidth="275.1999397277832" text="Title" />
-                                        <TableColumn fx:id="booksDateFromCol" prefWidth="245.60009765625" text="Date From" />
-                                        <TableColumn fx:id="booksDateToCol" prefWidth="279.20001220703125" text="Date To" />
+                              <TableColumn fx:id="booksEmailCol" prefWidth="160.0" text="Email" />
+                                        <TableColumn fx:id="booksTitleCol" prefWidth="183.0" text="Title" />
+                                        <TableColumn fx:id="booksDateFromCol" prefWidth="242.0" text="Date From" />
+                                        <TableColumn fx:id="booksDateToCol" prefWidth="214.0" text="Date To" />
                                     </columns>
                                 </TableView>
-                                <TextField layoutX="249.0" layoutY="14.0" promptText="Search..." />
-                                <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
                                 <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                                 <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />
+                        <Button layoutX="737.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveBookRent" text="Remove" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -57,15 +55,15 @@
                             <children>
                                 <TableView fx:id="cdTable" layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
                                     <columns>
-                                        <TableColumn fx:id="cdNameCol" prefWidth="275.1999397277832" text="Name" />
-                                        <TableColumn fx:id="cdDateFromCol" prefWidth="245.60009765625" text="Date From" />
-                                        <TableColumn fx:id="cdDateToCol" prefWidth="279.20001220703125" text="Date To" />
+                              <TableColumn fx:id="cdEmailCol" prefWidth="160.0" text="Email" />
+                                        <TableColumn fx:id="cdNameCol" prefWidth="184.0" text="Name" />
+                                        <TableColumn fx:id="cdDateFromCol" prefWidth="247.0" text="Date From" />
+                                        <TableColumn fx:id="cdDateToCol" prefWidth="208.0" text="Date To" />
                                     </columns>
                                 </TableView>
-                                <TextField layoutX="249.0" layoutY="14.0" promptText="Search..." />
-                                <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
                                 <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                                 <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />
+                        <Button layoutX="735.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveCDRent" text="Remove" />
                             </children></AnchorPane>
                     </content>
                 </Tab>
@@ -75,15 +73,15 @@
                             <children>
                                 <TableView fx:id="softwareTable" layoutX="24.0" layoutY="47.0" prefHeight="402.0" prefWidth="800.0">
                                     <columns>
-                                        <TableColumn fx:id="softwareNameCol" prefWidth="275.1999397277832" text="Name" />
-                                        <TableColumn fx:id="softwareDateFromCol" prefWidth="245.60009765625" text="Date From" />
-                                        <TableColumn fx:id="softwareDateToCol" prefWidth="279.20001220703125" text="Date To" />
+                              <TableColumn fx:id="softwareEmailCol" prefWidth="159.0" text="Email" />
+                                        <TableColumn fx:id="softwareNameCol" prefWidth="182.0" text="Name" />
+                                        <TableColumn fx:id="softwareDateFromCol" prefWidth="244.0" text="Date From" />
+                                        <TableColumn fx:id="softwareDateToCol" prefWidth="214.0" text="Date To" />
                                     </columns>
                                 </TableView>
-                                <TextField layoutX="249.0" layoutY="14.0" promptText="Search..." />
-                                <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
                                 <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                                 <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />
+                        <Button layoutX="734.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveSoftwareRent" text="Remove" />
                             </children>
                         </AnchorPane>
                     </content>

@@ -1,8 +1,6 @@
 package server.model.General.ProductInfo;
 
 import server.database.General.ProductInfo.ProductInfoDAOImpl;
-import server.model.Librarian.ManageProducts.ManageProducts;
-import server.model.Librarian.ManageProducts.ManageProductsImpl;
 import shared.transferObj.Book;
 import shared.transferObj.CD;
 import shared.transferObj.Movie;
@@ -12,9 +10,9 @@ import java.util.List;
 
 public class ProductInfoModelImpl implements ProductInfoModel
 {
-  private static ManageProducts instance =  new ManageProductsImpl();
+  private static ProductInfoModel instance =  new ProductInfoModelImpl();
 
-  public static ManageProducts getInstance(){
+  public static ProductInfoModel getInstance(){
     return instance;
   }
 
