@@ -25,6 +25,7 @@ public class ViewHandler
     Scene loginScene = ViewFactory.getScene("Login");
     stage.setScene(loginScene);
     stage.setTitle("Log In");
+    stage.setResizable(false);
     stage.show();
   }
 
@@ -32,6 +33,7 @@ public class ViewHandler
     Scene registerScene=ViewFactory.getScene("Register");
     stage.setScene(registerScene);
     stage.setTitle("Sign Up");
+    stage.setResizable(false);
     stage.show();
   }
 
@@ -39,6 +41,7 @@ public class ViewHandler
     Scene librarianMainScene=ViewFactory.getScene("LibrarianMain");
     stage.setScene(librarianMainScene);
     stage.setTitle("Library app");
+    stage.setResizable(false);
     stage.show();
   }
 
@@ -46,6 +49,7 @@ public class ViewHandler
     Scene rentScene=ViewFactory.getScene("Rent");
     stage.setScene(rentScene);
     stage.setTitle("Library App Rent ");
+    stage.setResizable(false);
     stage.show();
   }
 
@@ -53,6 +57,7 @@ public class ViewHandler
     Scene loansScene=ViewFactory.getScene("Loans");
     stage.setScene(loansScene);
     stage.setTitle("Library App Loans");
+    stage.setResizable(false);
     stage.show();
   }
 
@@ -60,6 +65,7 @@ public class ViewHandler
     Scene reviewScene=ViewFactory.getScene("Review");
     stage.setScene(reviewScene);
     stage.setTitle("Library App Review");
+    stage.setResizable(false);
     stage.show();
   }
 
@@ -67,6 +73,7 @@ public class ViewHandler
     Scene customerMainScene=ViewFactory.getScene("CustomerMain");
     stage.setScene(customerMainScene);
     stage.setTitle("Library App");
+    stage.setResizable(false);
     stage.show();
   }
 }

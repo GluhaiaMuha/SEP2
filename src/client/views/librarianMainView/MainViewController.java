@@ -668,7 +668,7 @@ public class MainViewController implements ViewController
 
     /* Books Table Starts Here */
 
-    final ObservableList<Object> dataBook = FXCollections.observableArrayList(createTableExample.read("book")
+    final ObservableList<Object> dataBook = FXCollections.observableArrayList(createTableExample.readBooks()
     );
 
     booksHashCol.setCellValueFactory(
@@ -696,7 +696,7 @@ public class MainViewController implements ViewController
     booksTable.setItems(dataBook);
 
     /* CD Table Starts Here */
-    final ObservableList<Object> dataCD = FXCollections.observableArrayList(createTableExample.read("cd")
+    final ObservableList<Object> dataCD = FXCollections.observableArrayList(createTableExample.readCDS()
     );
 
     cdHashCol.setCellValueFactory(
@@ -719,7 +719,7 @@ public class MainViewController implements ViewController
     cdTable.setItems(dataCD);
 
     /* Software Table Starts Here */
-    final ObservableList<Object> dataSoftware = FXCollections.observableArrayList(createTableExample.read("software")
+    final ObservableList<Object> dataSoftware = FXCollections.observableArrayList(createTableExample.readSoftwares()
     );
 
     softwareHashCol.setCellValueFactory(
