@@ -51,6 +51,7 @@ public class RegisterViewModel implements Subject
           Customer newCustomer = new Customer(customerEmail, customer_fName, customer_lName, customerPhoneNumber, customerPassword, "customer");
           libraryModel.newCustomer(newCustomer);
           support.firePropertyChange("Register", null, newCustomer);
+          CustomerMainViewModel.customerInfo();
         }
         else
         {

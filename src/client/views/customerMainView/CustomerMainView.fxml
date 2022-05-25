@@ -34,17 +34,17 @@
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
-      <Label fx:id="labelName" alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="376.0" text="Name" textAlignment="CENTER" textFill="#209a2c">
+      <Label fx:id="labelName" alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="376.0" text="Name" textAlignment="CENTER" textFill="#184cd0">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="labelEmail" alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="401.0" text="Email" textAlignment="CENTER" textFill="#209a2c">
+      <Label fx:id="labelEmail" alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="401.0" text="Email" textAlignment="CENTER" textFill="#184cd0">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="labelPhone" alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="426.0" text="Phone" textAlignment="CENTER" textFill="#209a2c">
+      <Label fx:id="labelPhone" alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="426.0" text="Phone" textAlignment="CENTER" textFill="#184cd0">
          <font>
             <Font size="16.0" />
          </font>

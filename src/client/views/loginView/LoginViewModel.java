@@ -41,7 +41,10 @@ public class LoginViewModel implements Subject
           if (received.getUser().equals("librarian"))
             support.firePropertyChange("Librarian Login", null, received);
           else if (received.getUser().equals("customer"))
+          {
             support.firePropertyChange("Customer Login", null, received);
+            CustomerMainViewModel.customerInfo();
+          }
         }
         else
         {
