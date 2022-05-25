@@ -70,6 +70,11 @@ public class RMIServerImpl implements RMIServer
     return LoansModelImpl.getInstance().readCustomerRents(customer_email, product);
   }
 
+  @Override public void removeRent(Rent rent, String product)
+  {
+    LoansModelImpl.getInstance().removeRent(rent, product);
+  }
+
   @Override
   public void rentProduct(String product, Rent rent)
   {

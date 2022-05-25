@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import shared.transferObj.Movie;
 import shared.transferObj.Rent;
 
 import java.sql.Date;
@@ -82,6 +83,38 @@ public class LoansViewController implements ViewController {
     {
         this.viewHandler = vh;
         loansViewModel= vmf.getLoansViewModel();
+    }
+
+    @FXML
+    void onRemoveBookRent(ActionEvent event)
+    {
+        Rent selectedBook = booksTable.getSelectionModel().getSelectedItem();
+        loansViewModel.removeRent(selectedBook, "book");
+        updateTables();
+    }
+
+    @FXML
+    void onRemoveCDRent(ActionEvent event)
+    {
+        Rent selectedCD = cdTable.getSelectionModel().getSelectedItem();
+        loansViewModel.removeRent(selectedCD, "cd");
+        updateTables();
+    }
+
+    @FXML
+    void onRemoveMovieRent(ActionEvent event)
+    {
+        Rent selectedMovie = movieTable.getSelectionModel().getSelectedItem();
+        loansViewModel.removeRent(selectedMovie, "movie");
+        updateTables();
+    }
+
+    @FXML
+    void onRemoveSoftwareRent(ActionEvent event)
+    {
+        Rent selectedSoftware = softwareTable.getSelectionModel().getSelectedItem();
+        loansViewModel.removeRent(selectedSoftware, "software");
+        updateTables();
     }
 
     @FXML

@@ -25,6 +25,7 @@
                                 </TableView>
                                 <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                                 <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />
+                        <Button layoutX="738.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveMovieRent" text="Remove" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -43,6 +44,7 @@
                                 </TableView>
                                 <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                                 <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />
+                        <Button layoutX="737.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveBookRent" text="Remove" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -61,6 +63,7 @@
                                 </TableView>
                                 <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                                 <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />
+                        <Button layoutX="735.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveCDRent" text="Remove" />
                             </children></AnchorPane>
                     </content>
                 </Tab>
@@ -78,6 +81,7 @@
                                 </TableView>
                                 <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                                 <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />
+                        <Button layoutX="734.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveSoftwareRent" text="Remove" />
                             </children>
                         </AnchorPane>
                     </content>

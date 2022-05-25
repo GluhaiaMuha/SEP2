@@ -18,6 +18,11 @@ public class LoansViewModel {
         return libraryModel.readCustomerRents(customer_email, product);
     }
 
+    public void removeRent(Rent rent, String product)
+    {
+        libraryModel.removeRent(rent, product);
+    }
+
     public String getEmail()
     {
         return libraryModel.getEmail();

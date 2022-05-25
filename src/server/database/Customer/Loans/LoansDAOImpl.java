@@ -47,4 +47,18 @@ public class LoansDAOImpl implements LoansDAO
     }
     return null;
   }
+
+  public void removeRent(Rent rent, String product)
+  {
+    try(Connection connection = DatabaseFront.getInstance().getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "DELETE FROM rent_" + product + " WHERE customer_email = '" + rent.getCustomer_email() + "' AND product_hash = '" + rent.getProduct_hash() + "'");
+      statement.executeUpdate();
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
+  }
 }

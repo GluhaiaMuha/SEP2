@@ -18,6 +18,8 @@ public interface Client
 
   List<Rent> readCustomerRents(String customer_email, String product);
 
+  void removeRent(Rent rent, String product);
+
   void rentProduct(String product, Rent rent);
 
   List<Object> read(String tableName);

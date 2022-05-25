@@ -23,4 +23,9 @@ public class LoansModelImpl implements LoansModel
   {
     return LoansDAOImpl.getInstance().readCustomerRents(customer_email, product);
   }
+
+  public void removeRent(Rent rent, String product)
+  {
+    LoansDAOImpl.getInstance().removeRent(rent, product);
+  }
 }
