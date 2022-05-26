@@ -3,6 +3,7 @@ package client.views.librarianMainView;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
+import client.views.review.ReviewViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -227,6 +228,12 @@ public class MainViewController implements ViewController
     mainViewModel = vmf.getMainViewModel();
     updateTables();
     updateChoiceBoxes();
+  }
+
+  @FXML
+  void onReviewsButton(ActionEvent event)
+  {
+    viewHandler.openReviewView();
   }
 
 

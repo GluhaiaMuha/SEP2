@@ -76,4 +76,11 @@ public class ViewHandler
     stage.setResizable(false);
     stage.show();
   }
+
+  public void openCustomerInfoChangeView(){
+    Scene reviewScene=ViewFactory.getScene("CustomerInfoChange");
+    stage.setScene(reviewScene);
+    stage.setTitle("Change Info");
+    stage.show();
+  }
 }

@@ -16,6 +16,8 @@ public interface LibraryModel
 
   void removeRent(Rent rent, String product);
 
+  void updateProductAmount(String tableName, String productHash);
+
   void rentProduct(String product, Rent rent);
 
   List<Object> read(String tableName);
@@ -51,6 +53,16 @@ public interface LibraryModel
   void insert(String tableName, Object obj);
 
   Customer readCustomerInfo(String email);
+
+  void changeCustomerInfo(String email,String f_name, String l_name, String phone);
+
+  void addReview(String product, Review review);
+
+  List<Review> readReview(String product);
+
+  List<Review> readReviewsByProductName(String searchString, String product);
+
+  void removeReview(Review review, String product);
 
   String getEmail();
 }

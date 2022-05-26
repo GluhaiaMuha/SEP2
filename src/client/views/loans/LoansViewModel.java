@@ -23,6 +23,16 @@ public class LoansViewModel {
         libraryModel.removeRent(rent, product);
     }
 
+    public void update(String tableName, String whereClause, Object obj)
+    {
+        libraryModel.update(tableName, whereClause, obj);
+    }
+
+    public void updateProductAmount(String tableName, String productHash)
+    {
+        libraryModel.updateProductAmount(tableName, productHash);
+    }
+
     public String getEmail()
     {
         return libraryModel.getEmail();

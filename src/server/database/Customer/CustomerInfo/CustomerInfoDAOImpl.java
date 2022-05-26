@@ -42,4 +42,21 @@ public class CustomerInfoDAOImpl implements CustomerInfoDAO
     }
     return null;
   }
+
+  public void changeCustomerInfo(String email,String f_name, String l_name, String phone)
+  {
+    try(Connection connection = DatabaseFront.getInstance().getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "UPDATE customer SET f_name = ?, l_name = ?, phone = ? WHERE email = '" + email + "'");
+      statement.setString(1, f_name);
+      statement.setString(2, l_name);
+      statement.setString(3, phone);
+      statement.executeUpdate();
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
+  }
 }

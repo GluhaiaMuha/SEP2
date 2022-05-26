@@ -44,6 +44,11 @@ public class LibraryModelManager implements LibraryModel
     client.removeRent(rent, product);
   }
 
+  @Override public void updateProductAmount(String tableName, String productHash)
+  {
+    client.updateProductAmount(tableName, productHash);
+  }
+
   @Override
   public void rentProduct(String product, Rent rent)
   {
@@ -133,6 +138,32 @@ public class LibraryModelManager implements LibraryModel
   @Override public Customer readCustomerInfo(String email)
   {
     return client.readCustomerInfo(email);
+  }
+
+  @Override public void changeCustomerInfo(String email,String f_name, String l_name, String phone)
+  {
+    client.changeCustomerInfo(email, f_name, l_name, phone);
+  }
+
+  @Override public void addReview(String product, Review review)
+  {
+    client.addReview(product, review);
+  }
+
+  @Override public List<Review> readReview(String product)
+  {
+    return client.readReview(product);
+  }
+
+  @Override public List<Review> readReviewsByProductName(String searchString,
+      String product)
+  {
+    return client.readReviewsByProductName(searchString, product);
+  }
+
+  @Override public void removeReview(Review review, String product)
+  {
+    client.removeReview(review, product);
   }
 
   @Override

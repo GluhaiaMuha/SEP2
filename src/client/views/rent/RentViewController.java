@@ -11,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.postgresql.util.PSQLException;
 import shared.transferObj.*;
 
 import javax.swing.*;
@@ -120,7 +121,7 @@ public class RentViewController implements ViewController {
     {
         Book selectedBook = (Book) booksTable.getSelectionModel().getSelectedItem();
 
-        if (validation(selectedBook, "book"))
+        if (validationForRent(selectedBook, "book"))
         {
             if (selectedBook.getAmountInStock() > 0)
             {
@@ -149,7 +150,7 @@ public class RentViewController implements ViewController {
     {
         CD selectedCD = (CD) cdTable.getSelectionModel().getSelectedItem();
 
-        if (validation(selectedCD, "cd"))
+        if (validationForRent(selectedCD, "cd"))
         {
             if (selectedCD.getAmountInStock() > 0){
                 selectedCD.setAmountInStock(selectedCD.getAmountInStock() - 1);
@@ -175,7 +176,7 @@ public class RentViewController implements ViewController {
     {
         Movie selectedMovie = (Movie) movieTable.getSelectionModel().getSelectedItem();
 
-        if (validation(selectedMovie, "movie"))
+        if (validationForRent(selectedMovie, "movie"))
         {
             if (selectedMovie.getAmountInStock() > 0){
                 selectedMovie.setAmountInStock(selectedMovie.getAmountInStock() - 1);
@@ -199,8 +200,7 @@ public class RentViewController implements ViewController {
     void onRentSoftware(ActionEvent event)
     {
         Software selectedSoftware = (Software) softwareTable.getSelectionModel().getSelectedItem();
-
-        if (validation(selectedSoftware, "software"))
+        if (validationForRent(selectedSoftware, "software"))
         {
             if (selectedSoftware.getAmountInStock() > 0){
                 selectedSoftware.setAmountInStock(selectedSoftware.getAmountInStock() - 1);
@@ -220,7 +220,89 @@ public class RentViewController implements ViewController {
             JOptionPane.showMessageDialog(null, "Product already rented!");
     }
 
-    public boolean validation(Object product, String table)
+    @FXML
+    void onAddBookReview(ActionEvent event)
+    {
+        Book selectedBook = (Book) booksTable.getSelectionModel().getSelectedItem();
+        if (validationForReview(selectedBook, "book"))
+        {
+            final String review = JOptionPane.showInputDialog("Write review: ");
+            java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
+
+            if (!review.equals(""))
+            {
+                Review bookReview = new Review(rentViewModel.getEmail(),
+                    selectedBook.getHash(), selectedBook.getTitle(), currentDate,
+                    review);
+                rentViewModel.addReview("book", bookReview);
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Input is empty!");
+        }else
+            JOptionPane.showMessageDialog(null, "Product already reviewed!");
+    }
+
+    @FXML
+    void onAddCDReview(ActionEvent event)
+    {
+        CD selectedCD = (CD) cdTable.getSelectionModel().getSelectedItem();
+        if (validationForReview(selectedCD, "cd"))
+        {
+            final String review = JOptionPane.showInputDialog("Write review: ");
+            java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
+
+            if (!review.equals(""))
+            {
+                Review cdReview = new Review(rentViewModel.getEmail(), selectedCD.getHash(), selectedCD.getName(), currentDate,
+                    review);
+                rentViewModel.addReview("cd", cdReview);
+            }else
+                JOptionPane.showMessageDialog(null, "Input is empty!");
+        } else
+            JOptionPane.showMessageDialog(null, "Product already reviewed!");
+    }
+
+    @FXML
+    void onAddMovieReview(ActionEvent event)
+    {
+        Movie selectedMovie = (Movie) movieTable.getSelectionModel().getSelectedItem();
+        if (validationForReview(selectedMovie, "movie"))
+        {
+            final String review = JOptionPane.showInputDialog("Write review: ");
+            java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
+
+            if (!review.equals(""))
+            {
+                Review movieReview = new Review(rentViewModel.getEmail(),
+                    selectedMovie.getHash(), selectedMovie.getTitle(), currentDate,
+                    review);
+                rentViewModel.addReview("movie", movieReview);
+            }else
+                JOptionPane.showMessageDialog(null, "Input is empty!");
+        } else
+            JOptionPane.showMessageDialog(null, "Product already reviewed!");
+    }
+
+    @FXML
+    void onAddSoftwareReview(ActionEvent event)
+    {
+        Software selectedSoftware = (Software) softwareTable.getSelectionModel().getSelectedItem();
+        if (validationForReview(selectedSoftware, "software"))
+        {
+            final String review = JOptionPane.showInputDialog("Write review: ");
+            java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
+            if (!review.equals(""))
+            {
+                Review softwareReview = new Review(rentViewModel.getEmail(), selectedSoftware.getHash(), selectedSoftware.getName(), currentDate, review);
+                rentViewModel.addReview("software", softwareReview);
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Input is empty!");
+        }else
+            JOptionPane.showMessageDialog(null, "Product already reviewed!");
+    }
+
+    public boolean validationForRent(Object product, String table)
     {
         List<Rent> rents = rentViewModel.readCustomerRents(rentViewModel.getEmail(), table);
         switch (table)
@@ -260,6 +342,55 @@ public class RentViewController implements ViewController {
                 for (Rent rent : rents)
                 {
                     if (rent.getProduct_hash().equals(software.getHash()))
+                    {
+                        return false;
+                    }
+                }
+                break;
+        }
+        return true;
+    }
+
+    public boolean validationForReview(Object product, String table)
+    {
+        List<Review> reviews = rentViewModel.readReview(table);
+        switch (table)
+        {
+            case "book":
+                Book book = (Book) product;
+                for (Review review : reviews)
+                {
+                    if (review.getProduct_hash().equals(book.getHash()))
+                    {
+                        return false;
+                    }
+                }
+                break;
+            case "movie":
+                Movie movie = (Movie) product;
+                for (Review review : reviews)
+                {
+                    if (review.getProduct_hash().equals(movie.getHash()))
+                    {
+                        return false;
+                    }
+                }
+                break;
+            case "cd":
+                CD cd = (CD) product;
+                for (Review review : reviews)
+                {
+                    if (review.getProduct_hash().equals(cd.getHash()))
+                    {
+                        return false;
+                    }
+                }
+                break;
+            case "software":
+                Software software = (Software) product;
+                for (Review review : reviews)
+                {
+                    if (review.getProduct_hash().equals(software.getHash()))
                     {
                         return false;
                     }

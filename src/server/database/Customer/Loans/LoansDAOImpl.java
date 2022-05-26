@@ -1,6 +1,8 @@
 package server.database.Customer.Loans;
 
 import server.database.DatabaseFront;
+import shared.transferObj.Book;
+import shared.transferObj.Customer;
 import shared.transferObj.Rent;
 
 import java.sql.*;
@@ -61,4 +63,34 @@ public class LoansDAOImpl implements LoansDAO
       e.printStackTrace();
     }
   }
+
+  public void updateProductAmount(String tableName, String productHash)
+  {
+      int amount = 0;
+      try(Connection connection = DatabaseFront.getInstance().getConnection())
+      {
+        PreparedStatement statement = connection.prepareStatement(
+            "SELECT amountInStock FROM "+ tableName + " WHERE hash = '" + productHash + "'");
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next())
+        {
+          amount = resultSet.getInt("amountInStock");
+        }
+      }
+      catch (SQLException e)
+      {
+        e.printStackTrace();
+      }
+      try(Connection connection = DatabaseFront.getInstance().getConnection())
+      {
+        PreparedStatement statement = connection.prepareStatement(
+            "UPDATE "+ tableName + " SET amountInStock = ? WHERE hash = '" + productHash + "'");
+        statement.setInt(1, amount+1);
+        statement.executeUpdate();
+      }
+      catch (SQLException e)
+      {
+        e.printStackTrace();
+      }
+    }
 }
