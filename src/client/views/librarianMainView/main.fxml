@@ -34,7 +34,7 @@
                         <Button layoutX="769.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveMovie" text="Remove Selected Item" />
                         <Button layoutX="549.0" layoutY="14.0" mnemonicParsing="false" onAction="#onMovieSearch" text="Search" />
                         <Button layoutX="611.0" layoutY="14.0" mnemonicParsing="false" onAction="#onMovieReset" text="Reset" />
-                        <Button layoutX="49.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReviewsButton" text="Reviews" />
+                        <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReviewsButton" text="Reviews" />
                      </children>
                   </AnchorPane>
               </content>
@@ -104,7 +104,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab style="-fx-background-color: #292826;" text="Manage Products">
+            <Tab style="-fx-background-color: #292826;" text="Add Products">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #F9D342;">
                      <children>
@@ -299,7 +299,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TitledPane expanded="false" prefHeight="467.0" prefWidth="228.0" text="Edit Movies">
+                        <TitledPane expanded="false" layoutY="14.0" prefHeight="467.0" prefWidth="228.0" text="Edit Movies">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -350,7 +350,7 @@
                               <Font size="15.0" />
                            </font>
                         </TitledPane>
-                        <TitledPane expanded="false" layoutX="228.0" prefHeight="467.0" prefWidth="228.0" text="Edit Books">
+                        <TitledPane expanded="false" layoutX="228.0" layoutY="14.0" prefHeight="467.0" prefWidth="228.0" text="Edit Books">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="392.0" prefWidth="226.0">
                                  <children>
@@ -407,7 +407,7 @@
                               <Font size="15.0" />
                            </font>
                         </TitledPane>
-                        <TitledPane expanded="false" layoutX="701.0" prefHeight="467.0" prefWidth="228.0" text="Edit Software">
+                        <TitledPane expanded="false" layoutX="701.0" layoutY="14.0" prefHeight="467.0" prefWidth="228.0" text="Edit Software">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -459,7 +459,7 @@
                               <Font size="15.0" />
                            </font>
                         </TitledPane>
-                        <TitledPane expanded="false" layoutX="473.0" prefHeight="467.0" prefWidth="228.0" text="Edit CD's">
+                        <TitledPane expanded="false" layoutX="473.0" layoutY="14.0" prefHeight="467.0" prefWidth="228.0" text="Edit CD's">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
