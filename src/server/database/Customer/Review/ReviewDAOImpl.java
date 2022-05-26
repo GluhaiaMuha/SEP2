@@ -60,4 +60,46 @@ public class ReviewDAOImpl implements ReviewDAO
     }
     return null;
   }
+
+  public List<Review> readReviewsByProductName(String searchString, String product)
+  {
+    try(Connection connection = DatabaseFront.getInstance().getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT * FROM review_" + product + " WHERE productName LIKE ?");
+      statement.setString(1, "%" + searchString + "%");
+      ResultSet resultSet = statement.executeQuery();
+      ArrayList<Review> reviews = new ArrayList<>();
+      while (resultSet.next())
+      {
+        String email = resultSet.getString("customer_email");
+        String hash = resultSet.getString("product_hash");
+        String productName = resultSet.getString("productName");
+        Date update = resultSet.getDate("update");
+        String customer_review = resultSet.getString("review");
+        Review review = new Review(email,hash, productName, update, customer_review);
+        reviews.add(review);
+      }
+      return reviews;
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  public void removeReview(Review review, String product)
+  {
+    try(Connection connection = DatabaseFront.getInstance().getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "DELETE FROM review_" + product + " WHERE customer_email = '" + review.getCustomer_email() + "' AND product_hash = '" + review.getProduct_hash() + "'");
+      statement.executeUpdate();
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
+  }
 }

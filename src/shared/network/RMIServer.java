@@ -60,7 +60,13 @@ public interface RMIServer extends Remote
 
   Customer readCustomerInfo(String email) throws RemoteException;
 
-  void addReview(String product, Review review)  throws RemoteException;
+  void changeCustomerInfo(String email,String f_name, String l_name, String phone) throws RemoteException;
 
-  List<Review> readReview(String product)  throws RemoteException;
+  void addReview(String product, Review review) throws RemoteException;
+
+  List<Review> readReview(String product) throws RemoteException;
+
+  List<Review> readReviewsByProductName(String searchString, String product) throws RemoteException;
+
+  void removeReview(Review review, String product) throws RemoteException;
 }

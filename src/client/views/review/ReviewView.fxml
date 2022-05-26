@@ -24,11 +24,12 @@
                               <TableColumn fx:id="moviesReviewCol" prefWidth="264.0" text="Review" />
                                     </columns>
                                 </TableView>
-                                <TextField layoutX="249.0" layoutY="14.0" promptText="Search..." />
-                                <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
+                                <TextField fx:id="movieSearchField" layoutX="249.0" layoutY="14.0" promptText="Search..." />
+                                <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" onAction="#onMovieSearch" text="Search" />
                                 <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                                 <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />
                         <Button layoutX="710.0" layoutY="14.0" mnemonicParsing="false" onAction="#onShowMovieReview" text="Show Review" />
+                        <Button fx:id="removeMovieReview" layoutX="569.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveMovieReview" text="Remove Review" visible="false" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -45,11 +46,12 @@
                               <TableColumn fx:id="booksReviewCol" prefWidth="264.0" text="Review" />
                                     </columns>
                                 </TableView>
-                                <TextField layoutX="249.0" layoutY="14.0" promptText="Search..." />
-                                <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
+                                <TextField fx:id="bookSearchField" layoutX="249.0" layoutY="14.0" promptText="Search..." />
+                                <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBookSearch" text="Search" />
                                 <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                                 <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />
                         <Button layoutX="718.0" layoutY="14.0" mnemonicParsing="false" onAction="#onShowBookReview" text="Show Review" />
+                        <Button fx:id="removeBookReview" layoutX="567.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveBookReview" text="Remove Review" visible="false" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -66,11 +68,12 @@
                               <TableColumn fx:id="cdReviewCol" prefWidth="264.0" text="Review" />
                                     </columns>
                                 </TableView>
-                                <TextField layoutX="249.0" layoutY="14.0" promptText="Search..." />
-                                <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
+                                <TextField fx:id="cdSearchField" layoutX="249.0" layoutY="14.0" promptText="Search..." />
+                                <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" onAction="#onCDSearch" text="Search" />
                                 <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                                 <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />
                         <Button layoutX="721.0" layoutY="14.0" mnemonicParsing="false" onAction="#onShowCDReview" text="Show Review" />
+                        <Button fx:id="removeCDReview" layoutX="573.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveCDReview" text="Remove Review" visible="false" />
                             </children></AnchorPane>
                     </content>
                 </Tab>
@@ -86,11 +89,12 @@
                               <TableColumn fx:id="softwareReviewCol" prefWidth="264.0" text="Review" />
                                     </columns>
                                 </TableView>
-                                <TextField layoutX="249.0" layoutY="14.0" promptText="Search..." />
-                                <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
+                                <TextField fx:id="softwareSearchField" layoutX="249.0" layoutY="14.0" promptText="Search..." />
+                                <Button layoutX="424.0" layoutY="14.0" mnemonicParsing="false" onAction="#onSoftwareSearch" text="Search" />
                                 <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoToMainPage" text="Main Page" />
                                 <Button layoutX="110.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateList" text="Update List" />
                         <Button layoutX="713.0" layoutY="14.0" mnemonicParsing="false" onAction="#onShowSoftwareReview" text="Show Review" />
+                        <Button fx:id="removeSoftwareReview" layoutX="554.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRemoveSoftwareReview" text="Remove Review" visible="false" />
                             </children>
                         </AnchorPane>
                     </content>

@@ -1,5 +1,6 @@
 package client.core;
 
+import client.views.customerInfoChangeView.CustomerInfoChangeViewModel;
 import client.views.customerMainView.CustomerMainViewModel;
 import client.views.librarianMainView.MainViewModel;
 import client.views.loans.LoansViewModel;
@@ -22,6 +23,7 @@ public class ViewModelFactory
   private LoansViewModel loansViewModel;
   private RentViewModel rentViewModel;
   private MainViewModel librarianViewModel;
+  private CustomerInfoChangeViewModel customerInfoChangeViewModel;
 
   private ReviewViewModel reviewViewModel;
 
@@ -77,5 +79,13 @@ public class ViewModelFactory
          .getLibraryModel());
    }
    return librarianViewModel;
+  }
+
+  public CustomerInfoChangeViewModel getCustomerInfoChangeViewModel()
+  {
+    if (customerInfoChangeViewModel == null){
+      customerInfoChangeViewModel = new CustomerInfoChangeViewModel(ModelFactory.getInstance().getLibraryModel());
+    }
+    return customerInfoChangeViewModel;
   }
 }

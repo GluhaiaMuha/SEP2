@@ -69,4 +69,11 @@ public class ViewHandler
     stage.setTitle("Library App");
     stage.show();
   }
+
+  public void openCustomerInfoChangeView(){
+    Scene reviewScene=ViewFactory.getScene("CustomerInfoChange");
+    stage.setScene(reviewScene);
+    stage.setTitle("Change Info");
+    stage.show();
+  }
 }
