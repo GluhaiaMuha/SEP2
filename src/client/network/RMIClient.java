@@ -118,6 +118,17 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
+  @Override public void updateProductAmount(String tableName, String productHash)
+  {
+    try
+    {
+      server.updateProductAmount(tableName, productHash);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
   @Override
   public void rentProduct(String product, Rent rent)
   {
@@ -343,6 +354,30 @@ public class RMIClient implements Client, ClientCallback
       e.printStackTrace();
     }
     return customer;
+  }
+
+  @Override public void addReview(String product, Review review)
+  {
+    try
+    {
+      server.addReview(product, review);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  @Override public List<Review> readReview(String product)
+  {
+    List<Review> reviews = null;
+    try
+    {
+      reviews = server.readReview(product);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return reviews;
   }
 
   @Override

@@ -218,6 +218,72 @@ public class RentViewController implements ViewController {
             }
         }else
             JOptionPane.showMessageDialog(null, "Product already rented!");
+
+    }
+
+    @FXML
+    void onAddBookReview(ActionEvent event)
+    {
+        Book selectedBook = (Book) booksTable.getSelectionModel().getSelectedItem();
+        final String review = JOptionPane.showInputDialog("Write review: ");
+        java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
+
+        if (!review.equals(""))
+        {
+            Review bookReview = new Review(rentViewModel.getEmail(),
+                selectedBook.getHash(), selectedBook.getTitle(), currentDate,
+                review);
+            rentViewModel.addReview("book", bookReview);
+        } else
+            JOptionPane.showMessageDialog(null, "Input is empty!");
+    }
+
+    @FXML
+    void onAddCDReview(ActionEvent event)
+    {
+        CD selectedCD = (CD) cdTable.getSelectionModel().getSelectedItem();
+        final String review = JOptionPane.showInputDialog("Write review: ");
+        java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
+
+        if (!review.equals(""))
+        {
+            Review cdReview = new Review(rentViewModel.getEmail(), selectedCD.getHash(), selectedCD.getName(), currentDate,
+                review);
+            rentViewModel.addReview("cd", cdReview);
+        }else
+            JOptionPane.showMessageDialog(null, "Input is empty!");
+    }
+
+    @FXML
+    void onAddMovieReview(ActionEvent event)
+    {
+        Movie selectedMovie = (Movie) movieTable.getSelectionModel().getSelectedItem();
+        final String review = JOptionPane.showInputDialog("Write review: ");
+        java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
+
+        if (!review.equals(""))
+        {
+            Review movieReview = new Review(rentViewModel.getEmail(),
+                selectedMovie.getHash(), selectedMovie.getTitle(), currentDate,
+                review);
+            rentViewModel.addReview("movie", movieReview);
+        }else
+            JOptionPane.showMessageDialog(null, "Input is empty!");
+    }
+
+    @FXML
+    void onAddSoftwareReview(ActionEvent event)
+    {
+        Software selectedSoftware = (Software) softwareTable.getSelectionModel().getSelectedItem();
+        final String review = JOptionPane.showInputDialog("Write review: ");
+        java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
+        if (!review.equals(""))
+        {
+            Review softwareReview = new Review(rentViewModel.getEmail(), selectedSoftware.getHash(), selectedSoftware.getName(), currentDate, review);
+            rentViewModel.addReview("software", softwareReview);
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Input is empty!");
     }
 
     public boolean validation(Object product, String table)

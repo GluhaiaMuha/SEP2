@@ -11,85 +11,135 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import server.database.DatabaseManager;
-import shared.transferObj.Book;
-import shared.transferObj.CD;
-import shared.transferObj.Movie;
-import shared.transferObj.Software;
+import shared.transferObj.*;
 
+import javax.swing.*;
 import java.sql.Date;
 import java.sql.SQLException;
 
 public class ReviewViewController implements ViewController {
     private ViewHandler viewHandler;
     private ReviewViewModel reviewViewModel;
-    private DatabaseManager createTableExample = new DatabaseManager();
-
-    @Override
-    public void init(ViewHandler vh, ViewModelFactory vmf) throws SQLException
-    {
-        this.viewHandler = vh;
-        reviewViewModel = vmf.getReviewViewModel();
-//        updateTables();
-    }
 
 
     /* Movie Table Start Here */
 
     @FXML
-    private TableView<Object> movieTable;
+    private TableView<Review> movieTable;
 
     @FXML
-    private TableColumn<Movie, String> moviesCustomerEmailCol;
+    private TableColumn<Review, String> moviesCustomerEmailCol;
     @FXML
-    private TableColumn<Movie, String> moviesTitleCol;
+    private TableColumn<Review, String> moviesTitleCol;
     @FXML
-    private TableColumn<Movie, Date> moviesDateCol;
+    private TableColumn<Review, Date> moviesDateCol;
     @FXML
-    private TableColumn<Movie, String> moviesReviewCol;
+    private TableColumn<Review, String> moviesReviewCol;
 
     /* Books Table Starts Here */
 
     @FXML
-    private TableView<Object> booksTable;
+    private TableView<Review> booksTable;
 
     @FXML
-    private TableColumn<Book, String> booksCustomerEmailCol;
+    private TableColumn<Review, String> booksCustomerEmailCol;
     @FXML
-    private TableColumn<Book, String> booksTitleCol;
+    private TableColumn<Review, String> booksTitleCol;
     @FXML
-    private TableColumn<Book, Date> booksDateCol;
+    private TableColumn<Review, Date> booksDateCol;
     @FXML
-    private TableColumn<Book, String> booksReviewCol;
+    private TableColumn<Review, String> booksReviewCol;
 
     /* CD Table Starts Here */
 
     @FXML
-    private TableView<Object> cdTable;
+    private TableView<Review> cdTable;
 
     @FXML
-    private TableColumn<CD, String> cdCustomerEmailCol;
+    private TableColumn<Review, String> cdCustomerEmailCol;
     @FXML
-    private TableColumn<CD, String> cdNameCol;
+    private TableColumn<Review, String> cdNameCol;
     @FXML
-    private TableColumn<CD,Date > cdDateCol;
+    private TableColumn<Review,Date > cdDateCol;
     @FXML
-    private TableColumn<CD, String> cdReviewCol;
+    private TableColumn<Review, String> cdReviewCol;
 
     /* Software Table Starts Here */
 
     @FXML
-    private TableView<Object> softwareTable;
+    private TableView<Review> softwareTable;
 
     @FXML
-    private TableColumn<Software, String> softwareCustomerEmailCol;
+    private TableColumn<Review, String> softwareCustomerEmailCol;
     @FXML
-    private TableColumn<Software, String> softwareNameCol;
+    private TableColumn<Review, String> softwareNameCol;
     @FXML
-    private TableColumn<Software, Date> softwareDateCol;
+    private TableColumn<Review, Date> softwareDateCol;
     @FXML
-    private TableColumn<Software, String> softwareReviewCol;
+    private TableColumn<Review, String> softwareReviewCol;
 
+    @Override
+    public void init(ViewHandler vh, ViewModelFactory vmf)
+    {
+        this.viewHandler = vh;
+        reviewViewModel = vmf.getReviewViewModel();
+        updateTables();
+    }
 
+    @FXML
+    void onShowBookReview(ActionEvent event) {
+        Review selectedBook = booksTable.getSelectionModel().getSelectedItem();
+        final String review = selectedBook.getReview();
+        final String html = "<html><body style='width: %1spx'>%1s";
+
+        Runnable r = () -> {
+            JOptionPane.showMessageDialog(
+                null, String.format(html, 200, review));
+        };
+        SwingUtilities.invokeLater(r);
+    }
+
+    @FXML
+    void onShowCDReview(ActionEvent event)
+    {
+        Review selectedCD = cdTable.getSelectionModel().getSelectedItem();
+        final String review = selectedCD.getReview();
+        final String html = "<html><body style='width: %1spx'>%1s";
+
+        Runnable r = () -> {
+            JOptionPane.showMessageDialog(
+                null, String.format(html, 200, review));
+        };
+        SwingUtilities.invokeLater(r);
+    }
+
+    @FXML
+    void onShowMovieReview(ActionEvent event)
+    {
+        Review selectedMovie = movieTable.getSelectionModel().getSelectedItem();
+        final String review = selectedMovie.getReview();
+        final String html = "<html><body style='width: %1spx'>%1s";
+
+        Runnable r = () -> {
+            JOptionPane.showMessageDialog(
+                null, String.format(html, 200, review));
+        };
+        SwingUtilities.invokeLater(r);
+    }
+
+    @FXML
+    void onShowSoftwareReview(ActionEvent event)
+    {
+        Review selectedSoftware = softwareTable.getSelectionModel().getSelectedItem();
+        final String review = selectedSoftware.getReview();
+        final String html = "<html><body style='width: %1spx'>%1s";
+
+        Runnable r = () -> {
+            JOptionPane.showMessageDialog(
+                null, String.format(html, 200, review));
+        };
+        SwingUtilities.invokeLater(r);
+    }
 
     @FXML
     void onGoToMainPage(ActionEvent event) {
@@ -97,27 +147,27 @@ public class ReviewViewController implements ViewController {
     }
 
     @FXML
-    void onUpdateList(ActionEvent event) throws SQLException
+    void onUpdateList(ActionEvent event)
     {
         updateTables();
     }
 
-    private void updateTables() throws SQLException
+    private void updateTables()
     {
         //* Movie Table Start Here *//*
         //* For future use, make sure PropertyValueFactory is the same as the get/set Methods *//*
 
-        final ObservableList<Object> dataMovie = FXCollections.observableArrayList(createTableExample.read("movie")
+        final ObservableList<Review> dataMovie = FXCollections.observableArrayList(reviewViewModel.readReview("movie")
         );
 
         moviesCustomerEmailCol.setCellValueFactory(
-            new PropertyValueFactory<>("Customer")
+            new PropertyValueFactory<>("customer_email")
         );
         moviesTitleCol.setCellValueFactory(
-            new PropertyValueFactory<>("Title")
+            new PropertyValueFactory<>("productName")
         );
         moviesDateCol.setCellValueFactory(
-            new PropertyValueFactory<>("Date")
+            new PropertyValueFactory<>("update")
         );
         moviesReviewCol.setCellValueFactory(
             new PropertyValueFactory<>("Review")
@@ -127,17 +177,17 @@ public class ReviewViewController implements ViewController {
 
         //* Books Table Starts Here *//*
 
-        final ObservableList<Object> dataBook = FXCollections.observableArrayList(createTableExample.read("book")
+        final ObservableList<Review> dataBook = FXCollections.observableArrayList(reviewViewModel.readReview("book")
         );
 
         booksCustomerEmailCol.setCellValueFactory(
-            new PropertyValueFactory<>("Customer")
+            new PropertyValueFactory<>("customer_email")
         );
         booksTitleCol.setCellValueFactory(
-            new PropertyValueFactory<>("Title")
+            new PropertyValueFactory<>("productName")
         );
         booksDateCol.setCellValueFactory(
-            new PropertyValueFactory<>("Date")
+            new PropertyValueFactory<>("update")
         );
         booksReviewCol.setCellValueFactory(
             new PropertyValueFactory<>("Review")
@@ -146,17 +196,17 @@ public class ReviewViewController implements ViewController {
         booksTable.setItems(dataBook);
 
         //* CD Table Starts Here *//*
-        final ObservableList<Object> dataCD = FXCollections.observableArrayList(createTableExample.read("cd")
+        final ObservableList<Review> dataCD = FXCollections.observableArrayList(reviewViewModel.readReview("cd")
         );
 
         cdCustomerEmailCol.setCellValueFactory(
-            new PropertyValueFactory<>("Customer")
+            new PropertyValueFactory<>("customer_email")
         );
         cdNameCol.setCellValueFactory(
-            new PropertyValueFactory<>("Name")
+            new PropertyValueFactory<>("productName")
         );
         cdDateCol.setCellValueFactory(
-            new PropertyValueFactory<>("Date")
+            new PropertyValueFactory<>("update")
         );
         cdReviewCol.setCellValueFactory(
             new PropertyValueFactory<>("Review")
@@ -166,17 +216,17 @@ public class ReviewViewController implements ViewController {
         cdTable.setItems(dataCD);
 
         //* Software Table Starts Here *//*
-        final ObservableList<Object> dataSoftware = FXCollections.observableArrayList(createTableExample.read("software")
+        final ObservableList<Review> dataSoftware = FXCollections.observableArrayList(reviewViewModel.readReview("software")
         );
 
         softwareCustomerEmailCol.setCellValueFactory(
-            new PropertyValueFactory<>("Customer")
+            new PropertyValueFactory<>("customer_email")
         );
         softwareNameCol.setCellValueFactory(
-            new PropertyValueFactory<>("Name")
+            new PropertyValueFactory<>("productName")
         );
         softwareDateCol.setCellValueFactory(
-            new PropertyValueFactory<>("Date")
+            new PropertyValueFactory<>("update")
         );
         softwareReviewCol.setCellValueFactory(
             new PropertyValueFactory<>("Review")

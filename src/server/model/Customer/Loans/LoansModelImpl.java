@@ -28,4 +28,9 @@ public class LoansModelImpl implements LoansModel
   {
     LoansDAOImpl.getInstance().removeRent(rent, product);
   }
+
+  public void updateProductAmount(String tableName, String productHash)
+  {
+    LoansDAOImpl.getInstance().updateProductAmount(tableName, productHash);
+  }
 }

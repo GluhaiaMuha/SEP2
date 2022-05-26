@@ -58,6 +58,11 @@ public class RentViewModel {
         libraryModel.delete(tableName, whereClause);
     }
 
+    public void addReview(String product, Review review)
+    {
+        libraryModel.addReview(product, review);
+    }
+
     public String getEmail()
     {
         return libraryModel.getEmail();

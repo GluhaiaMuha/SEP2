@@ -3,6 +3,7 @@ package server.network;
 import server.model.Customer.CustomerInfo.CustomerInfoImpl;
 import server.model.Customer.Loans.LoansModelImpl;
 import server.model.Customer.RentProduct.RentProductModelImpl;
+import server.model.Customer.Review.ReviewModelImpl;
 import server.model.General.Login.LoginModelImpl;
 import server.model.General.ProductInfo.ProductInfoModelImpl;
 import server.model.General.Register.RegisterModelImpl;
@@ -73,6 +74,11 @@ public class RMIServerImpl implements RMIServer
   @Override public void removeRent(Rent rent, String product)
   {
     LoansModelImpl.getInstance().removeRent(rent, product);
+  }
+
+  @Override public void updateProductAmount(String tableName, String productHash)
+  {
+    LoansModelImpl.getInstance().updateProductAmount(tableName, productHash);
   }
 
   @Override
@@ -164,5 +170,15 @@ public class RMIServerImpl implements RMIServer
   @Override public Customer readCustomerInfo(String email)
   {
     return CustomerInfoImpl.getInstance().readCustomerInfo(email);
+  }
+
+  @Override public void addReview(String product, Review review)
+  {
+    ReviewModelImpl.getInstance().addReview(product, review);
+  }
+
+  @Override public List<Review> readReview(String product)
+  {
+    return ReviewModelImpl.getInstance().readReview(product);
   }
 }

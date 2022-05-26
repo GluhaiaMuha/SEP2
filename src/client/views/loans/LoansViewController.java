@@ -90,6 +90,7 @@ public class LoansViewController implements ViewController {
     {
         Rent selectedBook = booksTable.getSelectionModel().getSelectedItem();
         loansViewModel.removeRent(selectedBook, "book");
+        loansViewModel.updateProductAmount("book", selectedBook.getProduct_hash());
         updateTables();
     }
 
@@ -98,6 +99,7 @@ public class LoansViewController implements ViewController {
     {
         Rent selectedCD = cdTable.getSelectionModel().getSelectedItem();
         loansViewModel.removeRent(selectedCD, "cd");
+        loansViewModel.updateProductAmount("cd", selectedCD.getProduct_hash());
         updateTables();
     }
 
@@ -106,6 +108,7 @@ public class LoansViewController implements ViewController {
     {
         Rent selectedMovie = movieTable.getSelectionModel().getSelectedItem();
         loansViewModel.removeRent(selectedMovie, "movie");
+        loansViewModel.updateProductAmount("movie", selectedMovie.getProduct_hash());
         updateTables();
     }
 
@@ -114,6 +117,7 @@ public class LoansViewController implements ViewController {
     {
         Rent selectedSoftware = softwareTable.getSelectionModel().getSelectedItem();
         loansViewModel.removeRent(selectedSoftware, "software");
+        loansViewModel.updateProductAmount("software", selectedSoftware.getProduct_hash());
         updateTables();
     }
 

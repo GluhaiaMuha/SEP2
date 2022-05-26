@@ -9,4 +9,6 @@ public interface LoansDAO
   List<Rent> readCustomerRents(String customer_email, String product);
 
   void removeRent(Rent rent, String product);
+
+  void updateProductAmount(String tableName, String productHash);
 }
