@@ -10,9 +10,9 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #292826;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.customerInfoChangeView.CustomerInfoChangeViewController">
    <children>
-      <TextField fx:id="firstNameTextField" layoutX="250.0" layoutY="135.0" style="-fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent; -fx-border-color: #F9D342; -fx-text-fill: #FFF;" />
-      <TextField fx:id="lastNameTextField" layoutX="250.0" layoutY="187.0" style="-fx-border-width: 0px 0px 2px 0px; -fx-border-color: #F9D342; -fx-background-color: transparent; -fx-text-fill: #FFF;" />
-      <TextField fx:id="phoneTextField" layoutX="250.0" layoutY="247.0" style="-fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent; -fx-border-color: #F9D342; -fx-text-fill: #FFF;" />
+      <TextField fx:id="firstNameTextField" layoutX="250.0" layoutY="135.0" style="-fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent; -fx-border-color: #F9D342;" />
+      <TextField fx:id="lastNameTextField" layoutX="250.0" layoutY="187.0" style="-fx-border-width: 0px 0px 2px 0px; -fx-border-color: #F9D342; -fx-background-color: transparent;" />
+      <TextField fx:id="phoneTextField" layoutX="250.0" layoutY="247.0" style="-fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent; -fx-border-color: #F9D342;" />
       <Label layoutX="125.0" layoutY="135.0" text="First name:" textFill="WHITE">
          <font>
             <Font size="18.0" />
@@ -29,7 +29,7 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onMainPage" prefHeight="30.0" prefWidth="101.0" style="-fx-background-color: #F9D342;" text="Main Page">
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onMainPage" prefHeight="27.0" prefWidth="85.0" style="-fx-background-color: #F9D342;" text="Main Page">
          <font>
             <Font size="14.0" />
          </font></Button>

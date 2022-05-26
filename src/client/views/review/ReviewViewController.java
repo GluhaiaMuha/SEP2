@@ -13,15 +13,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import server.database.Customer.Review.ReviewDAOImpl;
-import server.database.DatabaseManager;
-import shared.transferObj.*;
+import shared.transferObj.Review;
+import shared.transferObj.User;
 
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.Date;
-import java.sql.SQLException;
 
 public class ReviewViewController implements ViewController,
     PropertyChangeListener
