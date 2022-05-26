@@ -418,7 +418,6 @@ public class RentViewController implements ViewController {
         ObservableList<Object> moviesSearched = FXCollections.observableArrayList(rentViewModel.readMoviesByTitle(search));
 
         movieTable.setItems(moviesSearched);
-        updateTables();
     }
 
     @FXML
@@ -428,7 +427,6 @@ public class RentViewController implements ViewController {
         ObservableList<Object> booksSearched = FXCollections.observableArrayList(rentViewModel.readBooksByTitle(search));
 
         booksTable.setItems(booksSearched);
-        updateTables();
     }
 
     @FXML
@@ -438,7 +436,6 @@ public class RentViewController implements ViewController {
         ObservableList<Object> CDsSearched = FXCollections.observableArrayList(rentViewModel.readCDsByName(search));
 
         cdTable.setItems(CDsSearched);
-        updateTables();
     }
 
     @FXML
@@ -448,7 +445,6 @@ public class RentViewController implements ViewController {
         ObservableList<Object> softwaresSearched = FXCollections.observableArrayList(rentViewModel.readSoftwaresByName(search));
 
         softwareTable.setItems(softwaresSearched);
-        updateTables();
     }
 
 
