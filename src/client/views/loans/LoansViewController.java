@@ -12,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import shared.transferObj.Rent;
 
+import javax.swing.*;
 import java.sql.Date;
 
 public class LoansViewController implements ViewController {
@@ -88,36 +89,39 @@ public class LoansViewController implements ViewController {
     void onRemoveBookRent(ActionEvent event)
     {
         Rent selectedBook = booksTable.getSelectionModel().getSelectedItem();
-        loansViewModel.removeRent(selectedBook, "book");
-        loansViewModel.updateProductAmount("book", selectedBook.getProduct_hash());
-        updateTables();
+        removeRent(selectedBook, "book");
     }
 
     @FXML
     void onRemoveCDRent(ActionEvent event)
     {
         Rent selectedCD = cdTable.getSelectionModel().getSelectedItem();
-        loansViewModel.removeRent(selectedCD, "cd");
-        loansViewModel.updateProductAmount("cd", selectedCD.getProduct_hash());
-        updateTables();
+        removeRent(selectedCD, "cd");
     }
 
     @FXML
     void onRemoveMovieRent(ActionEvent event)
     {
         Rent selectedMovie = movieTable.getSelectionModel().getSelectedItem();
-        loansViewModel.removeRent(selectedMovie, "movie");
-        loansViewModel.updateProductAmount("movie", selectedMovie.getProduct_hash());
-        updateTables();
+        removeRent(selectedMovie, "movie");
     }
 
     @FXML
     void onRemoveSoftwareRent(ActionEvent event)
     {
         Rent selectedSoftware = softwareTable.getSelectionModel().getSelectedItem();
-        loansViewModel.removeRent(selectedSoftware, "software");
-        loansViewModel.updateProductAmount("software", selectedSoftware.getProduct_hash());
-        updateTables();
+        removeRent(selectedSoftware, "software");
+    }
+
+    public void removeRent(Rent rent, String product)
+    {
+        if (rent != null)
+        {
+            loansViewModel.removeRent(rent, product);
+            loansViewModel.updateProductAmount(product, rent.getProduct_hash());
+            updateTables();
+        }else
+            JOptionPane.showMessageDialog(null, "Product is not selected!");
     }
 
     @FXML

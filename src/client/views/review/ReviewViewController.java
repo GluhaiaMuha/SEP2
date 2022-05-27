@@ -120,88 +120,81 @@ public class ReviewViewController implements ViewController,
     @FXML
     void onShowBookReview(ActionEvent event) {
         Review selectedBook = booksTable.getSelectionModel().getSelectedItem();
-        final String review = selectedBook.getReview();
-        final String html = "<html><body style='width: %1spx'>%1s";
-
-        Runnable r = () -> {
-            JOptionPane.showMessageDialog(
-                null, String.format(html, 200, review));
-        };
-        SwingUtilities.invokeLater(r);
+        showReview(selectedBook);
     }
 
     @FXML
     void onShowCDReview(ActionEvent event)
     {
         Review selectedCD = cdTable.getSelectionModel().getSelectedItem();
-        final String review = selectedCD.getReview();
-        final String html = "<html><body style='width: %1spx'>%1s";
-
-        Runnable r = () -> {
-            JOptionPane.showMessageDialog(
-                null, String.format(html, 200, review));
-        };
-        SwingUtilities.invokeLater(r);
+        showReview(selectedCD);
     }
 
     @FXML
     void onShowMovieReview(ActionEvent event)
     {
         Review selectedMovie = movieTable.getSelectionModel().getSelectedItem();
-        final String review = selectedMovie.getReview();
-        final String html = "<html><body style='width: %1spx'>%1s";
-
-        Runnable r = () -> {
-            JOptionPane.showMessageDialog(
-                null, String.format(html, 200, review));
-        };
-        SwingUtilities.invokeLater(r);
+        showReview(selectedMovie);
     }
 
     @FXML
     void onShowSoftwareReview(ActionEvent event)
     {
         Review selectedSoftware = softwareTable.getSelectionModel().getSelectedItem();
-        final String review = selectedSoftware.getReview();
-        final String html = "<html><body style='width: %1spx'>%1s";
+        showReview(selectedSoftware);
+    }
 
-        Runnable r = () -> {
-            JOptionPane.showMessageDialog(
-                null, String.format(html, 200, review));
-        };
-        SwingUtilities.invokeLater(r);
+    public void showReview(Review review)
+    {
+        if (review != null)
+        {
+            final String customerReview = review.getReview();
+            final String html = "<html><body style='width: %1spx'>%1s";
+
+            Runnable r = () -> {
+                JOptionPane.showMessageDialog(null, String.format(html, 200, customerReview));
+            };
+            SwingUtilities.invokeLater(r);
+        }else
+            JOptionPane.showMessageDialog(null, "Product is not selected!");
     }
 
     @FXML
     void onRemoveBookReview(ActionEvent event)
     {
         Review selectedBook = booksTable.getSelectionModel().getSelectedItem();
-        reviewViewModel.removeReview(selectedBook, "book");
-        updateTables();
+        removeReview(selectedBook, "book");
     }
 
     @FXML
     void onRemoveCDReview(ActionEvent event)
     {
         Review selectedCD = cdTable.getSelectionModel().getSelectedItem();
-        reviewViewModel.removeReview(selectedCD, "cd");
-        updateTables();
+        removeReview(selectedCD, "cd");
     }
 
     @FXML
     void onRemoveMovieReview(ActionEvent event)
     {
         Review selectedMovie = movieTable.getSelectionModel().getSelectedItem();
-        reviewViewModel.removeReview(selectedMovie, "movie");
-        updateTables();
+        removeReview(selectedMovie, "movie");
     }
 
     @FXML
     void onRemoveSoftwareReview(ActionEvent event)
     {
         Review selectedSoftware = softwareTable.getSelectionModel().getSelectedItem();
-        reviewViewModel.removeReview(selectedSoftware, "software");
-        updateTables();
+        removeReview(selectedSoftware, "software");
+    }
+
+    public void removeReview(Review review, String product)
+    {
+        if (review != null)
+        {
+            reviewViewModel.removeReview(review, product);
+            updateTables();
+        }else
+            JOptionPane.showMessageDialog(null, "Product is not selected!");
     }
 
 
