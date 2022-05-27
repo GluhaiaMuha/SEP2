@@ -4,8 +4,6 @@ import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
 import client.views.loginView.LoginViewModel;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,15 +12,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import shared.transferObj.Review;
-import shared.transferObj.User;
 
-import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.Date;
 
-public class ReviewViewController implements ViewController,
-    PropertyChangeListener
+public class ReviewViewController implements ViewController, PropertyChangeListener
 {
     private ViewHandler viewHandler;
     private ReviewViewModel reviewViewModel;
@@ -113,99 +108,82 @@ public class ReviewViewController implements ViewController,
         this.viewHandler = vh;
         reviewViewModel = vmf.getReviewViewModel();
         loginViewModel = vmf.getLoginViewModel();
+
+        movieSearchField.textProperty().bindBidirectional(reviewViewModel.movieSearchFieldProperty());
+        bookSearchField.textProperty().bindBidirectional(reviewViewModel.bookSearchFieldProperty());
+        cdSearchField.textProperty().bindBidirectional(reviewViewModel.cdSearchFieldProperty());
+        softwareSearchField.textProperty().bindBidirectional(reviewViewModel.softwareSearchFieldProperty());
+
         loginViewModel.addListener("Librarian",this);
-        updateTables();
+        reviewViewModel.addListener("LibrarianView", this);
+        reviewViewModel.addListener("CustomerView", this);
+        tables();
+        reviewViewModel.updateTables();
     }
 
     @FXML
     void onShowBookReview(ActionEvent event) {
         Review selectedBook = booksTable.getSelectionModel().getSelectedItem();
-        showReview(selectedBook);
+        reviewViewModel.showReview(selectedBook);
     }
 
     @FXML
     void onShowCDReview(ActionEvent event)
     {
         Review selectedCD = cdTable.getSelectionModel().getSelectedItem();
-        showReview(selectedCD);
+        reviewViewModel.showReview(selectedCD);
     }
 
     @FXML
     void onShowMovieReview(ActionEvent event)
     {
         Review selectedMovie = movieTable.getSelectionModel().getSelectedItem();
-        showReview(selectedMovie);
+        reviewViewModel.showReview(selectedMovie);
     }
 
     @FXML
     void onShowSoftwareReview(ActionEvent event)
     {
         Review selectedSoftware = softwareTable.getSelectionModel().getSelectedItem();
-        showReview(selectedSoftware);
-    }
-
-    public void showReview(Review review)
-    {
-        if (review != null)
-        {
-            final String customerReview = review.getReview();
-            final String html = "<html><body style='width: %1spx'>%1s";
-
-            Runnable r = () -> {
-                JOptionPane.showMessageDialog(null, String.format(html, 200, customerReview));
-            };
-            SwingUtilities.invokeLater(r);
-        }else
-            JOptionPane.showMessageDialog(null, "Product is not selected!");
+        reviewViewModel.showReview(selectedSoftware);
     }
 
     @FXML
     void onRemoveBookReview(ActionEvent event)
     {
         Review selectedBook = booksTable.getSelectionModel().getSelectedItem();
-        removeReview(selectedBook, "book");
+        reviewViewModel.removeReview(selectedBook, "book");
+        reviewViewModel.updateTables();
     }
 
     @FXML
     void onRemoveCDReview(ActionEvent event)
     {
         Review selectedCD = cdTable.getSelectionModel().getSelectedItem();
-        removeReview(selectedCD, "cd");
+        reviewViewModel.removeReview(selectedCD, "cd");
+        reviewViewModel.updateTables();
     }
 
     @FXML
     void onRemoveMovieReview(ActionEvent event)
     {
         Review selectedMovie = movieTable.getSelectionModel().getSelectedItem();
-        removeReview(selectedMovie, "movie");
+        reviewViewModel.removeReview(selectedMovie, "movie");
+        reviewViewModel.updateTables();
     }
 
     @FXML
     void onRemoveSoftwareReview(ActionEvent event)
     {
         Review selectedSoftware = softwareTable.getSelectionModel().getSelectedItem();
-        removeReview(selectedSoftware, "software");
+        reviewViewModel.removeReview(selectedSoftware, "software");
+        reviewViewModel.updateTables();
     }
-
-    public void removeReview(Review review, String product)
-    {
-        if (review != null)
-        {
-            reviewViewModel.removeReview(review, product);
-            updateTables();
-        }else
-            JOptionPane.showMessageDialog(null, "Product is not selected!");
-    }
-
 
     @FXML
     void onGoToMainPage(ActionEvent event)
     {
-        User user = reviewViewModel.readUserRegister(reviewViewModel.getEmail());
-        if (user.getUser().equals("librarian"))
-            viewHandler.openLibrarianMainView();
-        else
-            viewHandler.openCustomerMainView();
+        reviewViewModel.goToMainPage();
     }
 
     public void librarianView()
@@ -219,126 +197,62 @@ public class ReviewViewController implements ViewController,
     @FXML
     void onMovieSearch(ActionEvent event)
     {
-        String search = movieSearchField.getText();
-        ObservableList<Review> moviesSearched = FXCollections.observableArrayList(reviewViewModel.readReviewsByProductName(search, "movie"));
-
-        movieTable.setItems(moviesSearched);
+        movieTable.setItems(reviewViewModel.searchProducts("movie"));
     }
 
     @FXML
     void onBookSearch(ActionEvent event)
     {
-        String search = bookSearchField.getText();
-        ObservableList<Review> booksSearched = FXCollections.observableArrayList(reviewViewModel.readReviewsByProductName(search, "book"));
-
-        booksTable.setItems(booksSearched);
+        booksTable.setItems(reviewViewModel.searchProducts("book"));
     }
 
     @FXML
     void onCDSearch(ActionEvent event)
     {
-        String search = cdSearchField.getText();
-        ObservableList<Review> CDsSearched = FXCollections.observableArrayList(reviewViewModel.readReviewsByProductName(search, "cd"));
-
-        cdTable.setItems(CDsSearched);
+        cdTable.setItems(reviewViewModel.searchProducts("cd"));
     }
 
     @FXML
     void onSoftwareSearch(ActionEvent event)
     {
-        String search = softwareSearchField.getText();
-        ObservableList<Review> softwaresSearched = FXCollections.observableArrayList(reviewViewModel.readReviewsByProductName(search, "software"));
-
-        softwareTable.setItems(softwaresSearched);
+        softwareTable.setItems(reviewViewModel.searchProducts("software"));
     }
 
     @FXML
     void onUpdateList(ActionEvent event)
     {
-        updateTables();
+        reviewViewModel.updateTables();
+        tables();
     }
 
-    private void updateTables()
+    private void tables()
     {
-        //* Movie Table Start Here *//*
-        //* For future use, make sure PropertyValueFactory is the same as the get/set Methods *//*
-
-        final ObservableList<Review> dataMovie = FXCollections.observableArrayList(reviewViewModel.readReview("movie")
-        );
-
-        moviesCustomerEmailCol.setCellValueFactory(
-            new PropertyValueFactory<>("customer_email")
-        );
-        moviesTitleCol.setCellValueFactory(
-            new PropertyValueFactory<>("productName")
-        );
-        moviesDateCol.setCellValueFactory(
-            new PropertyValueFactory<>("update")
-        );
-        moviesReviewCol.setCellValueFactory(
-            new PropertyValueFactory<>("Review")
-        );
-
-        movieTable.setItems(dataMovie);
-
-        //* Books Table Starts Here *//*
-
-        final ObservableList<Review> dataBook = FXCollections.observableArrayList(reviewViewModel.readReview("book")
-        );
-
-        booksCustomerEmailCol.setCellValueFactory(
-            new PropertyValueFactory<>("customer_email")
-        );
-        booksTitleCol.setCellValueFactory(
-            new PropertyValueFactory<>("productName")
-        );
-        booksDateCol.setCellValueFactory(
-            new PropertyValueFactory<>("update")
-        );
-        booksReviewCol.setCellValueFactory(
-            new PropertyValueFactory<>("Review")
-        );
-
-        booksTable.setItems(dataBook);
-
-        //* CD Table Starts Here *//*
-        final ObservableList<Review> dataCD = FXCollections.observableArrayList(reviewViewModel.readReview("cd")
-        );
-
-        cdCustomerEmailCol.setCellValueFactory(
-            new PropertyValueFactory<>("customer_email")
-        );
-        cdNameCol.setCellValueFactory(
-            new PropertyValueFactory<>("productName")
-        );
-        cdDateCol.setCellValueFactory(
-            new PropertyValueFactory<>("update")
-        );
-        cdReviewCol.setCellValueFactory(
-            new PropertyValueFactory<>("Review")
-        );
+        moviesCustomerEmailCol.setCellValueFactory(new PropertyValueFactory<>("customer_email"));
+        moviesTitleCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        moviesDateCol.setCellValueFactory(new PropertyValueFactory<>("update"));
+        moviesReviewCol.setCellValueFactory(new PropertyValueFactory<>("Review"));
+        movieTable.setItems(reviewViewModel.getDataMovie());
 
 
-        cdTable.setItems(dataCD);
+        booksCustomerEmailCol.setCellValueFactory(new PropertyValueFactory<>("customer_email"));
+        booksTitleCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        booksDateCol.setCellValueFactory(new PropertyValueFactory<>("update"));
+        booksReviewCol.setCellValueFactory(new PropertyValueFactory<>("Review"));
+        booksTable.setItems(reviewViewModel.getDataBook());
 
-        //* Software Table Starts Here *//*
-        final ObservableList<Review> dataSoftware = FXCollections.observableArrayList(reviewViewModel.readReview("software")
-        );
 
-        softwareCustomerEmailCol.setCellValueFactory(
-            new PropertyValueFactory<>("customer_email")
-        );
-        softwareNameCol.setCellValueFactory(
-            new PropertyValueFactory<>("productName")
-        );
-        softwareDateCol.setCellValueFactory(
-            new PropertyValueFactory<>("update")
-        );
-        softwareReviewCol.setCellValueFactory(
-            new PropertyValueFactory<>("Review")
-        );
+        cdCustomerEmailCol.setCellValueFactory(new PropertyValueFactory<>("customer_email"));
+        cdNameCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        cdDateCol.setCellValueFactory(new PropertyValueFactory<>("update"));
+        cdReviewCol.setCellValueFactory(new PropertyValueFactory<>("Review"));
+        cdTable.setItems(reviewViewModel.getDataCD());
 
-        softwareTable.setItems(dataSoftware);
+
+        softwareCustomerEmailCol.setCellValueFactory(new PropertyValueFactory<>("customer_email"));
+        softwareNameCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        softwareDateCol.setCellValueFactory(new PropertyValueFactory<>("update"));
+        softwareReviewCol.setCellValueFactory(new PropertyValueFactory<>("Review"));
+        softwareTable.setItems(reviewViewModel.getDataSoftware());
     }
 
     @Override public void propertyChange(PropertyChangeEvent evt)
@@ -346,6 +260,14 @@ public class ReviewViewController implements ViewController,
         if(evt.getPropertyName().equals("Librarian"))
         {
             librarianView();
+        }
+        else if (evt.getPropertyName().equals("LibrarianView"))
+        {
+            viewHandler.openLibrarianMainView();
+        }
+        else if (evt.getPropertyName().equals("CustomerView"))
+        {
+            viewHandler.openCustomerMainView();
         }
     }
 }
