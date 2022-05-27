@@ -172,6 +172,11 @@ public class RMIServerImpl implements RMIServer
     return CustomerInfoImpl.getInstance().readCustomerInfo(email);
   }
 
+  @Override public void changeCustomerInfo(String email,String f_name, String l_name, String phone)
+  {
+    CustomerInfoImpl.getInstance().changeCustomerInfo(email, f_name, l_name, phone);
+  }
+
   @Override public void addReview(String product, Review review)
   {
     ReviewModelImpl.getInstance().addReview(product, review);
@@ -180,5 +185,15 @@ public class RMIServerImpl implements RMIServer
   @Override public List<Review> readReview(String product)
   {
     return ReviewModelImpl.getInstance().readReview(product);
+  }
+
+  @Override public List<Review> readReviewsByProductName(String searchString, String product)
+  {
+    return ReviewModelImpl.getInstance().readReviewsByProductName(searchString, product);
+  }
+
+  @Override public void removeReview(Review review, String product)
+  {
+    ReviewModelImpl.getInstance().removeReview(review, product);
   }
 }

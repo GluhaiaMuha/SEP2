@@ -356,6 +356,17 @@ public class RMIClient implements Client, ClientCallback
     return customer;
   }
 
+  @Override public void changeCustomerInfo(String email,String f_name, String l_name, String phone)
+  {
+    try
+    {
+      server.changeCustomerInfo(email, f_name, l_name, phone);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
   @Override public void addReview(String product, Review review)
   {
     try
@@ -378,6 +389,31 @@ public class RMIClient implements Client, ClientCallback
       e.printStackTrace();
     }
     return reviews;
+  }
+
+  @Override public List<Review> readReviewsByProductName(String searchString,
+      String product)
+  {
+    List<Review> reviews = null;
+    try
+    {
+      reviews = server.readReviewsByProductName(searchString, product);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return reviews;
+  }
+
+  @Override public void removeReview(Review review, String product)
+  {
+    try
+    {
+      server.removeReview(review, product);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
   }
 
   @Override

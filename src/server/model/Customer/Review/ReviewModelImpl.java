@@ -22,4 +22,14 @@ public class ReviewModelImpl implements ReviewModel
   {
     return ReviewDAOImpl.getInstance().readReview(product);
   }
+
+  public List<Review> readReviewsByProductName(String searchString, String product)
+  {
+    return ReviewDAOImpl.getInstance().readReviewsByProductName(searchString, product);
+  }
+
+  public void removeReview(Review review, String product)
+  {
+    ReviewDAOImpl.getInstance().removeReview(review, product);
+  }
 }

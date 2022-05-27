@@ -3,6 +3,8 @@ package client.views.customerMainView;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
+import client.views.customerInfoChangeView.CustomerInfoChangeViewModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -39,6 +41,12 @@ public class CustomerMainViewController implements ViewController {
 
     public void onReviewAction() {
         viewHandler.openReviewView();
+    }
+
+    @FXML
+    void onChangeInfo(ActionEvent event) {
+        viewHandler.openCustomerInfoChangeView();
+        CustomerInfoChangeViewModel.selectInfo();
     }
 }
 

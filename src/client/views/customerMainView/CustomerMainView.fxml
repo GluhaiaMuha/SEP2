@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="475.0" prefWidth="775.0" style="-fx-background-color: #F9D342;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.customerMainView.CustomerMainViewController">
     <children>
-        <ImageView fitHeight="63.0" fitWidth="77.0" layoutX="10.0" layoutY="10.0">
+        <ImageView fitHeight="80.0" fitWidth="92.0" layoutX="10.0" layoutY="10.0">
             <image>
                 <Image url="@../../../shared/additional/logo.png" />
             </image>
@@ -34,20 +34,24 @@
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
-      <Label fx:id="labelName" alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="376.0" text="Name" textAlignment="CENTER" textFill="#184cd0">
+      <Label fx:id="labelName" alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="376.0" text="Name" textAlignment="CENTER" textFill="#292826">
          <font>
-            <Font size="16.0" />
+            <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="labelEmail" alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="401.0" text="Email" textAlignment="CENTER" textFill="#184cd0">
+      <Label fx:id="labelEmail" alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="401.0" text="Email" textAlignment="CENTER" textFill="#292826">
          <font>
-            <Font size="16.0" />
+            <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="labelPhone" alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="426.0" text="Phone" textAlignment="CENTER" textFill="#184cd0">
+      <Label fx:id="labelPhone" alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="426.0" text="Phone" textAlignment="CENTER" textFill="#292826">
          <font>
-            <Font size="16.0" />
+            <Font size="18.0" />
          </font>
       </Label>
+      <Button layoutX="650.0" layoutY="417.0" mnemonicParsing="false" onAction="#onChangeInfo" prefHeight="43.0" prefWidth="101.0" style="-fx-background-color: #292826;" text="Change Info" textFill="#f9d342">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
     </children>
 </AnchorPane>

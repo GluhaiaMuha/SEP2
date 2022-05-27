@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import shared.transferObj.Movie;
 import shared.transferObj.Rent;
 
 import java.sql.Date;

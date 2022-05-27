@@ -47,7 +47,7 @@
                   <Font size="21.0" />
                </font>
             </Button>
-            <Button layoutX="71.0" layoutY="349.0" mnemonicParsing="false" onAction="#onRegister" prefHeight="46.0" prefWidth="295.0" style="-fx-background-color: transparent;" text="New customer? Create an account." textFill="#292826">
+            <Button layoutX="71.0" layoutY="349.0" mnemonicParsing="false" onAction="#onRegister" prefHeight="46.0" prefWidth="295.0" style="-fx-background-color: transparent;" stylesheets="@../../../shared/additional/loginStyle.css" text="New customer? Create an account." textFill="#292826">
                <font>
                   <Font size="16.0" />
                </font>

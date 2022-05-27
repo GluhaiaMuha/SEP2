@@ -29,6 +29,7 @@ public class ViewFactory
     createScene("Rent");
     createScene("Loans");
     createScene("Review");
+    createScene("CustomerInfoChange");
   }
 
   private static void createScene(String sceneName) {
@@ -102,6 +103,20 @@ public class ViewFactory
         stage.centerOnScreen();
 
       } catch (IOException | SQLException e) {
+        e.printStackTrace();
+      }
+    }else if (sceneName.equals("CustomerInfoChange"))
+    {
+      try
+      {
+        Parent root = loadFXML("../views/customerInfoChangeView/CustomerInfoChangeView.fxml");
+
+        scene = new Scene(root);
+        stage.centerOnScreen();
+
+      }
+      catch (IOException | SQLException e)
+      {
         e.printStackTrace();
       }
     }
