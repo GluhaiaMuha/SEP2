@@ -52,6 +52,7 @@ public class RegisterViewController implements ViewController, PropertyChangeLis
   @FXML
   void onLogin(ActionEvent event) {
     viewHandler.openLoginView();
+    registerViewModel.clearTextFields();
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)

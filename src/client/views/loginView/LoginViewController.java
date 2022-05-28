@@ -42,6 +42,7 @@ public class LoginViewController implements ViewController, PropertyChangeListen
   @FXML
   void onRegister(ActionEvent event) {
     viewHandler.openRegisterView();
+    loginViewModel.clearTextFields();
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)

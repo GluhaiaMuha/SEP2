@@ -51,6 +51,19 @@ public class CustomerInfoChangeViewModel
       JOptionPane.showMessageDialog(null, "Please fill in all fields");
       return false;
     }
+    for(int i=0;i<phoneTextField.getValue().length();i++)
+    {
+      if(!"0123456789".contains(phoneTextField.getValue().charAt(i)+""))
+      {
+        JOptionPane.showMessageDialog(null,"Only digits allowed in phone field");
+        return false;
+      }
+    }
+    if (phoneTextField.getValue().length() != 8)
+    {
+      JOptionPane.showMessageDialog(null,"Invalid phone number");
+      return false;
+    }
     return true;
   }
 

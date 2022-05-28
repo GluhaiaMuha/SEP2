@@ -25,29 +25,29 @@
    <right>
       <AnchorPane prefHeight="410.0" prefWidth="482.0" style="-fx-background-color: #F9D342;" BorderPane.alignment="CENTER">
          <children>
-            <Text fill="#292826" layoutX="37.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
+            <Text fill="#292826" layoutX="38.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
                <font>
                   <Font size="21.0" />
                </font>
             </Text>
-            <Text fill="#292826" layoutX="37.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
+            <Text fill="#292826" layoutX="38.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
                <font>
                   <Font size="20.0" />
                </font>
             </Text>
-            <TextField fx:id="emailInput" layoutX="144.0" layoutY="163.0" style="-fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent; -fx-border-color: #292826;" />
-            <PasswordField fx:id="passwordInput" layoutX="146.0" layoutY="218.0" style="-fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent; -fx-border-color: #292826;" />
-            <ImageView fitHeight="104.0" fitWidth="148.0" layoutX="146.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <TextField fx:id="emailInput" layoutX="135.0" layoutY="164.0" prefHeight="27.0" prefWidth="170.0" style="-fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent; -fx-border-color: #292826;" />
+            <PasswordField fx:id="passwordInput" layoutX="135.0" layoutY="218.0" prefHeight="27.0" prefWidth="170.0" style="-fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent; -fx-border-color: #292826;" />
+            <ImageView fitHeight="104.0" fitWidth="148.0" layoutX="167.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../shared/additional/lock.png" />
                </image>
             </ImageView>
-            <Button layoutX="171.0" layoutY="270.0" mnemonicParsing="false" onAction="#onLoginAction" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #292826;" text="Login" textFill="#f9d342">
+            <Button layoutX="172.0" layoutY="271.0" mnemonicParsing="false" onAction="#onLoginAction" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #292826;" text="Login" textFill="#f9d342">
                <font>
                   <Font size="21.0" />
                </font>
             </Button>
-            <Button layoutX="71.0" layoutY="349.0" mnemonicParsing="false" onAction="#onRegister" prefHeight="46.0" prefWidth="295.0" style="-fx-background-color: transparent;" stylesheets="@../../../shared/additional/loginStyle.css" text="New customer? Create an account." textFill="#292826">
+            <Button layoutX="72.0" layoutY="350.0" mnemonicParsing="false" onAction="#onRegister" prefHeight="46.0" prefWidth="295.0" style="-fx-background-color: transparent;" stylesheets="@../../../shared/additional/loginStyle.css" text="New customer? Create an account." textFill="#292826">
                <font>
                   <Font size="16.0" />
                </font>
