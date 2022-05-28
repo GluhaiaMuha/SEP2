@@ -6,6 +6,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import shared.transferObj.Customer;
 
+import javax.swing.*;
+
 public class CustomerInfoChangeViewModel
 {
   private static StringProperty firstNameTextField;
@@ -24,12 +26,14 @@ public class CustomerInfoChangeViewModel
 
   public static void changeInfo()
   {
-        String f_name = firstNameTextField.getValue();
-        String l_name = lastNameTextField.getValue();
-        String phone = phoneTextField.getValue();
-        libraryModel.changeCustomerInfo(libraryModel.getEmail(), f_name, l_name, phone);
-        CustomerMainViewModel.customerInfo();
-        clearTextFields();
+    if (validCustomerInformation())
+    {
+      String f_name = firstNameTextField.getValue();
+      String l_name = lastNameTextField.getValue();
+      String phone = phoneTextField.getValue();
+      libraryModel.changeCustomerInfo(libraryModel.getEmail(), f_name, l_name, phone);
+      CustomerMainViewModel.customerInfo();
+    }
   }
 
   public static void selectInfo()
@@ -40,11 +44,14 @@ public class CustomerInfoChangeViewModel
     phoneTextField.setValue(customer.getPhone());
   }
 
-  private static void clearTextFields()
+  public static boolean validCustomerInformation()
   {
-    firstNameTextField.setValue("");
-    lastNameTextField.setValue("");
-    phoneTextField.setValue("");
+    if (firstNameTextField.getValue().isEmpty() || lastNameTextField.getValue().isEmpty() || phoneTextField.getValue().isEmpty())
+    {
+      JOptionPane.showMessageDialog(null, "Please fill in all fields");
+      return false;
+    }
+    return true;
   }
 
   public StringProperty firstNameTextFieldProperty()
