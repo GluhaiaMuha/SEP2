@@ -27,8 +27,6 @@ public class ViewModelFactory
 
   private ReviewViewModel reviewViewModel;
 
-  public ViewModelFactory() {
-  }
 
   public LoginViewModel getLoginViewModel()
   {
