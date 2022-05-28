@@ -1,298 +1,75 @@
 package client.views.rent;
 
 import client.model.LibraryModel;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import shared.transferObj.*;
 
-import javax.swing.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class RentViewModel {
-    private ObservableList<Object> dataMovie;
-    private ObservableList<Object> dataBook;
-    private ObservableList<Object> dataCD;
-    private ObservableList<Object> dataSoftware;
-
-    private StringProperty movieSearchField;
-    private StringProperty bookSearchField;
-    private StringProperty cdSearchField;
-    private StringProperty softwareSearchField;
-
     private LibraryModel libraryModel;
 
     public RentViewModel(LibraryModel libraryModel)
     {
-        dataMovie = FXCollections.observableList(new ArrayList<>());
-        dataBook = FXCollections.observableList(new ArrayList<>());
-        dataCD = FXCollections.observableList(new ArrayList<>());
-        dataSoftware = FXCollections.observableList(new ArrayList<>());
-
-        movieSearchField = new SimpleStringProperty();
-        bookSearchField = new SimpleStringProperty();
-        cdSearchField = new SimpleStringProperty();
-        softwareSearchField = new SimpleStringProperty();
-
         this.libraryModel = libraryModel;
     }
 
-    public void updateTables()
+    public void rentProduct(String product, Rent rent)
     {
-        dataMovie.clear();
-        dataBook.clear();
-        dataCD.clear();
-        dataSoftware.clear();
-        dataMovie.addAll(libraryModel.read("movie"));
-        dataBook.addAll(libraryModel.read( "book"));
-        dataCD.addAll(libraryModel.read( "cd"));
-        dataSoftware.addAll(libraryModel.read( "software"));
+        libraryModel.rentProduct(product, rent);
     }
 
-    public void newRent(Object obj, String product)
+    public List<Rent> readCustomerRents(String customer_email, String product)
     {
-        java.sql.Date sqlDateFrom;
-        java.sql.Date sqlDateTo;
-        Product product1 = (Product) obj;
-        Rent rent = null;
-
-        if (product1 != null)
-        {
-            if (validationForRent(obj, product))
-            {
-                if (product1.getAmountInStock() > 0)
-                {
-                    sqlDateFrom = new java.sql.Date(System.currentTimeMillis());
-                    sqlDateTo = new java.sql.Date(System.currentTimeMillis() + 691200000);
-                    switch (product)
-                    {
-                        case "book":
-                            Book book = (Book) obj;
-                            book.setAmountInStock(book.getAmountInStock() - 1);
-                            rent = new Rent(libraryModel.getEmail(), book.getHash(), book.getTitle(), sqlDateFrom, sqlDateTo);
-                            break;
-                        case "movie":
-                            Movie movie = (Movie) obj;
-                            movie.setAmountInStock(movie.getAmountInStock() - 1);
-                            rent = new Rent(libraryModel.getEmail(), movie.getHash(), movie.getTitle(), sqlDateFrom, sqlDateTo);
-                            break;
-                        case "cd":
-                            CD cd = (CD) obj;
-                            cd.setAmountInStock(cd.getAmountInStock() - 1);
-                            rent = new Rent(libraryModel.getEmail(), cd.getHash(), cd.getName(), sqlDateFrom, sqlDateTo);
-                            break;
-                        case "software":
-                            Software software = (Software) obj;
-                            software.setAmountInStock(software.getAmountInStock() - 1);
-                            rent = new Rent(libraryModel.getEmail(), software.getHash(), software.getName(), sqlDateFrom, sqlDateTo);
-                            break;
-                    }
-
-                    libraryModel.rentProduct(product, rent);
-                    libraryModel.update(product, "hash = '" + product1.getHash() + "'", obj);
-                }
-                else
-                    JOptionPane.showMessageDialog(null, "No product in stock!");
-            }
-            else
-                JOptionPane.showMessageDialog(null, "Product already rented!");
-        }
-        else
-            JOptionPane.showMessageDialog(null, "Product is not selected!");
+        return libraryModel.readCustomerRents(customer_email, product);
     }
 
-    public boolean validationForRent(Object product, String table)
+    public List<Object> read(String tableName)
     {
-        List<Rent> rents = libraryModel.readCustomerRents(libraryModel.getEmail(), table);
-        Product product1 = (Product) product;
-        for (Rent rent : rents)
-        {
-            if (rent.getProduct_hash().equals(product1.getHash()))
-                return false;
-        }
-        return true;
+        return libraryModel.read(tableName);
     }
 
-    public void newReview(Object obj, String product)
+    public List<Book> readBooksByTitle(String searchString)
     {
-        Review review = null;
-        if (obj != null)
-        {
-            if (validationForReview(obj, product))
-            {
-                final String inputReview = JOptionPane.showInputDialog(
-                    "Write review: ");
-                java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
-                if (!inputReview.equals(""))
-                {
-                    switch (product)
-                    {
-                        case "book":
-                            Book book = (Book) obj;
-                            review = new Review(libraryModel.getEmail(), book.getHash(), book.getTitle(), currentDate,
-                                inputReview);
-                            break;
-                        case "movie":
-                            Movie movie = (Movie) obj;
-                            review = new Review(libraryModel.getEmail(), movie.getHash(), movie.getTitle(), currentDate,
-                                inputReview);
-                            break;
-                        case "cd":
-                            CD cd = (CD) obj;
-                            review = new Review(libraryModel.getEmail(), cd.getHash(), cd.getName(), currentDate,
-                                inputReview);
-                            break;
-                        case "software":
-                            Software software = (Software) obj;
-                            review = new Review(libraryModel.getEmail(),
-                                software.getHash(), software.getName(),
-                                currentDate, inputReview);
-                            break;
-                    }
-                    libraryModel.addReview(product, review);
-                }
-                else
-                    JOptionPane.showMessageDialog(null, "Input is empty!");
-            }
-            else
-                JOptionPane.showMessageDialog(null, "Product is already reviewed!");
-        }
-        else
-            JOptionPane.showMessageDialog(null, "Product is not selected!");
+        return libraryModel.readBooksByTitle(searchString);
     }
 
-    public boolean validationForReview(Object product, String table)
+    public List<Movie> readMoviesByTitle(String searchString)
     {
-        List<Review> reviews = libraryModel.readReview(table);
-        Product product1 = (Product) product;
-        String email = libraryModel.getEmail();
-        for (Review review : reviews)
-        {
-            if (review.getProduct_hash().equals(product1.getHash()) && review.getCustomer_email().equals(email))
-                return false;
-        }
-        return true;
+        return libraryModel.readMoviesByTitle(searchString);
     }
 
-    public ObservableList<Object> searchProducts(String product)
+    public List<CD> readCDsByName(String searchString)
     {
-        String search;
-        ObservableList<Object> productSearched = null;
-        switch (product)
-        {
-            case "movie":
-                search = movieSearchField.getValue();
-                productSearched = FXCollections.observableArrayList(
-                    libraryModel.readMoviesByTitle(search));
-                break;
-            case "book":
-                search = bookSearchField.getValue();
-                productSearched = FXCollections.observableArrayList(
-                    libraryModel.readBooksByTitle(search));
-                break;
-            case "cd":
-                search = cdSearchField.getValue();
-                productSearched = FXCollections.observableArrayList(
-                    libraryModel.readCDsByName(search));
-                break;
-            case "software":
-                search = softwareSearchField.getValue();
-                productSearched = FXCollections.observableArrayList(
-                    libraryModel.readSoftwaresByName(search));
-                break;
-        }
-        return productSearched;
+        return libraryModel.readCDsByName(searchString);
     }
 
-    public ObservableList<Object> getDataMovie()
+    public List<Software> readSoftwaresByName(String searchString)
     {
-        return dataMovie;
+        return libraryModel.readSoftwaresByName(searchString);
     }
 
-    public ObservableList<Object> getDataBook()
+    public void update(String tableName, String whereClause, Object obj)
     {
-        return dataBook;
+        libraryModel.update(tableName, whereClause, obj);
     }
 
-    public ObservableList<Object> getDataCD()
+    public void delete(String tableName, String whereClause)
     {
-        return dataCD;
+        libraryModel.delete(tableName, whereClause);
     }
 
-    public ObservableList<Object> getDataSoftware()
+    public void addReview(String product, Review review)
     {
-        return dataSoftware;
+        libraryModel.addReview(product, review);
     }
 
-    public StringProperty movieSearchFieldProperty()
+    public List<Review> readReview(String product)
     {
-        return movieSearchField;
+        return libraryModel.readReview(product);
     }
 
-    public StringProperty bookSearchFieldProperty()
+    public String getEmail()
     {
-        return bookSearchField;
+        return libraryModel.getEmail();
     }
-
-    public StringProperty cdSearchFieldProperty()
-    {
-        return cdSearchField;
-    }
-
-    public StringProperty softwareSearchFieldProperty()
-    {
-        return softwareSearchField;
-    }
-
-    //    public void rentProduct(String product, Rent rent)
-//    {
-//        libraryModel.rentProduct(product, rent);
-//    }
-//
-//    public List<Rent> readCustomerRents(String customer_email, String product)
-//    {
-//        return libraryModel.readCustomerRents(customer_email, product);
-//    }
-//
-//    public List<Object> read(String tableName)
-//    {
-//        return libraryModel.read(tableName);
-//    }
-
-//    public List<Book> readBooksByTitle(String searchString)
-//    {
-//        return libraryModel.readBooksByTitle(searchString);
-//    }
-//
-//    public List<Movie> readMoviesByTitle(String searchString)
-//    {
-//        return libraryModel.readMoviesByTitle(searchString);
-//    }
-//
-//    public List<CD> readCDsByName(String searchString)
-//    {
-//        return libraryModel.readCDsByName(searchString);
-//    }
-//
-//    public List<Software> readSoftwaresByName(String searchString)
-//    {
-//        return libraryModel.readSoftwaresByName(searchString);
-//    }
-
-//    public void addReview(String product, Review review)
-//    {
-//        libraryModel.addReview(product, review);
-//    }
-//
-//    public List<Review> readReview(String product)
-//    {
-//        return libraryModel.readReview(product);
-//    }
-//
-//    public String getEmail()
-//    {
-//        return libraryModel.getEmail();
-//    }
 }

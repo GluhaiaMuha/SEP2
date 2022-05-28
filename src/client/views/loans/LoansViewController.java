@@ -3,6 +3,8 @@ package client.views.loans;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -80,9 +82,6 @@ public class LoansViewController implements ViewController {
     {
         this.viewHandler = vh;
         loansViewModel= vmf.getLoansViewModel();
-
-        tables();
-        loansViewModel.updateTables();
     }
 
     @FXML
@@ -90,7 +89,8 @@ public class LoansViewController implements ViewController {
     {
         Rent selectedBook = booksTable.getSelectionModel().getSelectedItem();
         loansViewModel.removeRent(selectedBook, "book");
-        loansViewModel.updateTables();
+        loansViewModel.updateProductAmount("book", selectedBook.getProduct_hash());
+        updateTables();
     }
 
     @FXML
@@ -98,7 +98,8 @@ public class LoansViewController implements ViewController {
     {
         Rent selectedCD = cdTable.getSelectionModel().getSelectedItem();
         loansViewModel.removeRent(selectedCD, "cd");
-        loansViewModel.updateTables();
+        loansViewModel.updateProductAmount("cd", selectedCD.getProduct_hash());
+        updateTables();
     }
 
     @FXML
@@ -106,7 +107,8 @@ public class LoansViewController implements ViewController {
     {
         Rent selectedMovie = movieTable.getSelectionModel().getSelectedItem();
         loansViewModel.removeRent(selectedMovie, "movie");
-        loansViewModel.updateTables();
+        loansViewModel.updateProductAmount("movie", selectedMovie.getProduct_hash());
+        updateTables();
     }
 
     @FXML
@@ -114,7 +116,8 @@ public class LoansViewController implements ViewController {
     {
         Rent selectedSoftware = softwareTable.getSelectionModel().getSelectedItem();
         loansViewModel.removeRent(selectedSoftware, "software");
-        loansViewModel.updateTables();
+        loansViewModel.updateProductAmount("software", selectedSoftware.getProduct_hash());
+        updateTables();
     }
 
     @FXML
@@ -125,142 +128,99 @@ public class LoansViewController implements ViewController {
     @FXML
     void onUpdateList(ActionEvent event)
     {
-        loansViewModel.updateTables();
+        updateTables();
     }
 
-    public void tables()
+    private void updateTables()
     {
-        movieEmailCol.setCellValueFactory(new PropertyValueFactory<>("customer_email"));
-        movieTitleCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
-        movieDateFromCol.setCellValueFactory(new PropertyValueFactory<>("DateFrom"));
-        movieDateToCol.setCellValueFactory(new PropertyValueFactory<>("DateTo"));
-        movieTable.setItems(loansViewModel.getDataMovie());
+        /* Movie Table Start Here */
+        /* For future use, make sure PropertyValueFactory is the same as the get/set Methods */
+
+        final ObservableList<Rent> dataMovie = FXCollections.observableArrayList(loansViewModel.readCustomerRents(loansViewModel.getEmail(), "movie")
+        );
+
+        movieEmailCol.setCellValueFactory(
+            new PropertyValueFactory<>("customer_email")
+        );
+
+        movieTitleCol.setCellValueFactory(
+            new PropertyValueFactory<>("productName")
+        );
+
+        movieDateFromCol.setCellValueFactory(
+            new PropertyValueFactory<>("DateFrom")
+        );
+        movieDateToCol.setCellValueFactory(
+            new PropertyValueFactory<>("DateTo")
+        );
+
+        movieTable.setItems(dataMovie);
+
+        /* Books Table Starts Here */
+
+        final ObservableList<Rent> dataBook = FXCollections.observableArrayList(loansViewModel.readCustomerRents(loansViewModel.getEmail(), "book")
+        );
+
+        booksEmailCol.setCellValueFactory(
+            new PropertyValueFactory<>("customer_email")
+        );
+
+        booksTitleCol.setCellValueFactory(
+            new PropertyValueFactory<>("productName")
+        );
+
+        booksDateFromCol.setCellValueFactory(
+            new PropertyValueFactory<>("DateFrom")
+        );
+        booksDateToCol.setCellValueFactory(
+            new PropertyValueFactory<>("DateTo")
+        );
+
+        booksTable.setItems(dataBook);
+
+        /* CD Table Starts Here */
+        final ObservableList<Rent> dataCD = FXCollections.observableArrayList(loansViewModel.readCustomerRents(loansViewModel.getEmail(), "cd")
+        );
+
+        cdEmailCol.setCellValueFactory(
+            new PropertyValueFactory<>("customer_email")
+        );
+
+        cdNameCol.setCellValueFactory(
+            new PropertyValueFactory<>("productName")
+        );
+
+        cdDateFromCol.setCellValueFactory(
+            new PropertyValueFactory<>("DateFrom")
+        );
+        cdDateToCol.setCellValueFactory(
+            new PropertyValueFactory<>("DateTo")
+        );
 
 
-        booksEmailCol.setCellValueFactory(new PropertyValueFactory<>("customer_email"));
-        booksTitleCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
-        booksDateFromCol.setCellValueFactory(new PropertyValueFactory<>("DateFrom"));
-        booksDateToCol.setCellValueFactory(new PropertyValueFactory<>("DateTo"));
-        booksTable.setItems(loansViewModel.getDataBook());
+        cdTable.setItems(dataCD);
 
+        /* Software Table Starts Here */
+        final ObservableList<Rent> dataSoftware = FXCollections.observableArrayList(loansViewModel.readCustomerRents(loansViewModel.getEmail(), "software")
+        );
 
-        cdEmailCol.setCellValueFactory(new PropertyValueFactory<>("customer_email"));
-        cdNameCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
-        cdDateFromCol.setCellValueFactory(new PropertyValueFactory<>("DateFrom"));
-        cdDateToCol.setCellValueFactory(new PropertyValueFactory<>("DateTo"));
-        cdTable.setItems(loansViewModel.getDataCD());
+        softwareEmailCol.setCellValueFactory(
+            new PropertyValueFactory<>("customer_email")
+        );
 
+        softwareNameCol.setCellValueFactory(
+            new PropertyValueFactory<>("productName")
+        );
 
-        softwareEmailCol.setCellValueFactory(new PropertyValueFactory<>("customer_email"));
-        softwareNameCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
-        softwareDateFromCol.setCellValueFactory(new PropertyValueFactory<>("DateFrom"));
-        softwareDateToCol.setCellValueFactory(new PropertyValueFactory<>("DateTo"));
-        softwareTable.setItems(loansViewModel.getDataSoftware());
+        softwareDateFromCol.setCellValueFactory(
+            new PropertyValueFactory<>("DateFrom")
+        );
+        softwareDateToCol.setCellValueFactory(
+            new PropertyValueFactory<>("DateTo")
+        );
+
+        softwareTable.setItems(dataSoftware);
     }
-
-//    public void removeRent(Rent rent, String product)
-//    {
-//        if (rent != null)
-//        {
-//            loansViewModel.removeRent(rent, product);
-//            loansViewModel.updateProductAmount(product, rent.getProduct_hash());
-//            loansViewModel.updateTables();
-//        }else
-//            JOptionPane.showMessageDialog(null, "Product is not selected!");
-//    }
-
-
-
-//    private void updateTables()
-//    {
-//        /* Movie Table Start Here */
-//        /* For future use, make sure PropertyValueFactory is the same as the get/set Methods */
-//
-//        final ObservableList<Rent> dataMovie = FXCollections.observableArrayList(loansViewModel.readCustomerRents(loansViewModel.getEmail(), "movie")
-//        );
-//
-//        movieEmailCol.setCellValueFactory(
-//            new PropertyValueFactory<>("customer_email")
-//        );
-//
-//        movieTitleCol.setCellValueFactory(
-//            new PropertyValueFactory<>("productName")
-//        );
-//
-//        movieDateFromCol.setCellValueFactory(
-//            new PropertyValueFactory<>("DateFrom")
-//        );
-//        movieDateToCol.setCellValueFactory(
-//            new PropertyValueFactory<>("DateTo")
-//        );
-//
-//        movieTable.setItems(dataMovie);
-//
-//        /* Books Table Starts Here */
-//
-//        final ObservableList<Rent> dataBook = FXCollections.observableArrayList(loansViewModel.readCustomerRents(loansViewModel.getEmail(), "book")
-//        );
-//
-//        booksEmailCol.setCellValueFactory(
-//            new PropertyValueFactory<>("customer_email")
-//        );
-//
-//        booksTitleCol.setCellValueFactory(
-//            new PropertyValueFactory<>("productName")
-//        );
-//
-//        booksDateFromCol.setCellValueFactory(
-//            new PropertyValueFactory<>("DateFrom")
-//        );
-//        booksDateToCol.setCellValueFactory(
-//            new PropertyValueFactory<>("DateTo")
-//        );
-//
-//        booksTable.setItems(dataBook);
-//
-//        /* CD Table Starts Here */
-//        final ObservableList<Rent> dataCD = FXCollections.observableArrayList(loansViewModel.readCustomerRents(loansViewModel.getEmail(), "cd")
-//        );
-//
-//        cdEmailCol.setCellValueFactory(
-//            new PropertyValueFactory<>("customer_email")
-//        );
-//
-//        cdNameCol.setCellValueFactory(
-//            new PropertyValueFactory<>("productName")
-//        );
-//
-//        cdDateFromCol.setCellValueFactory(
-//            new PropertyValueFactory<>("DateFrom")
-//        );
-//        cdDateToCol.setCellValueFactory(
-//            new PropertyValueFactory<>("DateTo")
-//        );
-//
-//
-//        cdTable.setItems(dataCD);
-//
-//        /* Software Table Starts Here */
-//        final ObservableList<Rent> dataSoftware = FXCollections.observableArrayList(loansViewModel.readCustomerRents(loansViewModel.getEmail(), "software")
-//        );
-//
-//        softwareEmailCol.setCellValueFactory(
-//            new PropertyValueFactory<>("customer_email")
-//        );
-//
-//        softwareNameCol.setCellValueFactory(
-//            new PropertyValueFactory<>("productName")
-//        );
-//
-//        softwareDateFromCol.setCellValueFactory(
-//            new PropertyValueFactory<>("DateFrom")
-//        );
-//        softwareDateToCol.setCellValueFactory(
-//            new PropertyValueFactory<>("DateTo")
-//        );
-//
-//        softwareTable.setItems(dataSoftware);
-//    }
 
 
 }
