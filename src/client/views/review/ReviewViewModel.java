@@ -151,31 +151,6 @@ public class ReviewViewModel implements Subject
         return softwareSearchField;
     }
 
-//    public List<Review> readReview(String product)
-//    {
-//        return libraryModel.readReview(product);
-//    }
-
-//    public List<Review> readReviewsByProductName(String searchString, String product)
-//    {
-//        return libraryModel.readReviewsByProductName(searchString, product);
-//    }
-
-//    public User readUserRegister(String email)
-//    {
-//        return libraryModel.readUserRegister(email);
-//    }
-
-//    public void removeReview(Review review, String product)
-//    {
-//        libraryModel.removeReview(review, product);
-//    }
-
-//    public String getEmail()
-//    {
-//        return libraryModel.getEmail();
-//    }
-
     @Override public void addListener(String eventName,
         PropertyChangeListener listener)
     {
