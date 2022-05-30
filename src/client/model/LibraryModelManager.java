@@ -356,6 +356,18 @@ public class LibraryModelManager implements LibraryModel
   }
 
   /**
+   * Return a product by hash
+   *
+   * @param table DB table name
+   * @param productHash Product Hash
+   * @return Object
+   */
+  @Override public Object readProductByHash(String table, String productHash)
+  {
+    return client.readProductByHash(table, productHash);
+  }
+
+  /**
    * Getter for client email
    *
    * @return String

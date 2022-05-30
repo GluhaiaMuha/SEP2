@@ -12,10 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import shared.transferObj.Book;
-import shared.transferObj.CD;
-import shared.transferObj.Movie;
-import shared.transferObj.Software;
+import shared.transferObj.*;
 
 import javax.swing.*;
 import java.util.List;
@@ -266,11 +263,17 @@ public class MainViewController implements ViewController
     String hash = String.valueOf(title.hashCode());
 
     Movie movie = new Movie(hash,title,director,release_year,length,amountInStock);
-    mainViewModel.insert("movie", movie);
-    updateTables();
-    updateChoiceBoxes();
-    clearTextFields("movie");
-    updateChoiceBoxes();
+    Movie movie1 = (Movie) mainViewModel.readProductByHash("movie", movie.getHash());
+    if (movie1==null)
+    {
+      mainViewModel.insert("movie", movie);
+      updateTables();
+      updateChoiceBoxes();
+      clearTextFields("movie");
+      updateChoiceBoxes();
+    }
+    else
+      JOptionPane.showMessageDialog(null, "This product already exists!");
   }
 
   /**
@@ -280,10 +283,32 @@ public class MainViewController implements ViewController
   void onRemoveMovie(ActionEvent event)
   {
     Movie selectedMovie = (Movie) movieTable.getSelectionModel().getSelectedItem();
-      movieTable.getItems().remove(selectedMovie);
-      mainViewModel.delete("movie",selectedMovie.getHash());
-      updateTables();
-      updateChoiceBoxes();
+    try
+    {
+      List<Rent> rents = mainViewModel.readRents("movie");
+      boolean productRented = false;
+      for (Rent rent : rents)
+      {
+        if (rent.getProduct_hash().equals(selectedMovie.getHash()))
+        {
+          productRented = true;
+          break;
+        }
+      }
+      if (!productRented)
+      {
+        movieTable.getItems().remove(selectedMovie);
+        mainViewModel.delete("movie", selectedMovie.getHash());
+        updateTables();
+        updateChoiceBoxes();
+      }
+      else
+        JOptionPane.showMessageDialog(null, "This product is currently rented!");
+    } catch (NullPointerException e)
+    {
+      JOptionPane.showMessageDialog(null, "Product is not selected!");
+    }
+
   }
 
   /**
@@ -365,10 +390,16 @@ public class MainViewController implements ViewController
     String hash = String.valueOf(title.hashCode());
 
     Book book = new Book(hash,title,author,pageCount,genre,publicationYear,amountInStock);
-    mainViewModel.insert("book", book);
-    updateTables();
-    clearTextFields("book");
-    updateChoiceBoxes();
+    Book book1 = (Book) mainViewModel.readProductByHash("book", book.getHash());
+    if (book1==null)
+    {
+      mainViewModel.insert("book", book);
+      updateTables();
+      clearTextFields("book");
+      updateChoiceBoxes();
+    }
+    else
+      JOptionPane.showMessageDialog(null, "This product already exists!");
   }
 
   /**
@@ -378,10 +409,31 @@ public class MainViewController implements ViewController
   void onRemoveBook(ActionEvent event)
   {
     Book selectedBook = (Book) booksTable.getSelectionModel().getSelectedItem();
-      booksTable.getItems().remove(selectedBook);
-      mainViewModel.delete("book", selectedBook.getHash());
-      updateTables();
-      updateChoiceBoxes();
+    try
+    {
+      List<Rent> rents = mainViewModel.readRents("book");
+      boolean productRented = false;
+      for (Rent rent : rents)
+      {
+        if (rent.getProduct_hash().equals(selectedBook.getHash()))
+        {
+          productRented = true;
+          break;
+        }
+      }
+      if (!productRented)
+      {
+        booksTable.getItems().remove(selectedBook);
+        mainViewModel.delete("book", selectedBook.getHash());
+        updateTables();
+        updateChoiceBoxes();
+      }
+      else
+        JOptionPane.showMessageDialog(null, "This product is currently rented!");
+    } catch (NullPointerException e)
+    {
+      JOptionPane.showMessageDialog(null, "Product is not selected!");
+    }
   }
 
   /**
@@ -466,10 +518,16 @@ public class MainViewController implements ViewController
     String hash = String.valueOf(name.hashCode());
 
     CD cd = new CD(hash, name, capacity, usage, amountInStock);
-    mainViewModel.insert("cd", cd);
-    updateTables();
-    clearTextFields("cd");
-    updateChoiceBoxes();
+    CD cd1 = (CD) mainViewModel.readProductByHash("cd", cd.getHash());
+    if (cd1==null)
+    {
+      mainViewModel.insert("cd", cd);
+      updateTables();
+      clearTextFields("cd");
+      updateChoiceBoxes();
+    }
+    else
+      JOptionPane.showMessageDialog(null, "This product already exists!");
   }
 
   /**
@@ -479,10 +537,31 @@ public class MainViewController implements ViewController
   void onRemoveCd(ActionEvent event)
   {
     CD selectedCd = (CD) cdTable.getSelectionModel().getSelectedItem();
-      cdTable.getItems().remove(selectedCd);
-      mainViewModel.delete("cd", selectedCd.getHash());
-      updateTables();
-      updateChoiceBoxes();
+    try
+    {
+      List<Rent> rents = mainViewModel.readRents("cd");
+      boolean productRented = false;
+      for (Rent rent : rents)
+      {
+        if (rent.getProduct_hash().equals(selectedCd.getHash()))
+        {
+          productRented = true;
+          break;
+        }
+      }
+      if (!productRented)
+      {
+        cdTable.getItems().remove(selectedCd);
+        mainViewModel.delete("cd", selectedCd.getHash());
+        updateTables();
+        updateChoiceBoxes();
+      }
+      else
+        JOptionPane.showMessageDialog(null, "This product is currently rented!");
+    } catch (NullPointerException e)
+    {
+      JOptionPane.showMessageDialog(null, "Product is not selected!");
+    }
   }
 
   /**
@@ -565,10 +644,16 @@ public class MainViewController implements ViewController
     String hash = String.valueOf(name.hashCode());
 
     Software software = new Software(hash, name, type, version, licenseType, amountInStock);
-    mainViewModel.insert("software", software);
-    updateTables();
-    clearTextFields("software");
-    updateChoiceBoxes();
+    Software software1 = (Software) mainViewModel.readProductByHash("software", software.getHash());
+    if (software1==null)
+    {
+      mainViewModel.insert("software", software);
+      updateTables();
+      clearTextFields("software");
+      updateChoiceBoxes();
+    }
+    else
+      JOptionPane.showMessageDialog(null, "This product already exists!");
   }
 
   /**
@@ -578,10 +663,31 @@ public class MainViewController implements ViewController
   void onRemoveSoftware(ActionEvent event)
   {
     Software selectedSoftware = (Software) softwareTable.getSelectionModel().getSelectedItem();
-      softwareTable.getItems().remove(selectedSoftware);
-      mainViewModel.delete("software", selectedSoftware.getHash());
-      updateTables();
-      updateChoiceBoxes();
+    try
+    {
+      List<Rent> rents = mainViewModel.readRents("software");
+      boolean productRented = false;
+      for (Rent rent : rents)
+      {
+        if (rent.getProduct_hash().equals(selectedSoftware.getHash()))
+        {
+          productRented = true;
+          break;
+        }
+      }
+      if (!productRented)
+      {
+        softwareTable.getItems().remove(selectedSoftware);
+        mainViewModel.delete("software", selectedSoftware.getHash());
+        updateTables();
+        updateChoiceBoxes();
+      }
+      else
+        JOptionPane.showMessageDialog(null, "This product is currently rented!");
+    } catch (NullPointerException e)
+    {
+      JOptionPane.showMessageDialog(null, "Product is not selected!");
+    }
   }
 
   /**

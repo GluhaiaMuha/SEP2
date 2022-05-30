@@ -81,4 +81,9 @@ public class ProductInfoModelImpl implements ProductInfoModel
   {
     return ProductInfoDAOImpl.getInstance().readSoftwareByName(searchString);
   }
+
+  @Override public Object readProductByHash(String table, String productHash)
+  {
+    return ProductInfoDAOImpl.getInstance().readProductByHash(table, productHash);
+  }
 }

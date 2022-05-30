@@ -208,4 +208,9 @@ public class RMIServerImpl implements RMIServer
   {
     ReviewModelImpl.getInstance().removeReview(review, product);
   }
+
+  @Override public Object readProductByHash(String table, String productHash)
+  {
+    return ProductInfoModelImpl.getInstance().readProductByHash(table, productHash);
+  }
 }

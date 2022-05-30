@@ -70,5 +70,7 @@ public interface Client
 
   void removeReview(Review review, String product);
 
+  Object readProductByHash(String table, String productHash);
+
   String getEmail();
 }

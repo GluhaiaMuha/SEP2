@@ -429,6 +429,19 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
+  @Override public Object readProductByHash(String table, String productHash)
+  {
+    Object obj = null;
+    try
+    {
+      obj = server.readProductByHash(table, productHash);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return obj;
+  }
+
   @Override
   public String getEmail()
   {

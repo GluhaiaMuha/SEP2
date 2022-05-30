@@ -71,4 +71,6 @@ public interface RMIServer extends Remote
   List<Review> readReviewsByProductName(String searchString, String product) throws RemoteException;
 
   void removeReview(Review review, String product) throws RemoteException;
+
+  Object readProductByHash(String table, String productHash) throws RemoteException;
 }

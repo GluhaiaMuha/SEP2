@@ -1,10 +1,7 @@
 package client.views.librarianMainView;
 
 import client.model.LibraryModel;
-import shared.transferObj.Book;
-import shared.transferObj.CD;
-import shared.transferObj.Movie;
-import shared.transferObj.Software;
+import shared.transferObj.*;
 
 import java.util.List;
 
@@ -182,5 +179,28 @@ public class MainViewModel
   public void insert(String tableName, Object obj)
   {
     libraryModel.insert(tableName, obj);
+  }
+
+  /**
+   * Return a product by hash
+   *
+   * @param table DB table name
+   * @param productHash Product Hash
+   * @return Object
+   */
+  public Object readProductByHash(String table, String productHash)
+  {
+    return libraryModel.readProductByHash(table, productHash);
+  }
+
+  /**
+   * Returns all rented products
+   *
+   * @param product Rented product
+   * @return List
+   */
+  public List<Rent> readRents(String product)
+  {
+    return libraryModel.readRents(product);
   }
 }

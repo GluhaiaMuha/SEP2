@@ -34,4 +34,6 @@ public interface ProductInfoModel
   CD readCDByName(String searchString);
 
   Software readSoftwareByName(String searchString);
+
+  Object readProductByHash(String table, String productHash);
 }

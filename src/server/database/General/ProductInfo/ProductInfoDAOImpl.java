@@ -479,4 +479,101 @@ public class ProductInfoDAOImpl implements ProductInfoDAO
     }
     return null;
   }
+
+  public Object readProductByHash(String table, String productHash)
+  {
+    if (table.equals("movie"))
+    {
+      try (Connection connection = DatabaseFront.getInstance().getConnection())
+      {
+        PreparedStatement statement = connection.prepareStatement(
+            "SELECT * FROM " + table + " WHERE hash = '" + productHash + "'");
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next())
+        {
+          String hash = resultSet.getString("hash");
+          String title = resultSet.getString("title");
+          String director = resultSet.getString("director");
+          int release_year = resultSet.getInt("release_year");
+          int length = resultSet.getInt("length");
+          int amountInStock = resultSet.getInt("amountInStock");
+          return new Movie(hash, title, director, release_year, length, amountInStock);
+        }
+      }
+      catch (SQLException e)
+      {
+        e.printStackTrace();
+      }
+    }
+    if (table.equals("book"))
+    {
+      try (Connection connection = DatabaseFront.getInstance().getConnection())
+      {
+        PreparedStatement statement = connection.prepareStatement(
+            "SELECT * FROM " + table + " WHERE hash = '" + productHash + "'");
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next())
+        {
+          String hash = resultSet.getString("hash");
+          String title = resultSet.getString("title");
+          String author = resultSet.getString("author");
+          int pageCount = resultSet.getInt("pageCount");
+          String genre = resultSet.getString("genre");
+          int publication_year = resultSet.getInt("publication_year");
+          int amountInStock = resultSet.getInt("amountInStock");
+          return new Book(hash, title, author, pageCount, genre, publication_year, amountInStock);
+        }
+      }
+      catch (SQLException e)
+      {
+        e.printStackTrace();
+      }
+    }
+    if (table.equals("cd"))
+    {
+      try (Connection connection = DatabaseFront.getInstance().getConnection())
+      {
+        PreparedStatement statement = connection.prepareStatement(
+            "SELECT * FROM " + table + " WHERE hash = '" + productHash + "'");
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next())
+        {
+          String hash = resultSet.getString("hash");
+          String name = resultSet.getString("name");
+          int capacity = resultSet.getInt("capacity");
+          String usage = resultSet.getString("usage");
+          int amountInStock = resultSet.getInt("amountInStock");
+          return new CD(hash, name, capacity, usage, amountInStock);
+        }
+      }
+      catch (SQLException e)
+      {
+        e.printStackTrace();
+      }
+    }
+    if (table.equals("software"))
+    {
+      try (Connection connection = DatabaseFront.getInstance().getConnection())
+      {
+        PreparedStatement statement = connection.prepareStatement(
+            "SELECT * FROM " + table + " WHERE hash = '" + productHash + "'");
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next())
+        {
+          String hash = resultSet.getString("hash");
+          String name = resultSet.getString("name");
+          String type = resultSet.getString("type");
+          String version = resultSet.getString("version");
+          String license_type = resultSet.getString("license_type");
+          int amountInStock = resultSet.getInt("amountInStock");
+          return new Software(hash, name, type, version, license_type, amountInStock);
+        }
+      }
+      catch (SQLException e)
+      {
+        e.printStackTrace();
+      }
+    }
+    return null;
+  }
 }
