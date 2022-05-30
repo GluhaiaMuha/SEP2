@@ -11,6 +11,9 @@ import javafx.scene.control.TextField;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * Controller for login.fxml
+ */
 public class LoginViewController implements ViewController, PropertyChangeListener
 {
   @FXML
@@ -22,6 +25,12 @@ public class LoginViewController implements ViewController, PropertyChangeListen
   private ViewHandler viewHandler;
   private LoginViewModel loginViewModel;
 
+  /**
+   * Method to Initialize the Controller
+   *
+   * @param vh VieHandler
+   * @param vmf ViewModelFactory
+   */
   @Override
   public void init(ViewHandler vh, ViewModelFactory vmf)
   {
@@ -33,12 +42,18 @@ public class LoginViewController implements ViewController, PropertyChangeListen
     loginViewModel.addListener("Customer Login", this);
   }
 
+  /**
+   * Action Event for loging In
+   */
   @FXML
   void onLoginAction(ActionEvent event)
   {
     loginViewModel.login();
   }
 
+  /**
+   * Action Event for registering a user
+   */
   @FXML
   void onRegister(ActionEvent event) {
     viewHandler.openRegisterView();

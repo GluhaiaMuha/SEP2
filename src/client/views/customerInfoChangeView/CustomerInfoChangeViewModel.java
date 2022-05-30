@@ -8,6 +8,9 @@ import shared.transferObj.Customer;
 
 import javax.swing.*;
 
+/**
+ * View Model for CustomerInfoChangeView Controller
+ */
 public class CustomerInfoChangeViewModel
 {
   private static StringProperty firstNameTextField;
@@ -24,6 +27,9 @@ public class CustomerInfoChangeViewModel
     this.libraryModel = libraryModel;
   }
 
+  /**
+   * Method to change Customer Info
+   */
   public static void changeInfo()
   {
     if (validCustomerInformation())
@@ -44,6 +50,11 @@ public class CustomerInfoChangeViewModel
     phoneTextField.setValue(customer.getPhone());
   }
 
+  /**
+   * Method that checks if the Customer Input is valid
+   *
+   * @return boolean
+   */
   public static boolean validCustomerInformation()
   {
     if (firstNameTextField.getValue().isEmpty() || lastNameTextField.getValue().isEmpty() || phoneTextField.getValue().isEmpty())

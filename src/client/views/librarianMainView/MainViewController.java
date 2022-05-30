@@ -229,12 +229,18 @@ public class MainViewController implements ViewController
     updateChoiceBoxes();
   }
 
+  /**
+   * Action Event to open Review View with data available only for Librarian
+   */
   @FXML
   void onReviewsButton(ActionEvent event)
   {
     viewHandler.openReviewView();
   }
 
+  /**
+   * Action Event to open Rent View with data available only for Librarian
+   */
   @FXML
   void onRentsButton(ActionEvent event)
   {
@@ -245,6 +251,9 @@ public class MainViewController implements ViewController
 
   /* Movie Action Events Start Here */
 
+  /**
+   * Action Event to add a movie to db/table
+   */
   @FXML
   void onAddMovie(ActionEvent event)
   {
@@ -262,6 +271,10 @@ public class MainViewController implements ViewController
     clearTextFields("movie");
     updateChoiceBoxes();
   }
+
+  /**
+   * Action Event to remove a movie from db/table
+   */
   @FXML
   void onRemoveMovie(ActionEvent event)
   {
@@ -271,6 +284,10 @@ public class MainViewController implements ViewController
       updateTables();
       updateChoiceBoxes();
   }
+
+  /**
+   * Action Event to edit a Movie's Object content
+   */
   @FXML
   void onEditMovie(ActionEvent event)
   {
@@ -287,6 +304,10 @@ public class MainViewController implements ViewController
     updateChoiceBoxes();
     clearTextFields("editMovie");
   }
+
+  /**
+   * Action Event to get the selected Movie from a choiceBox
+   */
   @FXML
   void onSelectMovieTitle(ActionEvent event)
   {
@@ -298,6 +319,10 @@ public class MainViewController implements ViewController
     editMovieLength.setText(Integer.toString(movie.getLength()));
     editMovieAmountInStock.setText(Integer.toString(movie.getAmountInStock()));
   }
+
+  /**
+   * Action Event to search for a movie by name
+   */
   @FXML
   void onMovieSearch(ActionEvent event){
     String search = movieSearchField.getText();
@@ -305,6 +330,10 @@ public class MainViewController implements ViewController
 
     movieTable.setItems(moviesSearched);
   }
+
+  /**
+   * Action Event to update the Movie Table
+   */
   @FXML
   void onMovieReset(ActionEvent event)
   {
@@ -315,6 +344,9 @@ public class MainViewController implements ViewController
 
   /* Book Action Events Start Here */
 
+  /**
+   * Action Event to add a Book to db/table
+   */
   @FXML
   void onAddBook(ActionEvent event)
   {
@@ -332,6 +364,10 @@ public class MainViewController implements ViewController
     clearTextFields("book");
     updateChoiceBoxes();
   }
+
+  /**
+   * Action Event to remove a Book
+   */
   @FXML
   void onRemoveBook(ActionEvent event)
   {
@@ -341,6 +377,10 @@ public class MainViewController implements ViewController
       updateTables();
       updateChoiceBoxes();
   }
+
+  /**
+   * Action Event to edit a Book Object data
+   */
   @FXML
   void onEditBook(ActionEvent event)
   {
@@ -359,6 +399,10 @@ public class MainViewController implements ViewController
     clearTextFields("editBook");
 
   }
+
+  /**
+   * Action Event to get the selected Book from the ChoiceBox and insert values in FieldText
+   */
   @FXML
   void onSelectBookTitle(ActionEvent event)
   {
@@ -371,6 +415,10 @@ public class MainViewController implements ViewController
     editBookPublicationYear.setText(Integer.toString(book.getPublication_year()));
     editBookAmountInStock.setText(Integer.toString(book.getAmountInStock()));
   }
+
+  /**
+   * Action Event to search for a Book
+   */
   @FXML
   void onBookSearch(){
     String search = bookSearchField.getText();
@@ -378,6 +426,10 @@ public class MainViewController implements ViewController
 
     booksTable.setItems(booksSearched);
   }
+
+  /**
+   * Action Event to update Book table
+   */
   @FXML
   void onBookReset()
   {
@@ -390,6 +442,9 @@ public class MainViewController implements ViewController
 
   /* CD Action Events Start Here */
 
+  /**
+   * Action Event to add a CD to db and table
+   */
   @FXML
   void onAddCd(ActionEvent event)
   {
@@ -405,6 +460,10 @@ public class MainViewController implements ViewController
     clearTextFields("cd");
     updateChoiceBoxes();
   }
+
+  /**
+   * Action Event to remove a CD from table & db
+   */
   @FXML
   void onRemoveCd(ActionEvent event)
   {
@@ -414,6 +473,10 @@ public class MainViewController implements ViewController
       updateTables();
       updateChoiceBoxes();
   }
+
+  /**
+   * Action Event to edit a CD Object values
+   */
   @FXML
   void onEditCd(ActionEvent event)
   {
@@ -429,6 +492,10 @@ public class MainViewController implements ViewController
     updateChoiceBoxes();
     clearTextFields("editCd");
   }
+
+  /**
+   * Action Event to get a CD obj from ChoiceBox and insert values in FieldText
+   */
   @FXML
   void onSelectCdName(ActionEvent event)
   {
@@ -440,6 +507,10 @@ public class MainViewController implements ViewController
     editCdUsage.setText(cd.getUsage());
     editCdAmountInStock.setText(Integer.toString(cd.getAmountInStock()));
   }
+
+  /**
+   * Action Event to search for a CD
+   */
   @FXML
   void onSearchCd(ActionEvent event){
     String search = cdSearchField.getText();
@@ -447,6 +518,10 @@ public class MainViewController implements ViewController
 
     cdTable.setItems(cdSearched);
   }
+
+  /**
+   * Action Event to update CD table
+   */
   @FXML
   void onCdReset(ActionEvent event)
   {
@@ -460,6 +535,9 @@ public class MainViewController implements ViewController
 
   /* Software Action Events Start Here */
 
+  /**
+   * Action Event to add a Software to db & table
+   */
   @FXML
   void onAddSoftware(ActionEvent event)
   {
@@ -477,6 +555,9 @@ public class MainViewController implements ViewController
     updateChoiceBoxes();
   }
 
+  /**
+   * Action Event to remove a Software Obj from db & table
+   */
   @FXML
   void onRemoveSoftware(ActionEvent event)
   {
@@ -486,6 +567,10 @@ public class MainViewController implements ViewController
       updateTables();
       updateChoiceBoxes();
   }
+
+  /**
+   * Action Event to edit a Software Obj value
+   */
   @FXML
   void onEditSoftware(ActionEvent event)
   {
@@ -502,6 +587,10 @@ public class MainViewController implements ViewController
     updateChoiceBoxes();
     clearTextFields("editSoftware");
   }
+
+  /**
+   * Action Event to get the selected Software obj from the ChoiceBox
+   */
   @FXML
   void onSelectSoftwareName(ActionEvent event)
   {
@@ -514,6 +603,10 @@ public class MainViewController implements ViewController
     editSoftwareLicenseType.setText(software.getLicense_type());
     editSoftwareAmountInStock.setText(Integer.toString(software.getAmountInStock()));
   }
+
+  /**
+   * Action Event to search for a Software in table
+   */
   @FXML
   void onSoftwareSearch(ActionEvent event){
     String search = softwareSearchField.getText();
@@ -521,6 +614,10 @@ public class MainViewController implements ViewController
 
     cdTable.setItems(softwareSearch);
   }
+
+  /**
+   * Action Event to update Software table
+   */
   @FXML
   void onSoftwareReset(ActionEvent event)
   {
@@ -532,6 +629,9 @@ public class MainViewController implements ViewController
 
   /* Utility Methods Start Here*/
 
+  /**
+   * Action Event to update all ChoiceBoxes with values from table
+   */
   private void updateChoiceBoxes()
   {
     List<Movie> movies = mainViewModel.readMovies();
@@ -630,9 +730,9 @@ public class MainViewController implements ViewController
     }
   }
 
-
-
-
+  /**
+   * Method for populating/updating data into the table from db
+   */
   private void updateTables()
   {
     /* Movie Table Start Here */

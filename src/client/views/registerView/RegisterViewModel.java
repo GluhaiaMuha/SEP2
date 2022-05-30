@@ -34,6 +34,9 @@ public class RegisterViewModel implements Subject
     support = new PropertyChangeSupport(this);
   }
 
+  /**
+   * Method for creating a new User
+   */
   public void newCustomer()
   {
     try
@@ -65,6 +68,9 @@ public class RegisterViewModel implements Subject
     }
   }
 
+  /**
+   * Method for cleaning the TextFields
+   */
   public void clearTextFields()
   {
     fName.setValue("");
@@ -74,6 +80,11 @@ public class RegisterViewModel implements Subject
     phoneNumber.setValue("");
   }
 
+  /**
+   * Method for checking if the User input is valid
+   *
+   * @return boolean
+   */
   public boolean validCustomerInformation()
   {
     if(fName.getValue().isEmpty() || lName.getValue().isEmpty() || email.getValue().isEmpty() || password.getValue().isEmpty() || phoneNumber.getValue().isEmpty())

@@ -27,6 +27,9 @@ public class LoginViewModel implements Subject
     support = new PropertyChangeSupport(this);
   }
 
+  /**
+   * Login Method
+   */
   public void login()
   {
     try
@@ -61,6 +64,11 @@ public class LoginViewModel implements Subject
     }
   }
 
+  /**
+   * Check if User input in valid
+   *
+   * @return boolean
+   */
   public boolean validUserInformation()
   {
     if(emailInput.getValue().isEmpty() || passwordInput.getValue().isEmpty())
@@ -71,6 +79,9 @@ public class LoginViewModel implements Subject
     return true;
   }
 
+  /**
+   * Method for cleaning text fields
+   */
   public void clearTextFields()
   {
     emailInput.setValue("");

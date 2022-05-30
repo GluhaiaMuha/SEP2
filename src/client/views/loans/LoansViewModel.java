@@ -12,6 +12,9 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
+/**
+ * ViewModel for the LoansViewController
+ */
 public class LoansViewModel implements Subject
 {
     private ObservableList<Rent> dataMovie;
@@ -32,6 +35,9 @@ public class LoansViewModel implements Subject
         support = new PropertyChangeSupport(this);
     }
 
+    /**
+     * Method for updating Tables
+     */
     public void updateTables()
     {
         dataMovie.clear();
@@ -58,6 +64,12 @@ public class LoansViewModel implements Subject
         }
     }
 
+    /**
+     * Method for removing a rent
+     *
+     * @param rent Rent
+     * @param product product
+     */
     public void removeRent(Rent rent, String product)
     {
         if (rent != null)
@@ -68,6 +80,9 @@ public class LoansViewModel implements Subject
             JOptionPane.showMessageDialog(null, "Product is not selected!");
     }
 
+    /**
+     * Method for going back to the main Page
+     */
     public void goToMainPage()
     {
         User user = libraryModel.readUserRegister(libraryModel.getEmail());

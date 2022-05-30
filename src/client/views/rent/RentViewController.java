@@ -14,6 +14,9 @@ import shared.transferObj.CD;
 import shared.transferObj.Movie;
 import shared.transferObj.Software;
 
+/**
+ * Controller Class for RentView.fxml
+ */
 public class RentViewController implements ViewController {
 
     private ViewHandler viewHandler;
@@ -103,8 +106,12 @@ public class RentViewController implements ViewController {
     @FXML
     private TableColumn<Software, String> softwareAmountInStockCol;
 
-
-
+    /**
+     * Method to Initialize the Controller
+     *
+     * @param vh ViewHandler
+     * @param vmf ViewModelFactory
+     */
     @Override
     public void init(ViewHandler vh, ViewModelFactory vmf)
     {
@@ -120,6 +127,9 @@ public class RentViewController implements ViewController {
         rentViewModel.updateTables();
     }
 
+    /**
+     * Action Event to rent a Book
+     */
     @FXML
     void onRentBook(ActionEvent event)
     {
@@ -128,6 +138,9 @@ public class RentViewController implements ViewController {
         rentViewModel.updateTables();
     }
 
+    /**
+     * Action Event to rent a CD
+     */
     @FXML
     void onRentCD(ActionEvent event)
     {
@@ -136,6 +149,9 @@ public class RentViewController implements ViewController {
         rentViewModel.updateTables();
     }
 
+    /**
+     * Action Event to rent a Movie
+     */
     @FXML
     void onRentMovie(ActionEvent event)
     {
@@ -144,6 +160,9 @@ public class RentViewController implements ViewController {
         rentViewModel.updateTables();
     }
 
+    /**
+     * Action Event to rent a Software
+     */
     @FXML
     void onRentSoftware(ActionEvent event)
     {
@@ -152,6 +171,9 @@ public class RentViewController implements ViewController {
         rentViewModel.updateTables();
     }
 
+    /**
+     * Action Event to add review for Book
+     */
     @FXML
     void onAddBookReview(ActionEvent event)
     {
@@ -159,6 +181,9 @@ public class RentViewController implements ViewController {
         rentViewModel.newReview(selectedBook, "book");
     }
 
+    /**
+     * Action Event to add review for CD
+     */
     @FXML
     void onAddCDReview(ActionEvent event)
     {
@@ -166,6 +191,9 @@ public class RentViewController implements ViewController {
         rentViewModel.newReview(selectedCD, "cd");
     }
 
+    /**
+     * Action Event to add review for Movie
+     */
     @FXML
     void onAddMovieReview(ActionEvent event)
     {
@@ -173,6 +201,9 @@ public class RentViewController implements ViewController {
         rentViewModel.newReview(selectedMovie, "movie");
     }
 
+    /**
+     * Action Event to add review Software
+     */
     @FXML
     void onAddSoftwareReview(ActionEvent event)
     {
@@ -180,11 +211,17 @@ public class RentViewController implements ViewController {
         rentViewModel.newReview(selectedSoftware, "software");
     }
 
+    /**
+     * Action Event to return to Main Page
+     */
     @FXML
     void onGoToMainPage(ActionEvent event) {
         viewHandler.openCustomerMainView();
     }
 
+    /**
+     * Action Event to update Rent Table
+     */
     @FXML
     void onUpdateList(ActionEvent event)
     {
@@ -192,30 +229,45 @@ public class RentViewController implements ViewController {
         tables();
     }
 
+    /**
+     * Action Event to search all movie Rents
+     */
     @FXML
     void onMovieSearch(ActionEvent event)
     {
         movieTable.setItems(rentViewModel.searchProducts("movie"));
     }
 
+    /**
+     * Action Event to search all Book Rents
+     */
     @FXML
     void onBookSearch(ActionEvent event)
     {
         booksTable.setItems(rentViewModel.searchProducts("book"));
     }
 
+    /**
+     * Action Event to search all CD Rents
+     */
     @FXML
     void onCDSearch(ActionEvent event)
     {
         cdTable.setItems(rentViewModel.searchProducts("cd"));
     }
 
+    /**
+     * Action Event to search all Software rents
+     */
     @FXML
     void onSoftwareSearch(ActionEvent event)
     {
         softwareTable.setItems(rentViewModel.searchProducts("software"));
     }
 
+    /**
+     * Method for binding/updating tables with data
+     */
     private void tables()
     {
         movieHashCol.setCellValueFactory(new PropertyValueFactory<>("Hash"));
