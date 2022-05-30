@@ -322,13 +322,13 @@
                                        </font>
                                     </Text>
                                     <TextField fx:id="editMovieDirector" layoutX="37.0" layoutY="190.0" />
-                                    <Text layoutX="58.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Release year">
+                                    <Text layoutX="64.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Release year">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
-                                    <TextField fx:id="editMovieReleaseYear" layoutX="31.0" layoutY="240.0" />
-                                    <Text layoutX="80.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Length">
+                                    <TextField fx:id="editMovieReleaseYear" layoutX="39.0" layoutY="242.0" />
+                                    <Text layoutX="86.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Length">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -367,25 +367,25 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
-                                    <Text layoutX="76.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Author" wrappingWidth="63.8701171875">
+                                    <Text layoutX="82.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Author" wrappingWidth="63.8701171875">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
                                     <TextField fx:id="editBookAuthor" layoutX="39.0" layoutY="126.0" />
-                                    <Text layoutX="64.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Page Count">
+                                    <Text layoutX="67.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Page Count">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
                                     <TextField fx:id="editBookPgCount" layoutX="37.0" layoutY="181.0" />
-                                    <Text layoutX="84.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre">
+                                    <Text layoutX="82.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
                                     <TextField fx:id="editBookGenre" layoutX="34.0" layoutY="236.0" />
-                                    <Text layoutX="42.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount In Stock">
+                                    <Text layoutX="40.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount In Stock">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -424,7 +424,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
-                                    <Text layoutX="87.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" wrappingWidth="49.4700927734375">
+                                    <Text layoutX="91.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" wrappingWidth="49.4700927734375">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -476,7 +476,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
-                                    <Text layoutX="73.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capacity" wrappingWidth="79.070068359375">
+                                    <Text layoutX="75.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capacity" wrappingWidth="79.070068359375">
                                        <font>
                                           <Font size="18.0" />
                                        </font>

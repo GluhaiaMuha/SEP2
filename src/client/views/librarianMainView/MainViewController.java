@@ -17,6 +17,7 @@ import shared.transferObj.CD;
 import shared.transferObj.Movie;
 import shared.transferObj.Software;
 
+import javax.swing.*;
 import java.util.List;
 
 public class MainViewController implements ViewController
@@ -312,12 +313,17 @@ public class MainViewController implements ViewController
   void onSelectMovieTitle(ActionEvent event)
   {
     savedMovieTitle = editMovieChoiceBox.getValue();
-    Movie movie = mainViewModel.readMovieByTitle(savedMovieTitle);
-    editMovieTitle.setText(movie.getTitle());
-    editMovieDirector.setText(movie.getDirector());
-    editMovieReleaseYear.setText(Integer.toString(movie.getRelease_year()));
-    editMovieLength.setText(Integer.toString(movie.getLength()));
-    editMovieAmountInStock.setText(Integer.toString(movie.getAmountInStock()));
+    if (savedMovieTitle!=null)
+    {
+      Movie movie = mainViewModel.readMovieByTitle(savedMovieTitle);
+      editMovieTitle.setText(movie.getTitle());
+      editMovieDirector.setText(movie.getDirector());
+      editMovieReleaseYear.setText(Integer.toString(movie.getRelease_year()));
+      editMovieLength.setText(Integer.toString(movie.getLength()));
+      editMovieAmountInStock.setText(Integer.toString(movie.getAmountInStock()));
+    }
+    else
+      JOptionPane.showMessageDialog(null, "Product is not selected!");
   }
 
   /**
@@ -407,13 +413,18 @@ public class MainViewController implements ViewController
   void onSelectBookTitle(ActionEvent event)
   {
     savedBookTitle = editBookChoiceBox.getValue();
-    Book book = mainViewModel.readBookByTitle(savedBookTitle);
-    editBookTitle.setText(book.getTitle());
-    editBookAuthor.setText(book.getAuthor());
-    editBookPgCount.setText(Integer.toString(book.getPageCount()));
-    editBookGenre.setText(book.getGenre());
-    editBookPublicationYear.setText(Integer.toString(book.getPublication_year()));
-    editBookAmountInStock.setText(Integer.toString(book.getAmountInStock()));
+    if (savedBookTitle != null)
+    {
+      Book book = mainViewModel.readBookByTitle(savedBookTitle);
+      editBookTitle.setText(book.getTitle());
+      editBookAuthor.setText(book.getAuthor());
+      editBookPgCount.setText(Integer.toString(book.getPageCount()));
+      editBookGenre.setText(book.getGenre());
+      editBookPublicationYear.setText(Integer.toString(book.getPublication_year()));
+      editBookAmountInStock.setText(Integer.toString(book.getAmountInStock()));
+    }
+    else
+      JOptionPane.showMessageDialog(null, "Product is not selected!");
   }
 
   /**
@@ -500,12 +511,17 @@ public class MainViewController implements ViewController
   void onSelectCdName(ActionEvent event)
   {
     savedCdName = editCdChoiceBox.getValue();
-    CD cd = mainViewModel.readCDByName(savedCdName);
+    if (savedCdName != null)
+    {
+      CD cd = mainViewModel.readCDByName(savedCdName);
 
-    editCdName.setText(cd.getName());
-    editCdCapacity.setText(Integer.toString(cd.getCapacity()));
-    editCdUsage.setText(cd.getUsage());
-    editCdAmountInStock.setText(Integer.toString(cd.getAmountInStock()));
+      editCdName.setText(cd.getName());
+      editCdCapacity.setText(Integer.toString(cd.getCapacity()));
+      editCdUsage.setText(cd.getUsage());
+      editCdAmountInStock.setText(Integer.toString(cd.getAmountInStock()));
+    }
+    else
+      JOptionPane.showMessageDialog(null, "Product is not selected!");
   }
 
   /**
@@ -595,13 +611,18 @@ public class MainViewController implements ViewController
   void onSelectSoftwareName(ActionEvent event)
   {
     savedSoftwareName = editSoftwareChoiceBox.getValue();
-    Software software = mainViewModel.readSoftwareByName(savedSoftwareName);
+    if (savedSoftwareName != null)
+    {
+      Software software = mainViewModel.readSoftwareByName(savedSoftwareName);
 
-    editSoftwareName.setText(software.getName());
-    editSoftwareType.setText(software.getType());
-    editSoftwareVersion.setText(software.getVersion());
-    editSoftwareLicenseType.setText(software.getLicense_type());
-    editSoftwareAmountInStock.setText(Integer.toString(software.getAmountInStock()));
+      editSoftwareName.setText(software.getName());
+      editSoftwareType.setText(software.getType());
+      editSoftwareVersion.setText(software.getVersion());
+      editSoftwareLicenseType.setText(software.getLicense_type());
+      editSoftwareAmountInStock.setText(Integer.toString(software.getAmountInStock()));
+    }
+    else
+      JOptionPane.showMessageDialog(null, "Product is not selected!");
   }
 
   /**
