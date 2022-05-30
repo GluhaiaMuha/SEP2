@@ -125,9 +125,9 @@ public class LibraryModelManager implements LibraryModel
     client.update(tableName, whereClause, obj);
   }
 
-  @Override public void delete(String tableName, String whereClause)
+  @Override public void delete(String tableName, String product_hash)
   {
-    client.delete(tableName, whereClause);
+    client.delete(tableName, product_hash);
   }
 
   @Override public void insert(String tableName, Object obj)

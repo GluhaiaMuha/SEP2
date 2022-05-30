@@ -52,7 +52,7 @@ public interface Client
 
   void update(String tableName, String whereClause, Object obj);
 
-  void delete(String tableName, String whereClause);
+  void delete(String tableName, String product_hash);
 
   void insert(String tableName, Object obj);
 

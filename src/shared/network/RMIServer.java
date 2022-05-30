@@ -54,7 +54,7 @@ public interface RMIServer extends Remote
 
   void update(String tableName, String whereClause, Object obj) throws RemoteException;
 
-  void delete(String tableName, String whereClause) throws RemoteException;
+  void delete(String tableName, String product_hash) throws RemoteException;
 
   void insert(String tableName, Object obj) throws RemoteException;
 

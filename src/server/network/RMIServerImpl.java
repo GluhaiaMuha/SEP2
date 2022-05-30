@@ -157,9 +157,9 @@ public class RMIServerImpl implements RMIServer
     ManageProductsImpl.getInstance().update(tableName, whereClause, obj);
   }
 
-  @Override public void delete(String tableName, String whereClause)
+  @Override public void delete(String tableName, String product_hash)
   {
-    ManageProductsImpl.getInstance().delete(tableName, whereClause);
+    ManageProductsImpl.getInstance().delete(tableName, product_hash);
   }
 
   @Override public void insert(String tableName, Object obj)

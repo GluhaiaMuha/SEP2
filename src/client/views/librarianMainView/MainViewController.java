@@ -262,7 +262,7 @@ public class MainViewController implements ViewController
   {
     Movie selectedMovie = (Movie) movieTable.getSelectionModel().getSelectedItem();
       movieTable.getItems().remove(selectedMovie);
-      mainViewModel.delete("movie","hash = '" + selectedMovie.getHash() + "'");
+      mainViewModel.delete("movie",selectedMovie.getHash());
       updateTables();
       updateChoiceBoxes();
   }
@@ -332,7 +332,7 @@ public class MainViewController implements ViewController
   {
     Book selectedBook = (Book) booksTable.getSelectionModel().getSelectedItem();
       booksTable.getItems().remove(selectedBook);
-      mainViewModel.delete("book", "hash = '" + selectedBook.getHash() + "'");
+      mainViewModel.delete("book", selectedBook.getHash());
       updateTables();
       updateChoiceBoxes();
   }
@@ -405,7 +405,7 @@ public class MainViewController implements ViewController
   {
     CD selectedCd = (CD) cdTable.getSelectionModel().getSelectedItem();
       cdTable.getItems().remove(selectedCd);
-      mainViewModel.delete("cd", "hash = '" + selectedCd.getHash() + "'");
+      mainViewModel.delete("cd", selectedCd.getHash());
       updateTables();
       updateChoiceBoxes();
   }
@@ -477,7 +477,7 @@ public class MainViewController implements ViewController
   {
     Software selectedSoftware = (Software) softwareTable.getSelectionModel().getSelectedItem();
       softwareTable.getItems().remove(selectedSoftware);
-      mainViewModel.delete("software", "hash = '" + selectedSoftware.getHash() + "'");
+      mainViewModel.delete("software", selectedSoftware.getHash());
       updateTables();
       updateChoiceBoxes();
   }

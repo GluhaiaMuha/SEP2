@@ -321,11 +321,11 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
-  @Override public void delete(String tableName, String whereClause)
+  @Override public void delete(String tableName, String product_hash)
   {
     try
     {
-      server.delete(tableName, whereClause);
+      server.delete(tableName, product_hash);
     } catch (RemoteException e)
     {
       e.printStackTrace();
