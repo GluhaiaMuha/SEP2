@@ -14,6 +14,9 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.Date;
 
+/**
+ * Controller for LoansView.fxml
+ */
 public class LoansViewController implements ViewController, PropertyChangeListener
 {
     private ViewHandler viewHandler;
@@ -77,7 +80,12 @@ public class LoansViewController implements ViewController, PropertyChangeListen
     @FXML
     private TableColumn<Rent, Date> softwareDateToCol;
 
-
+    /**
+     * Initialize the controller
+     *
+     * @param vh ViewHandler
+     * @param vmf ViewModelHandler
+     */
     @Override
     public void init(ViewHandler vh, ViewModelFactory vmf)
     {
@@ -91,6 +99,9 @@ public class LoansViewController implements ViewController, PropertyChangeListen
         loansViewModel.updateTables();
     }
 
+    /**
+     * Action Event for removing a book rent
+     */
     @FXML
     void onRemoveBookRent(ActionEvent event)
     {
@@ -99,6 +110,9 @@ public class LoansViewController implements ViewController, PropertyChangeListen
         loansViewModel.updateTables();
     }
 
+    /**
+     * Action Event for removing a CD rent
+     */
     @FXML
     void onRemoveCDRent(ActionEvent event)
     {
@@ -107,6 +121,9 @@ public class LoansViewController implements ViewController, PropertyChangeListen
         loansViewModel.updateTables();
     }
 
+    /**
+     * Action Event for removing a Movie rent
+     */
     @FXML
     void onRemoveMovieRent(ActionEvent event)
     {
@@ -115,6 +132,9 @@ public class LoansViewController implements ViewController, PropertyChangeListen
         loansViewModel.updateTables();
     }
 
+    /**
+     * Action Event for removing a Software rent
+     */
     @FXML
     void onRemoveSoftwareRent(ActionEvent event)
     {
@@ -123,17 +143,26 @@ public class LoansViewController implements ViewController, PropertyChangeListen
         loansViewModel.updateTables();
     }
 
+    /**
+     * Action Event used to go to the main page of the Application
+     */
     @FXML
     void onGoToMainPage(ActionEvent event) {
         loansViewModel.goToMainPage();
     }
 
+    /**
+     * Action Event to update Rent Table
+     */
     @FXML
     void onUpdateList(ActionEvent event)
     {
         loansViewModel.updateTables();
     }
 
+    /**
+     * Method for binding the data from db to tableView
+     */
     public void tables()
     {
         movieEmailCol.setCellValueFactory(new PropertyValueFactory<>("customer_email"));
@@ -164,6 +193,11 @@ public class LoansViewController implements ViewController, PropertyChangeListen
         softwareTable.setItems(loansViewModel.getDataSoftware());
     }
 
+    /**
+     * Method for getting the Property Change
+     *
+     * @param evt Event Name
+     */
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
         if (evt.getPropertyName().equals("LibrarianView"))

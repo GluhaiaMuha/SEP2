@@ -17,6 +17,9 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.Date;
 
+/**
+ * Controller Class for Review.fxml
+ */
 public class ReviewViewController implements ViewController, PropertyChangeListener
 {
     private ViewHandler viewHandler;
@@ -102,6 +105,12 @@ public class ReviewViewController implements ViewController, PropertyChangeListe
     @FXML
     private Button removeSoftwareReview;
 
+    /**
+     * Method for initializing the Controller
+     *
+     * @param vh ViewHandler
+     * @param vmf ViewModelFactory
+     */
     @Override
     public void init(ViewHandler vh, ViewModelFactory vmf)
     {
@@ -121,12 +130,18 @@ public class ReviewViewController implements ViewController, PropertyChangeListe
         reviewViewModel.updateTables();
     }
 
+    /**
+     * Action Event for showing Book reviews
+     */
     @FXML
     void onShowBookReview(ActionEvent event) {
         Review selectedBook = booksTable.getSelectionModel().getSelectedItem();
         reviewViewModel.showReview(selectedBook);
     }
 
+    /**
+     * Action Event for showing CD reviews
+     */
     @FXML
     void onShowCDReview(ActionEvent event)
     {
@@ -134,6 +149,9 @@ public class ReviewViewController implements ViewController, PropertyChangeListe
         reviewViewModel.showReview(selectedCD);
     }
 
+    /**
+     * Action Event for showing Movie Reviews
+     */
     @FXML
     void onShowMovieReview(ActionEvent event)
     {
@@ -141,6 +159,9 @@ public class ReviewViewController implements ViewController, PropertyChangeListe
         reviewViewModel.showReview(selectedMovie);
     }
 
+    /**
+     * Action Event for showing Software Reviews
+     */
     @FXML
     void onShowSoftwareReview(ActionEvent event)
     {
@@ -148,6 +169,9 @@ public class ReviewViewController implements ViewController, PropertyChangeListe
         reviewViewModel.showReview(selectedSoftware);
     }
 
+    /**
+     * Action Event for removing Book reviews
+     */
     @FXML
     void onRemoveBookReview(ActionEvent event)
     {
@@ -156,6 +180,9 @@ public class ReviewViewController implements ViewController, PropertyChangeListe
         reviewViewModel.updateTables();
     }
 
+    /**
+     * Action Event for removing CD reviews
+     */
     @FXML
     void onRemoveCDReview(ActionEvent event)
     {
@@ -164,6 +191,9 @@ public class ReviewViewController implements ViewController, PropertyChangeListe
         reviewViewModel.updateTables();
     }
 
+    /**
+     * Action Event for removing Movie reviews
+     */
     @FXML
     void onRemoveMovieReview(ActionEvent event)
     {
@@ -172,6 +202,9 @@ public class ReviewViewController implements ViewController, PropertyChangeListe
         reviewViewModel.updateTables();
     }
 
+    /**
+     * Action Event for removing Software reviews
+     */
     @FXML
     void onRemoveSoftwareReview(ActionEvent event)
     {
@@ -180,6 +213,9 @@ public class ReviewViewController implements ViewController, PropertyChangeListe
         reviewViewModel.updateTables();
     }
 
+    /**
+     * Action Event for going back to the main Page
+     */
     @FXML
     void onGoToMainPage(ActionEvent event)
     {

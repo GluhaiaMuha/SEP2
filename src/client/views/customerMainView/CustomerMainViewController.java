@@ -34,11 +34,9 @@ public class CustomerMainViewController implements ViewController {
     public void onRentAction() {
         viewHandler.openRentView();
     }
-
     public void onLoansAction() {
         viewHandler.openLoansView();
     }
-
     public void onReviewAction() {
         viewHandler.openReviewView();
     }

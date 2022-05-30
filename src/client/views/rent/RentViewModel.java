@@ -11,6 +11,9 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * View Model Class for RentViewController
+ */
 public class RentViewModel {
     private ObservableList<Object> dataMovie;
     private ObservableList<Object> dataBook;
@@ -39,6 +42,9 @@ public class RentViewModel {
         this.libraryModel = libraryModel;
     }
 
+    /**
+     * Method for updating tables
+     */
     public void updateTables()
     {
         dataMovie.clear();
@@ -51,6 +57,12 @@ public class RentViewModel {
         dataSoftware.addAll(libraryModel.read( "software"));
     }
 
+    /**
+     * Method for creating a new Rent
+     *
+     * @param obj Object
+     * @param product Product
+     */
     public void newRent(Object obj, String product)
     {
         java.sql.Date sqlDateFrom;
@@ -103,6 +115,13 @@ public class RentViewModel {
             JOptionPane.showMessageDialog(null, "Product is not selected!");
     }
 
+    /**
+     * Method for checking valid Input
+     *
+     * @param product Product
+     * @param table tableName
+     * @return boolean
+     */
     public boolean validationForRent(Object product, String table)
     {
         List<Rent> rents = libraryModel.readCustomerRents(libraryModel.getEmail(), table);
@@ -115,6 +134,12 @@ public class RentViewModel {
         return true;
     }
 
+    /**
+     * Method for creating new Reviews
+     *
+     * @param obj Object
+     * @param product Product
+     */
     public void newReview(Object obj, String product)
     {
         Review review = null;
@@ -163,6 +188,13 @@ public class RentViewModel {
             JOptionPane.showMessageDialog(null, "Product is not selected!");
     }
 
+    /**
+     * Method for checking valid Review input
+     *
+     * @param product Product
+     * @param table tableName
+     * @return boolean
+     */
     public boolean validationForReview(Object product, String table)
     {
         List<Review> reviews = libraryModel.readReview(table);
@@ -176,6 +208,12 @@ public class RentViewModel {
         return true;
     }
 
+    /**
+     * Method for returning a list of Searched Items
+     *
+     * @param product Product
+     * @return ObservableList
+     */
     public ObservableList<Object> searchProducts(String product)
     {
         String search;
