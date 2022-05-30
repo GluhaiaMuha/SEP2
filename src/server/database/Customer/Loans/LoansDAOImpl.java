@@ -1,8 +1,6 @@
 package server.database.Customer.Loans;
 
 import server.database.DatabaseFront;
-import shared.transferObj.Book;
-import shared.transferObj.Customer;
 import shared.transferObj.Rent;
 
 import java.sql.*;
