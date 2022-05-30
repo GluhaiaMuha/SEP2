@@ -87,9 +87,9 @@ public class MainViewModel
     libraryModel.update(tableName, whereClause, obj);
   }
 
-  public void delete(String tableName, String whereClause)
+  public void delete(String tableName, String product_hash)
   {
-    libraryModel.delete(tableName, whereClause);
+    libraryModel.delete(tableName, product_hash);
   }
 
   public void insert(String tableName, Object obj)

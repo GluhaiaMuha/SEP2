@@ -71,7 +71,7 @@ public class LoginViewModel implements Subject
     return true;
   }
 
-  private void clearTextFields()
+  public void clearTextFields()
   {
     emailInput.setValue("");
     passwordInput.setValue("");

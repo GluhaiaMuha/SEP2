@@ -20,6 +20,8 @@ public interface RMIServer extends Remote
 
   List<Rent> readCustomerRents(String customer_email, String product) throws RemoteException;
 
+  List<Rent> readRents(String product) throws RemoteException;
+
   void removeRent(Rent rent, String product) throws RemoteException;
 
   void updateProductAmount(String tableName, String productHash) throws RemoteException;
@@ -54,7 +56,7 @@ public interface RMIServer extends Remote
 
   void update(String tableName, String whereClause, Object obj) throws RemoteException;
 
-  void delete(String tableName, String whereClause) throws RemoteException;
+  void delete(String tableName, String product_hash) throws RemoteException;
 
   void insert(String tableName, Object obj) throws RemoteException;
 

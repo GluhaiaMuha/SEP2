@@ -39,6 +39,11 @@ public class LibraryModelManager implements LibraryModel
     return client.readCustomerRents(customer_email, product);
   }
 
+  @Override public List<Rent> readRents(String product)
+  {
+    return client.readRents(product);
+  }
+
   @Override public void removeRent(Rent rent, String product)
   {
     client.removeRent(rent, product);
@@ -125,9 +130,9 @@ public class LibraryModelManager implements LibraryModel
     client.update(tableName, whereClause, obj);
   }
 
-  @Override public void delete(String tableName, String whereClause)
+  @Override public void delete(String tableName, String product_hash)
   {
-    client.delete(tableName, whereClause);
+    client.delete(tableName, product_hash);
   }
 
   @Override public void insert(String tableName, Object obj)

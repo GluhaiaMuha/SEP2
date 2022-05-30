@@ -65,7 +65,7 @@ public class RegisterViewModel implements Subject
     }
   }
 
-  private void clearTextFields()
+  public void clearTextFields()
   {
     fName.setValue("");
     lName.setValue("");
@@ -88,6 +88,11 @@ public class RegisterViewModel implements Subject
         JOptionPane.showMessageDialog(null,"Only digits allowed in phone field");
         return false;
       }
+    }
+    if (phoneNumber.getValue().length() != 8)
+    {
+      JOptionPane.showMessageDialog(null,"Invalid phone number");
+      return false;
     }
     if (!email.getValue().contains("@") || !email.getValue().contains("."))
     {

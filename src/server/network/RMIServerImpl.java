@@ -71,6 +71,11 @@ public class RMIServerImpl implements RMIServer
     return LoansModelImpl.getInstance().readCustomerRents(customer_email, product);
   }
 
+  @Override public List<Rent> readRents(String product)
+  {
+    return LoansModelImpl.getInstance().readRents(product);
+  }
+
   @Override public void removeRent(Rent rent, String product)
   {
     LoansModelImpl.getInstance().removeRent(rent, product);
@@ -157,9 +162,9 @@ public class RMIServerImpl implements RMIServer
     ManageProductsImpl.getInstance().update(tableName, whereClause, obj);
   }
 
-  @Override public void delete(String tableName, String whereClause)
+  @Override public void delete(String tableName, String product_hash)
   {
-    ManageProductsImpl.getInstance().delete(tableName, whereClause);
+    ManageProductsImpl.getInstance().delete(tableName, product_hash);
   }
 
   @Override public void insert(String tableName, Object obj)

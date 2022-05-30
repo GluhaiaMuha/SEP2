@@ -106,13 +106,22 @@ public class ManageProductsDAOImpl implements ManageProductsDAO
     }
   }
 
-  @Override public void delete(String tableName, String whereClause)
+  @Override public void delete(String tableName, String product_hash)
   {
-
     try(Connection connection = DatabaseFront.getInstance().getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "DELETE FROM " + tableName + " WHERE " + whereClause);
+          "DELETE FROM review_" + tableName + " WHERE product_hash = '" + product_hash + "'");
+      statement.executeUpdate();
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
+    try(Connection connection = DatabaseFront.getInstance().getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "DELETE FROM " + tableName + " WHERE hash = '" + product_hash + "'");
       statement.executeUpdate();
     }
     catch (SQLException e)
