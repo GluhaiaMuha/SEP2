@@ -222,6 +222,9 @@ public class ReviewViewController implements ViewController, PropertyChangeListe
         reviewViewModel.goToMainPage();
     }
 
+    /**
+     * Method for setting Review Manage Button visible only for librarian
+     */
     public void librarianView()
     {
         removeMovieReview.setVisible(true);
@@ -230,30 +233,45 @@ public class ReviewViewController implements ViewController, PropertyChangeListe
         removeCDReview.setVisible(true);
     }
 
+    /**
+     * Action Event to search for a Movie
+     */
     @FXML
     void onMovieSearch(ActionEvent event)
     {
         movieTable.setItems(reviewViewModel.searchProducts("movie"));
     }
 
+    /**
+     * Action Event to search for a Book
+     */
     @FXML
     void onBookSearch(ActionEvent event)
     {
         booksTable.setItems(reviewViewModel.searchProducts("book"));
     }
 
+    /**
+     * Action Event to search for a CD
+     */
     @FXML
     void onCDSearch(ActionEvent event)
     {
         cdTable.setItems(reviewViewModel.searchProducts("cd"));
     }
 
+    /**
+     * Action Event to search for Software
+     */
     @FXML
     void onSoftwareSearch(ActionEvent event)
     {
         softwareTable.setItems(reviewViewModel.searchProducts("software"));
     }
 
+    /**
+     * Action Event to update Tables
+     */
     @FXML
     void onUpdateList(ActionEvent event)
     {

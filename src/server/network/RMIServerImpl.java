@@ -19,6 +19,9 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+/**
+ * Implementation Class for the RMI Server
+ */
 public class RMIServerImpl implements RMIServer
 {
   private ConnectionPool connectionPool;
@@ -29,6 +32,10 @@ public class RMIServerImpl implements RMIServer
     connectionPool = new ConnectionPool();
   }
 
+  /**
+   * Default method for starting the Server
+   *
+   */
   public void startServer() throws RemoteException, AlreadyBoundException
   {
     Registry registry = LocateRegistry.createRegistry(1099);

@@ -14,6 +14,9 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
+/**
+ * ViewModel Class for ReviewViewController
+ */
 public class ReviewViewModel implements Subject
 {
     private ObservableList<Review> dataMovie;
@@ -57,6 +60,9 @@ public class ReviewViewModel implements Subject
         dataSoftware.addAll(libraryModel.readReview( "software"));
     }
 
+    /**
+     * Show review
+     */
     public void showReview(Review review)
     {
         if (review != null)
@@ -72,6 +78,9 @@ public class ReviewViewModel implements Subject
             JOptionPane.showMessageDialog(null, "Product is not selected!");
     }
 
+    /**
+     * Delete review
+     */
     public void removeReview(Review review, String product)
     {
         if (review != null)
@@ -81,6 +90,12 @@ public class ReviewViewModel implements Subject
             JOptionPane.showMessageDialog(null, "Product is not selected!");
     }
 
+    /**
+     * Search for a specific product
+     *
+     * @param product Product
+     * @return ObservableList
+     */
     public ObservableList<Review> searchProducts(String product)
     {
         String search = "";
