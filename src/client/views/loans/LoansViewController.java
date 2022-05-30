@@ -10,9 +10,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import shared.transferObj.Rent;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.sql.Date;
 
-public class LoansViewController implements ViewController {
+public class LoansViewController implements ViewController, PropertyChangeListener
+{
     private ViewHandler viewHandler;
     private LoansViewModel loansViewModel;
 
@@ -81,6 +84,9 @@ public class LoansViewController implements ViewController {
         this.viewHandler = vh;
         loansViewModel= vmf.getLoansViewModel();
 
+        loansViewModel.addListener("LibrarianView", this);
+        loansViewModel.addListener("CustomerView", this);
+
         tables();
         loansViewModel.updateTables();
     }
@@ -119,7 +125,7 @@ public class LoansViewController implements ViewController {
 
     @FXML
     void onGoToMainPage(ActionEvent event) {
-        viewHandler.openCustomerMainView();
+        loansViewModel.goToMainPage();
     }
 
     @FXML
@@ -158,7 +164,19 @@ public class LoansViewController implements ViewController {
         softwareTable.setItems(loansViewModel.getDataSoftware());
     }
 
-//    public void removeRent(Rent rent, String product)
+    @Override public void propertyChange(PropertyChangeEvent evt)
+    {
+        if (evt.getPropertyName().equals("LibrarianView"))
+        {
+            viewHandler.openLibrarianMainView();
+        }
+        else if (evt.getPropertyName().equals("CustomerView"))
+        {
+            viewHandler.openCustomerMainView();
+        }
+    }
+
+    //    public void removeRent(Rent rent, String product)
 //    {
 //        if (rent != null)
 //        {

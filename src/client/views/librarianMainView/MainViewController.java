@@ -236,6 +236,12 @@ public class MainViewController implements ViewController
     viewHandler.openReviewView();
   }
 
+  @FXML
+  void onRentsButton(ActionEvent event)
+  {
+    viewHandler.openLoansView();
+  }
+
 
 
   /* Movie Action Events Start Here */

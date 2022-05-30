@@ -50,6 +50,33 @@ public class LoansDAOImpl implements LoansDAO
     return null;
   }
 
+  public List<Rent> readRents(String product)
+  {
+    try(Connection connection = DatabaseFront.getInstance().getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT * FROM rent_" + product);
+      ResultSet resultSet = statement.executeQuery();
+      ArrayList<Rent> rents = new ArrayList<>();
+      while (resultSet.next())
+      {
+        String email = resultSet.getString("customer_email");
+        String hash = resultSet.getString("product_hash");
+        String productName = resultSet.getString("productName");
+        Date dateFrom = resultSet.getDate("dateFrom");
+        Date dateTo = resultSet.getDate("dateTo");
+        Rent rent = new Rent(email, hash, productName, dateFrom, dateTo);
+        rents.add(rent);
+      }
+      return rents;
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
   public void removeRent(Rent rent, String product)
   {
     try(Connection connection = DatabaseFront.getInstance().getConnection())

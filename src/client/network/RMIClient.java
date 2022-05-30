@@ -107,6 +107,19 @@ public class RMIClient implements Client, ClientCallback
     return rents;
   }
 
+  @Override public List<Rent> readRents(String product)
+  {
+    List<Rent> rents = null;
+    try
+    {
+      rents = server.readRents(product);
+    } catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return rents;
+  }
+
   @Override public void removeRent(Rent rent, String product)
   {
     try

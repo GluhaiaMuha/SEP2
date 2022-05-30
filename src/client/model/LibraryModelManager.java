@@ -39,6 +39,11 @@ public class LibraryModelManager implements LibraryModel
     return client.readCustomerRents(customer_email, product);
   }
 
+  @Override public List<Rent> readRents(String product)
+  {
+    return client.readRents(product);
+  }
+
   @Override public void removeRent(Rent rent, String product)
   {
     client.removeRent(rent, product);
