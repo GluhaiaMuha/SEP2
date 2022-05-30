@@ -11,6 +11,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Factory for creating Views Objects without exposing the creation logic to the client
+ */
 public class ViewFactory
 {
   private static Map<String, Scene> scenes;
@@ -32,6 +35,11 @@ public class ViewFactory
     createScene("CustomerInfoChange");
   }
 
+  /**
+   * Method for creating JavaFX Scenes
+   *
+   * @param sceneName is the name of the scene to be opened
+   */
   private static void createScene(String sceneName) {
     Scene scene = null;
     if (sceneName.equals("Login")) {
@@ -123,6 +131,11 @@ public class ViewFactory
       scenes.put(sceneName, scene);
     }
 
+  /**
+   * @param path location of the .fxml file
+   * @return Parent
+   * @throws SQLException may appear if database isn't set up correctly
+   */
     private static Parent loadFXML(String path) throws IOException, SQLException
     {
       FXMLLoader loader = new FXMLLoader();

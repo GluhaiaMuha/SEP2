@@ -9,6 +9,9 @@ import client.views.registerView.RegisterViewModel;
 import client.views.rent.RentViewModel;
 import client.views.review.ReviewViewModel;
 
+/**
+ * Factory for creating ViewModel Objects without exposing the creation logic to the client
+ */
 public class ViewModelFactory
 {
   private static ViewModelFactory instance=new ViewModelFactory();
@@ -27,7 +30,11 @@ public class ViewModelFactory
 
   private ReviewViewModel reviewViewModel;
 
-
+  /**
+   * Method for creating LoginViewModel
+   *
+   * @return LoginViewModel
+   */
   public LoginViewModel getLoginViewModel()
   {
     if (logInViewModel == null)
@@ -37,18 +44,35 @@ public class ViewModelFactory
     return logInViewModel;
   }
 
+  /**
+   * Method for creating RegisterViewModel
+   *
+   * @return RegisterViewModel
+   */
   public RegisterViewModel getRegisterViewModel(){
     if (registerViewModel == null){
       registerViewModel = new RegisterViewModel(ModelFactory.getInstance().getLibraryModel());
     }
     return registerViewModel;
   }
+
+  /**
+   * Method for creating CustomerMainViewModel
+   *
+   * @return CustomerMainViewModel
+   */
   public CustomerMainViewModel getCustomerMainViewModel() {
     if (customerMainViewModel == null){
       customerMainViewModel= new CustomerMainViewModel(ModelFactory.getInstance().getLibraryModel());
     }
     return customerMainViewModel;
   }
+
+  /**
+   * Method for creating LoansViewModel
+   *
+   * @return LoansViewModel
+   */
   public LoansViewModel getLoansViewModel() {
     if (loansViewModel == null){
       loansViewModel = new LoansViewModel(ModelFactory.getInstance().getLibraryModel());
@@ -56,6 +80,11 @@ public class ViewModelFactory
   return loansViewModel;
 }
 
+  /**
+   * Method for creating RentViewModel
+   *
+   * @return RentViewModel
+   */
   public RentViewModel getRentViewModel() {
     if (rentViewModel == null){
       rentViewModel = new RentViewModel(ModelFactory.getInstance().getLibraryModel());
@@ -63,6 +92,11 @@ public class ViewModelFactory
     return rentViewModel;
   }
 
+  /**
+   * Method for creating ReviewViewModel
+   *
+   * @return ReviewViewModel
+   */
   public ReviewViewModel getReviewViewModel() {
     if (reviewViewModel == null){
       reviewViewModel = new ReviewViewModel(ModelFactory.getInstance().getLibraryModel());
@@ -70,6 +104,11 @@ public class ViewModelFactory
     return reviewViewModel;
   }
 
+  /**
+   * Method for creating MainViewModel
+   *
+   * @return MainViewModel
+   */
   public MainViewModel getMainViewModel()
   {
    if (librarianViewModel == null){
@@ -79,6 +118,11 @@ public class ViewModelFactory
    return librarianViewModel;
   }
 
+  /**
+   * Method for creating CustomerInfoChangeViewModel
+   *
+   * @return CustomerInfoChangeViewModel
+   */
   public CustomerInfoChangeViewModel getCustomerInfoChangeViewModel()
   {
     if (customerInfoChangeViewModel == null){

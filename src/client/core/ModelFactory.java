@@ -3,6 +3,9 @@ package client.core;
 import client.model.LibraryModel;
 import client.model.LibraryModelManager;
 
+/**
+ * Factory for creating Model Objects without exposing the creation logic to the client
+ */
 public class ModelFactory
 {
   private static ModelFactory instance = new ModelFactory();

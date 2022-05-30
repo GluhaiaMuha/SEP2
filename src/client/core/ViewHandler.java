@@ -3,6 +3,9 @@ package client.core;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Class for creating/loading new Scenes
+ */
 public class ViewHandler
 {
   private static ViewHandler instance = new ViewHandler();
@@ -15,6 +18,9 @@ public class ViewHandler
   private ViewHandler() {
   }
 
+  /**
+   * Method used for starting the default stage
+   */
   public void start() {
     stage = new Stage();
     ViewFactory.init(stage);
