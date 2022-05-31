@@ -10,6 +10,7 @@ public class User implements Serializable
 
   public User(String e_mail, String password, String user)
   {
+    if(e_mail==null||password==null) throw new IllegalArgumentException();
     this.e_mail = e_mail;
     this.password = password;
     this.user = user;

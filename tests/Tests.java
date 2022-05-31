@@ -1,11 +1,22 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import shared.transferObj.*;
+import server.database.DatabaseFront;
+import server.database.General.ProductInfo.ProductInfoDAOImpl;
+import server.database.Librarian.ManageProducts.ManageProductsDAOImpl;
+import server.network.RMIServerImpl;
+import shared.transferObj.Book;
+import shared.transferObj.Customer;
+import shared.transferObj.Movie;
+import shared.transferObj.Review;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.rmi.RemoteException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-public class Tests
-{
+import static org.junit.jupiter.api.Assertions.*;
+
+public class Tests{
 
     static final String firstName = "firstName";
     static final String lastName = "lastName";
@@ -19,132 +30,151 @@ public class Tests
     Review review;
     Book book;
 
-    @BeforeEach public void setUp()
-    {
+    @BeforeEach
+    public void setUp() {
         customer = new Customer(email, firstName, lastName, phoneNr, pass,
-            "customer");
-        book = new Book("1","bookTest", "authorTest", 123, "genreTest", 2022, 10);
+                "customer");
+        book = new Book("1", "bookTest", "authorTest", 123, "genreTest", 2022, 10);
         review = new Review(customer.getE_mail(), book.getHash(), book.getTitle(), currentDate, "Test Review");
     }
 
-    // -----------------------
-    //    User methods
-    // -----------------------
-
-    @Test public void getEmail()
-    {
+    @Test
+    public void getEmail() {
         assertEquals("email@test.com", customer.getE_mail());
     }
 
-    @Test public void checkNullEmail()
-    {
-        customer = new Customer(null, firstName, lastName, phoneNr, pass,
-            "customer");
+    @Test
+    public void checkBlankEmail() {
+        customer = new Customer("", firstName, lastName, phoneNr, pass,
+                "customer");
 
-        assertEquals(null, customer.getE_mail());
+        assertEquals("", customer.getE_mail());
     }
 
-    @Test() public void checkEmailBlank()
-    {
-        Customer c = new Customer("", firstName, lastName, phoneNr, pass,
-            "customer");
-
-        assertEquals("", c.getE_mail());
+    @Test()
+    public void checkEmailNull() {
+        assertThrows(IllegalArgumentException.class,()->new Customer(null,firstName,lastName,phoneNr,pass, "username") );
     }
 
-    @Test public void getFirstName()
-    {
+    @Test
+    public void getFirstName() {
         assertEquals("firstName", customer.getF_name());
     }
 
-    @Test public void checkNullFirstName()
-    {
+    @Test
+    public void checkNullFirstName() {
         customer = new Customer(email, null, lastName, phoneNr, pass, "customer");
 
         assertEquals(null, customer.getF_name());
     }
 
-    @Test() public void checkFirstNameBlank()
-    {
+    @Test()
+    public void checkFirstNameBlank() {
         Customer c = new Customer(email, "", lastName, phoneNr, pass, "customer");
 
         assertEquals("", c.getF_name());
     }
 
-    @Test public void getLasName()
-    {
+    @Test
+    public void getLastName() {
         assertEquals("lastName", customer.getL_name());
     }
 
-    @Test public void checkNullLastName()
-    {
+    @Test
+    public void checkNullLastName() {
         customer = new Customer(email, firstName, null, phoneNr, pass, "customer");
 
         assertEquals(null, customer.getL_name());
     }
 
-    @Test() public void checkLastNameBlank()
-    {
+    @Test()
+    public void checkLastNameBlank() {
         Customer c = new Customer(email, firstName, "", phoneNr, pass, "customer");
 
         assertEquals("", c.getL_name());
     }
 
-    @Test public void getPhoneNumber()
-    {
+    @Test
+    public void getPhoneNumber() {
         assertEquals("52798664", customer.getPhone());
     }
 
-    @Test public void checkNullPhoneNumber()
-    {
+    @Test
+    public void checkNullPhoneNumber() {
         customer = new Customer(email, firstName, lastName, null, pass, "customer");
 
         assertEquals(null, customer.getPhone());
     }
 
-    @Test() public void checkPhoneNumberBlank()
-    {
+    @Test()
+    public void checkPhoneNumberBlank() {
         Customer c = new Customer(email, firstName, lastName, "", pass, "customer");
 
         assertEquals("", c.getPhone());
     }
 
-    @Test public void getPassword()
-    {
+    @Test
+    public void getPassword() {
         assertEquals("password", customer.getPassword());
     }
 
-    @Test public void checkNullPassword()
-    {
-        customer = new Customer(email, firstName, lastName, phoneNr, null, "customer");
-
-        assertEquals(null, customer.getPassword());
+    @Test
+    public void checkNullPassword() {
+        assertThrows(IllegalArgumentException.class,()->new Customer(email, firstName, lastName, phoneNr, null, "customer"));
     }
 
-    @Test() public void checkPasswordBlank()
-    {
+    @Test()
+    public void checkPasswordBlank() {
         Customer c = new Customer(email, firstName, lastName, phoneNr, "", "customer");
 
         assertEquals("", c.getPassword());
     }
 
-
-    // -----------------------
-    //   Review
-    // -----------------------
-
-
-    @Test public void getCustomerEmailReview(){
+    @Test
+    public void getCustomerEmailReview() {
         assertEquals("email@test.com", review.getCustomer_email());
     }
 
-    @Test public void checkSetNewReview(){
+    @Test
+    public void checkSetNewReview() {
         review.setReview("TestNewReview");
         assertEquals("TestNewReview", review.getReview());
     }
 
+    @Test
+    public void isDBDriverRegistered() {
+        assertNotNull(DatabaseFront.getInstance());
+    }
 
+    @Test
+    public void doesDatabaseGiveAConnection() throws SQLException {
+        assertNotNull(DatabaseFront.getInstance().getConnection());
+    }
 
+    @Test
+    public void addAMovieToDatabase() throws SQLException {
+        Connection connection = DatabaseFront.getInstance().getConnection();
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO movie" +
+                "(hash, title, director, release_year, length, amountInStock) VALUES ('2115','Liberator','Steven Spielberg','1991','98','4');");
+        assertFalse(statement.execute());
+        PreparedStatement statement2 = connection.prepareStatement("DELETE FROM movie WHERE hash='2115';");
+        assertFalse(statement2.execute());
+    }
 
+    @Test
+    public void getStuffFromDatabase(){
+        ManageProductsDAOImpl impl = new ManageProductsDAOImpl();
+        impl.insert("movie", new Movie("2115","Liberator","Steven Spielberg",1991,98,4));
+        ProductInfoDAOImpl getMovie = new ProductInfoDAOImpl();
+        Movie movie = getMovie.readMovieByTitle("Liberator");
+        assertNotNull(movie);
+        impl.delete("movie","2115");
+    }
+
+    @Test
+    public void serverInstantiation() throws RemoteException {
+        RMIServerImpl server = new RMIServerImpl();
+        assertNotNull(server);
+    }
 
 }
