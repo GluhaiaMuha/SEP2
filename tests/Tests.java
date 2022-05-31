@@ -1,13 +1,14 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import server.database.Customer.CustomerInfo.CustomerInfoDAOImpl;
 import server.database.DatabaseFront;
+import server.database.General.Login.LoginDAOImpl;
 import server.database.General.ProductInfo.ProductInfoDAOImpl;
+import server.database.General.Register.RegisterDAO;
+import server.database.General.Register.RegisterDAOImpl;
 import server.database.Librarian.ManageProducts.ManageProductsDAOImpl;
 import server.network.RMIServerImpl;
-import shared.transferObj.Book;
-import shared.transferObj.Customer;
-import shared.transferObj.Movie;
-import shared.transferObj.Review;
+import shared.transferObj.*;
 
 import java.rmi.RemoteException;
 import java.sql.Connection;
@@ -25,15 +26,15 @@ public class Tests{
     static final String pass = "password";
     java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
 
-
+    User user;
     Customer customer;
     Review review;
     Book book;
 
     @BeforeEach
     public void setUp() {
-        customer = new Customer(email, firstName, lastName, phoneNr, pass,
-                "customer");
+        user = new User("test@test.test", "test", "customer");
+        customer = new Customer(email, firstName, lastName, phoneNr, pass, "customer");
         book = new Book("1", "bookTest", "authorTest", 123, "genreTest", 2022, 10);
         review = new Review(customer.getE_mail(), book.getHash(), book.getTitle(), currentDate, "Test Review");
     }
@@ -45,15 +46,14 @@ public class Tests{
 
     @Test
     public void checkBlankEmail() {
-        customer = new Customer("", firstName, lastName, phoneNr, pass,
-                "customer");
-
-        assertEquals("", customer.getE_mail());
+        assertThrows(IllegalArgumentException.class,
+            ()->new Customer("",firstName,lastName,phoneNr,pass, "username") );
     }
 
     @Test()
     public void checkEmailNull() {
-        assertThrows(IllegalArgumentException.class,()->new Customer(null,firstName,lastName,phoneNr,pass, "username") );
+        assertThrows(IllegalArgumentException.class,
+            ()->new Customer(null,firstName,lastName,phoneNr,pass, "username") );
     }
 
     @Test
@@ -63,16 +63,14 @@ public class Tests{
 
     @Test
     public void checkNullFirstName() {
-        customer = new Customer(email, null, lastName, phoneNr, pass, "customer");
-
-        assertEquals(null, customer.getF_name());
+        assertThrows(IllegalArgumentException.class,
+            ()->new Customer(email,null,lastName,phoneNr,pass, "username") );
     }
 
     @Test()
     public void checkFirstNameBlank() {
-        Customer c = new Customer(email, "", lastName, phoneNr, pass, "customer");
-
-        assertEquals("", c.getF_name());
+        assertThrows(IllegalArgumentException.class,
+            ()->new Customer(email,"",lastName,phoneNr,pass, "username") );
     }
 
     @Test
@@ -82,16 +80,14 @@ public class Tests{
 
     @Test
     public void checkNullLastName() {
-        customer = new Customer(email, firstName, null, phoneNr, pass, "customer");
-
-        assertEquals(null, customer.getL_name());
+        assertThrows(IllegalArgumentException.class,
+            ()->new Customer(email,firstName,null,phoneNr,pass, "username"));
     }
 
     @Test()
     public void checkLastNameBlank() {
-        Customer c = new Customer(email, firstName, "", phoneNr, pass, "customer");
-
-        assertEquals("", c.getL_name());
+        assertThrows(IllegalArgumentException.class,
+            ()->new Customer(email,firstName,"",phoneNr,pass, "username"));
     }
 
     @Test
@@ -101,16 +97,14 @@ public class Tests{
 
     @Test
     public void checkNullPhoneNumber() {
-        customer = new Customer(email, firstName, lastName, null, pass, "customer");
-
-        assertEquals(null, customer.getPhone());
+        assertThrows(IllegalArgumentException.class,
+            ()->new Customer(email,firstName,lastName,null,pass, "username"));
     }
 
     @Test()
     public void checkPhoneNumberBlank() {
-        Customer c = new Customer(email, firstName, lastName, "", pass, "customer");
-
-        assertEquals("", c.getPhone());
+        assertThrows(IllegalArgumentException.class,
+            ()->new Customer(email,firstName,lastName,"",pass, "username"));
     }
 
     @Test
@@ -120,14 +114,14 @@ public class Tests{
 
     @Test
     public void checkNullPassword() {
-        assertThrows(IllegalArgumentException.class,()->new Customer(email, firstName, lastName, phoneNr, null, "customer"));
+        assertThrows(IllegalArgumentException.class,
+            ()->new Customer(email, firstName, lastName, phoneNr, null, "customer"));
     }
 
     @Test()
     public void checkPasswordBlank() {
-        Customer c = new Customer(email, firstName, lastName, phoneNr, "", "customer");
-
-        assertEquals("", c.getPassword());
+        assertThrows(IllegalArgumentException.class,
+            ()->new Customer(email,firstName,lastName,phoneNr,"", "username"));
     }
 
     @Test
@@ -162,7 +156,48 @@ public class Tests{
     }
 
     @Test
-    public void getStuffFromDatabase(){
+    public void registerCustomer() throws SQLException{
+        RegisterDAOImpl impl = new RegisterDAOImpl();
+        LoginDAOImpl logInDao  = new LoginDAOImpl();
+        impl.insertUserRegister(customer);
+
+        //Get the user
+        User u1 = logInDao.readUserLogin(customer.getE_mail(), customer.getPassword());
+
+        assertTrue(u1.getPassword().equals(customer.getPassword()) &&
+            u1.getE_mail().equals(customer.getE_mail()));
+
+        //Delete for no errors later
+        Connection connection = DatabaseFront.getInstance().getConnection();
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM customer WHERE email='email@test.com' ");
+        PreparedStatement statement2 = connection.prepareStatement("DELETE FROM users WHERE email='email@test.com' ");
+        statement.execute();
+        statement2.execute();
+
+    }
+
+    @Test
+    public void changeCustomerInfoDAO() throws SQLException{
+        RegisterDAOImpl impl = new RegisterDAOImpl();
+        CustomerInfoDAOImpl impl2 = new CustomerInfoDAOImpl();
+        impl.insertUserRegister(customer);
+        impl2.changeCustomerInfo(customer.getE_mail(), "newTestName", "newLastName", "999999999");
+
+        //Get the user
+        Customer c1 = impl2.readCustomerInfo(customer.getE_mail());
+
+        assertTrue(c1.getF_name().equals("newTestName"));
+
+        //Delete for no errors later
+        Connection connection = DatabaseFront.getInstance().getConnection();
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM customer WHERE email='email@test.com' ");
+        PreparedStatement statement2 = connection.prepareStatement("DELETE FROM users WHERE email='email@test.com' ");
+        statement.execute();
+        statement2.execute();
+    }
+
+    @Test
+    public void getMovieFromDatabase(){
         ManageProductsDAOImpl impl = new ManageProductsDAOImpl();
         impl.insert("movie", new Movie("2115","Liberator","Steven Spielberg",1991,98,4));
         ProductInfoDAOImpl getMovie = new ProductInfoDAOImpl();
