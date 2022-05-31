@@ -11,6 +11,7 @@ public class Customer extends User implements Serializable
   public Customer(String e_mail, String f_name, String l_name, String phone, String password, String user)
   {
     super(e_mail, password, user);
+    if(f_name==null||l_name==null || phone == null || f_name.equals("") || l_name.equals("") || phone.equals("")) throw new IllegalArgumentException();
     this.f_name = f_name;
     this.l_name = l_name;
     this.phone = phone;
