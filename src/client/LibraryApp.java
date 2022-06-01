@@ -18,5 +18,6 @@ public class LibraryApp extends Application
     super.stop();
     System.out.println("Exit");
     ClientFactory.getInstance().getClient().unRegisterClient();
+    System.exit(0);
   }
 }
