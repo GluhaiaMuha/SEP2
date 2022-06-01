@@ -26,7 +26,7 @@ public class CustomerMainViewModel{
         Customer customer = libraryModel.readCustomerInfo(libraryModel.getEmail());
         labelName.setValue(customer.getF_name() + " " + customer.getL_name());
         labelEmail.setValue(customer.getE_mail());
-        labelPhone.setValue(customer.getPhone());
+        labelPhone.setValue("+45" + customer.getPhone());
     }
 
     public StringProperty labelEmailProperty()
