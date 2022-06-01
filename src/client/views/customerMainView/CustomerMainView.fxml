@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -18,16 +19,25 @@
             <font>
                 <Font size="21.0" />
             </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
         </Button>
         <Button layoutX="329.0" layoutY="186.0" mnemonicParsing="false" onAction="#onLoansAction" prefHeight="74.0" prefWidth="102.0" style="-fx-background-color: #292826;" text="Loans" textFill="#f9d342">
             <font>
                 <Font size="21.0" />
             </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
         </Button>
         <Button layoutX="548.0" layoutY="186.0" mnemonicParsing="false" onAction="#onReviewAction" prefHeight="74.0" prefWidth="102.0" style="-fx-background-color: #292826;" text="Review" textFill="#f9d342">
             <font>
                 <Font size="21.0" />
             </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
         </Button>
         <Label layoutX="192.0" layoutY="14.0" text="The National Library of Horsens “Hedevig Rosing”">
             <font>
@@ -52,6 +62,9 @@
       <Button layoutX="650.0" layoutY="417.0" mnemonicParsing="false" onAction="#onChangeInfo" prefHeight="43.0" prefWidth="101.0" style="-fx-background-color: #292826;" text="Change Info" textFill="#f9d342">
          <font>
             <Font size="14.0" />
-         </font></Button>
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
     </children>
 </AnchorPane>
