@@ -43,12 +43,12 @@
                   <Image url="@../../../shared/additional/lock.png" />
                </image>
             </ImageView>
-            <Button layoutX="172.0" layoutY="271.0" mnemonicParsing="false" onAction="#onLoginAction" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #292826;" text="Login" textFill="#f9d342">
+            <Button id="loginButton" layoutX="172.0" layoutY="271.0" mnemonicParsing="false" onAction="#onLoginAction" prefHeight="34.0" prefWidth="95.0" stylesheets="@../../../shared/additional/loginStyle.css" text="Login" textFill="#f9d342">
                <font>
                   <Font size="21.0" />
                </font>
             </Button>
-            <Button layoutX="72.0" layoutY="350.0" mnemonicParsing="false" onAction="#onRegister" prefHeight="46.0" prefWidth="295.0" style="-fx-background-color: transparent;" stylesheets="@../../../shared/additional/loginStyle.css" text="New customer? Create an account." textFill="#292826">
+            <Button id="newAccButton" layoutX="72.0" layoutY="350.0" mnemonicParsing="false" onAction="#onRegister" prefHeight="46.0" prefWidth="295.0" style="-fx-background-color: transparent;" stylesheets="@../../../shared/additional/loginStyle.css" text="New customer? Create an account." textFill="#292826">
                <font>
                   <Font size="16.0" />
                </font>

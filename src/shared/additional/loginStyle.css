@@ -1,3 +1,10 @@
-.button:hover{
+#newAccButton:hover{
   -fx-border-color: #292826
+}
+
+#loginButton {
+  -fx-background-color: #292826
+}
+#loginButton:hover{
+  -fx-background-color: #000000
 }
