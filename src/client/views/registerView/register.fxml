@@ -51,7 +51,7 @@
                   <Font size="16.0" />
                </font>
                <cursor>
-                  <Cursor fx:constant="OPEN_HAND" />
+                  <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
             <Text fill="#292826" layoutX="47.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:">

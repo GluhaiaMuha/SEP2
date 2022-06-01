@@ -53,7 +53,7 @@
                   <Font size="16.0" />
                </font>
                <cursor>
-                  <Cursor fx:constant="OPEN_HAND" />
+                  <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
          </children></AnchorPane>
