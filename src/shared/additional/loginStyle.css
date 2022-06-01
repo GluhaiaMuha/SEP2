@@ -8,3 +8,10 @@
 #loginButton:hover{
   -fx-background-color: #000000
 }
+
+#registerButton{
+  -fx-background-color: #292826
+}
+#registerButton:hover {
+  -fx-background-color: #000000
+}

@@ -64,7 +64,7 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Button layoutX="143.0" layoutY="298.0" mnemonicParsing="false" onAction="#onRegister" prefHeight="46.0" prefWidth="111.0" style="-fx-background-color: #292826;" text="Register" textFill="#f9d342">
+            <Button id="registerButton" layoutX="143.0" layoutY="298.0" mnemonicParsing="false" onAction="#onRegister" prefHeight="46.0" prefWidth="111.0" stylesheets="@../../../shared/additional/loginStyle.css" text="Register" textFill="#f9d342">
                <font>
                   <Font size="21.0" />
                </font>
